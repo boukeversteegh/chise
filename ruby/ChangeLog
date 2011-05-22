@@ -1,0 +1,10 @@
+2006-05-06  Kouichirou Eto  <2006 eto.com>
+
+	* idsdb.rb: Adapt to libchise API.
+	* ids.rb: Ditto.
+	* config.rb: Ditto.
+	* chisedb.rb: Ditto.
+
+2006-05-06  Kouichirou Eto  <2006 eto.com>
+
+	* Add ChangeLog

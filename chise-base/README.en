@@ -1,0 +1,115 @@
+Installing the CHISE-core/CHISE-base package
+********************************************
+
+What is CHISE-core/CHISE-base
+=============================
+
+CHISE-core is a package to install core functionalities of the CHISE
+environment.  It contains the Concord Library, the CHISE Library
+(libchise) and the CHISE general character database (chise-db).  You
+can install them easily.
+
+CHISE-base is also an installation package, but it supports not only
+libchise but also XEmacs CHISE environment.  It contains whole
+elements of CHISE-core, XEmacs CHISE, tomoyo-tools (an Emacs Lisp
+utilities about character database for XEmacs CHISE) and the CHISE-IDS
+package.
+
+
+PREREQUISITES
+=============
+
+Please install
+ - Berkeley DB Version 3 or later
+before installing CHISE-core.
+
+If you install CHISE-base, please install additional libraries to
+install XEmacs.
+
+
+CONFIGURATION
+=============
+
+In the top level directory of the CHISE-core/base distribution, run
+the program `configure' as follows:
+
+  % ./configure
+
+
+Installing CHISE-core
+=====================
+
+Type `make install-core' as follows:
+
+  % make install-core
+
+
+Installing CHISE-base
+=====================
+
+Type `make install-base' as follows:
+
+  % make install-base
+
+Even if you get the CHISE-core package, it is available if you can use
+a networking environment and it passes the CVS pserver protocol.  In
+that case, the CHISE-core installer gets the sources of CHISE-base
+from cvs.m17n.org via anonymous CVS.
+
+
+Installing CHISE-base in Mac OS X with Fink
+===========================================
+
+If you use Fink in Mac OS X (10.4 or later), you can use a installer
+script `bootstrap.fink' as follows:
+
+  % ./bootstrap.fink
+
+It installs some Fink packages and some Emacs Lisp packages for
+CHISE-base environment.
+
+
+Reporting Bugs
+**************
+
+If you write bug-reports and/or suggestions for improvement, please
+send them to the CHISE Mailing List:
+
+  chise-en@m17n.org	(English)
+  chise-ja@m17n.org	(Japanese)
+
+Via the CHISE mailing list, you can report CHISE-core/base bugs,
+obtain the latest release of CHISE-core/base, and discuss future
+enhancements to CHISE-core/base.  To join the CHISE mailing list, send
+an empty e-mail to
+
+  chise-en-ctl@m17n.org	(English)
+  chise-ja-ctl@m17n.org	(Japanese)
+
+
+* CVS
+
+Development of CHISE-core/base uses CVS.  So latest developing version
+is available at CVS.
+
+** cvs login (first time only)
+
+  % cvs -d :pserver:anonymous@cvs.m17n.org:/cvs/chise login
+
+  CVS password: [CR] # NULL string
+
+** checkout
+
+  % cvs -d :pserver:anonymous@cvs.m17n.org:/cvs/chise checkout chise-base
+
+** updating
+
+  % make distclean
+
+  % cvs -z9 update -Pd
+
+
+  If you would like to join CVS based development, please declare it
+in the CHISE mailing list.
+
+We hope you will join the open development.

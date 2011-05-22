@@ -1,0 +1,197 @@
+<html>
+<head>
+<title>Ruby/CHISEの実装, IDSによる字形構造分析の試み</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<div class="page"><a name="1" class="a">.</a><br>
+<h1>Ruby/CHISEの実装,<br> IDSによる字形構造分析の試み</h1>
+<p>独立行政法人産業技術総合研究所 特別研究員<br> 江渡 浩一郎 <a target=top href="http://staff.aist.go.jp/k-eto/"><span class="addr">http://staff.aist.go.jp/k-eto/</span></a>
+</div>
+
+<div class="page"><a name="2" class="a">.</a><br>
+<h2>まずはデモ。</h2>
+<pre>
+require 'chise'
+include CHISE
+p "字"					#"字"
+p "字".ucs				#23383
+p "字".total_strokes		#6
+p "字".inspect_all			#いろいろでてくる。
+p "字".ideograph_daikanwa	#6942	#大漢和番号6942である。
+</pre>
+<p>このように実行することができる。
+つまり文字そのものが自分の持つ属性を知っていて、そこにメソッドとしてアクセスできる。
+</div>
+
+<div class="page"><a name="3" class="a">.</a><br>
+<h2>Character class</h2>
+<ul>
+<li>これらのメソッドは、Character classに実装されている。
+<li>UTF-8的な意味で一文字の場合のみ、自動的にCharacterとする。
+<li>String自体を拡張しているように見える。
+</ul>
+<pre>
+p "字字".ucs		#エラー
+</pre>
+<p>Character classのオブジェクトを生成し、それを直接用いることもできる。
+<pre>
+char = "字".char			#Character classのインスタンスを生成。
+char = Character.get("字")	#上記とまったく同じ。
+</pre>
+<p>flyweightパターンを用いている。同じ字の場合は同じインスタンスとなる。
+<p>Characterは文字データベースに問い合わせを行い、属性の値を取得する。
+</div>
+
+<div class="page"><a name="4" class="a">.</a><br>
+<h2>実体参照</h2>
+<pre>
+p "字". to_er			#"&amp;#x5b57;"	#実体参照化する
+p "&amp;#x5b57;".de_er		#"字"			#実体参照を解除
+p "&J90-3B7A;".de_er		#JISX0208-1990による実体参照を解除
+p "&M-06942;".de_er		#大漢和番号による実体参照を解除
+</pre>
+<p>このように、様々なCCSにおける実体参照を解除することができる。
+</div>
+
+<div class="page"><a name="5" class="a">.</a><br>
+<h2>Stringの拡張</h2>
+<dl>
+
+<dt>String#each_character
+<dd>Stringの一文字毎にイテレータを実行。引数としてCharacterがはいる。
+
+<dt>String#map_character
+<dd>同様にmapした結果の文字列を返す。
+
+<dt>String#char_length
+<dd>UTF-8的な文字列の長さを返す。
+
+</dl>
+
+<p>他に、to_er, de_erなど、Characterと共通の要素を各文字毎に摘要するというメソッドもいくつか用意されている。
+</div>
+
+<div class="page"><a name="6" class="a">.</a><br>
+<h2>my属性の定義</h2>
+<pre>
+"木".mydepth = 1
+"林".mydepth = 2
+"森".mydepth = 3
+</pre>
+<p>実行すると自動的にデータベースに保存されるため、<br>
+プログラム終了後も属性は保存される。
+<pre>
+p "木".mydepth
+p "林".mydepth
+p "森".mydepth
+</pre>
+<p>このようにして、自分独自の必要な属性を作り、<br>
+その属性に基づいたプログラムを書くことができる。
+</div>
+ 
+<div class="page"><a name="7" class="a">.</a><br>
+<h2>IDS</h2>
+<p>IDSによる字形分解・合成ができる。
+<pre>
+p "字".decompose		#"&#x2ff1;   宀子"	#分解する
+p "&#x2ff1;   宀子".compose		#"字"	#合成する
+p "鬱".decompose		#"木缶木冖鬯彡"	#難しい字もOK
+p "鬱".decompose_all		#再帰的に分解する。
+p "木缶".find		#この二つの部品を含む漢字をリストアップ
+</pre>
+<p>字形構造は内部的にはできるだけ集約した形で持っている。
+</div>
+
+<div class="page"><a name="8" class="a">.</a><br>
+<h2>IDSによる字形構造分析</h2>
+<p>漢字の字形内部の構造をデータとして扱うことができる。
+<p>JISX0208集合(6355字)において:
+
+<table border=0 align=center cellpadding=0 cellspacing=0>
+<tr><th class=bb valign=bottom>
+
+<table border=1 cellpadding=0 cellspacing=0 class="b">
+<tr><td class=e>要素    </td><td class=n>352</td><td class=n>5.5%</td></tr>
+<tr><td class=e>&#x2ff0;</td><td class=n>3846</td><td class=n>60.5%</td></tr>
+<tr><td class=e>&#x2ff1;</td><td class=n>1465</td><td class=n>23.1%</td></tr>
+<tr><td class=e>&#x2ff2;</td><td class=n>18</td><td class=n>0.3%</td></tr>
+<tr><td class=e>&#x2ff3;</td><td class=n>74</td><td class=n>1.2%</td></tr>
+
+</table>
+
+</th><th class=bb valign=bottom>
+
+<table border=1 cellpadding=0 cellspacing=0 class="b">
+<tr><td class=e width=40>&#x2ff4;</td><td class=n>42</td><td class=n>0.7%</td></tr>
+<tr><td class=e>&#x2ff5;</td><td class=n>77</td><td class=n>1.2%</td></tr>
+<tr><td class=e>&#x2ff6;</td><td class=n>5</td><td class=n>0.1%</td></tr>
+<tr><td class=e>&#x2ff7;</td><td class=n>14</td><td class=n>0.2%</td></tr>
+</table>
+
+</th><th class=bb valign=bottom>
+
+<table border=1 cellpadding=0 cellspacing=0 class="b">
+<tr><td class=e>&#x2ff8;</td><td class=n>240</td><td class=n>3.8%</td></tr>
+<tr><td class=e>&#x2ff9;</td><td class=n>39</td><td class=n>0.6%</td></tr>
+<tr><td class=e>&#x2ffa;</td><td class=n>163</td><td class=n>2.6%</td></tr>
+<tr><td class=e>&#x2ffb;</td><td class=n>20</td><td class=n>0.3%</td></tr>
+</table>
+
+</th></tr></table>
+
+<p>このようにして、字形構造分析を効率的に行うための基盤が構築された。<br>
+この基盤を元に、より詳細な字形構造分析を予定である。
+</div>
+
+<div class="page"><a name="9" class="a">.</a><br>
+<h2>不足している機能</h2>
+<p>CES関連は不足している。
+<ul>
+<li>SJIS,EUCとの相互変換だけは対応
+<li>外部ライブラリーと連携をとり対応する予定。
+</ul>
+<p>ドキュメントが不足している。
+<ul>
+<li>test caseを見るとわかる場合もある。
+</ul>
+</div>
+
+<div class="page"><a name="10" class="a">.</a><br>
+<h2>How to GET</h2>
+<pre>
+<a target=top href="http://eto.com/2003/ruby/"><span class="get">http://eto.com/2003/ruby/</span></a>
+</pre>
+<p>現時点では、XEmacs CHISEにおいてビルドされた文字データベースが必要
+<p>Windows, Linuxでも同様に動作する。
+<p>開発は主にWindows上でおこなった。
+
+<br>
+<br>
+<p align=right>
+テストプログラム:
+<a href="test1.rb">test1.rb</a>,
+<a href="test2.rb">test2.rb</a>,
+<a href="test3.rb">test3.rb</a>,
+<a href="test4.rb">test4.rb</a>,
+<a href="test5.rb">test5.rb</a>,
+<a href="count1.rb">count1.rb</a>
+
+</div>
+
+<div class="indexpage" align=right>
+<div class="a"><a name="contents">.</a></div>
+<div class="w100"><a href="#1" target="page" onMouseOver="parent.page.location='#1'">1</a></div>
+<div class="w100"><a href="#2" target="page" onMouseOver="parent.page.location='#2'">2</a></div>
+<div class="w100"><a href="#3" target="page" onMouseOver="parent.page.location='#3'">3</a></div>
+<div class="w100"><a href="#4" target="page" onMouseOver="parent.page.location='#4'">4</a></div>
+<div class="w100"><a href="#5" target="page" onMouseOver="parent.page.location='#5'">5</a></div>
+<div class="w100"><a href="#6" target="page" onMouseOver="parent.page.location='#6'">6</a></div>
+<div class="w100"><a href="#7" target="page" onMouseOver="parent.page.location='#7'">7</a></div>
+<div class="w100"><a href="#8" target="page" onMouseOver="parent.page.location='#8'">8</a></div>
+<div class="w100"><a href="#9" target="page" onMouseOver="parent.page.location='#9'">9</a></div>
+<div class="w100"><a href="#10" target="page" onMouseOver="parent.page.location='#10'">10</a></div>
+</div>
+
+</body>
+</html>

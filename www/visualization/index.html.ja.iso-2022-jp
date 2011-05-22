@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+<head>
+<title>CHaracter Information Service Environment</title>
+<link rel=stylesheet href="../chise.css" type="text/css">
+</head>
+<body>
+
+    <p>
+      [<a href="../index.html.ja.iso-2022-jp">CHISE</a>]
+      [<a href="../xemacs/index.html.ja.iso-2022-jp">XEmacs CHISE</a>]
+      [<a href="../ruby/index.html.ja.iso-2022-jp">Ruby/CHISE</a>]
+      [<a href="../perl/index.html.ja.iso-2022-jp">Perl/CHISE</a>]
+      [<a href="../topicmaps/index.html.ja.iso-2022-jp">TopicMaps</a>]
+      [<a href="../ids/index.html.ja.iso-2022-jp">IDS</a>]
+      [<a href="../glyph/index.html.ja.iso-2022-jp">glyph</a>]
+      [Visualization]
+      [<a href="../omega/index.html.ja.iso-2022-jp">Ω</a>]
+    </p>
+
+    <h1>
+      <a href="../index.html.ja.iso-2022-jp">CHISE</a> / 
+      文字知識情報の数理的解析と可視化
+    </h1>
+
+<hr>
+
+<ul>
+  <li><a href="http://www2.crl.go.jp/jt/a134/yoshi/">
+      Yoshi Fujiwara</a>,
+      <a href="http://gentzen.mri.tmd.ac.jp/~suzuki/personal.html">
+      Yasuhiro Suzuki</a>, <a
+      href="http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/">Tomohiko
+      Morioka</a>, “<a
+      href="http://www2.crl.go.jp/jt/a134/yoshi/pc/kanji/nw.ps">
+      Network of Words</a>”, <a href="http://arob.cc.oita-u.ac.jp/">
+      Artificial Life and Robotics 2002</a>
+      (<a href="http://www2.crl.go.jp/jt/a134/yoshi/pc/kanji/index.html">
+      発表資料
+      </a>)
+  <li>共通する部品を持つ漢字間の関係の模式図
+      <br>
+      <a href="http://www2.crl.go.jp/jt/a134/yoshi/pc/kanji/mage1.jpg">
+      <img alt="模式図1"
+      src="../images/mage1-s.jpg">
+      <br>
+      [その1]
+      </a>
+      <br>
+      <a href="http://www2.crl.go.jp/jt/a134/yoshi/pc/kanji/mage2.jpg">
+      <img alt="模式図2"
+      src="../images/mage2-s.jpg">
+      <br>
+      [その2]
+      </a>
+</ul>
+
+    <h2>文書・発表等</h2>
+
+    <ul>
+      <li><a href="../#presentation">CHISEプロジェクト全般</a></li>
+    </ul>
+
+    <ul>
+      <li><a href="http://www2.crl.go.jp/jt/a134/yoshi/">
+	  Yoshi Fujiwara</a>,
+	<a href="http://gentzen.mri.tmd.ac.jp/~suzuki/personal.html">
+	  Yasuhiro Suzuki</a>,
+	<a href="http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/">
+	  Tomohiko Morioka</a>, 
+	“<a href="http://www2.crl.go.jp/jt/a134/yoshi/pc/kanji/nw.ps">
+	  Network of Words</a>”, 
+	<a href="http://arob.cc.oita-u.ac.jp/">
+	  Artificial Life and Robotics 2002</a>
+	(<a href="http://www2.crl.go.jp/jt/a134/yoshi/pc/kanji/index.html">
+	  発表資料</a>)
+      <li>藤原義久「漢字のネットワーク」
+	<a href="http://www.jaet.gr.jp/">漢字文献情報処理研究会</a>第5回大会、
+	2002年12月7日（土）、花園大学</li>
+      <li>江渡浩一郎「漢字構造の可視化 (work in progress)」
+	<a href="http://www.jaet.gr.jp/">漢字文献情報処理研究会</a>第5回大会、
+	2002年12月7日（土）、花園大学</li>
+    </ul>
+
+    <hr>
+
+    <p>
+      [<a href="../">戻る</a>]
+    </p>
+
+    <p>
+<!-- hhmts start -->
+Last modified: Thu Jan 16 11:56:31 JST 2003
+<!-- hhmts end -->.
+    </p>
+
+</body>
+</html>

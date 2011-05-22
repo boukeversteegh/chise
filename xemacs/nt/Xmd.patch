@@ -1,0 +1,10 @@
+--- Xmd.h~	Thu Jun 08 23:20:40 1995
++++ Xmd.h	Sun Mar 16 13:09:10 1997
+@@ -150,8 +150,9 @@
+ typedef CARD16		BITS16;
+ typedef CARD8		BYTE;
+ 
++#ifndef WIN32
+ typedef CARD8           BOOL;
+-
++#endif

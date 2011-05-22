@@ -1,0 +1,300 @@
+-*- Mode: outline; coding: euc-jp -*-
+
+* はじめに
+
+  ここではXEmacs/CHISEで作成した文書をΩ/CHISEでPDFに変換できるようにす
+  るために必要な手順を紹介します。インストールが完了すれば付属のtest.tex
+  をPDFに出来るようになるはずです。
+
+  # test.tex をPDFで見れても特にうれしくはないのですが。(^^;;
+
+  * なお、現在もCVSにはperl 5.6用のスクリプト（inCHISE-5.6）を残してい
+    ますが、perl 5.6用のスクリプトはメインテナンスしていません。ご注意
+    ください。
+
+  必要な手順は次の通りです。ruby/CHISEに依存している部分がありますので、
+  あらかじめruby/CHISEをインストールしておいて下さい。
+
+  1. Chise_utils.pm をインストール（要 BerkeleyDB.pm）
+  2. CHISE DB に Ω/CHISE が利用する情報を加える。
+    a. ruby/CHISEのインストール
+    b. ruby/CHISE を利用して ids, ids-decomposed, ids-aggregated とids の
+       逆引きDBを作成
+    d. CHISE DB にAdobe CID情報を付け加える
+  3. フォントメトリックファイルのインストール
+  4. fontforge, t1asm のインストール
+  5. スクリプトの設定
+  6. dvipdfmx の設定
+
+  7. lambda の実行
+  8. dvipdfmx の実行
+  9. インストール上の注意
+
+  これを順に説明していきます。
+
+  なお、Mac OS X 上で fink を利用している場合のインストール方法は
+  INSTALL-MacOS-X.txt.ja にありますので、そちらもご参照下さい。
+
+* 1. Chise_utils.pm をインストール（要 BerkeleyDB.pm）
+
+  $ perl Makefile.PL
+  $ make
+  $ make install
+
+* 2. CHISE DB に Ω/CHISE が利用する情報を加える。
+
+  なるべく簡単にインストール出来るようにするため、tar アーカイブを準備
+  しています。CHISE DB が新しいディレクトリ構造
+  （/usr/local/share/chise/0.3/db/character/ など）の場合、次の方法で
+  インストールできます。ファイルを上書きしてしまいますのでご注意下さい。
+
+  * ここでインストールされる情報はある時点でしか整合性がないものですの
+    で、問題がある場合は、次の節を参考にアーカイブを利用せずにCHISE DB 
+    を更新する方法を御利用下さい。
+
+  ex)
+  $ wget http://www.jokoji.jp/chise/omega-chise-supportdb-20040827.tar.gz
+  $ tar xvzf omega-chise-supportdb-20040827.tar.gz -C /usr/local/share/chise/0.3/db
+
+  これで CHISE DB に IDS の逆引きデータベースなどと vnd-adobe-cid の
+  情報が付け加わります。
+
+  以前の形式のデータベースの場合は、手でファイルを移動する必要がありま
+  す。
+
+  ex)
+  $ wget http://www.jokoji.jp/chise/omega-chise-supportdb-20040827.tar.gz
+  $ tar xvzf omega-chise-supportdb-20040827.tar.gz -C $TMPDIR
+  $ cd $TEMPDIR/chise-db/character
+  $ cp feature/* /usr/local/lib/chise/char-db/system-char-id/
+  $ cp by_feature/* /usr/local/lib/chise/char-db/
+
+** tar アーカイブを利用せずに CHISE DB に情報を加えるには、次の a, b, c の手順を行って下さい。
+
+*** a. ruby/CHISEのインストール
+
+  （省略）
+
+  * ruby/CHISE のドキュメントを参照して下さい。
+
+*** b. ruby/CHISE を利用して ids, ids-decomposed, ids-aggregated と ids の逆引きDBを作成
+
+  $ cd $RUBY_CHISE_DIR/tools
+  $ vi make_ids_db.rb
+  - edit -
+  $ ruby make_ids_db.rb
+
+  db.make_ids_reverse
+  db.make_ids_db
+  db.make_ids_aggregated
+  db.make_ids_decomposed
+
+  が必要です。
+
+*** c. CHISE DB にAdobe CID情報を付け加える
+
+  付属の add_adobecid.pl を使って CHISE DB に情報を加えます。
+  必要なファイルは Adobe Reader や Adobe Acrobat などに付属の CMap ファ
+  イル（UniGB-UCS2-H, UniCNS-UCS2-H,UniJIS-UTF16-H,UniKS-UCS2-H）です。
+
+  四つのファイルに対して add_adobecid.pl を実行します。
+
+  $ perl add_adobecid.pl $CMAP_DIR/UniGB-UCS2-H $CHISEDB_DIR
+  $ perl add_adobecid.pl $CMAP_DIR/UniCNS-UCS2-H $CHISEDB_DIR
+  $ perl add_adobecid.pl $CMAP_DIR/UniJIS-UTF16-H $CHISEDB_DIR
+  $ perl add_adobecid.pl $CMAP_DIR/UniKS-UCS2-H $CHISEDB_DIR
+
+  * $CMAP_DIR は上記の CMap ファイルのあるディレクトリ
+
+  * $CHISEDB_DIR は /usr/local/share/chise/0.3/db など CHISE の文字
+    データベースがあるディレクトリです。
+
+* 3. フォントメトリックファイルのインストール
+
+  omega-chise-texmf-0.3.20040902.tar.gz を取ってきて展開する。ファイル
+  が上書きされてしまうかもしれないので、内容を確認して下さい。
+
+    ex) $TEXMF が /usr/local/share/texmf の場合
+    $ wget http://www.jokoji.jp/chise/omega-chise-texmf-0.3.20040902.tar.gz
+    $ tar xvzf omega-chise-texmf-0.3.20040902.tar.gz -C /usr/local/share
+
+  * 必要ならこの後 mktexlsr を実行して下さい。
+
+* 4. fontforge, t1asm などのインストール
+
+  1) Debian (woody) の場合
+
+    # apt-get install t1utils
+    # apt-get install fontforge
+
+* 5. スクリプトの設定
+
+  想定しているディレクトリ構造は、
+    1. $TEXMF … /usr/local/share/texmf
+    2. Ω/CHISE データキャッシュ用ディレクトリ … /usr/local/share/chise/omega
+  です。
+
+  これと同じ場合は設定を変更する必要はありません。3. の inCHISE のスク
+  リプト埋め込みオプションだけをご参照下さい。
+
+** 1. $TEXMF が /usr/local/share/texmf 以外の場合
+
+  chise.sty と makefonts.pl の設定を変更する必要があります。
+
+*** $TEXMF/omega/lambda/local/chise/chise.sty
+
+  chise.sty の中の外部OCPファイルの場所をすべて正しい位置に書き換えて
+  下さい。/usr/local/share/texmf/omega/ocp/chise_rqd/chise を全て置換する
+  のがもっとも簡単な方法です。
+
+  * これは、外部OCPファイルをフルパスで指定しないとΩが認識できないこ
+    とによるものです。将来は不要になるかもしれません。
+
+  また、makefonts.pl の中の $cleanup_script をご確認下さい。
+  $cleanup_script は fontforge が利用するスクリプト（svg2t1.pfe）の
+  位置を指しています。必要があれば指定して下さい。
+
+  * $TEXMF が /usr/share/texmf や /sw/share/texmf の場合は変更しなくて
+    も動作します。
+
+** 2. Ω/CHISE のデータキャッシュ用のディレクトリが /usr/local/share/chise/omega ではない場合
+
+  Ω/CHISE のデータキャッシュ用のディレクトリは Chise_utils.pm で指定
+  しています。
+
+  1. でインストールした Chise_utils.pm の中の $omegadb_path を変更して
+  下さい。
+
+  * なおこのディレクトリにIDSのデータやグリフデータをキャッシュするの
+    で、書き込み権限が必要です。パーミッションを適宜変更して下さい。
+
+** 3. inCHISE のスクリプト埋め込みオプション
+
+  inCHISE には、変更の頻度が少ないと思われる、スクリプト埋め込みのオプ
+  ションがあります。必要があれば変更して下さい。
+
+    $opt_order{Multi}← Multifont 環境内で使用するフォントの優先順位を
+                     指定します。c, g, j, k, G, H, C を優先順位の高い
+                     方から順に「jGcgkHC」のような形で並べます。全てを
+                     指定する必要はなく「jG」などの形も可能です。
+
+                     それぞれ
+
+                      'c'=>'UniCNS'
+                      'g'=>'UniGB'
+                      'j'=>'UniJIS'
+                      'k'=>'UniKS'
+                      'G'=>'GT'
+                      'H'=>'HZK'
+                      'C'=>'CDP'
+
+                     を表しています。
+
+		     大文字のオプションは、埋め込み用のフォントが必要
+		     になるものです。
+
+    $opt_allow_unify← unify を許します。結果として字形が変わることが
+                     あるので、使用には注意が必要です。nify を許す時は
+                     「1」を、unify をさせないようにする時は「0」を指
+                     定して下さい。
+
+    $opt_protrude ← 禁則をぶら下がりにするかどうかの指定です。ぶら下
+                     がりにする時は「1」を、ぶら下がりをしない時は「0」
+                     を指定してください。
+
+* 6. dvipdfmx の設定
+
+  $TEXMF/dvipdfm/CMap にリンクをはるなどして CMap を dvipdfmx で使える
+  ようにしておく。
+
+  ex)
+  ln -s $ADOBE_READER_CMAP_DIR/* $TEXMF/dvipdfm/CMap/
+
+  また、dvipdfmx.cfg に
+
+  f chise.map
+  f mulambda.map
+  f gt.map
+  f hzk.map
+  f cdp.map
+
+  を書き加える。
+
+  * cdp.map は Identity-H という CMap を利用する設定になっていますが、
+    手元の dvipdfmx では「Adobe-Identity-UCS2」を見に行ってしまいます。
+    そのような場合は、
+
+    $ cd $TEXMF/dvipdfm/CMap
+    $ ln -s Identity-H Adobe-Identity-UCS2
+
+    として対処して下さい。
+
+  * gt.map, hzk.map, cdp.map は必ずしも必要ではありません。
+
+  * chise.map は KAGE サーバからグリフをもらって来る時に必要です。
+
+  * Mac OS X などでヒラギノのフォントを利用する時は「mulambda.map」の
+    代わりに「mulambda-hiragino.map」を指定して下さい。embed をさせな
+    いようにする時は「mulambda-hiragino-noembed.map」を御利用下さい。
+
+* 7. lambda の実行
+
+  ex)
+  $ lambda test
+
+  # chise.sty には次の三つのオプションがあります。
+  #
+  # 1. ファイルを保存した時のコーディングシステム（必須）
+  #      utf8cns, utf8gb, utf8jis, utf8ks, utf8mcs のいずれか。
+
+  # 2. 文書全体にデフォールトで使用するフォントの種類
+  #      cnsfont, gbfont, jisfont, ksfont, multifont のいずれか。
+
+  #    指定しなければラテン文字用のフォントがデフォールトになります。
+
+  #    なお、最後の「multifont」は、CNS, GB, JIS, KS のフォントのいず
+  #    れかにグリフがあればそれを使用するという環境です。ここで指定し
+  #    なくても \begin{Multifont}…\end{Multifont} や \multifont{} を
+  #    使って利用することも出来ます。
+
+  #    また優先順位を指定することも出来ます。上記の「スクリプトの移動
+  #    と設定の書き換え」を参照して下さい。
+
+  # 3. KAGE サーバを利用するかどうか（kage）
+
+  #    指定しなければ、KAGE を呼びません。
+  
+* 8. dvipdfmx の実行
+
+  ex)
+  $ dvipdfmx test
+
+  * GT, HZK, CDP を使う時はTTFをdvipdfmxが見付けられる所に置いて下さい。
+    何故か私の所ではこれらのフォントは、カレントディレクトリにないと認
+    識されません。(^^;
+
+
+  これで PDF ファイルが出来上がっているはずです。
+
+* 9. インストール上の注意
+
+  最近のlambdaはalephを使っているので、Ω/CHISEが正常に動きません。
+  その場合はomegaを使ったlambdaを作りなおす必要があります。
+
+  以下に、TeXが/usr/local以下にインストールされている場合の例を示しま
+  す。
+
+  確認方法)
+
+  $ ls -l /usr/local/bin/lambda
+
+  「/usr/local/bin/lambda -> aleph」と表示される場合は、以下の作業を行っ
+  て下さい。
+
+  $ cd /usr/local/bin
+  $ sudo rm lambda
+  $ sudo ln -s omega lambda
+  $ cd /usr/local/share/texmf/web2c
+  $ lambda -ini lambda.tex
+
+  以上です。

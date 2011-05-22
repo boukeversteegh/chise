@@ -1,0 +1,162 @@
+\documentclass[a4j]{jarticle}
+
+\title{XEmacs UTF-2000 API}
+\author{守岡 知彦}
+\date{}
+
+\newenvironment{feature}[1]
+{\vspace{0.3em}\noindent{\textbf{機能 #1}}\vspace{-0.5em}\begin{quote}}
+{\end{quote}}
+
+\newenvironment{function}[2]
+{\vspace{0.3em}\noindent{\textbf{関数 #1} (\textit{#2})}\vspace{-0.5em}\begin{quote}}
+{\end{quote}}
+
+\newenvironment{example}
+{\begin{description}\item [［例］]}
+{\end{description}}
+
+\newcommand{\optargs}[1]{{\sl\textbf{\&optional}} #1}
+
+\newcommand{\var}[1]{\textit{#1}}
+
+\newcommand{\sym}[1]{\textsf{#1}}
+
+\newcommand{\func}[1]{\sym{#1}}
+
+\begin{document}
+
+\maketitle
+
+\begin{feature}{utf-2000}
+  UTF-2000 機能を提供する。
+
+  \begin{example}
+    (featurep 'utf-2000)
+    → t
+  \end{example}
+\end{feature}
+
+\begin{function}{define-char}{char-spec}
+  文字属性の集合 \var{char-spec} で表現される文字オブジェクトを定義し、
+  その文字オブジェクトを返す。
+
+  文字属性の集合 \var{char-spec} は連想リストである。
+
+  \begin{example}
+\begin{verbatim}
+(define-char
+  '((name               . "CJK RADICAL SECOND TWO")
+    (general-category   symbol other) ; Informative Category
+    (bidi-category      . "ON")
+    (mirrored           . nil)
+    (total-strokes       . 1)
+    (<-radical
+     ((ucs                . #x4E5A)
+      ))
+    (ideograph-cdp      . -21)
+    (chinese-big5-cdp   . #x8C5D)
+    (ucs                . #x2E83)
+    ))
+\end{verbatim}
+    %% この例、line by line の説明がほしい。
+  \end{example}
+\end{function}
+
+\begin{function}{get-char-attribute}
+        {character attribute \optargs{default-value}}
+  文字オブジェクト \var{character} の属性 \var{attribute} の
+  値を返す。
+
+  Return \var{default-value} if the value is not exist.
+
+  \begin{example}
+\begin{verbatim}
+(get-char-attribute ?あ 'name)
+→ "HIRAGANA LETTER A"
+\end{verbatim}
+    \end{example}
+    %% 上と同じ例を使うほうが親切かも。「あ」って見たことない人にも読
+    %% ませるなら。
+\end{function}
+
+\begin{function}{put-char-attribute}{character attribute value}
+  文字オブジェクト \var{character} の属性 \var{attribute} の
+  値を \var{value} に設定する。
+
+  \begin{example}
+\begin{verbatim}
+(get-char-attribute ?あ 'foo)
+→nil
+(put-char-attribute ?あ 'foo 1)
+→1
+(get-char attribute ?あ 'foo)
+→1
+\end{verbatim}
+  \end{example}
+\end{function}
+
+\begin{function}{find-char}{attributes}
+  In order to find a character object by a character \var{attribute},
+    a builtin function \func{find-char} may be convenient.  This
+    function retrieves the character that has specified attributes.
+\end{function}
+
+\begin{function}{map-char-attribute}{function attribute \optargs{range}}
+    A map function for character attributes is also available.  This
+    function is useful in finding characters with a character
+    attribute, or processing by a character attribute,
+  
+    This function maps \var{function} over entries in \var{attribute},
+    %% 以下はattribute ((key value) のリスト)の全要素に対して  function
+    %% (key value) を呼ぶ。でいいの？
+    %% What's table? 
+    calling it with two arguments, each key and value in the table.
+
+    \var{Range}
+    specifies a subrange to map over and 
+    %% 一般の読者は XEmacsLisp は知らない。
+    is in the same format as the
+    range argument to 
+    'put-range-table'.  If omitted or t, it defaults to
+    the entire table.  See Fig~\ref{fig:map-char-attribute}
+    %%mapcaratributes?
+    for an example using this function.    
+\end{function}
+
+\begin{function}{char-attribute-alist}{character}
+  You can get every attributes of a character as an association-list
+  by a built-in function \var{char-attribute-alist}.
+  
+  This function returns the alist of attributes of \var{character}.
+\end{function}
+
+\begin{function}{char-attribute-list}{}
+    You can get the list of character attributes by a builtin function
+    \func{char-attribute-list}.
+    
+    This function returns the list of all existing character
+    attributes.
+\end{function}
+
+\begin{function}{encode-char}{character coded-charset \optargs{defined-only}}
+  Return code-point of \var{character} in specified \var{coded-charset}.
+\end{function}
+
+\begin{function}{decode-char}{coded-charset code \optargs{defined-only}}
+  Make a character from \var{coded-charset} and code-point \var{code}.
+
+  If \var{defined-only} is non-\sym{nil}, builtin character is not returned.
+  If corresponding character is not found, \sym{nil} is returned.
+\end{function}
+
+\begin{function}{decode-builtin-char}{coded-charset code}
+  Make a builtin character from \var{coded-charset} and code-point \var{code}.
+\end{function}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+<head>
+<title>CHaracter Information Service Environment</title>
+<link rel=stylesheet href="../chise.css" type="text/css">
+</head>
+<body>
+
+    <p>
+      [<a href="../index.html.ja.iso-2022-jp">CHISE</a>]
+      [<a href="../xemacs/index.html.ja.iso-2022-jp">XEmacs CHISE</a>]
+      [<a href="../ruby/index.html.ja.iso-2022-jp">Ruby/CHISE</a>]
+      [<a href="../perl/index.html.ja.iso-2022-jp">Perl/CHISE</a>]
+      [<a href="../topicmaps/index.html.ja.iso-2022-jp">TopicMaps</a>]
+      [<a href="../ids/index.html.ja.iso-2022-jp">IDS</a>]
+      [glyph]
+      [<a href="../visualization/index.html.ja.iso-2022-jp">Visualization</a>]
+      [<a href="../omega/index.html.ja.iso-2022-jp">Ω</a>]
+    </p>
+
+    <h1>
+      <a href="../index.html.ja.iso-2022-jp">CHISE</a> / 
+      グリフ・字形情報の統合と合成
+    </h1>
+    
+    <hr>
+
+    <p>
+      文字データベースに字形やグリフ（字体）に関する情報を収録し、
+      文字に関する知識とグリフ・字形を統一的に扱うシステムを実現します。
+      また、<a href="../ids/index.html.ja.iso-2022-jp">	漢字の構造情報</a>を
+      利用して複数の部品からなる漢字の字形情報を合成するシステムを開発します。
+      これにより、文字の性質と実際に表示される字形のミスマッチが起こらず、
+      符号化されていない文字・フォントが存在しない文字も含め
+      定義した文字が正しく表示・印刷可能な環境の実現を目指します。
+    </p>
+
+    <ul>
+      <li><a href="http://www.fonts.jp/">漢字フォント自動生成技術フォーラム</a>
+    </ul>
+
+    <hr>
+
+    <h2>文書・発表等</h2>
+
+    <ul>
+      <li><a href="../#presentation">CHISEプロジェクト全般</a></li>
+    </ul>
+
+    <ul>
+      <li><a href="http://web.sfc.keio.ac.jp/~kamichi/">上地 宏一</a>
+	「漢字フォント自動生成サーバ“影 KAGE”の構築
+	−文字コードの枠組みを超える次世代漢字処理の提案−」、
+	<a href="http://www.jaet.gr.jp/jj/3.html">『漢字文献情報処理研究』第3号</a>、
+	好文出版、2002年10月</li>
+      <li><a href="http://web.sfc.keio.ac.jp/~kamichi/">上地 宏一</a>
+	「漢字字形の自動生成とネットワークフォント」
+	<a href="http://www.jaet.gr.jp/">漢字文献情報処理研究会</a>第5回大会、
+	2002年12月7日（土）、花園大学</li>
+    </ul>
+
+    <hr>
+
+    <p>
+      [<a href="../">戻る</a>]
+    </p>
+
+    <p>
+<!-- hhmts start -->
+Last modified: Thu Jan 16 12:17:05 JST 2003
+<!-- hhmts end -->.
+    </p>
+
+</body>
+</html>

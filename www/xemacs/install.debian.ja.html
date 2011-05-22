@@ -1,0 +1,530 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang=ja>
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-2022-JP">
+<title>How to Install XEmacs CHISE on Debian GNU/Linux (woody)</title>
+<link rel=stylesheet href="../chise.css" type="text/css">
+</head>
+
+<Body lang=ja>
+
+<p>[ <a href="../index.html.ja.iso-2022-jp">CHISE Top</a> ] [ <a href="index.html.ja.iso-2022-jp">XEmacs CHISE Top</a> ]</p>
+
+<h1>XEmacs CHISE を Debian GNU/Linux にインストールする方法</h1>
+
+<hr>
+
+<h2>はじめに</h2>
+<p>
+ここでは
+<a href="http://www.debian.org/" >Debian GNU/Linux</a>
+を一通り扱える人を対象に、
+<a href="../xemacs/" >XEmacs CHISE</a>（旧称 XEmacs UTF-2000）
+のインストール方法（ソースの入手、コンパイルなど）を説明しています。
+</p>
+
+<p>
+インストール対象となる Debian のバージョンは sarge（および 3.0 woody）です。
+<kbd>tasksel</kbd>
+で「desktop environment」を
+（woody の場合、「japanese environment」
+「simplified Chinese environment」「traditional Chinese environment」
+「Korean environment」「X window system」も）
+インストールしていると想定しています。
+</p>
+
+<hr>
+
+<h2>コンパイルの前に</h2>
+<p>
+XEmacs CHISEをインストールする前に、
+<kbd>apt-get install</kbd>しておかなくてはならない（しておいた方がいい）
+ものがあります。以下のパッケージです。
+</p>
+
+<blockquote>
+<samp>
+make gcc
+libtool libdb4.2-dev（libdb3-dev,
+あるいは、sid の場合、libdb4.3-devも可） g++
+texinfo libcanna1g-dev <!--  libwnn6-dev -->
+libjpeg62-dev libncurses5-dev libpng12-dev（woody の場合、libpng2-dev）
+libtiff4-dev（woody の場合、libtiff3g-dev） zlib1g-dev texi2html
+debhelper libldap2-dev <!--  libsasl-dev --> libpam0g-dev 
+libcompfaceg1-dev xlibs-dev libxaw7-dev autoconf <!--  libgtk1.2-dev -->
+<!--  libgnome-dev --> <!--  libart-dev -->
+libglade2-dev （woody の場合、libglade-gnome0-dev も可） libesd0-dev
+</samp>
+</blockquote>
+
+<p>
+このパッケージのリストは <kbd>apt-get source xemacs21-mule</kbd>
+で得られたものを基にしています。
+これらのすべてを入れなければいけないわけではないのですが、
+いくつかのパッケージは必須です。
+</p>
+
+    <p>
+      また、XEmacs CHISEではたくさんの種類のフォントを使います。
+      特殊なフォントについては後述しますが、
+      とりあえず以下のフォントを<kbd>apt-get install</kbd>しておけば問題ないでしょう
+      (viva apt!)。
+    </p>
+
+    <blockquote>
+      <samp>
+	scalable-cyrfonts scalable-cyrfonts-x11 xfonts-100dpi-transcoded xfonts-75dpi-transcoded
+	xfonts-base-transcoded xfonts-biznet-100dpi xfonts-biznet-75dpi xfonts-biznet-base
+	xfonts-biznet-iso-8859-2-100dpi xfonts-biznet-iso-8859-2-75dpi xfonts-biznet-iso-8859-2-base
+	xfonts-bolkhov-cp1251-75dpi xfonts-bolkhov-cp1251-misc xfonts-bolkhov-koi8r-75dpi
+	xfonts-bolkhov-koi8r-misc xfonts-bolkhov-koi8u-75dpi xfonts-bolkhov-koi8u-misc
+	xfonts-cronyx-cp1251-100dpi xfonts-cronyx-isocyr-100dpi xfonts-cronyx-isocyr-75dpi
+	xfonts-cronyx-isocyr-misc xfonts-cronyx-koi8r-100dpi xfonts-cronyx-koi8u-100dpi
+	xfonts-cyrillic
+	xfonts-intl-european xfonts-intl-arabic xfonts-intl-asian xfonts-intl-phonetic
+      </samp>
+    </blockquote>
+
+    <p>
+      フォントをインストールしたら、フォントを読み込むためにX Window Systemを再起動しましょう。
+    </p>
+
+<hr>
+
+<h2><a name="libchise">libchise のインストール</a></h2>
+<p>
+ここでは、XEmacs CHISE を libchise 付でインストールします。
+<p>
+Sarge の場合、libchise は Debian
+パッケージ化されているので、これを利用することができます。
+この場合、root になって <kbd>apt-get install libchise</kbd> と
+<kbd>apt-get install libchise-dev</kbd> と実行するだけで OK です。
+<p>
+以下では libchise を自分でインストールする場合について説明します。
+
+<h3><a name="sources">ソースの入手</a></h3>
+
+<h4>ダウンロード</h4>
+<p>
+現在、最新版は
+<a
+href="http://kanji.zinbun.kyoto-u.ac.jp/projects/chise/dist/libchise/libchise-0.2.1.tar.gz"
+>libchise 0.2.1</a
+>からダウンロードできます。ダウンロード後、適当なディレクトリに解凍して下さい。
+</p>
+
+<h4>anonymous cvsによる入手</h4>
+<p>
+cvs.m17n.org の /cvs/chise の libchise モジュールから
+anonymous CVS でも入手可能です。
+こちらから入手したものの方が
+リリースされたダウンロード用のソースよりも新しいことが多いでしょう。
+</p>
+
+<h5>login</h5>
+
+<blockquote>
+<kbd>% cvs -d :pserver:anonymous@cvs.m17n.org:/cvs/chise login</kbd><br>
+<kbd>CVS password: ← 何も入力しないでEnter</kbd>
+</blockquote>
+<p>
+（以前に行っている場合、これを毎回やる必要はありません）
+
+<h5>checkout</h5>
+
+<blockquote>
+<kbd>% cvs -z9 -d :pserver:anonymous@cvs.m17n.org:/cvs/chise checkout
+libchise</kbd>
+</blockquote>
+
+<!--<h4><a href="http://cvs.m17n.org/cgi-bin/viewcvs/libchise/?cvsroot=chise">-->
+<h4><a href="http://cvs.m17n.org/viewcvs/libchise/?cvsroot=chise">
+WWW access</a></h4>
+
+<h3>コンパイル</h3>
+<p>
+<kbd>./configure</kbd>, <kbd>make</kbd>, <kbd>make install</kbd> で
+OK です。
+<p>
+なお、<kbd>./configure</kbd> を実行する前に、をインストールしておいてください。
+<p>
+なお、/etc/ld.so.conf に /usr/local/lib がなければ追加し、root
+になって <kbd>ldconfig</kbd> を実行しておいてください。
+
+<hr>
+
+<h2><a name="sources">ソースの入手</a></h2>
+
+<h3>ダウンロード</h3>
+<p>
+現在、最新版は
+<a
+href="http://kanji.zinbun.kyoto-u.ac.jp/projects/chise/dist/XEmacs/xemacs-chise-0.21.tar.gz"
+>XEmacs CHISE 0.21 (平城山)</a
+>からダウンロードできます。ダウンロード後、適当なディレクトリに解凍して下さい。
+</p>
+
+<h3>anonymous cvsによる入手</h3>
+<p>
+cvs.m17n.org の /cvs/chise の xemacs モジュールから
+anonymous CVS でも入手可能です。
+こちらから入手したものの方が
+リリースされたダウンロード用のソースよりも新しいことが多いでしょう。
+（<a href="../ids/">CHISE ids</a>
+パッケージを使う場合、anonymous CVS
+で入手したものを使う必要があります）
+</p>
+
+<h4>login</h4>
+
+<blockquote>
+<kbd>% cvs -d :pserver:anonymous@cvs.m17n.org:/cvs/chise login</kbd><br>
+<kbd>CVS password: ← 何も入力しないでEnter</kbd>
+</blockquote>
+
+<h4>checkout</h4>
+
+<blockquote>
+<kbd>% cvs -z9 -d :pserver:anonymous@cvs.m17n.org:/cvs/chise checkout
+-d XEmacs-CHISE xemacs</kbd>
+</blockquote>
+
+<!--<h4><a href="http://cvs.m17n.org/cgi-bin/viewcvs/xemacs/?cvsroot=chise">-->
+<h4><a href="http://cvs.m17n.org/viewcvs/xemacs/?cvsroot=chise">
+WWW access</a></h4>
+
+<hr>
+
+<h2>コンパイル</h2>
+<p>
+configureでは少なくとも
+<kbd>--with-mule</kbd>,
+<kbd>--without-wnn</kbd>,
+<kbd>--with-utf-2000</kbd>
+を指定してください（まだ、Wnnは supportされていません）。また
+<kbd>--with-text-coding</kbd>
+や
+<kbd>--pdump</kbd>
+も付けた方が良いでしょう（sid の場合、これは必須です）。
+</p>
+
+<dl>
+  <dt>例</dt>
+  <dd><kbd>% ./configure --with-mule --without-xim --without-wnn --with-utf-2000 --with-text-coding --pdump</kbd></dd>
+</dl>
+
+<p>
+あとは通常の XEmacs の作成と何ら変わる所はありません
+(が、文字データベースの構築に結構時間がかかります)。
+</p>
+
+<dl>
+  <dt>例</dt>
+  <dd><kbd>% make</kbd></dd>
+  <dd><kbd>% su</kbd></dd>
+  <dd><kbd>Password:</kbd> ← rootのパスワード</dd>
+  <dd><kbd># make install</kbd></dd>
+</dl>
+
+<hr>
+
+<h2>sumoパッケージの入手と展開</h2>
+
+<h3>入手先</h3>
+<p>
+XEmacs CHISEのソース以外に、
+<a href="ftp://ftp.xemacs.org/pub/xemacs/packages/xemacs-sumo.tar.gz">xemacs-sumo.tar.gz</a>
+と
+<a href="ftp://ftp.xemacs.org/pub/xemacs/packages/xemacs-mule-sumo.tar.gz">xemacs-mule-sumo.tar.gz</a>
+もダウンロードしておきましょう。
+これらがなくてもコンパイルはできますが、日本語などがちゃんと扱えません。
+</p>
+
+<h3>解凍</h3>
+<p>
+configureの際、特別な指定をしていなければ、解凍先は、
+</p>
+
+<blockquote>/usr/local/lib/xemacs/</blockquote>
+
+<p>になるはずです。</p>
+
+<dl>
+  <dt>例</dt>
+  <dd><kbd>% cd ~/work</kbd> ← 作業用ディレクトリ。お好みで。</dd>
+  <dd><kbd>% wget ftp://ftp.xemacs.org/pub/xemacs/packages/xemacs-sumo-2002-09-19.tar.gz</kbd></dd>
+  <dd><kbd>% wget ftp://ftp.xemacs.org/pub/xemacs/packages/xemacs-mule-sumo-2002-09-19.tar.gz</kbd></dd>
+  <dd><kbd>% su -m</kbd></dd>
+  <dd><kbd>Password:</kbd> ← rootのパスワード</dd>
+  <dd><kbd># cd /usr/local/lib/xemacs</kbd></dd>
+  <dd><kbd># tar xvfz ~/work/xemacs-sumo-2002-09-19.tar.gz</kbd></dd>
+  <dd><kbd># tar xvfz ~/work/xemacs-mule-sumo-2002-09-19.tar.gz</kbd></dd>
+</dl>
+
+<p>
+また、/usr/local/lib/xemacs/ に書き込み可能な状態であれば、xemacs
+のメニューバーの Tools → Packages 以下を操作することにより、XEmacs
+のパッケージ管理機構を利用することができます。
+</p>
+
+<hr>
+
+<h2><a name="fonts">特殊なフォントのインストール (under construction)</a></h2>
+<p>
+通常、エディタとして使う分にはそれほどでもありませんが、
+文字データベースを見る際などに、たくさんのフォントを必要とします。
+以下、通常のルート（aptなど）では入手しづらいものについて、
+入手先とインストール方法を述べます。
+</p>
+
+<h3>CDP 外字用フォント</h3>
+<p>
+<a href="http://www.sinica.edu.tw/~cdp/">台湾中央研究院文献処理実験室
+</a>
+が作成した、Big5 にない漢字や漢字部品を表示するためのフォントです。
+</p>
+    
+<h4>入手先</h4>
+<p>
+<a href="http://www.sinica.edu.tw/~cdp/zip/font/eudc.zip">
+http://www.sinica.edu.tw/~cdp/zip/font/eudc.zip</a>
+</p>
+
+<h4>インストール方法</h4>
+<p>
+入手したファイルを解凍します。ここでは
+/usr/local/share/fonts/TrueType/CDP
+というディレクトリを作って、そこに解凍します。
+eudc.tte のファイル名を「eudc.tt<strong>f</strong>」に変更します。
+</p>
+<p>
+同じディレクトリに以下のような内容の fonts.dir と encodings.dir を作ります。
+</p>
+
+<dl>
+  <dt>fonts.dir</dt>
+  <dd>
+      <pre>
+2
+eudc.ttf -CDP-mincho-medium-r-normal--0-0-0-0-c-0-big5.cdp-0
+eudc.ttf -CDP-mincho-medium-r-normal--0-0-0-0-c-0-iso10646.cdp-1</pre>
+  </dd>
+  <dt>encodings.dir</dt>
+  <dd>
+      <pre>
+11
+big5.eten-0 /usr/X11R6/lib/X11/fonts/encodings/large/big5.eten-0.enc.gz
+jisx0212.1990-0 /usr/X11R6/lib/X11/fonts/encodings/large/jisx0212.1990-0.enc.gz
+jisx0208.1990-0 /usr/X11R6/lib/X11/fonts/encodings/large/jisx0208.1990-0.enc.gz
+big5.cp950-0 /usr/X11R6/lib/X11/fonts/encodings/large/big5.eten-0.enc.gz
+jisx0208.1983-0 /usr/X11R6/lib/X11/fonts/encodings/large/jisx0208.1983-0.enc.gz
+big5-0 /usr/X11R6/lib/X11/fonts/encodings/large/big5.eten-0.enc.gz
+gb2312.1980-0 /usr/X11R6/lib/X11/fonts/encodings/large/gb2312.1980-0.enc.gz
+gbk-0 /usr/X11R6/lib/X11/fonts/encodings/large/gbk-0.enc.gz
+jisx0201.1976-0 /usr/X11R6/lib/X11/fonts/encodings/large/jisx0201.1976-0.enc.gz
+ksc5601.1987-0 /usr/X11R6/lib/X11/fonts/encodings/large/ksc5601.1987-0.enc.gz
+big5.cdp-0 /usr/local/share/fonts/TrueType/CDP/big5.cdp-0.enc.gz</pre>
+  </dd>
+</dl>
+<p>
+/etc/X11/XF86Config-4の「Files」セクションに以下の記述を付け加えます。
+</p>
+
+<blockquote>
+<pre>
+FontPath     "/usr/local/share/fonts/TrueType/CDP"
+</pre>
+</blockquote>
+
+<p>
+フォントの設定を有効にするためには、Xを再起動します。
+</p>
+
+<h3>GT 2000 書体フォント</h3>
+
+<p class="attention">
+XFree86 4.2.x の freetype module を使う状態で GT 2000
+書体フォントを表示しようとすると
+X Window System が落ちることが確認されています。sid
+の場合、この条件に当てはまるので、この場合、xfs-xtt
+を使うようにして下さい。
+</p>
+
+<p>
+GT 2000 書体は
+<a href="http://www.l.u-tokyo.ac.jp/GT/">東京大学多国語処理研究会</a>
+によって開発された6万7千字を超える漢字のTrueTypeフォントです。
+Debianにおいては、
+non-freeのパッケージttf-gtfontsを<kbd>apt-get install</kbd>することで
+入手可能ですが、その際/etc/apt/sources.listに
+</p>
+
+<blockquote>
+<pre>
+deb ftp://ftp.jp.debian.org/debian-jp unstable-jp main contrib non-free
+deb-src ftp://ftp.jp.debian.org/debian-jp unstable-jp main contrib non-free</pre>
+</blockquote>
+
+<p>
+を追加しておかなければなりません。
+また、インストールを自動的にやってくれるわけではないので、
+フォントが展開される「/usr/share/fonts/truetype/GT/」に
+下記のようにfonts.dir、encodings.dirを作り、
+/etc/X11/XF86Config-4の「Files」セクションにパスを記述します。
+</p>
+
+<dl>
+  <dt>fonts.dir</dt>
+  <dd>
+      <pre>
+13
+GT200001.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-GTpj-1
+GT200002.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-GTpj-2
+GT200003.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-GTpj-3
+GT200004.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-GTpj-4
+GT200005.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-GTpj-5
+GT200006.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-GTpj-6
+GT200007.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-GTpj-7
+GT200008.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-GTpj-8
+GT200009.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-GTpj-9
+GT200010.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-GTpj-10
+GT200011.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-GTpj-11
+GT2000k1.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-GTKpj-1
+GT2000k2.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-GTKpj-2
+      </pre>
+  </dd>
+  <dt>encodings.dir</dt>
+  <dd>
+      <pre>
+13
+gtpj-1 /usr/X11R6/lib/X11/fonts/encodings/large/jisx0208.1990-0.enc.gz
+gtpj-2 /usr/X11R6/lib/X11/fonts/encodings/large/jisx0208.1990-0.enc.gz
+gtpj-3 /usr/X11R6/lib/X11/fonts/encodings/large/jisx0208.1990-0.enc.gz
+gtpj-4 /usr/X11R6/lib/X11/fonts/encodings/large/jisx0208.1990-0.enc.gz
+gtpj-5 /usr/X11R6/lib/X11/fonts/encodings/large/jisx0208.1990-0.enc.gz
+gtpj-6 /usr/X11R6/lib/X11/fonts/encodings/large/jisx0208.1990-0.enc.gz
+gtpj-7 /usr/X11R6/lib/X11/fonts/encodings/large/jisx0208.1990-0.enc.gz
+gtpj-8 /usr/X11R6/lib/X11/fonts/encodings/large/jisx0208.1990-0.enc.gz
+gtpj-9 /usr/X11R6/lib/X11/fonts/encodings/large/jisx0208.1990-0.enc.gz
+gtpj-10 /usr/X11R6/lib/X11/fonts/encodings/large/jisx0208.1990-0.enc.gz
+gtpj-11 /usr/X11R6/lib/X11/fonts/encodings/large/jisx0208.1990-0.enc.gz
+gtkpj-1 /usr/X11R6/lib/X11/fonts/encodings/large/jisx0208.1990-0.enc.gz
+gtkpj-2 /usr/X11R6/lib/X11/fonts/encodings/large/jisx0208.1990-0.enc.gz
+</pre>
+  </dd>
+  <dt>XF86Config-4</dt>
+  <dd>
+      <pre>FontPath     "/usr/share/fonts/truetype/GT/"</pre>
+  </dd>
+</dl>
+
+<p>
+なお、xfs-xtt を使う場合、
+フォントが展開される「/usr/share/fonts/truetype/GT/」に
+下記のように fonts.dir を作り、/etc/X11/fs-xtt/config の catalogue に
+/usr/share/fonts/truetype/GT/ を追加します。なお、encodings.dir
+は不要です。
+</p>
+<dl>
+  <dt>fonts.dir</dt>
+  <dd>
+      <pre>
+13
+gt200001.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-jisx0208.GT-1
+gt200002.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-jisx0208.GT-2
+gt200003.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-jisx0208.GT-3
+gt200004.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-jisx0208.GT-4
+gt200005.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-jisx0208.GT-5
+gt200006.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-jisx0208.GT-6
+gt200007.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-jisx0208.GT-7
+gt200008.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-jisx0208.GT-8
+gt200009.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-jisx0208.GT-9
+gt200010.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-jisx0208.GT-10
+gt200011.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-jisx0208.GT-11
+gt2000k1.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-jisx0208.GTK-1
+gt2000k2.ttf -GT-mincho-medium-r-normal--0-0-0-0-c-0-jisx0208.GTK-2
+      </pre>
+  </dd>
+</dl>
+<p>
+また、/etc/X11/XF86Config-4 の「Files」セクションに
+<blockquote>
+<pre>
+FontPath	"unix/:7110"			# local font server
+</pre>
+</blockquote>
+という行があることを確認して下さい。
+
+</p>
+
+<h3>拡張漢字B (ISO/IEC 10646-2)</h3>
+
+    <p>
+      ISO/IEC 10646-2、Unicode 3.1以降の拡張漢字B (Extension B) の完全なフォントはまだ無いようなので、
+      ISO/IEC 10646-2:2001のPDFから文字の画像を吸い出し、それをフォント化する
+      手順を紹介します。
+    </p>
+
+    <h4>入手先</h4>
+
+    <p>
+      ISO/IEC 10646-2:2001のPDFファイルは、
+      <a href="http://www.iso.ch/iso/en/ISOOnline.frontpage">ISOのサイト</a>で入手可能です。
+      ただし有料 (CHF 80,00)。
+      <a href="http://www.iso.ch/iso/en/CatalogueDetailPage.CatalogueDetail?CSNUMBER=33208&ICS1=35&ICS2=40&ICS3=">ISO/IEC 10646-2:2001のページ</a>。
+    </p>
+
+    <h4>インストール方法</h4>
+
+    <ol>
+      <li>PDFから文字画像の吸い出しにはpdfimagesを使います。pdfimagesはxpdf-utilsパッケージに入っています。
+	<dl>
+	  <dt>例</dt>
+	  <dd><kbd>% cd ~/work</kbd> ← 作業用ディレクトリ。名前はお好みで。</dd>
+	  <dd><kbd>% cp /cdrom/c033208e_pdf.zip .</kbd> ← あらかじめCD-ROMをマウントしておきましょう。</dd>
+	  <dd><kbd>% unzip c033208e_pdf.zip</kbd></dd>
+	  <dd><kbd>% mkdir iso10646-2</kbd> ← 吸い出した画像を貯めておくところ。これもお好みで。</dd>
+	  <dd><kbd>% pdfimages C033208e.pdf iso10646-2/</kbd></dd>
+	</dl></li>
+      <li>吸い出した画像をbdfファイルにします。 (この項、under construction)</li>
+      <li>できあがったbdfフォントは一文字が128×128と巨大なので、bdfresize (<kbd>apt-get install bdfresize</kbd>で入手可能)
+	で4分の1程度に小さくします。ついでにbdftopcf &amp; gzipでサイズを小さくしましょう。
+	<dl>
+	  <dt>例</dt>
+	  <dd><kbd>bdfresize -f 1/4 iso-sip.bdf &gt; iso-sip-48.bdf</kbd> ← 4分の1 (＝48×48) にする場合。8分の1なら1/8。</dd>
+	  <dd><kbd>bdftopcf iso-sip-48.bdf &gt; iso-sip-48.pcf</kbd></dd>
+	  <dd><kbd>gzip iso-sip-48.pcf</kbd></dd>
+	</dl></li>
+      <li></li>
+      <li></li>
+      <li>~/.xemacs/init.elまたはそれに準ずる設定ファイルに、以下のような記述を加える。
+	<dl>
+	  <dt>例</dt>
+	  <dd><kbd>(set-charset-registry 'ucs-sip &quot;iso10646-2&quot;)</kbd></dd>
+	</dl></li>
+      <li></li>
+      <li></li>
+    </ol>
+
+<h3>諸橋『大漢和辞典』用のフォント</h3>
+
+    <p>
+      e漢字からBDFを生成するスクリプトを使います。
+    </p>
+
+<h3>漢字庫フォント</h3>
+
+<h4>入手先</h4>
+
+    <blockquote>
+      <a href="http://www.sinica.edu.tw/~cdp/zip/hanzi/hanzicd.zip">http://www.sinica.edu.tw/~cdp/zip/hanzi/hanzicd.zip</a>
+    </blockquote>
+
+<hr>
+<p>
+<!-- hhmts start -->
+Last modified: Mon Oct 18 00:42:00 JST 2005
+<!-- hhmts end -->
+</p>
+</body>
+</html>

@@ -1,0 +1,37 @@
+#!/bin/sh
+
+fink install compface-dev
+fink install libpng3
+fink install libtiff
+fink install libjpeg
+fink install db48
+fink install xaw3d
+fink install libncurses5
+fink install x11-dev
+fink install canna-dev
+
+fink install x11
+fink install compface-shlibs
+fink install libpng3-shlibs
+fink install libtiff-shlibs
+fink install libjpeg-shlibs
+fink install db48-shlibs
+fink install xaw3d-shlibs
+fink install ncurses
+fink install libncurses5-shlibs
+fink install canna-shlibs
+
+#fink install coreutils-default
+fink install wget
+
+./configure \
+    --with-site-includes=/sw/include/db4:/sw/include \
+    --with-site-libraries=/sw/lib \
+    --with-canna
+
+ulimit -n 2048
+
+make -e SUDO=sudo install-base
+
+cd chise-fonts-installer/TrueType && make build-arphic \
+    && sudo make install-arphic

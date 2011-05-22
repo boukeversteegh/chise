@@ -1,0 +1,178 @@
+-*- Mode: outline; coding: euc-jp -*-
+
+* はじめに
+
+  OTFパッケージ http://psitau.at.infoseek.co.jp/otf.html を使ってみた
+  のをきっかけに、XEmacs/CHISEで作成した文書を、OTFパッケージを利用す
+  るTeXファイルに変換するperlスクリプトを書いてみました。
+
+  Ω/CHISE用に書いた外部OTPをベースにしているので、仕様は基本的には共
+  通で、
+
+  ・IDSがあれば、パースして文字に置き換える
+  ・GTフォントにグリフがあれば利用するオプションがある
+  ・グリフが見付からなければ、フォント合成システムを利用する
+
+  などはそのまま受け継いでいます。
+
+  ただΩと異なり、元ファイルを一度に処理するので、処理が簡単になるよう
+  に、環境によってベースにするフォントを切替えることはせず、文書全体で
+  どのフォントを優先するかをスクリプトのオプションで切替えるようにして
+  います。使用方法はスクリプトの「-h」オプションを参照して下さい。
+
+  * なお、現在もCVSにはperl 5.6用のスクリプト（chise2otf-5.6）を残して
+    いますが、perl 5.6用のスクリプトはメインテナンスしていません。ご注
+    意ください。
+
+  インストールの手順は次の通りです。
+
+  1X Chise_utils.pm をインストール（要 BerkeleyDB.pm）
+  2X. CHISE DB に Ω/CHISE が利用する情報を加える。
+    a. ruby/CHISEのインストール
+    b. ruby/CHISE を使って ids, ids-decomposed, ids-aggregated とids の
+       逆引きDBを作成
+    c. CHISE DB にAdobe CID情報を付け加える
+  3X フォントメトリックファイルのインストール
+  4X fontforge, t1asm のインストール
+
+  5. スクリプトの移動と設定の書き換え
+  6. dvipdfmx の設定
+  7. OTFパッケージのインストール
+  8. スクリプトの実行
+  9. dvipdfmx の実行
+
+  * X印は Ω/CHISE のインストールと共通ですので、Ω/CHISE の
+    INSTALL.txt.ja を御参照下さい。すでに Ω/CHISE をインストールして
+    いる場合は「5. スクリプトの移動と設定の書き換え」から始めて下さい。
+
+  * フォント合成システムを使わない場合は、4, 5 の設定変更も不要です。
+
+* 1. 〜 4.
+
+  （省略）
+
+* 5. スクリプトの設定
+
+   chise2otf は、次の三つのスクリプトを利用します。
+
+   1. chise2otf … utf-8 から OTF パッケージ用 TeX ファイルへの変換ス
+                  クリプト
+   2. makefonts.pl … KAGE サーバにリクエストを出すスクリプト
+
+   3. svg2t1.pfe … makefonts.pl が利用する fontforge 用のスクリプト
+
+  このうち chise2otf は Chise_utils.pm を利用しますので、
+  Chise_utils.pm も含めて四つのうち、svg2t1.pfe 以外の三つののスクリプ
+  トの設定が必要です。
+
+  * フォント合成システムを使わない場合は makefonts.pl に関する設定は不
+    要ですので、この節はとばして下さい。（makefonts.pl はΩ/CHISEの一
+    部です。）
+
+  * Ω/CHISEをすでに御利用の場合は、chise2otf の「$makefonts」だけ
+    を確認して下さい。
+
+  makefonts.pl と svg2t1.pfe は 3. でインストールしたフォントメトリッ
+  クファイルの中にあります。$TEXMF/omega/ocp/local/chise をご確認下さ
+  い。
+
+** Chise_utils.pm の設定
+
+  $omegadb_path … グリフデータなどのキャッシュ用のディレクトリ
+                   /usr/local/share/chise/omega を利用する場合は設定の変
+                   更の必要はありません。
+
+  * なおこのディレクトリにIDSのデータやグリフデータをキャッシュするの
+    で、書き込み権限が必要です。パーミッションを適宜変更して下さい。
+    個人でのみ使用するのであれば「~/.chise/omega」などでもいいかもしれ
+    ません。
+
+** makefonts.pl の設定
+
+  $cleanup_script … svg2t1.pfe の位置
+         /usr/local/share/texmf/omega/ocp/local/chise/svg2t1.pfe
+         /usr/share/texmf/omega/ocp/local/chise/svg2t1.pfe
+         /sw/share/texmf/omega/ocp/local/chise/svg2t1.pfe 以外の場合は
+         変更して下さい。
+
+** chise2otf の設定
+
+  $makefonts … makefonts.pl の位置
+         /usr/local/share/texmf/omega/ocp/local/chise/makefonts.pl
+         以外の場合は、変更して下さい。
+
+  なお、フォント合成システムを利用する場合はchise2otfスクリプトのオプ
+  ション「-k」を使います。
+
+* 8. dvipdfmx の設定
+
+  $TEXMF/dvipdfm/CMap にリンクをはるなどして CMap を dvipdfmx で使える
+  ようにしておく。
+
+  ex)
+  mkdir $TEXMF/fonts/cmap/acrobat
+  ln -s $ADOBE_READER_CMAP_DIR/* $TEXMF/fonts/cmap/acrobat
+
+  また、dvipdfmx.cfg に
+
+  f gto.map
+
+  を加える。
+
+* 9. OTFパッケージのインストール
+
+  詳細は省略します。本家
+
+    http://psitau.at.infoseek.co.jp/otf.html
+
+  の説明を参考にインストールして下さい。
+
+* 10. スクリプトの実行
+
+  ex)
+  $ perl chise2otf -o jGgckm test.tex > test2.tex
+
+* 11. dvipdfmx の実行
+
+  ex)
+  $ dvipdfmx test2
+
+  * GT を使う時はTTFをdvipdfmxが見付けられる所に置いて下さい。
+    カレントディレクトリにリンクをはるとか… (^^;;
+
+** ラテン文字について
+
+  0080..00FF; Latin-1 Supplement
+  0100..017F; Latin Extended-A
+  1E00..1EFF; Latin Extended Additional
+
+  のうち、一部の文字を利用することが出来るようにしていますが、全ての
+  Latin Extended-A, Latin Extended Additional の範囲の文字を利用するた
+  めには、jadeTeX の中の unicode.sty と dummyels.sty、ならびに 
+  chise2otf の中の extaccent.sty が必要です。
+
+  jadeTeX は
+
+    http://sourceforge.net/projects/jadetex/
+
+  から入手できます。アーカイブから unicode.sty と dummyels.sty を抜き
+  出して、適当な場所において下さい。
+
+  ex)
+
+  cp $JADETEX_SRCDIR/unicode.sty $JADETEX_SRCDIR/dummyels.sty $TEXMF/tex/latex/local/chise2utf/
+  cp $CHISE2OTF_SRCDIR/extaccent.sty $TEXMF/tex/latex/local/chise2utf/
+
+  * 必要ならこの後 mktexlsr を実行して下さい。
+
+
+* おまけ
+
+** Mac OS X での pTeX のインストール
+
+  私は「JIS X0212 for pTeX」
+
+    http://www2.kumagaku.ac.jp/teacher/herogw/index.html
+
+  のページにあるパッケージを利用させてもらってます。
+  ここにはOTFパッケージもあります。

@@ -1,0 +1,64 @@
+VERSION = @PACKAGE_VERSION@
+
+RM	= /bin/rm -f
+TAR	= tar
+WGET	= wget
+MKDIR	= mkdir -p
+SUDO	= 
+
+prefix		= @prefix@
+exec_prefix	= @exec_prefix@
+
+datadir	= @datadir@
+
+FONTS_DIR	= $(datadir)/fonts
+BDF_FONTS_DIR	= $(datadir)/fonts/BDF
+PCF_FONTS_DIR	= $(datadir)/fonts/PCF
+ZINBUN_BDF_FONTS_DIR = $(BDF_FONTS_DIR)/Zinbun
+ZINBUN_PCF_FONTS_DIR = $(PCF_FONTS_DIR)/Zinbun
+
+CHISE_FONTS_URL	= http://kanji.zinbun.kyoto-u.ac.jp/projects/chise/dist/fonts
+
+BDF_FILES	= ekan-dk2.bdf ekan-dk3.bdf \
+		  jef-c3-48.bdf kaizuka48.bdf kaizuka128.bdf
+
+OPTS		= @ac_configure_args@
+
+all:	get
+
+get:	$(BDF_FILES)
+
+
+ekan-dk2.bdf:
+	$(WGET) $(CHISE_FONTS_URL)/BDF/Zinbun/ekan-dk2.bdf
+
+ekan-dk3.bdf:
+	$(WGET) $(CHISE_FONTS_URL)/BDF/Zinbun/ekan-dk3.bdf
+
+jef-c3-48.bdf:
+	$(WGET) $(CHISE_FONTS_URL)/BDF/Zinbun/jef-c3-48.bdf
+
+kaizuka48.bdf:
+	$(WGET) $(CHISE_FONTS_URL)/BDF/Zinbun/kaizuka48.bdf
+
+kaizuka128.bdf:
+	$(WGET) $(CHISE_FONTS_URL)/BDF/Zinbun/kaizuka128.bdf
+
+
+install:
+	$(MKDIR) $(ZINBUN_BDF_FONTS_DIR)
+	( $(TAR) -cf - *.bdf ) | \
+	( cd $(ZINBUN_BDF_FONTS_DIR) && $(TAR) -xf - )
+	$(MKDIR) $(ZINBUN_PCF_FONTS_DIR)
+	for file in $(BDF_FILES) ; do \
+		FONT=`basename $${file} .bdf`.pcf.gz ; \
+		bdftopcf $${file} | gzip -9 > $(ZINBUN_PCF_FONTS_DIR)/$${FONT} ; \
+	done
+	cd $(ZINBUN_PCF_FONTS_DIR) && mkfontdir
+
+
+distclean:
+	-$(RM) Makefile
+
+distclean-all:
+	-$(RM) *.bdf Makefile

@@ -1,0 +1,1310 @@
+Document Type: WSE
+item: Global
+  Version=7.0
+  Title=<<<version.title + " Installation">>>
+  Flags=00000100
+  Languages=65 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Progress Bar DLL=%_WISE_%\Progress\WIZ%_EXE_OS_TYPE_%.DLL
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000100000000010010110000001000
+  Log Pathname=%MAINDIR%\INSTALL.LOG
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=85
+  Patch Memory=4000
+  FTP Cluster Size=20
+  Dialogs Version=6
+  Variable Name1=_SYS_
+  Variable Default1=C:\WINDOWS\SYSTEM
+  Variable Flags1=00001000
+  Variable Name2=_WISE_
+  Variable Default2=C:\PROGRAM FILES\WISE INSTALLBUILDER
+  Variable Flags2=00001000
+end
+item: Get Temporary Filename
+  Variable=READMEFILE
+end
+item: Install File
+  Source=<<<dirs.source>>>\nt\Wise\Copying.txt
+  Destination=%TEMP%\%READMEFILE%
+  Flags=0000000000100010
+end
+item: Open/Close INSTALL.LOG
+  Flags=00000001
+end
+item: Check if File/Dir Exists
+  Pathname=%SYS%
+  Flags=10000100
+end
+item: Set Variable
+  Variable=SYS
+  Value=%WIN%
+end
+item: End Block
+end
+item: Set Variable
+  Variable=APPTITLE
+  Value=<<<version.title>>>
+  Flags=10000000
+end
+item: Set Variable
+  Variable=GROUP
+  Value=XEmacs
+  Flags=10000000
+end
+item: Set Variable
+  Variable=DISABLED
+  Value=!
+end
+item: Set Variable
+  Variable=MAINDIR
+  Value=XEmacs
+  Flags=10000000
+end
+item: Check Configuration
+  Flags=10111011
+end
+item: Get Registry Key Value
+  Variable=COMMON
+  Key=SOFTWARE\Microsoft\Windows\CurrentVersion
+  Default=C:\Program Files\Common Files
+  Value Name=CommonFilesDir
+  Flags=00000100
+end
+item: Get Registry Key Value
+  Variable=PROGRAM_FILES
+  Key=SOFTWARE\Microsoft\Windows\CurrentVersion
+  Default=C:\Program Files
+  Value Name=ProgramFilesDir
+  Flags=00000100
+end
+item: Set Variable
+  Variable=MAINDIR
+  Value=%PROGRAM_FILES%\%MAINDIR%
+  Flags=00001100
+end
+item: Set Variable
+  Variable=EXPLORER
+  Value=1
+end
+item: Else Statement
+end
+item: Set Variable
+  Variable=MAINDIR
+  Value=C:\%MAINDIR%
+  Flags=00001100
+end
+item: End Block
+end
+item: Set Variable
+  Variable=BACKUP
+  Value=%MAINDIR%\BACKUP
+  Flags=10000000
+end
+item: Set Variable
+  Variable=DOBACKUP
+  Value=B
+  Flags=10000000
+end
+item: Set Variable
+  Variable=COMPONENTS
+  Value=ACE
+  Flags=10000000
+end
+<<<set_category_defaults()>>>
+item: Wizard Block
+  Direction Variable=DIRECTION
+  Display Variable=DISPLAY
+  Bitmap Pathname=<<<dirs.source>>>\nt\Wise\gnu.bmp
+  X Position=9
+  Y Position=10
+  Filler Color=8421440
+  Dialog=Select Program Manager Group
+  Dialog=Select Backup Directory
+  Dialog=Display Registration Information
+  Dialog=Get Registration Information
+  Variable=EXPLORER
+  Variable=DOBACKUP
+  Variable=DOBRAND
+  Variable=DOBRAND
+  Value=1
+  Value=A
+  Value=1
+  Value=1
+  Compare=0
+  Compare=1
+  Compare=0
+  Compare=1
+  Flags=00000011
+end
+item: Custom Dialog Set
+  Name=Welcome
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=Welcome
+    Title French=Bienvenue
+    Title German=Willkommen
+    Title Portuguese=Bem-vindo 
+    Title Spanish=Bienvenido
+    Title Italian=Benvenuto
+    Title Danish=Velkommen
+    Title Dutch=Welkom
+    Title Norwegian=Velkommen
+    Title Swedish=Välkommen
+    Width=280
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=172 185 214 199
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suivant>
+      Text German=&Weiter>
+      Text Portuguese=&Próximo>
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+      Text Danish=&Næste>
+      Text Dutch=&Volgende>
+      Text Norwegian=&Neste>
+      Text Swedish=&Nästa >
+    end
+    item: Push Button
+      Rectangle=222 185 264 199
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=Cancel
+      Text French=Annuler
+      Text German=Abbrechen
+      Text Portuguese=Cancelar
+      Text Spanish=Cancelar
+      Text Italian=Annulla
+      Text Danish=Annuller
+      Text Dutch=Annuleren
+      Text Norwegian=Avbryt
+      Text Swedish=Avbryt
+    end
+    item: Static
+      Rectangle=9 177 263 178
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=91 22 245 118
+      Enabled Color=00000000000000001111111111111111
+      Create Flags=01010000000000000000000000000000
+      Text=<<<version.welcome>>>
+    end
+  end
+end
+item: Custom Dialog Set
+  Name=Display ReadMe
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=Read Me File
+    Title French=Fichier Lisez-moi
+    Title German=Liesmich-Datei
+    Title Portuguese=Ficheiro Leia-me
+    Title Spanish=Archivo Léeme
+    Title Italian=File Leggimi
+    Title Danish=Vigtigt fil
+    Title Dutch=Leesmij-bestand
+    Title Norwegian=Informasjonsfil
+    Title Swedish=Läs mig-fil
+    Width=280
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=172 185 214 199
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=I &Agree >
+      Text French=&Suivant>
+      Text German=&Weiter>
+      Text Portuguese=&Próximo>
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+      Text Danish=&Næste>
+      Text Dutch=&Volgende>
+      Text Norwegian=&Neste>
+      Text Swedish=&Nästa >
+    end
+    item: Push Button
+      Rectangle=222 185 264 199
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=Cancel
+      Text French=Annuler
+      Text German=Abbrechen
+      Text Portuguese=Cancelar
+      Text Spanish=Cancelar
+      Text Italian=Annulla
+      Text Danish=Slet
+      Text Dutch=Annuleren
+      Text Norwegian=Avbryt
+      Text Swedish=Avbryt
+    end
+    item: Static
+      Rectangle=9 177 263 178
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Editbox
+      Rectangle=85 11 254 170
+      Value=%TEMP%\%READMEFILE%
+      Help Context=16711681
+      Create Flags=01010000101000000000100000000100
+    end
+  end
+end
+item: Custom Dialog Set
+  Name=Select Destination Directory
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=Choose Destination Location
+    Title French=Choisissez la localisation de destination
+    Title German=Zielpfad wählen
+    Title Portuguese=Escolher Local de Destino
+    Title Spanish=Elegir una localización de destino
+    Title Italian=Scegli Posizione di Destinazione
+    Title Danish=Vælg destinationsmappe
+    Title Dutch=Kies doellocatie
+    Title Norwegian=Velg målplassering
+    Title Swedish=Välj ställe för installationen
+    Width=280
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=172 185 214 199
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suivant>
+      Text German=&Weiter>
+      Text Portuguese=&Próximo>
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+      Text Danish=&Næste>
+      Text Dutch=&Volgende>
+      Text Norwegian=&Neste>
+      Text Swedish=&Nästa >
+    end
+    item: Push Button
+      Rectangle=130 185 172 199
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Flags=0000000000000001
+      Text=< &Back
+      Text French=<&Retour
+      Text German=<&Zurück
+      Text Portuguese=<&Retornar
+      Text Spanish=<&Retroceder
+      Text Italian=< &Indietro
+      Text Danish=<&Tilbage
+      Text Dutch=<&Terug
+      Text Norwegian=<&Tilbake
+      Text Swedish=< &Tillbaka
+    end
+    item: Push Button
+      Rectangle=222 185 264 199
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=Cancel
+      Text French=Annuler
+      Text German=Abbrechen
+      Text Portuguese=Cancelar
+      Text Spanish=Cancelar
+      Text Italian=Annulla
+      Text Danish=Annuller
+      Text Dutch=Annuleren
+      Text Norwegian=Avbryt
+      Text Swedish=Avbryt
+    end
+    item: Static
+      Rectangle=9 177 263 178
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=90 10 260 122
+      Create Flags=01010000000000000000000000000000
+      Text=Setup will install %APPTITLE% in the following folder.
+      Text=
+      Text=To install into a different folder, click Browse, and select another folder. 
+      Text=
+      Text=You can choose not to install %APPTITLE% by clicking Cancel to exit Setup.
+      Text French=%APPTITLE% va être installé dans le répertoire ci-dessous
+      Text French=
+      Text French=Pour l'installer dans un répertoire différent, cliquez sur Parcourir et sélectionnez un autre répertoire
+      Text French=
+      Text French=Vous pouvez choisir de ne pas installer %APPTITLE% en cliquant sur Annuler pour quitter l'Installation
+      Text German=Installation speichert %APPTITLE% im unten angegebenen Ordner:
+      Text German=
+      Text German=Zur Installation in einem anderen Ordner auf Blättern klicken und einen anderen Ordner wählen.
+      Text German=
+      Text German=Wenn Sie %APPTITLE% nicht installieren möchten, können Sie durch Klicken auf Abbrechen die Installation beenden.
+      Text Portuguese=Configuração instalará %APPTITLE% na seguinte pasta
+      Text Portuguese=
+      Text Portuguese=Para instalar numa pasta diferente, faça um clique sobre Procurar, e seleccione uma outra pasta.
+      Text Portuguese=
+      Text Portuguese=Pode escolher não instalar %APPTITLE% clicando no botão Cancelar para sair da Configuração
+      Text Spanish=El programa de Configuración instalará %APPTITLE% en la siguiente carpeta.
+      Text Spanish=
+      Text Spanish=Para instalar en una carpeta diferente, haga un clic en Visualizar, y seleccione otra carpeta.
+      Text Spanish=
+      Text Spanish=Puede elegir no instalar %APPTITLE% haciendo un clic en Cancelar para salir de Configuración.
+      Text Italian=Il programma di installazione installerà %APPTITLE% nella seguente cartella.
+      Text Italian=
+      Text Italian=Per effettuare l’installazione in una cartella diversa, fai clic su Sfoglia, e scegli un’altra cartella.
+      Text Italian=
+      Text Italian=Puoi scegliere di non installare %APPTITLE% facendo clic su Annulla per uscire dal programma di installazione
+      Text Danish=Installationsprogrammet installerer %APPTITLE% i denne mappe.
+      Text Danish=
+      Text Danish=Man installerer i en anden mappe ved at klikke på Browse og vælge en anden mappe.
+      Text Danish=
+      Text Danish=Man kan vælge ikke at installere %APPTITLE% ved at klikke på Slet og forlade installationsprogrammet.
+      Text Dutch=Het installatieprogramma installeert %APPTITLE% in de volgende directory.
+      Text Dutch=
+      Text Dutch=Als u het in een andere directory wilt installeren, klik dan op Bladeren en kies een andere locatie.
+      Text Dutch=
+      Text Dutch=U kunt ervoor kiezen om %APPTITLE% niet te installeren: klik op Annuleren om het installatieprogramma te verlaten.
+      Text Norwegian=Oppsett vil installere %APPTITLE% i følgende mappe.
+      Text Norwegian=
+      Text Norwegian=For å installere i en annen mappe, klikk Bla igjennom og velg en annen mappe.
+      Text Norwegian=
+      Text Norwegian=Du kan velge å ikke installere %APPTITLE% ved å velge Avbryt for å gå ut av Oppsett.
+      Text Swedish=Installationsprogrammet installerar %APPTITLE% i följande mapp.
+      Text Swedish=
+      Text Swedish=Om du vill att installationen ska göras i en annan mapp, klickar du på Bläddra och väljer en annan mapp.
+      Text Swedish=
+      Text Swedish=Du kan välja att inte installera %APPTITLE% genom att klicka på Avbryt för att lämna installationsprogrammet.
+    end
+    item: Static
+      Rectangle=90 134 260 162
+      Action=1
+      Create Flags=01010000000000000000000000000111
+      Text=Destination Folder
+      Text French=Répertoire de destination
+      Text German=Zielordner
+      Text Portuguese=Pasta de Destino
+      Text Spanish=Carpeta de Destino
+      Text Italian=Cartella di destinazione
+      Text Danish=Destinationsmappe
+      Text Dutch=Doeldirectory
+      Text Norwegian=Målmappe
+      Text Swedish=Destinationsmapp
+    end
+    item: Push Button
+      Rectangle=213 143 255 157
+      Variable=MAINDIR_SAVE
+      Value=%MAINDIR%
+      Destination Dialog=1
+      Action=2
+      Create Flags=01010000000000010000000000000000
+      Text=B&rowse...
+      Text French=P&arcourir
+      Text German=B&lättern...
+      Text Portuguese=P&rocurar
+      Text Spanish=V&isualizar...
+      Text Italian=Sfoglia...
+      Text Danish=&Gennemse...
+      Text Dutch=B&laderen...
+      Text Norwegian=Bla igjennom
+      Text Swedish=&Bläddra
+    end
+    item: Static
+      Rectangle=95 146 211 157
+      Destination Dialog=2
+      Create Flags=01010000000000000000000000000000
+      Text=%MAINDIR%
+      Text French=%MAINDIR%
+      Text German=%MAINDIR%
+      Text Portuguese=%MAINDIR%
+      Text Spanish=%MAINDIR%
+      Text Italian=%MAINDIR%
+      Text Danish=%MAINDIR%
+      Text Dutch=%MAINDIR%
+      Text Norwegian=%MAINDIR%
+      Text Swedish=%MAINDIR%
+    end
+  end
+  item: Dialog
+    Title=Select Destination Directory
+    Title French=Choisissez le répertoire de destination
+    Title German=Zielverzeichnis wählen
+    Title Portuguese=Seleccionar Directório de Destino
+    Title Spanish=Seleccione el Directorio de Destino
+    Title Italian=Seleziona Directory di destinazione
+    Title Danish=Vælg Destinationsbibliotek
+    Title Dutch=Kies doeldirectory
+    Title Norwegian=Velg målkatalog
+    Title Swedish=Välj destinationskalatog
+    Width=221
+    Height=173
+    Font Name=Helv
+    Font Size=8
+    item: Listbox
+      Rectangle=5 2 160 149
+      Variable=MAINDIR
+      Create Flags=01010000100000010000000101000000
+      Flags=0000110000100010
+      Text=%MAINDIR%
+      Text French=%MAINDIR%
+      Text German=%MAINDIR%
+      Text Portuguese=%MAINDIR%
+      Text Spanish=%MAINDIR%
+      Text Italian=%MAINDIR%
+      Text Danish=%MAINDIR%
+      Text Dutch=%MAINDIR%
+      Text Norwegian=%MAINDIR%
+      Text Swedish=%MAINDIR%
+    end
+    item: Push Button
+      Rectangle=167 6 212 21
+      Create Flags=01010000000000010000000000000001
+      Text=OK
+      Text French=OK
+      Text German=OK
+      Text Portuguese=OK
+      Text Spanish=ACEPTAR
+      Text Italian=OK
+      Text Danish=OK
+      Text Dutch=OK
+      Text Norwegian=OK
+      Text Swedish=OK
+    end
+    item: Push Button
+      Rectangle=167 25 212 40
+      Variable=MAINDIR
+      Value=%MAINDIR_SAVE%
+      Create Flags=01010000000000010000000000000000
+      Flags=0000000000000001
+      Text=Cancel
+      Text French=Annuler
+      Text German=Abbrechen 
+      Text Portuguese=Cancelar
+      Text Spanish=Cancelar
+      Text Italian=Annulla
+      Text Danish=Slet
+      Text Dutch=Annuleren
+      Text Norwegian=Avbryt
+      Text Swedish=Avbryt
+    end
+  end
+end
+item: Custom Dialog Set
+  Name=Select Packages
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=Select Packages
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suite >
+      Text German=&Weiter >
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=86 8 258 28
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-24 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Select Packages
+      Text French=Sélectionner les composants
+      Text German=Komponenten auswählen
+      Text Spanish=Seleccione componentes
+      Text Italian=Selezionare i componenti
+    end
+    item: Checkbox
+      Rectangle=83 62 211 146
+      Variable=COMPONENTS LIBS,COMM,OA,OS,PROG,WP,GAMES
+      Create Flags=01010000000000010000000000000011
+      Flags=0000000000000110
+      Text=Libraries
+      Text=Communication
+      Text=Productivity
+      Text=Operating System
+      Text=Programming
+      Text=Word Processing
+      Text=Games and Amusements
+      Text=
+    end
+    item: Static
+      Rectangle=194 162 242 172
+      Variable=COMPONENTS, LIBS, COMM, OA, OS, PROG, WP, GAMES
+      Value=MAINDIR
+      Create Flags=01010000000000000000000000000010
+    end
+    item: Static
+      Rectangle=194 153 242 162
+      Variable=COMPONENTS, LIBS, COMM, OA, OS, PROG, WP, GAMES
+      Create Flags=01010000000000000000000000000010
+    end
+    item: Static
+      Rectangle=107 153 196 164
+      Create Flags=01010000000000000000000000000000
+      Text=Disk Space Required:
+      Text French=Espace disque requis :
+      Text German=Notwendiger Speicherplatz:
+      Text Spanish=Espacio requerido en el disco:
+      Text Italian=Spazio su disco necessario:
+    end
+    item: Static
+      Rectangle=107 162 196 172
+      Create Flags=01010000000000000000000000000000
+      Text=Disk Space Remaining:
+      Text French=Espace disque disponible :
+      Text German=Verbleibender Speicherplatz:
+      Text Spanish=Espacio en disco disponible:
+      Text Italian=Spazio su disco disponibile:
+    end
+    item: Static
+      Rectangle=80 146 256 175
+      Action=1
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=83 30 256 57
+      Create Flags=01010000000000000000000000000000
+      Text=Choose which package categories to install by checking the boxes below. Press the Options buttons to select individual packages.
+      Text French=Choisissez les composants que vous voulez installer en cochant les cases ci-dessous.
+      Text German=Wählen Sie die zu installierenden Komponenten, indem Sie in die entsprechenden Kästchen klicken.
+      Text Spanish=Elija los componentes que desee instalar marcando los cuadros de abajo.
+      Text Italian=Scegliere quali componenti installare selezionando le caselle sottostanti.
+    end
+    item: Push Button
+      Rectangle=230 62 254 72
+      Variable=LIBS_SAVE
+      Value=%LIBS%
+      Destination Dialog=1
+      Action=2
+      Create Flags=01010000000000010000000000000000
+      Text=Options
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Push Button
+      Rectangle=230 74 254 84
+      Variable=COMM_SAVE
+      Value=%COMM%
+      Destination Dialog=2
+      Action=2
+      Create Flags=01010000000000010000000000000000
+      Text=Options
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Push Button
+      Rectangle=230 86 254 96
+      Variable=OA_SAVE
+      Value=%OA%
+      Destination Dialog=3
+      Action=2
+      Create Flags=01010000000000010000000000000000
+      Text=Options
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Push Button
+      Rectangle=230 98 254 108
+      Variable=OS_SAVE
+      Value=%OS%
+      Destination Dialog=4
+      Action=2
+      Create Flags=01010000000000010000000000000000
+      Text=Options
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Push Button
+      Rectangle=230 110 254 120
+      Variable=PROG_SAVE
+      Value=%PROG%
+      Destination Dialog=5
+      Action=2
+      Create Flags=01010000000000010000000000000000
+      Text=Options
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Push Button
+      Rectangle=230 122 254 132
+      Variable=WP_SAVE
+      Value=%WP%
+      Destination Dialog=6
+      Action=2
+      Create Flags=01010000000000010000000000000000
+      Text=Options
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Push Button
+      Rectangle=230 134 254 144
+      Variable=GAMES_SAVE
+      Value=%GAMES%
+      Destination Dialog=7
+      Action=2
+      Create Flags=01010000000000010000000000000000
+      Text=Options
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Set Variable
+      Variable=COMPONENTS
+      Value=X
+      Flags=00000001
+    end
+  end
+<<<string.join(map(category_dialog,packages.category_names),"")>>>
+end
+item: Custom Dialog Set
+  Name=Select Program Manager Group
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=Select Program Manager Group
+    Title French=Sélectionnez le Groupe du Gestionnaire de Programmes
+    Title German=Programm-Managergruppe wählen
+    Title Portuguese=Seleccionar o Grupo Gestor de Programas
+    Title Spanish=Seleccione el Grupo del Administrador del Programa
+    Title Italian=Seleziona il gruppo Program Manager
+    Title Danish=Vælg Programstyringsgruppen
+    Title Dutch=Kies Programmabeheergroep.
+    Title Norwegian=Velg Programbehandlingsgruppen
+    Title Swedish=Välj grupp i Programhanteraren
+    Width=280
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=172 185 214 199
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suivant>
+      Text German=&Weiter>
+      Text Portuguese=&Próximo>
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+      Text Danish=&Næste>
+      Text Dutch=&Volgende>
+      Text Norwegian=&Neste>
+      Text Swedish=&Nästa >
+    end
+    item: Push Button
+      Rectangle=130 185 172 199
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Flags=0000000000000001
+      Text=< &Back
+      Text French=<&Retour
+      Text German=<&Zurück
+      Text Portuguese=<&Retornar
+      Text Spanish=<&Retroceder
+      Text Italian=< &Indietro
+      Text Danish=<&Back
+      Text Dutch=<&Terug
+      Text Norwegian=<&Tilbake
+      Text Swedish=< &Tillbaka
+    end
+    item: Push Button
+      Rectangle=222 185 264 199
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=Cancel
+      Text French=Annuler
+      Text German=Abbrechen
+      Text Portuguese=Cancelar
+      Text Spanish=Cancelar
+      Text Italian=Annulla
+      Text Danish=Slet
+      Text Dutch=Annuleren
+      Text Norwegian=Avbryt
+      Text Swedish=Avbryt
+    end
+    item: Static
+      Rectangle=9 177 263 178
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=90 10 260 38
+      Create Flags=01010000000000000000000000000000
+      Text=Enter the name of the Program Manager group to add %APPTITLE% icons to:
+      Text French=Entrez le nom du groupe du Gestionnaire de Programmes où placer les icônes %APPTITLE% à :
+      Text German=Den Namen der Programm-Managergruppe wählen, in der die %APPTITLE%-Symbole gespeichert werden sollen:
+      Text Portuguese=Introduzir o nome do Grupo Gestor de Programa para acrescentar os ícones %APPTITLE% para:
+      Text Spanish=Introduzca el nombre del grupo del Administrador del Programa para añadir los iconos %APPTITLE para:
+      Text Italian=Inserisci il nome del gruppo Program Manager per aggiungere le icone di %APPTITLE% a:
+      Text Danish=Indtast navnet på Programstyringsgruppen der skal tilføjes %APPTITLE% elementer:
+      Text Dutch=Breng de naam van de programmabeheergroep in waaraan u %APPTITLE%-pictogrammen wilt toevoegen.
+      Text Norwegian=Tast inn navnet på programbehandlingsgruppen for å legge %APPTITLE%-ikoner til:
+      Text Swedish=Skriv in namnet på den grupp i Programhanteraren där du vill ha ikonerna för %APPTITLE%:
+    end
+    item: Combobox
+      Rectangle=90 42 260 148
+      Variable=GROUP
+      Create Flags=01010000001000010000001100000001
+      Flags=0000000000000001
+      Text=%GROUP%
+      Text=
+      Text French=%GROUP%
+      Text French=
+      Text German=%GROUP%
+      Text German=
+      Text Portuguese=%GROUP%
+      Text Portuguese=
+      Text Spanish=%GROUP%
+      Text Spanish=
+      Text Italian=%GROUP%
+      Text Italian=
+      Text Danish=%GROUP%
+      Text Danish=
+      Text Dutch=%GROUP%
+      Text Dutch=
+      Text Norwegian=%GROUP%
+      Text Norwegian=
+      Text Swedish=%GROUP%
+      Text Swedish=
+    end
+  end
+end
+item: Custom Dialog Set
+  Name=Start Installation
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=Start Installation
+    Title French=Commencer l'installation
+    Title German=Installation beginnen
+    Title Portuguese=Iniciar Instalação
+    Title Spanish=Comenzar la Instalación
+    Title Italian=Avvia Installazione
+    Title Danish=Start installationen
+    Title Dutch=Start de installatie.
+    Title Norwegian=Start installeringen
+    Title Swedish=Starta installationen
+    Width=280
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=172 185 214 199
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suivant>
+      Text German=&Weiter>
+      Text Portuguese=&Próximo>
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+      Text Danish=&Næste>
+      Text Dutch=&Volgende>
+      Text Norwegian=&Neste>
+      Text Swedish=&Nästa >
+    end
+    item: Push Button
+      Rectangle=130 185 172 199
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Text=< &Back
+      Text French=<&Retour
+      Text German=<&Zurück
+      Text Portuguese=<&Retornar
+      Text Spanish=<&Retroceder
+      Text Italian=< &Indietro
+      Text Danish=<&Tilbage
+      Text Dutch=<&Terug
+      Text Norwegian=<&Tilbake
+      Text Swedish=< &Tillbaka
+    end
+    item: Push Button
+      Rectangle=222 185 264 199
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=Cancel
+      Text French=Annuler
+      Text German=Abbrechen
+      Text Portuguese=Cancelar
+      Text Spanish=Cancelar
+      Text Italian=Annulla
+      Text Danish=Annuller
+      Text Dutch=Annuleren
+      Text Norwegian=Avbryt
+      Text Swedish=Avbryt
+    end
+    item: Static
+      Rectangle=9 177 263 178
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=90 10 260 70
+      Create Flags=01010000000000000000000000000000
+      Text=You are now ready to install %APPTITLE%.
+      Text=
+      Text=Press the Next button to begin the installation or the Back button to reenter the installation information.
+      Text French=Vous êtes maintenant prêt à installer %APPTITLE%
+      Text French=
+      Text French=Cliquez sur Suivant pour commencer l'installation ou Retour pour entrer à nouveau les informations d'installation
+      Text German=Sie sind jetzt zur Installation von %APPTITLE% bereit.
+      Text German=
+      Text German=Auf die Schaltfläche Weiter klicken, um mit dem Start der Installation zu beginnen, oder auf die Schaltfläche Zurück, um die Installationsinformationen nochmals aufzurufen.
+      Text Portuguese=Está agora pronto para instalar %APPTITLE%
+      Text Portuguese=
+      Text Portuguese=Pressione o botão Próximo para começar a instalação ou o botão Retornar para introduzir novamente a informação sobre a instalação
+      Text Spanish=Ahora estará listo para instalar %APPTITLE%.
+      Text Spanish=
+      Text Spanish=Pulse el botón de Próximo para comenzar la instalación o el botón Retroceder para volver a introducir la información sobre la instalación.
+      Text Italian=Sei pronto ad installare %APPTITLE%.
+      Text Italian=
+      Text Italian=Premi il tasto Avanti per iniziare l’installazione o il tasto Indietro per rientrare nuovamente nei dati sull’installazione
+      Text Danish=Du er nu klar til at installere %APPTITLE%.
+      Text Danish=
+      Text Danish=Klik på Næste for at starte installationen eller på Tilbage for at ændre installationsoplysningerne.
+      Text Dutch=U bent nu klaar om %APPTITLE% te installeren.
+      Text Dutch=
+      Text Dutch=Druk op Volgende om met de installatie te beginnen of op Terug om de installatie-informatie opnieuw in te voeren.
+      Text Norwegian=Du er nå klar til å installere %APPTITLE%
+      Text Norwegian=
+      Text Norwegian=Trykk på Neste-tasten for å starte installeringen, eller Tilbake-tasten for å taste inn installasjonsinformasjonen på nytt.
+      Text Swedish=Du är nu redo att installera %APPTITLE%.
+      Text Swedish=
+      Text Swedish=Tryck på Nästa för att starta installationen eller på Tillbaka för att skriva in installationsinformationen på nytt.
+    end
+  end
+end
+item: If/While Statement
+  Variable=DISPLAY
+  Value=Select Destination Directory
+end
+item: Set Variable
+  Variable=BACKUP
+  Value=%MAINDIR%\BACKUP
+end
+item: End Block
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=DOBACKUP
+  Value=A
+end
+item: Set Variable
+  Variable=BACKUPDIR
+  Value=%BACKUP%
+end
+item: End Block
+end
+item: Open/Close INSTALL.LOG
+end
+item: Check Disk Space
+  Component=COMPONENTS
+end
+item: Display Graphic
+  Pathname=<<<dirs.source>>>\nt\Wise\xemacs-beta.bmp
+  X Position=32784
+  Y Position=16
+end
+item: Include Script
+  Pathname=%_WISE_%\INCLUDE\uninstal.wse
+end
+<<<ifblock("COMPONENTS","X")>>>
+<<<string.join(map(lambda x:install_file(x[0],x[1],x[2]),filelist.all),"")>>>
+<<<endblock()>>>
+<<<map(do_category,packages.category_names)>>>
+item: Set Variable
+  Variable=COMMON
+  Value=%COMMON%
+  Flags=00010100
+end
+item: Set Variable
+  Variable=MAINDIR
+  Value=%MAINDIR%
+  Flags=00010100
+end
+item: Check Configuration
+  Flags=10111011
+end
+item: Get Registry Key Value
+  Variable=STARTUPDIR
+  Key=Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  Default=%WIN%\Start Menu\Programs\StartUp
+  Value Name=StartUp
+  Flags=00000010
+end
+item: Get Registry Key Value
+  Variable=DESKTOPDIR
+  Key=Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  Default=%WIN%\Desktop
+  Value Name=Desktop
+  Flags=00000010
+end
+item: Get Registry Key Value
+  Variable=STARTMENUDIR
+  Key=Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  Default=%WIN%\Start Menu
+  Value Name=Start Menu
+  Flags=00000010
+end
+item: Get Registry Key Value
+  Variable=GROUPDIR
+  Key=Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  Default=%WIN%\Start Menu\Programs
+  Value Name=Programs
+  Flags=00000010
+end
+item: Get Registry Key Value
+  Variable=CSTARTUPDIR
+  Key=Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  Default=%STARTUPDIR%
+  Value Name=Common Startup
+  Flags=00000100
+end
+item: Get Registry Key Value
+  Variable=CDESKTOPDIR
+  Key=Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  Default=%DESKTOPDIR%
+  Value Name=Common Desktop
+  Flags=00000100
+end
+item: Get Registry Key Value
+  Variable=CSTARTMENUDIR
+  Key=Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  Default=%STARTMENUDIR%
+  Value Name=Common Start Menu
+  Flags=00000100
+end
+item: Get Registry Key Value
+  Variable=CGROUPDIR
+  Key=Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  Default=%GROUPDIR%
+  Value Name=Common Programs
+  Flags=00000100
+end
+item: Set Variable
+  Variable=CGROUP_SAVE
+  Value=%GROUP%
+end
+item: Set Variable
+  Variable=GROUP
+  Value=%GROUPDIR%\%GROUP%
+end
+item: Create Shortcut
+  Source=%MAINDIR%\<<<dirs.dst>>>\i386-pc-win32\runemacs.exe
+  Destination=%GROUP%\XEmacs.lnk
+  Working Directory=\
+  Icon Number=0
+end
+item: Create Shortcut
+  Source=%MAINDIR%\<<<dirs.dst>>>\i386-pc-win32\runemacs.exe
+  Destination=%DESKTOPDIR%\XEmacs.lnk
+  Working Directory=\
+  Icon Number=0
+end
+item: Else Statement
+end
+item: Add ProgMan Icon
+  Group=%GROUP%
+  Icon Name=XEmacs
+  Command Line=%MAINDIR%\<<<dirs.dst>>>\i386-pc-win32\runemacs.exe
+  Default Directory=\
+  Flags=01000000
+end
+item: End Block
+end
+item: Edit Registry
+  Total Keys=16
+  item: Key
+    Key=SOFTWARE\GNU\XEmacs
+    New Value=%MAINDIR%
+    Value Name=emacs_dir
+    Root=2
+  end
+  item: Key
+    Key=SOFTWARE\GNU\XEmacs
+    New Value=%MAINDIR%\xemacs-packages
+    Value Name=EMACSPACKAGEPATH
+    Root=2
+  end
+  item: Key
+    Key=SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\runemacs.exe
+    New Value=%MAINDIR%\<<<dirs.dst>>>\i386-pc-win32
+    Value Name=Path
+    Root=2
+  end
+  item: Key
+    Key=SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\xemacs.exe
+    New Value=%MAINDIR%\<<<dirs.dst>>>\i386-pc-win32
+    Value Name=Path
+    Root=2
+  end
+  item: Key
+    Key=.el
+    New Value=elfile
+  end
+  item: Key
+    Key=.el
+    New Value=text/plain
+    Value Name=Content Type
+  end
+  item: Key
+    Key=elfile
+    New Value=Emacs lisp
+  end
+  item: Key
+    Key=elfile
+    New Value=00 00 01 00
+    Value Name=EditFlags
+    Data Type=4
+  end
+  item: Key
+    Key=elfile\DefaultIcon
+    New Value=%MAINDIR%\<<<dirs.dst>>>\i386-pc-win32\runemacs.exe,2
+  end
+  item: Key
+    Key=elfile\QuickView
+    New Value=*
+  end
+  item: Key
+    Key=elfile\Shell
+    New Value=
+  end
+  item: Key
+    Key=elfile\Shell\open
+  end
+  item: Key
+    Key=elfile\Shell\open\command
+    New Value=%MAINDIR%\<<<dirs.dst>>>\i386-pc-win32\runemacs.exe "%%1"
+  end
+  item: Key
+    Key=elfile\Shell\open\ddeexec
+    New Value=open("%%1")
+  end
+  item: Key
+    Key=elfile\Shell\open\ddeexec\Application
+    New Value=XEmacs
+    New Value=
+  end
+  item: Key
+    Key=elfile\Shell\open\ddeexec\topic
+    New Value=System
+  end
+end
+item: Wizard Block
+  Direction Variable=DIRECTION
+  Display Variable=DISPLAY
+  Bitmap Pathname=<<<dirs.source>>>\nt\Wise\gnu.bmp
+  X Position=9
+  Y Position=10
+  Filler Color=8421440
+  Flags=00000011
+end
+item: Custom Dialog Set
+  Name=Finished
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=Installation Complete
+    Title French=Installation en cours
+    Title German=Installation abgeschlossen
+    Title Portuguese=Instalação Completa 
+    Title Spanish=Se ha completado la Instalación
+    Title Italian=Installazione completata
+    Title Danish=Installation gennemført
+    Title Dutch=Installatie afgerond
+    Title Norwegian=Installasjonen er fullført
+    Title Swedish=Installationen klar
+    Width=280
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=170 185 212 199
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Finish >
+      Text French=&Terminer>
+      Text German=&Fertigstellen>
+      Text Portuguese=&Terminar >
+      Text Spanish=&Finalizar>
+      Text Italian=&Fine >
+      Text Danish=&Afslut >
+      Text Dutch=&Klaar>
+      Text Norwegian=&Avslutt>
+      Text Swedish=&Sluta>
+    end
+    item: Push Button
+      Control Name=CANCEL
+      Rectangle=222 185 264 199
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=Cancel
+      Text French=Annuler
+      Text German=Abbrechen
+      Text Portuguese=Cancelar
+      Text Spanish=Cancelar
+      Text Italian=Annulla
+      Text Danish=Annuller
+      Text Dutch=Annuleren
+      Text Norwegian=Avbryt
+      Text Swedish=Avbryt
+    end
+    item: Static
+      Rectangle=9 177 263 178
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=90 10 260 63
+      Enabled Color=00000000000000001111111111111111
+      Create Flags=01010000000000000000000000000000
+      Text=%APPTITLE% has been successfully installed.
+      Text=
+      Text=
+      Text=Press the Finish button to exit this installation.
+      Text=
+      Text French=L'installation de %APPTITLE% est réussie
+      Text French=
+      Text French=
+      Text French=Cliquez sur Terminer pour quitter cette installation
+      Text French=
+      Text German=%APPTITLE% wurde erfolgreich installiert.
+      Text German=
+      Text German=
+      Text German=Zum Beenden dieser Installation Fertigstellen anklicken.
+      Text German=
+      Text Portuguese=%APPTITLE% foi instalado com êxito
+      Text Portuguese=
+      Text Portuguese=
+      Text Portuguese=Pressionar o botão Terminar para sair desta instalação
+      Text Portuguese=
+      Text Spanish=%APPTITLE% se ha instalado con éxito.
+      Text Spanish=
+      Text Spanish=
+      Text Spanish=Pulse el botón de Finalizar para salir de esta instalación.
+      Text Spanish=
+      Text Italian=%APPTITLE% è stato installato.
+      Text Italian=
+      Text Italian=
+      Text Italian=Premi il pulsante Fine per uscire dal programma di installazione
+      Text Italian=
+      Text Danish=%APPTITLE% er nu installeret korrekt.
+      Text Danish=
+      Text Danish=
+      Text Danish=Klik på Afslut for at afslutte installationen.
+      Text Danish=
+      Text Dutch=%APPTITLE% is met succes geïnstalleerd.
+      Text Dutch=
+      Text Dutch=
+      Text Dutch=Druk op Klaar om deze installatie af te ronden.
+      Text Dutch=
+      Text Norwegian=Installasjonen av %APPTITLE% er suksessfull.
+      Text Norwegian=
+      Text Norwegian=
+      Text Norwegian=Trykk på Avslutt-tasten for å avslutte denne installasjonen.
+      Text Norwegian=
+      Text Swedish=Installationen av %APPTITLE% har lyckats.
+      Text Swedish=
+      Text Swedish=
+      Text Swedish=Tryck på Sluta för att gå ur installationsprogrammet.
+      Text Swedish=
+    end
+    item: Push Button
+      Control Name=BACK
+      Rectangle=128 185 170 199
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Text=< &Back
+      Text French=<&Retour
+      Text German=<&Zurück
+      Text Portuguese=<&Retornar
+      Text Spanish=<&Retroceder
+      Text Italian=< &Indietro
+      Text Danish=<&Tilbage
+      Text Dutch=<&Terug
+      Text Norwegian=<&Tilbake
+      Text Swedish=< &Tillbaka
+    end
+    item: Set Control Attribute
+      Control Name=BACK
+      Operation=1
+    end
+    item: Set Control Attribute
+      Control Name=CANCEL
+      Operation=1
+    end
+  end
+end
+item: End Block
+end
+item: New Event
+  Name=Cancel
+end
+item: Include Script
+  Pathname=%_WISE_%\INCLUDE\rollback.wse
+end

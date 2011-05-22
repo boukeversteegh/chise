@@ -1,0 +1,546 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SOURCE DIALOG DISCARDABLE  0, 0, 311, 201
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "XEmacs Setup"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Next >",IDOK,199,176,45,15,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,256,176,45,15
+    CONTROL         "Download from the Internet",IDC_SOURCE_DOWNLOAD,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,127,102,152,10
+    CONTROL         "Install from the Internet",IDC_SOURCE_NETINST,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,127,121,87,10
+    CONTROL         "Install from Local Directory",IDC_SOURCE_CWD,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,127,140,104,10
+    LTEXT           "",IDC_STATIC,10,10,87,151,SS_SUNKEN | NOT WS_GROUP
+    LTEXT           "",IDC_STATIC,10,169,291,1,SS_SUNKEN | NOT WS_GROUP
+    LTEXT           "Setup will use the following installation method.",
+                    IDC_STATIC,112,11,170,17
+    LTEXT           "To exit setup click Cancel at any time.",IDC_STATIC,112,
+                    32,166,17
+    GROUPBOX        "Installation method",IDC_STATIC,113,84,188,77
+    CONTROL         "GNU",IDC_STATIC,"Static",SS_BITMAP,19,36,69,62
+END
+
+IDD_LOCAL_DIR DIALOG DISCARDABLE  0, 0, 311, 201
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Local package directory"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Next >",IDOK,199,176,45,15,WS_DISABLED
+    PUSHBUTTON      "< Back",IDC_BACK,154,176,45,15
+    PUSHBUTTON      "Cancel",IDCANCEL,256,176,45,15
+    LTEXT           "",IDC_STATIC,10,10,87,151,SS_SUNKEN | NOT WS_GROUP
+    LTEXT           "",IDC_STATIC,10,169,291,1,SS_SUNKEN | NOT WS_GROUP
+    EDITTEXT        IDC_LOCAL_DIR,120,138,122,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse...",IDC_LOCAL_DIR_BROWSE,252,137,38,14
+    LTEXT           "Setup will use the following folder to install XEmacs and / or packages from.",
+                    IDC_STATIC,112,10,170,17
+    LTEXT           "To select a different folder, click Browse and select another folder.",
+                    IDC_STATIC,112,36,170,18
+    LTEXT           "To exit setup click Cancel at any time.",IDC_STATIC,112,
+                    63,166,17
+    GROUPBOX        "Local Package Directory",IDC_STATIC,112,126,186,31
+    CONTROL         "GNU",IDC_STATIC,"Static",SS_BITMAP,19,36,69,62
+END
+
+IDD_ROOT DIALOG DISCARDABLE  0, 0, 311, 201
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "XEmacs Setup"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Next >",IDOK,199,176,45,15
+    PUSHBUTTON      "< Back",IDC_BACK,154,176,45,15
+    PUSHBUTTON      "Cancel",IDCANCEL,256,176,45,15
+    LTEXT           "",IDC_STATIC,10,10,87,151,SS_SUNKEN | NOT WS_GROUP
+    LTEXT           "",IDC_STATIC,10,169,291,1,SS_SUNKEN | NOT WS_GROUP
+    EDITTEXT        IDC_ROOT_DIR,120,138,122,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse...",IDC_ROOT_BROWSE,252,137,38,14
+    LTEXT           "Setup will use the following folder in which to install XEmacs and / or packages.",
+                    IDC_STATIC,112,10,170,17
+    LTEXT           "To select a different folder, click Browse and select another folder.",
+                    IDC_STATIC,112,35,170,18
+    LTEXT           "To exit setup click Cancel at any time.",IDC_STATIC,112,
+                    63,166,17
+    GROUPBOX        "Installation Root Directory",IDC_STATIC,112,126,186,31
+    CONTROL         "All",IDC_ROOT_SYSTEM,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,177,110,25,8
+    CONTROL         "Just Me",IDC_ROOT_USER,"Button",BS_AUTORADIOBUTTON,220,
+                    110,50,8
+    LTEXT           "Installation Type :",IDC_STATIC,112,95,60,8
+    LTEXT           "Install For :",IDC_STATIC,112,110,43,8
+    CONTROL         "Native",IDC_INSTALL_NATIVE,"Button",BS_AUTORADIOBUTTON,
+                    177,93,37,10
+    CONTROL         "Cygwin",IDC_INSTALL_CYGWIN,"Button",BS_AUTORADIOBUTTON,
+                    220,93,39,10
+    CONTROL         "GNU",IDC_STATIC,"Static",SS_BITMAP,19,36,69,62
+END
+
+IDD_SITE DIALOG DISCARDABLE  0, 0, 311, 201
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "XEmacs Setup"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Next >",IDOK,199,176,45,15
+    PUSHBUTTON      "< Back",IDC_BACK,154,176,45,15
+    PUSHBUTTON      "Cancel",IDCANCEL,256,176,45,15
+    LTEXT           "",IDC_STATIC,10,10,87,151,SS_SUNKEN | NOT WS_GROUP
+    LTEXT           "",IDC_STATIC,10,169,291,1,SS_SUNKEN | NOT WS_GROUP
+    LTEXT           "Select Download Site",IDC_STATIC,113,11,135,11
+    LISTBOX         IDC_URL_LIST,121,24,179,136,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+    CONTROL         "GNU",IDC_STATIC,"Static",SS_BITMAP,19,36,69,62
+END
+
+IDD_OTHER_URL DIALOG DISCARDABLE  0, 0, 311, 201
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "XEmacs Setup"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Next >",IDOK,199,176,45,15
+    PUSHBUTTON      "< Back",IDC_BACK,154,176,45,15
+    PUSHBUTTON      "Cancel",IDCANCEL,256,176,45,15
+    LTEXT           "",IDC_STATIC,10,10,87,151,SS_SUNKEN | NOT WS_GROUP
+    LTEXT           "",IDC_STATIC,10,169,291,1,SS_SUNKEN | NOT WS_GROUP
+    EDITTEXT        IDC_OTHER_URL,120,138,170,12,ES_AUTOHSCROLL
+    LTEXT           "Setup will use the following URL to install XEmacs and / or packages from.",
+                    IDC_STATIC,112,10,170,17
+    LTEXT           "To select a different URL, edit the text.",IDC_STATIC,
+                    112,36,170,18
+    LTEXT           "To exit setup click Cancel at any time.",IDC_STATIC,112,
+                    58,166,17
+    GROUPBOX        "Select URL to download from",IDC_STATIC,112,126,186,31
+    CONTROL         "GNU",IDC_STATIC,"Static",SS_BITMAP,19,36,69,62
+END
+
+IDD_NET DIALOG DISCARDABLE  0, 0, 311, 201
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "XEmacs Setup"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Next >",IDOK,199,176,45,15,WS_GROUP
+    PUSHBUTTON      "< Back",IDC_BACK,154,176,45,15
+    PUSHBUTTON      "Cancel",IDCANCEL,256,176,45,15
+    LTEXT           "",IDC_STATIC,10,10,87,151,SS_SUNKEN | NOT WS_GROUP
+    LTEXT           "",IDC_STATIC,10,169,291,1,SS_SUNKEN | NOT WS_GROUP
+    LTEXT           "Setup will use the following connection method.",
+                    IDC_STATIC,112,11,170,17,NOT WS_GROUP
+    LTEXT           "To exit setup click Cancel at any time.",IDC_STATIC,112,
+                    32,166,17,NOT WS_GROUP
+    CONTROL         "Use IE5 Settings",IDC_NET_IE5,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,128,93,69,10
+    CONTROL         "Direct Connection",IDC_NET_DIRECT,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,128,109,73,10
+    CONTROL         "Use HTTP/FTP Proxy:",IDC_NET_PROXY,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,128,124,88,10
+    EDITTEXT        IDC_PROXY_HOST,128,141,80,12,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    LTEXT           "Proxy",IDC_STATIC,10,55,50,15,SS_CENTERIMAGE,
+                    WS_EX_RIGHT
+    LTEXT           "Port",IDC_STATIC,229,139,20,15,SS_CENTERIMAGE,
+                    WS_EX_RIGHT
+    EDITTEXT        IDC_PROXY_PORT,257,141,30,12,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    GROUPBOX        "Installation method",IDC_STATIC,113,78,188,83
+    CONTROL         "GNU",IDC_STATIC,"Static",SS_BITMAP,19,36,69,62
+END
+
+IDD_DLSTATUS DIALOG DISCARDABLE  0, 0, 311, 201
+STYLE DS_MODALFRAME | DS_SETFOREGROUND | DS_CENTER | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION | WS_SYSMENU
+CAPTION "XEmacs Setup"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Cancel",IDCANCEL,256,176,45,15
+    LTEXT           "",IDC_STATIC,10,10,87,151,SS_SUNKEN | NOT WS_GROUP
+    LTEXT           "",IDC_STATIC,10,169,291,1,SS_SUNKEN | NOT WS_GROUP
+    LTEXT           "Downloading Packages",IDC_STATIC,112,10,170,17
+    LTEXT           "(URL)",IDC_DLS_URL,112,26,170,11
+    LTEXT           "(RATE)",IDC_DLS_RATE,112,41,166,11
+    CONTROL         "Progress1",IDC_DLS_PROGRESS,"msctls_progress32",
+                    WS_BORDER,123,143,165,10
+    GROUPBOX        "Progress",IDC_STATIC,112,130,186,31
+    CONTROL         "GNU",IDC_STATIC,"Static",SS_BITMAP,19,36,69,62
+END
+
+IDD_INSTATUS DIALOG DISCARDABLE  0, 0, 311, 201
+STYLE DS_MODALFRAME | DS_SETFOREGROUND | DS_CENTER | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION | WS_SYSMENU
+CAPTION "XEmacs Setup"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Cancel",IDCANCEL,256,176,45,15
+    LTEXT           "",IDC_STATIC,10,10,87,151,SS_SUNKEN | NOT WS_GROUP
+    LTEXT           "",IDC_STATIC,10,169,291,1,SS_SUNKEN | NOT WS_GROUP
+    LTEXT           "Installing Packages",IDC_STATIC,112,10,170,17
+    LTEXT           "(PKG)",IDC_INS_PKG,112,26,170,11
+    LTEXT           "(FILE)",IDC_INS_FILE,112,41,183,11
+    CONTROL         "Progress1",IDC_INS_DISKFULL,"msctls_progress32",
+                    WS_BORDER,123,143,165,10
+    CONTROL         "Progress1",IDC_INS_IPROGRESS,"msctls_progress32",
+                    WS_BORDER,125,106,163,10
+    CONTROL         "Progress1",IDC_INS_PPROGRESS,"msctls_progress32",
+                    WS_BORDER,125,67,163,10
+    GROUPBOX        "Disk",IDC_STATIC,112,130,186,31
+    GROUPBOX        "Package",IDC_STATIC,112,54,186,31
+    GROUPBOX        "Total",IDC_STATIC,112,93,186,31
+    CONTROL         "GNU",IDC_STATIC,"Static",SS_BITMAP,19,36,69,62
+END
+
+IDD_UNINSTALL DIALOG DISCARDABLE  0, 0, 311, 201
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Uninstall XEmacs"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Cancel",IDCANCEL,199,176,45,15
+    DEFPUSHBUTTON   "Uninstall",IDOK,256,176,45,15
+    LTEXT           "",IDC_STATIC,10,10,87,151,SS_SUNKEN | NOT WS_GROUP
+    LTEXT           "",IDC_STATIC,10,169,291,1,SS_SUNKEN | NOT WS_GROUP
+    LTEXT           "Uninstalling Packages",IDC_STATIC,112,10,170,17
+    LTEXT           "(PKG)",IDC_UNINS_PKG,112,26,170,11
+    LTEXT           "(FILE)",IDC_UNINS_FILE,112,41,166,11
+    CONTROL         "Progress1",IDC_UNINS_DISKFULL,"msctls_progress32",
+                    WS_BORDER,123,143,165,10
+    CONTROL         "Progress1",IDC_UNINS_IPROGRESS,"msctls_progress32",
+                    WS_BORDER,125,106,163,10
+    CONTROL         "Progress1",IDC_UNINS_PPROGRESS,"msctls_progress32",
+                    WS_BORDER,125,67,163,10
+    GROUPBOX        "Disk",IDC_STATIC,112,130,186,31
+    GROUPBOX        "Package",IDC_STATIC,112,54,186,31
+    GROUPBOX        "Total",IDC_STATIC,112,93,186,31
+    CONTROL         "GNU",IDC_STATIC,"Static",SS_BITMAP,19,36,69,62
+END
+
+IDD_PROXY_AUTH DIALOG DISCARDABLE  0, 0, 215, 95
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "XEmacs Setup"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDI_XEMACS,IDC_STATIC,5,5,20,20
+    EDITTEXT        IDC_NET_USER,65,28,145,12,ES_AUTOHSCROLL
+    LTEXT           "Proxy User ID",IDC_STATIC,5,28,55,15,SS_CENTERIMAGE,
+                    WS_EX_RIGHT
+    EDITTEXT        IDC_NET_PASSWD,65,43,145,12,ES_PASSWORD | ES_AUTOHSCROLL
+    LTEXT           "Password",IDC_STATIC,10,43,50,15,SS_CENTERIMAGE,
+                    WS_EX_RIGHT
+    LTEXT           "Proxy Authorization Required",IDC_STATIC,65,10,145,10
+    DEFPUSHBUTTON   "OK",IDOK,100,75,45,15,WS_DISABLED
+    PUSHBUTTON      "Cancel",IDCANCEL,165,75,45,15
+END
+
+IDD_NET_AUTH DIALOG DISCARDABLE  0, 0, 215, 95
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "XEmacs Setup"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDI_XEMACS,IDC_STATIC,5,5,20,20
+    EDITTEXT        IDC_NET_USER,65,28,145,12,ES_AUTOHSCROLL
+    LTEXT           "User ID",IDC_STATIC,5,28,55,15,SS_CENTERIMAGE,
+                    WS_EX_RIGHT
+    EDITTEXT        IDC_NET_PASSWD,65,43,145,12,ES_PASSWORD | ES_AUTOHSCROLL
+    LTEXT           "Password",IDC_STATIC,10,43,50,15,SS_CENTERIMAGE,
+                    WS_EX_RIGHT
+    LTEXT           "Server Authorization Required",IDC_STATIC,65,10,145,10
+    DEFPUSHBUTTON   "OK",IDOK,100,75,45,15,WS_DISABLED
+    PUSHBUTTON      "Cancel",IDCANCEL,165,75,45,15
+END
+
+IDD_SPLASH DIALOG DISCARDABLE  0, 0, 311, 201
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "XEmacs Setup"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Next >",IDOK,199,176,45,15
+    PUSHBUTTON      "Cancel",IDCANCEL,256,176,45,15
+    ICON            IDI_XEMACS,IDC_STATIC,107,10,20,20
+    LTEXT           "Welcome to the XEmacs Net Release Setup Program. This will install XEmacs and/or associated packages on your computer.",
+                    IDC_STATIC,133,10,158,29
+    LTEXT           "Version (unknown)",IDC_VERSION,112,117,120,10
+    LTEXT           "Copyright (C) 2000 Red Hat Inc",IDC_STATIC,111,132,135,
+                    8
+    LTEXT           "http://www.xemacs.org/",IDC_STATIC,111,147,150,10
+    LTEXT           "It is strongly recommended that you exit all Windows programs before running this utility.",
+                    IDC_STATIC,110,43,191,19
+    LTEXT           "",IDC_STATIC,10,169,291,1,SS_SUNKEN | NOT WS_GROUP
+    LTEXT           "",IDC_STATIC,10,10,87,151,SS_SUNKEN | NOT WS_GROUP
+    CONTROL         "GNU",IDC_STATIC,"Static",SS_BITMAP,19,36,69,62
+END
+
+IDD_CHOOSE DIALOG DISCARDABLE  0, 0, 311, 239
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "XEmacs Setup"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Next >",IDOK,199,214,45,15
+    PUSHBUTTON      "< Back",IDC_BACK,154,214,45,15
+    PUSHBUTTON      "Cancel",IDCANCEL,256,214,45,15
+    LTEXT           "",IDC_STATIC,10,201,291,1,SS_SUNKEN | NOT WS_GROUP
+    LTEXT           "Select packages to install",IDC_STATIC,55,5,85,8
+    ICON            IDI_XEMACS,IDC_STATIC,5,5,21,20
+    LTEXT           "",IDC_LISTVIEW_POS,55,15,230,155,SS_SUNKEN | NOT 
+                    WS_VISIBLE | NOT WS_GROUP
+    CONTROL         "SPIN",IDC_STATIC,"Static",SS_BITMAP,55,170,15,13
+    LTEXT           "= click to choose action, (p) = previous version, (x) = experimental",
+                    IDC_STATIC,65,170,220,8
+    PUSHBUTTON      "Full/Part",IDC_CHOOSE_FULLPART,250,5,35,10
+    PUSHBUTTON      "Exp",IDC_CHOOSE_EXP,215,5,25,10
+    PUSHBUTTON      "Curr",IDC_CHOOSE_CURR,190,5,25,10
+    PUSHBUTTON      "Prev",IDC_CHOOSE_PREV,165,5,25,10
+END
+
+IDD_DESKTOP DIALOG DISCARDABLE  0, 0, 311, 201
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "XEmacs Setup"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Finish",IDOK,199,176,45,15
+    PUSHBUTTON      "< Back",IDC_BACK,154,176,45,15
+    PUSHBUTTON      "Cancel",IDCANCEL,256,176,45,15
+    LTEXT           "Setup has now finished. To create desktop shortcuts, please select from the following options.",
+                    IDC_STATIC,112,11,170,17
+    LTEXT           "To complete setup click Finish.",IDC_STATIC,112,32,166,
+                    17
+    CONTROL         "Create Desktop Icon",IDC_ROOT_DESKTOP,"Button",
+                    BS_AUTOCHECKBOX,113,50,100,8
+    CONTROL         "Add to Start Menu",IDC_ROOT_MENU,"Button",
+                    BS_AUTOCHECKBOX,113,66,100,8
+    CONTROL         "GNU",IDC_STATIC,"Static",SS_BITMAP,19,36,69,62
+    CONTROL         "Text",IDC_TXT_TYPE,"Button",BS_AUTOCHECKBOX,209,101,38,
+                    8
+    CONTROL         "Java",IDC_JAVA_TYPE,"Button",BS_AUTOCHECKBOX,113,100,50,
+                    8
+    CONTROL         "C",IDC_C_TYPE,"Button",BS_AUTOCHECKBOX,113,116,41,8
+    CONTROL         "C++",IDC_CPP_TYPE,"Button",BS_AUTOCHECKBOX,113,133,38,8
+    CONTROL         "E-Lisp",IDC_ELISP_TYPE,"Button",BS_AUTOCHECKBOX,113,148,
+                    38,8
+    LTEXT           "Register XEmacs for these file types:",IDC_STATIC,113,
+                    84,166,13
+    LTEXT           "",IDC_STATIC,10,169,291,1,SS_SUNKEN | NOT WS_GROUP
+    LTEXT           "",IDC_STATIC,10,10,87,151,SS_SUNKEN | NOT WS_GROUP
+    CONTROL         "GNU",IDC_STATIC,"Static",SS_BITMAP,19,36,69,62
+    CONTROL         "IDL",IDC_IDL_TYPE,"Button",BS_AUTOCHECKBOX,209,116,38,8
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_XEMACS              ICON    DISCARDABLE     "xemacs.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// FILE
+//
+
+XEMACS.ICON             FILE    DISCARDABLE     "xemacs.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_SOURCE, DIALOG
+    BEGIN
+        VERTGUIDE, 113
+        VERTGUIDE, 127
+    END
+
+    IDD_LOCAL_DIR, DIALOG
+    BEGIN
+        VERTGUIDE, 112
+        HORZGUIDE, 10
+    END
+
+    IDD_ROOT, DIALOG
+    BEGIN
+        VERTGUIDE, 112
+        HORZGUIDE, 103
+        HORZGUIDE, 118
+    END
+
+    IDD_SITE, DIALOG
+    BEGIN
+        HORZGUIDE, 11
+        HORZGUIDE, 161
+    END
+
+    IDD_NET, DIALOG
+    BEGIN
+        VERTGUIDE, 128
+        BOTTOMMARGIN, 191
+        HORZGUIDE, 153
+    END
+
+    IDD_INSTATUS, DIALOG
+    BEGIN
+        VERTGUIDE, 112
+        VERTGUIDE, 125
+        VERTGUIDE, 288
+    END
+
+    IDD_PROXY_AUTH, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 49
+    END
+
+    IDD_NET_AUTH, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 49
+    END
+
+    IDD_SPLASH, DIALOG
+    BEGIN
+        LEFTMARGIN, 10
+        RIGHTMARGIN, 301
+        TOPMARGIN, 10
+        BOTTOMMARGIN, 191
+    END
+
+    IDD_CHOOSE, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 229
+        HORZGUIDE, 214
+    END
+
+    IDD_DESKTOP, DIALOG
+    BEGIN
+        VERTGUIDE, 113
+        VERTGUIDE, 209
+        HORZGUIDE, 124
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+SPIN                    BITMAP  DISCARDABLE     "choose-spin.bmp"
+IDB_SPIN                BITMAP  DISCARDABLE     "choose-spin.bmp"
+IDB_RTARROW             BITMAP  DISCARDABLE     "choose-rtarrow.bmp"
+IDB_CHECK_YES           BITMAP  DISCARDABLE     "check-yes.bmp"
+IDB_CHECK_NO            BITMAP  DISCARDABLE     "check-no.bmp"
+IDB_CHECK_NA            BITMAP  DISCARDABLE     "check-na.bmp"
+GNU                     BITMAP  DISCARDABLE     "gnu.bmp"
+IDB_GNU                 BITMAP  DISCARDABLE     "gnu.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ROOT_SLASH          "Warning: we recommend you do NOT use the root of your hard drive as the XEmacs root.  Proceed anyway?"
+    IDS_ROOT_SPACE          "You should not choose a root path that include spaces in directory names.  Proceed anyway?"
+    IDS_MIRROR_LST          "http://www.xemacs.org/Download/mirrors.lst"
+    IDS_DIALOG_FAILED       "Unable to create Dialog Box"
+    IDS_CYGWIN_FUNC_MISSING "Error: unable to find function `%s' in %s"
+    IDS_DOWNLOAD_SHORT      "Download error: %s too short (%d, wanted %d)"
+    IDS_ERR_OPEN_WRITE      "Can't open %s for writing: %s"
+    IDS_SETUPINI_MISSING    "Unable to get setup.ini from %s"
+    IDS_OLD_SETUPINI        "This setup.ini is older than the one you used last time you installed cygwin.  Proceed anyway?"
+    IDS_ERR_RENAME          "Can't rename %s to %s: %s"
+    IDS_NOTHING_INSTALLED   "Nothing needed to be installed"
+    IDS_INSTALL_COMPLETE    "Installation Complete"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERR_OPEN_READ       "Can't open %s for reading: %s"
+    IDS_ROOT_ABSOLUTE       "The install directory must be absolute, with both a drive letter and leading slash, like C:\\Cygwin"
+    IDS_DOWNLOAD_COMPLETE   "Download Complete"
+    IDS_CVSID               "\n%%% $Id: res.rc,v 1.2.2.2 2002/08/20 11:36:07 stephent Exp $\n"
+    IDS_NOLOGFILE           "Cannot open log file %s for writing"
+    IDS_UNINSTALL_COMPLETE  "Uninstalls complete."
+    IDS_WININET             "Unable to find or load the Internet Explorer 5 DLLs"
+    IDS_ERR_CHDIR           "Could not change dir to %s"
+    IDS_OLD_SETUP_VERSION   "This setup is version %s, but setup.ini claims version %s is available.\nYou might want to upgrade to get the latest features and bug fixes."
+    IDS_DOWNLOAD_FAILED     "Unable to download %s"
+    IDS_DOWNLOAD_INCOMPLETE "Download Incomplete.  Try again?"
+    IDS_INSTALL_INCOMPLETE  "Installation incomplete.  Check /setup.log.full for details"
+    IDS_ROOT_NOCYGWIN       "You should not install the Cygwin version without Cygwin installed.  Proceed anyway?"
+    IDS_CREATE_DIR          "The directory %s does not exist, create it?"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

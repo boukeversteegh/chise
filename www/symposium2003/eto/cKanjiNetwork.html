@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>漢字ネットワーク構造の視覚化</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<div class="page"><a name="1" class="a">.</a><br>
+<h1>漢字ネットワーク構造の視覚化
+</h1>
+<p>独立行政法人産業技術総合研究所 特別研究員<br> 江渡 浩一郎 <a target=top href="http://staff.aist.go.jp/k-eto/"><span class="addr">http://staff.aist.go.jp/k-eto/</span></a>
+</div>
+
+<div class="page"><a name="2" class="a">.</a><br>
+<h2>漢字は部品にわかれる。</h2>
+<p>そのわかれた部品はまた別の漢字につながる。
+<p>そのように漢字同士は部品を介して接続され、<br>
+それはネットワーク構造となっていると考えられる。
+<p>ならばそのネットワーク構造はどのような特徴を持っているだろうか。
+</div>
+
+<div class="page"><a name="3" class="a">.</a><br>
+<h2>宮下久夫</h2>
+<p>小学校の漢字教育の改革にとりくんでいた。
+<p>101の基本漢字と、128のあわせ漢字とを決めた。
+<p>ここではこの最小セットとしての<br>
+128のあわせ漢字をターゲットとすることとした。
+</div>
+
+<div class="page"><a name="4" class="a">.</a><br>
+<h2>Graphvizによるサンプル</h2>
+<p>neatoはバネによる接続モデル、twopiは円形に配置するモデル。
+<p>128字のあわせ漢字の接続関係を視覚化した。
+<p>小学校1～6年生で習う漢字を順に視覚化した。
+<p>接続関係が増えてくると、視覚化が非常に難しくなる。
+<br>
+<p align=right>
+<a href="128awase-neato.svg">fig 1</a>,
+<a href="128awase-twopi1.svg">fig 2</a>,
+<a href="128awase-twopi2.svg">fig 3</a>,
+<a href="shou4-twopi.svg">fig 4</a>
+</div>
+
+<div class="page"><a name="5" class="a">.</a><br>
+<h2>動的な表現による<br>
+ネットワーク構造の視覚化</h2>
+<p>Springモデルにより、リアルタイムに画面上で動かす。
+<p>インタラクティブに配置を移動できるため、表示をコントロールできる。
+<br>
+<br>
+<p align=right>
+(screenshot, ダウンロード準備中。)
+</div>
+
+<div class="indexpage" align=right>
+<div class="a"><a name="contents">.</a></div>
+<div class="w100"><a href="#1" target="page" onMouseOver="parent.page.location='#1'">1</a></div>
+<div class="w100"><a href="#2" target="page" onMouseOver="parent.page.location='#2'">2</a></div>
+<div class="w100"><a href="#3" target="page" onMouseOver="parent.page.location='#3'">3</a></div>
+<div class="w100"><a href="#4" target="page" onMouseOver="parent.page.location='#4'">4</a></div>
+<div class="w100"><a href="#5" target="page" onMouseOver="parent.page.location='#5'">5</a></div>
+</div>
+
+</body>
+</html>

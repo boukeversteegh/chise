@@ -1,0 +1,398 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+<head>
+<title>XEmacs CHISE</title>
+<link rel=stylesheet href="../chise.css" type="text/css">
+</head>
+
+<body>
+
+<table>
+  <tr>
+    <td align="center">
+    <b>[Mirror Sites]</b>
+    <hr>
+    <td>
+	<b><a href="index.html.en">[English page]</a></b>
+	<hr>
+  </tr>
+  <tr>
+    <td>
+	<a href="http://cvs.m17n.org/chise/xemacs/"><img
+	alt="m17n.org" src="../images/tomura-s.png" align="middle"></a>
+	<a href="http://www.kanji.zinbun.kyoto-u.ac.jp/projects/chise/xemacs/"><img
+	alt="kanji.zinbun.kyoto-u.ac.jp" src="../images/diccs-s.jpg" align="middle"></a>
+	<a href="http://mousai.info/projects/chise/xemacs/"><img
+	alt="mousai.info" src="../images/egret-pond-s.jpg"
+	align="middle"></a>
+    <td>
+  </table>
+
+
+    <p>
+      [<a href="../index.html.ja.iso-2022-jp">CHISE</a>]
+      [XEmacs CHISE]
+      [<a href="../ruby/index.html.ja.iso-2022-jp">Ruby/CHISE</a>]
+      [<a href="../perl/index.html.ja.iso-2022-jp">Perl/CHISE</a>]
+      [<a href="../topicmaps/index.html.ja.iso-2022-jp">TopicMaps</a>]
+      [<a href="../ids/index.html.ja.iso-2022-jp">IDS</a>]
+      [<a href="../glyph/index.html.ja.iso-2022-jp">glyph</a>]
+      [<a href="../visualization/index.html.ja.iso-2022-jp">Visualization</a>]
+      [<a href="../omega/index.html.ja.iso-2022-jp">Ω</a>]
+    </p>
+
+<h1>
+<!--  <a href="../index.html.ja.iso-2022-jp">CHISE</a> : -->
+<a name="xemacs">XEmacs CHISE</a>
+</h1>
+
+<p>
+現在の最新版は
+<a href="http://chise.zinbun.kyoto-u.ac.jp/chise/dist/XEmacs/xemacs-chise-0.25.tar.gz">
+XEmacs CHISE 0.25 (大河原)
+</a>
+です。
+</p>
+
+<hr>
+
+<h2>XEmacs CHISE について</h2>
+<p>
+XEmacs CHISE は、文字を文字属性の集合で表現することにより
+文字符号に依存せずに文字を処理することを目指した「Chaon
+モデル」の XEmacs に基づく実装です。
+  <blockquote>
+  <b>[Note]</b>
+  「XEmacs UTF-2000」および「UTF-2000 モデル」はそれぞれ
+  「XEmacs CHISE」および「Chaon モデル」に改称しました。
+  </blockquote>
+</p>
+<!--  <p> -->
+<!--  XEmacs CHISE （旧 XEmacs UTF-2000）は「<a -->
+<!--  href="http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/UTF-2000/"> -->
+<!--  UTF-2000 プロジェクト -->
+<!--  </a>」において開発していましたが、 -->
+<!--  「UTF-2000 プロジェクト」が実質的に「<a href=".."> -->
+<!--  CHISE Project -->
+<!--  </a>」に受け継がれて以来、XEmacs CHISE の開発は -->
+<!--  CHISE Project の一部となっています。 -->
+
+<!--  UTF-2000 Project -->
+<!--  とは特定の文字符号に依存しない -->
+<!--  文書表現・処理・交換のための枠組を開発するための project です。 -->
+
+<!--  <p> -->
+<!--  この project における主な研究対象は、 -->
+<!--  符号化法 (Character Encoding Scheme; CES) ではなく、 -->
+<!--  文字のさまざまな属性や『意味』を -->
+<!--  特定の文字符号に依存せずに表現することです。 -->
+<!--  つまり、利用者が表現したいテキストにあわせて自由に符号化文字集合 -->
+<!--  (Coded Character Set; CCS) を定義・編集可能な枠組を作ろうという訳です。 -->
+<!--  <p> -->
+<!--  既に存在する CCS を用いて利用者が自由に CES を定義することは従来の -->
+<!--  Mule において既に実現されており、 -->
+<!--  実際に対象とするテキストにあわせて -->
+<!--  異なる文字符号を利用することが可能になっています。 -->
+<!--  つまり、従来の Mule でも CCS -->
+<!--  を単位に利用者が自由にテキストの表現を定義・変更可能であった訳です。 -->
+<!--  UTF-2000 Project では -->
+<!--  これをさらに一歩進めて、CCS -->
+<!--  単位ではなく文字単位でも定義・変更可能にしようという訳です。 -->
+
+<!--  <p> -->
+<!--  UTF-2000 -->
+<!--  ではこの目標を実現するために -->
+<!--  文字に関するデータベースを直接利用・編集可能な -->
+<!--  テキスト処理系を開発します。 -->
+<!--  内部処理のための符号空間としては UTF-8 もしくは UCS-4 の構造を流用し、 -->
+<!--  この空間の中で利用者が自由に文字を割り当て可能な実装を開発します。 -->
+<!--  当然のことながら、既存の Mule がそうであるように、 -->
+<!--  既存のさまざまな符号との相互変換も実現しますが、 -->
+<!--  文字定義も含めて文書情報を交換するための枠組も開発します。 -->
+
+
+<!--  <h2>計画</h2> -->
+<!--  <p> -->
+<!--  第１期においては XEmacs を元に、文字列・buffer 表現として UTF-8, -->
+<!--  文字表現として UCS-4 の符号空間を持った実装を開発し、UTF-2000 -->
+<!--  におけるテキスト処理における問題点を洗い出し、基礎技術を確立します。 -->
+<!--  その後、GNU Emacs を元により簡素な実装も行います。 -->
+<!--  <p> -->
+<!--  第２期においては、UTF-2000 実装での user interface やその他の -->
+<!--  application を開発し、XEmacs/Emacs UTF-2000 実装の実用化を行います。 -->
+<!--  <p> -->
+<!--  第３期には GNU libc, Gnome, Guile -->
+<!--  などの異なった環境・条件での実装を開発し、OS 全体の UTF-2000 -->
+<!--  化に関する検討を行います。 -->
+
+<h3>Sample Images</h3>
+<ul>
+<!--    <li>変体かな <a href="demo/mojikyo-13-kana.png">[PNG]</a> -->
+<!--        <a href="demo/mojikyo-13-kana.gif">[GIF]</a> -->
+<!--    <li>水文 <a href="demo/mojikyo-13-sui.png">[PNG]</a> -->
+<!--        <a href="demo/mojikyo-13-sui.gif">[GIF]</a> -->
+<!--    <li>梵字 <a href="demo/mojikyo-19.png">[PNG]</a> -->
+<!--        <a href="demo/mojikyo-19.gif">[GIF]</a> -->
+  <li>what-char-definition<a href="demo/handa.png">[PNG]</a>
+  <li><a href="http://www.l.u-tokyo.ac.jp/~sat/japan/">
+      大正新脩大藏經テキストデータベース
+      </a> の見本
+      <a href="demo/sat-sample.png">[PNG]</a>
+</ul>
+
+<hr>
+
+<h2>XEmacs CHISE Archives</h2>
+<ul>
+  <li><a href="http://www.kanji.zinbun.kyoto-u.ac.jp/projects/chise/dist/XEmacs/">
+      XEmacs CHISE repository in kanji.zinbun.kyoto-u.ac.jp
+      </a>
+  <li><a href="ftp://ftp.m17n.org/pub/utf-2000/">
+      XEmacs CHISE repository in ftp.m17n.org
+      </a>
+</ul>
+
+<hr>
+
+<h2>How to install XEmacs CHISE</h2>
+<ul>
+  <li><a href="install.debian.ja.html">
+      XEmacs CHISE を Debian GNU/Linux にインストールする方法</a>
+  <li><a href="install.mac-os-x.ja.html.iso-2022-jp">
+      XEmacs CHISE を Mac OS X にインストールする方法</a>
+</ul>
+
+<hr>
+
+<h2>Mailing List</h2>
+<p>
+XEmacs CHISE に関する議論等は CHISE mailing list で行っています。
+<p>
+XEmacs CHISE の開発に参加したい方、XEmacs CHISE
+使ってみたい方、XEmacs CHISE についての質問・要望、その他
+XEmacs CHISE に関する議論に参加したい方をお待ちしています。
+
+<p>
+CHISE mailing list に参加希望の方は
+<a href="mailto:chise-ja-ctl@m17n.org">chise-ja-ctl@m17n.org</a>
+宛に
+<blockquote>subscribe あなたの名前</blockquote>
+の一行を書いた mail をお送りください。
+
+その後、確認の mail を届きますので、その mail の中にある
+<blockquote>
+confirm PASSWORD あなたの名前
+</blockquote>
+の１行を本文にして返事を送ってください。
+
+<hr>
+
+<h2>XEmacs CHISE</h2>
+
+<!-- <h3>XEmacs CHISE 0.21 (平城山) における主な変更点</h3> -->
+<!-- <p> -->
+<!-- <ul> -->
+<!--   <li>libchise のサポート -->
+<!--   <li>幾つかの CCS を C ではなく lisp で定義するようにした -->
+<!--   <li>CCS 名の命名規則の変更 -->
+<!--   <li>word-combining-categories の廃止および -->
+<!--       word-separating-categories の修正 -->
+<!--   <li>UTF-8 などの coding-system での decode 時の文字結合処理の bug を -->
+<!--       修正 -->
+<!--       （Mac OS X において、file-name-coding-system を utf-8-jis -->
+<!--       等に設定することで 「ヒラギノ」といった -->
+<!--       文字結合を必要とするファイル名を正しく扱うことができるようになった） -->
+<!--   <li>文字素性データベースの追加・修正など -->
+<!-- </ul> -->
+
+<h3>API</h3>
+<ul>
+  <li><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/specs/chise-elisp_ja.tex?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      CHISE Emacs Lisp API
+      </a>
+  <li><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/specs/char-atr.ja.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      文字属性一覧
+      </a>
+</ul>
+
+<hr>
+
+<h2><a name="anon-cvs">Anonymous cvs による入手</a></h2>
+<p>
+XEmacs CHISE の現在開発中の最新版を anonymous CVS
+経由で入手することが可能です。
+</p>
+
+<h3>login</h3>
+<p>
+以下は、cvs.m17n.org の /cvs/chise の anonymous CVS
+サービスを初めて利用する時に行ってください。２度目以降は不要です。
+<blockquote>
+<kbd>% cvs -d :pserver:anonymous@cvs.m17n.org:/cvs/chise login</kbd><br>
+<kbd>CVS password: ← 何も入力しないでEnter</kbd>
+</blockquote>
+</p>
+
+<h3>checkout</h3>
+<blockquote>
+<kbd>% cvs -z9 -d :pserver:anonymous@cvs.m17n.org:/cvs/chise checkout -d XEmacs-CHISE xemacs</kbd>
+</blockquote>
+
+<h3>update</h3>
+<p>
+一度 checkout すれば、２度目以降は CVS
+の作業ディレクトリ（上記の例の場合、XEmacs-CHISE）内で
+<blockquote>
+<kbd>% cvs -z9 update -Pd</kbd>
+</blockquote>
+を行うだけで、作業ディレクトリの中身を最新のソースにする事ができます。
+
+<h3><a href="http://cvs.m17n.org/viewcvs/xemacs/?cvsroot=chise">
+WWW access</a></h3>
+
+<hr>
+
+<h2><a name="presentation">文書・発表等</a></h2>
+
+    <ul>
+      <li><a href="../#presentation">CHISEプロジェクト全般</a></li>
+    </ul>
+
+    <ul>
+      <li>守岡 知彦、「UTF-2000 ―
+	emacsen における新たな文字表現への取り組み」、
+	<a href="http://lc.linux.or.jp/lc2000spring/">
+	  Linux Conference 2000 Spring</a></li>
+      <li><a href="builtin-char.html.ja">
+	  builtin character ― 文字を定義するための文字
+	</a></li>
+      <li>守岡 知彦、「<a href="../papers/dc2000.pdf">UTF-2000 ―
+	  汎用文字符号に依存しない文字表現系の展望</a>」、
+	「アジア情報学のフロンティア」
+	（全国文献・情報センター人文社会科学学術セミナーシリーズ No.10）,
+	2000年11月</li>
+      <li>錦見美貴子、守岡知彦、戸村哲、半田剣一、高橋直人、
+	「文書編集系における文字コード」、
+	<a href="http://kyoritsu-pub.topica.ne.jp/bit/mojicode.html">
+	  bit 別冊「インターネット時代の文字コード」
+	</a>第9章、2001年4月5日、
+	<a href="http://kyoritsu-pub.topica.ne.jp/index.html">共立出版</a></li>
+      <li><a href="http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/">守岡知彦</a>
+	「XEmacs UTF-2000の紹介」、
+	<a href="http://www.jaet.gr.jp/">漢字文献情報処理研究会</a>第5回大会、
+	2002年12月7日（土）、花園大学</li>
+    </ul>
+
+
+<h2>Resource</h2>
+<ul>
+<!--        <ul> -->
+<!--  	<li><a href="ftp://ftp.m17n.org/pub/utf-2000/character/data/"> -->
+<!--  	    UTF-2000 文字定義データベース -->
+<!--  	    </a> -->
+<!--  	<li><a href="ftp://ftp.m17n.org/pub/utf-2000/character/tables/"> -->
+<!--  	    UTF-2000 で作った符号化文字の対応表 -->
+<!--  	    </a> -->
+<!--  	    <ul> -->
+<!--  	      <li><a -->
+<!--  		  href="ftp://ftp.m17n.org/pub/utf-2000/character/tables/JIS-X-0213-table-0.11.pln"> -->
+<!--  		  JIS X 0213 と UCS, JIS X 0212, CNS 11643, GB 2312, -->
+<!--  		  CCITT Extended GB (ISO-IR-165), KS C 5601 との対応表 -->
+<!--  		  </a> -->
+<!--  	    </ul> -->
+<!--        </ul> -->
+</ul>
+
+
+<h2>参考文献</h2>
+<ul>
+  <li><a href="http://turnbull.sk.tsukuba.ac.jp/Tools/XEmacs/utf-2000.html">
+      UTF-2000 Announcement (English and Japanese)
+      </a>
+  <li><a href="http://www.etl.go.jp/etl/bunsan/ipsj/9804/ie9804.html">
+      情報処理, Vol.39, No.4 (1998.4) 
+      インタラクティブ・エッセイ
+      「Unicodeは好きですか？」
+      </a>
+      <ul>
+	<li><a
+	    href="http://www.etl.go.jp/etl/bunsan/ipsj/9804/ie9804.html#007">
+	    「文字コードが大好きです」
+	    </a>
+      </ul>
+  <li><!--  注：２０００年６月現在、このページは存在しないようです。<br> -->
+      <a href="http://www.os-omicron.org/~takano/doc/virtual_paper.html">
+      「「電紙」アーキテクチャについて」
+      </a> … 結構 CHISE と同じ気持かも知れない。でも、いきなり OS
+      を作らなくても良いような気がするが。実は Lisp machine
+      の再現なんじゃないかという話もあり
+      <!--  （なんか懐かしい記述が(^_^;;;。 -->
+<!--        私も ELIS 使ってました。だから APEL/XEmacs には TAO -->
+<!--        由来の関数があったりします） --><br>
+<!--        注：このページは 2000年6月現在、存在しないようです。 -->
+</ul>
+
+
+<h2>Links</h2>
+<ul>
+  <li><a href="http://www.xemacs.org/">
+      XEmacs
+      </a>
+  <li><a href="http://www.unicode.org/">
+      Unicode
+      </a>
+  <li><a href="http://www.itscj.ipsj.or.jp/ISO-IR/">
+      International register of coded character sets to be used with
+      escape sequences
+      </a>
+  <li><a href="http://www.etl.go.jp/~tomo/character/font_ja.html">
+      fonts
+      </a>
+<!--        <ul> -->
+<!--  	<li><a href="http://www.zinbun.kyoto-u.ac.jp/~ekanji/"> -->
+<!--  	    <img alt="「e漢字」" -->
+<!--  	    src="http://www.zinbun.kyoto-u.ac.jp/~ekanji/ekanji.gif"> -->
+<!--  	    「e漢字(電子漢字)」 -->
+<!--  	    </a> -->
+<!--  	    （休止中） -->
+<!--  	<li><a href="http://www.mojikyo.gr.jp/html/index.html"> -->
+<!--  	    <img alt="「今昔文字鏡」" -->
+<!--  	    src="http://www.mojikyo.gr.jp/img/mologo.gif"> -->
+<!--  	    「今昔文字鏡」 -->
+<!--  	    </a> -->
+<!--        </ul> -->
+  <li><a href="http://X-TT.dsl.gr.jp/index-ja.html">
+      The X-TrueType Server Project<BR>
+      <S>〜理想のましゅまろを求めて〜</S><BR>
+      〜Using TrueType fonts on X server〜
+      </a>
+  <li><a
+      href="http://www.netlab.is.tsukuba.ac.jp/~yokota/izumi/Xatm/">
+      「Xatm で美しいフォントの世界」
+      </a>（<a href="http://www.netlab.is.tsukuba.ac.jp/~yokota/">
+      横田 裕思
+      </a> さん）
+</ul>
+
+<hr>
+<a href="../">
+[戻る]
+</a>
+
+<hr>
+
+<!-- hhmts start -->
+Last modified: Tue Jun 15 19:30:37 JST 2010
+<!-- hhmts end -->
+<br>
+閲覧者数: 2002年7月15日以降、のべ
+<a href="http://www.aurora.dti.ne.jp/~zom/Counter/index.html">
+<img
+ src="http://mousai.info/cgi-bin/counterp.cgi?projects_chise_xemacs.log"
+ alt="counter"></a>人
+
+</body>
+</html>

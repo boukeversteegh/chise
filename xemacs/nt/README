@@ -1,0 +1,321 @@
+Building and Installing XEmacs on Windows 95/98/NT/2000/XP -*- mode:outline -*-
+
+			     David Hobley
+			     Marc Paquette
+			    Jonathan Harris
+			       Ben Wing
+
+This is a port of XEmacs to Windows 95/98/NT/2000/XP.  If you are looking for a
+port of GNU Emacs, see http://www.cs.washington.edu/homes/voelker/ntemacs.html.
+NT 3.51 or later is required for building on Windows NT.  Note that the
+developers typically use NT 4.0 and Windows 2000, and there may possibly be
+problems under Windows 95/98 and NT 3.51.  If so, please report them to
+xemacs-nt@xemacs.org; we are committed to maintaining compatibility with all
+systems listed.
+
+* Required tools and sources
+============================
+
+1.  You will need Visual C++ V4.0 or later to compile everything. Personally
+    we have tested V4.0, V4.2, V5.0, v6.0 and v7.0/.NET.
+
+    Note that Visual C++ assumes that the environment variables INCLUDE and
+    LIB are set to specify the location of the includes and libraries.
+    Your PATH environment variable also needs to include the DevStudio
+    vc\bin and sharedide\bin directories.
+
+    Visual C++ V5.0 and later install a batch file called vcvars32.bat in
+    c:\Program Files\DevStudio\VC\bin\ (or wherever you installed it) that you
+    can run before building to set up all of these environment variables.
+    Alternatively, you can choose at setup time to have these
+    environment variables automatically set up in the registry, which
+    is generally a good idea.
+
+    Visual Studio .NET calls this batch file vsvars32.bat and installs it in
+    $Installdir\Common7\Tools, but doesn't offer at install time to
+    automatically set these environment variables up in the registry.
+
+2.  Grab the latest XEmacs source from
+
+      ftp://ftp.xemacs.org/pub/xemacs/
+
+    or one of its mirrors listed at http://www.xemacs.org/Download/index.html.
+
+    (NOTE: If you are behind a firewall and have problems with FTP access,
+    the URL http://ftp.xemacs.org/pub/xemacs/ works just as well.)
+
+    You'll also need the packages.  You probably want to get the unified
+    packages bundle from
+
+      ftp://ftp.xemacs.org/pub/xemacs/packages/xemacs-sumo.tar.gz
+
+    If you are building with international support, you also need
+
+      ftp://ftp.xemacs.org/pub/xemacs/packages/xemacs-mule-sumo.tar.gz
+
+    Although we don't recommend it, you can also retrieve just the packages
+    you really need if you have an extremely slow net connection or are very
+    short on disk space.  You can find the various packages in
+    ftp://ftp.xemacs.org/pub/xemacs/packages/.  You will need the xemacs-base
+    package (and mule-base, if building with international support).  You'll
+    also need the texinfo package unless you have a copy of makeinfo.exe on
+    your machine.  If you want to download additional or updated packages
+    from within XEmacs you'll need the efs, dired and vm packages.  You'll
+    probably also want at least the edit-utils, text-modes, fsf-compat,
+    cc-mode, prog-modes and xemacs-devel packages.
+
+    Unpack the packages into "x:\your\choice\XEmacs\xemacs-packages",
+    for example "c:\Program Files\XEmacs\xemacs-packages".
+
+3.  At this point you can choose to build for X and/or for Win32 native GUI.
+    If you only want to build for the Win32 native GUI then skip the next
+    section.
+
+
+** Extra tools and sources required for X
+
+NOTE: XEmacs has not been tested with X support under the native
+Windows build for a long, long time!  It may not even compile any
+more.  If you are interested in X support, you're better off compiling
+the Cygwin version of XEmacs, which can handle both Win32 native and X
+frames (in the same binary, in fact, but not at the same time), and is
+actively tested with X support.
+
+If you want support for X you will also need:
+
+1.  An X server.  XEmacs has been tested and runs well under MI/X,
+    available from: http://www.microimages.com/mix/. (International aka
+    "Mule" support even works under this X server!) Unfortunately, this is
+    not free, but is trialware; you have to pay $25 if you want to use it
+    for more than 15 days.  XEmacs also runs (barely) under the free XWin
+    server that comes as part of the Cygwin XFree86 package, available at
+
+    ftp://sources.redhat.com/pub/cygwin/xfree/
+
+    or numerous mirrors, such as
+
+    ftp://ftp.freesoftware.com/pub/sourceware/cygwin/xfree/
+
+    There are numerous other X servers available in the same package or at
+    the same location, but unfortunately most of them behave even worse
+    than XWin.  If you have any luck with any of these, *PLEASE* email
+    the maintainers at xemacs-nt@xemacs.org, and we'll add the info here.
+
+2.  Source for the MIT X11R6.3 libraries, available from ftp.x.org.
+
+3.  You'll need to compile the MIT libraries without multi-thread support.
+    To do this, there is an example Win32.cf and site.def provided which set
+    the relevant flags. You will also need to apply the patch in nt/X11.patch
+    in the xc/lib/X11 directory which will fix the DLL definition file.
+
+    Once compiled and installed, you will need to apply the patch in
+    nt/Xmd.patch. This is messy and better solutions would be appreciated.
+
+4.  Goto step 2 under 'Optional libraries' below.
+
+
+* Optional libraries
+====================
+
+1.  You really want the XPM library.  Grab the latest version of the xpm
+    sources (xpm-3.4k.tar.gz as of 2002-04-27) from
+    ftp://ftp.xemacs.org/pub/xemacs/aux/ and unpack them somewhere.  Copy
+    nt\xpm.mak from the xemacs sources to the lib subdirectory of the xpm
+    sources, cd to that directory and build xpm with 'nmake -f xpm.mak'.
+
+2.  You probably also want PNG image support. Grab the latest versions of
+    zlib and libpng (zlib-1.1.4 and libpng-1.0.9 as of 2002-04-27) from
+    ftp://ftp.xemacs.org/pub/xemacs/aux/, unpack them somewhere and read the
+    respective READMEs for details on how to build them.  The following
+    build procedure works for zlib-1.1.4 and libpng-1.0.9:
+
+    cd to the zlib directory, type 'copy msdos\makefile.w32 Makefile' and
+    then type 'nmake'.
+
+    cd to the libpng directory, rename or move the zlib directory to ..\zlib
+    and type 'nmake -f scripts\makefile.w32'.
+
+3.  If you want TIFF support, grap the latest version of libtiff (tiff-v3.4
+    as of 2002-04-27) from ftp://ftp.xemacs.org/pub/xemacs/aux/ and unpack
+    it somewhere. Copy nt\tiff.mak from the xemacs sources to the
+    contrib\winnt subdirectory of the tiff sources, cd to that directory and
+    build libtiff with 'nmake -f tiff.mak'. Note: tiff.mak has only been
+    verified to work under WinNT, not Win95 or 98.  However, the latest
+    distribution of libtiff includes a contrib\win95\makefile.w95; that
+    might work.
+
+4.  If you want JPEG support grab the latest version of jpegsrc (jpeg-6b as
+    of 2002-04-27) from ftp://ftp.xemacs.org/pub/xemacs/aux/ and read the
+    README for details on how to build it.
+
+5.  If you want X-Face support, grab the compface distribution from
+    ftp://ftp.xemacs.org/pub/xemacs/aux/ and unpack it somewhere.
+    Copy nt\compface.mak from xemacs sources to the compface directory.
+    cd to that directory and build libcompface with 'nmake -f compface.mak'.
+
+
+* Building
+==========
+
+1.  cd to the nt subdirectory of the xemacs distribution and copy the file
+    config.inc.samp to config.inc.  Make any necessary modifications.  This
+    file controls the options that XEmacs is built with:
+
+    -- If you want international (aka "Mule") support, modify the appropriate
+       line in config.inc as follows:
+
+       HAVE_MULE=1
+
+       NOTE: This support is still quite raw under the Win32 native GUI,
+       but works well if you compile the Cygwin version with X support
+       and disable native Win32 support (--with-msw=no).
+    
+    -- If you're building with XPM support, modify the appropriate lines in
+       config.inc as follows:
+
+       HAVE_XPM=1
+       XPM_DIR="x:\location\of\your\xpm\sources"
+    
+       and similarly for JPEG and TIFF support.
+
+    -- If you're building with PNG support, modify the appropriate lines in
+       config.inc as follows:
+
+       HAVE_PNG=1
+       PNG_DIR="x:\location\of\your\png\sources"
+       ZLIB_DIR="x:\location\of\your\zlib\sources"
+
+    -- If you're building with GIF support, modify the appropriate lines in
+       config.inc as follows:
+
+       HAVE_GIF=1
+
+    -- If you're building with X-Face support, modify the appropriate lines in
+       config.inc as follows:
+
+       HAVE_XFACE=1
+       COMPFACE_DIR="x:\location\of\your\compface\sources"
+
+    -- If you're building for X, modify the appropriate lines in config.inc
+       as follows:
+
+       HAVE_X_WINDOWS=1
+       X11_DIR=x:\root\directory\of\your\X11\installation
+
+    -- By default, XEmacs will expect to find its packages in the
+       subdirectories "site-packages", "mule-packages" and "xemacs-packages"
+       under the directory "c:\Program Files\XEmacs". If you want it to look
+       for these subdirectories elsewhere, modify the appropriate lines in
+       config.inc as follows:
+
+       PACKAGE_PREFIX="x:\your\package\directory"
+
+       Make sure that the directory pointed to by PACKAGE_PREFIX contains
+       the xemacs-packages directory into which you installed the packages.
+
+    -- XEmacs can build its info files more quickly if you have a copy of the
+       makeinfo program. If you have a copy, modify the appropriate lines in
+       config.inc as follows:
+
+       MAKEINFO="x:\location\of\makeinfo.exe"
+
+       If you don't have a copy of makeinfo then you'll need to have installed
+       the XEmacs texinfo package.
+
+2.  If you want to install XEmacs when you build it, modify the appropriate
+    lines in config.inc as follows (you can also run XEmacs from its build
+    directory):
+
+       INSTALL_DIR="x:\your\installation\directory"
+
+    (By default, XEmacs will be installed in directories under the directory
+    "c:\Program Files\XEmacs\XEmacs-21.4".)
+
+3.  If you want to build xemacs on the command line, use
+    `nmake install -f xemacs.mak', or just `nmake -f xemacs.mak' if you want
+    to run XEmacs from its build directory.  nmake will build temacs, the DOC
+    file, update the elc's, dump xemacs and (optionally) install the relevant
+    files in the directories under the installation directory.
+
+    If you chose to install XEmacs, the file that you should run to start
+    XEmacs will be installed (by default) as
+        "c:\Program Files\XEmacs\XEmacs-21.4\i586-pc-win32\xemacs.exe".
+
+    To run from the build directory, run the file "src\xemacs.exe" off of the
+    root of the build directory.
+
+    You may want to create a shortcut to the file from your Desktop or
+    Start Menu.
+
+4.  To build using MS Developer Studio, you can use the workspace file
+    `nt/xemacs.dsw'.  This was prepared for Visual C++ 6.0.  If you are using
+    Visual C++ 5.0, you can use the workspace file `nt/xemacs-vc50.dsw'.  If
+    you have a different version and neither file works, just open up
+    `nt/xemacs.mak' from within MS Developer Studio and it will offer to wrap
+    this Makefile in a workspace file, from which you can build.  Assuming
+    you want to run from the build directory (which you will want to do if
+    you are planning on doing any development work on XEmacs), use the
+    following settings in Project/Settings...:
+
+    Under the General tab:
+
+    Build command line: NMAKE /f xemacs.mak
+    Output file name: ..\src\xemacs.exe
+    Browse info file name: ..\src\temacs.bsc
+
+    Under the Debug tab:
+
+    Executable for debug session: ..\src\xemacs.exe
+
+
+    If you want to install XEmacs when it's built, change the build command
+    line to "NMAKE install /f xemacs.mak". (You will have to make the same
+    change even if you use the provided workspace nt/xemacs.dsw.)
+
+
+* Debugging under MS Developer Studio
+=====================================
+
+The build process always creates debugging and "Source Browser" information
+in the source tree for use with DevStudio. However that information is not
+very useful unless you build a debug version of XEmacs:
+
+1.  Set DEBUG_XEMACS=1 and DEPEND=1 in config.inc and rebuild.
+
+2.  See instructions above for obtaining a workspace file for use with
+    MS Developer Studio.  Build and debug your XEmacs this way.
+
+3.  To display the contents of a lisp variable, type Shift-F9 (or use the
+    menu) to bring up the QuickWatch window, type debug_print(variable) and
+    click Recalculate. The output will appear in a console window, as well
+    as in the Debug window in MS Developer Studio.
+
+4.  To view Lisp variables in the "Watch" window wrap the variable in one of
+    the helper functions from the file src\console-msw.c, for example type
+    DSTRING(variable) in the "Watch" window to inspect a Lisp string.
+
+
+* Known Problems
+================
+
+Please look at the PROBLEMS file for known problems. Any other problems you
+need clarified, please email us and we will endeavour to provide any
+assistance we can:
+
+The XEmacs NT Mailing List: xemacs-nt@xemacs.org
+Subscribe address:          xemacs-nt-request@xemacs.org
+
+Ben Wing (current primary MS Windows maintainer; author of the MS Windows
+          Mule code and some of the dialog box code)
+Andy Piper (MS Windows contributor; author of the Cygwin support and the
+            MS Windows glyph and widget code)
+Jonathan Harris (MS Windows contributor; author of the MS Windows redisplay
+                 and underlying GUI code)
+Kirill Katsnelson (MS Windows contributor; author of the MS Windows process
+                   and printing code and some of the dialog box code;
+                   general guru on obscure MS Windows programming topics)
+David Hobley (early MS Windows contributor)
+Marc Paquette (early MS Windows contributor)
+August Hill (early MS Windows contributor)
+
+and others.

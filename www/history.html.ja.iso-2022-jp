@@ -1,0 +1,796 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML i18n//EN">
+<html>
+<head>
+<title>CHISE Project の歴史</title>
+</head>
+
+<body>
+
+<h1>CHISE Project の歴史</h1>
+<!-- hhmts start -->
+Last modified: Tue Jun 15 19:26:12 JST 2010
+<!-- hhmts end -->
+<br>
+
+<table border>
+  <tr><th align=center>1891
+    <td>
+    <td>逓信省電務局に電気試験所創設
+  <tr><th align=center>1929
+    <td>
+    <td>東方文化学院 発足
+  <tr><th align=center>1930-11
+    <td>
+    <td>東方文化学院の新所屋（現 漢字情報研究センター）が完成する	
+  <tr><th align=center>1938
+    <td>
+    <td>東方文化学院が改組し、京都研究所が独立し東方文化研究所となる
+  <tr><th align=center>1948
+    <td>
+    <td>東方文化研究所の所管が外務省から文部省（京都大学）に移る
+  <tr><th align=center>1948
+    <td>
+    <td>逓信省電気試験所は商工省工業技術庁電気試験所となり
+	電気通信部門が独立し逓信省電気通信研究所となる
+  <tr><th align=center>1949
+    <td>
+    <td>東方文化研究所、旧西洋文化研究所、旧人文科学研究所が統合し、
+	新生 人文科学研究所が発足
+  <tr><th align=center>1952
+    <td>
+    <td>工業技術庁が工業技術院に改編（工業技術院電気試験所）
+  <tr><th align=center>1963
+    <td>
+    <td>日本電気用品試験所設立（電気用品取締法に基づく、関係業務移管）
+  <tr><th align=center>1965
+    <td>
+    <td>400名以上の検定部門が分離し、電気協会の検定部門と一体化して
+	日本電気計器検定所発足
+  <tr><th align=center>1970
+    <td>
+    <td>電子技術総合研究所に所名変更
+  <tr><th align=center>1978
+    <td>
+    <td>JIS C 6226 (現 JIS X 0208):1978 が制定される
+  <tr><th align=center>1979
+    <td>
+    <td>電子技術総合研究所、筑波に移転
+  <tr><th align=center>1990 頃
+    <td><a href="http://www.sinica.edu.tw/">台湾中央研究院
+	</a>の謝清俊らが CDP (Chinese Document Processing)
+	データベースの開発をはじめる
+  <tr><th align=center>1995 頃
+    <td>Christian Wittern と Urs App ら
+	<a href="http://www.iijnet.or.jp/iriz/index_j.html">
+	花園大学国際禅学研究所 (IRIZ)</a>のグループ、
+	<a
+	href="http://www.iijnet.or.jp/iriz/irizhtml/kanjibas/cefintroj.htm">
+	IRIZ漢字ベース</a>を開発する
+    <tr><th align=center>1997年
+      <td>工業技術院 電子技術総合研究所 Mule ラボ発足
+  <tr><th align=center>1996 冬頃?
+    <td>守岡、akr さんと bitmap 計算を使ったり color pallet
+	のように文字符号を扱うような、汎用文字符号に依存しない
+	text 処理系に関して議論する
+    <tr><th align=center>1997年
+      <td>工業技術院 電子技術総合研究所 Mule ラボ発足
+  <tr><th align=center>1997 春頃?
+    <td>守岡、おそばやさんで
+	中島秀之さんや錦見さんらにこの話をするが受けない
+    <td>この頃、g新部さんが“My Symbolic System”の名を提案する
+  <tr><th align=center>1998 春頃?
+    <td>守岡、g新部さんや himi さんらと同様の議論をして盛り上がる
+    <td>g新部さんが“UTF-2000”の名を提案する
+  <tr><th align=center>1998-04-13<td>utf-2000 mailing list 開設
+  <tr><th align=center>1998-04-16
+    <td>g新部さんによる UTF-2000 based on GNU Emacs 20.2.90 の release
+    <td>（現在の XEmacs UTF-2000 とは直接のつながりはない）
+  <tr><th align=center>1999-03
+    <td>Olivier Galibert 氏、XEmacs
+	の内部表現として「可変固定長方式」(*1)を提案
+	（(*1) この名称は守岡が付けたもの）
+    <td>（ちなみに、その頃、守岡は JAIST から AIST
+	への引っ越し作業中
+	（で
+	<a href="http://www.m17n.org/mule/m17n99/">
+	m17n99: Symposium on Multilingual Information Processing '99 
+	</a>
+	には行けなかった(;_;)））
+</table>
+<table border>
+  <tr><th align=center>1999-05 頃
+    <td>守岡、XEmacs の内部表現を UTF-8 化する作業に着手する
+  <tr><th align=center>1999-06 頃
+    <td>守岡、XEmacs の内部表現の UTF-8 化に成功
+  <tr><th align=center>1999-06-17
+    <td>XEmacs 21.2.16 (Sumida) UTF-2000 Version 0.2 (JR 難波) を release
+  <tr><th align=center>1999-06-18
+    <td>XEmacs 21.2.16 (Sumida) UTF-2000 Version 0.3 (今宮) を release
+    <td>
+	<ul>
+	  <li>--with-mule だけ付けると従来式 MULE 表現になる
+	  <li>--with-mule と
+	      --with-ucs4（新設）を指定すると文字表現のみ UCS-4 になる
+	  <li>--with-mule と --with-utf-2000 を付けると、文字表現が
+	      UCS-4, buffer / 文字列表現が UTF-8 になる
+	</ul>
+  <tr><th align=center>1999-06〜07 頃
+    <td>XEmacs の内部表現の「可変固定長方式」化に着手するが挫折
+  <tr><th align=center>1999-08-25
+    <td>XEmacs 21.2.19 (Shinjuku) UTF-2000 Version 0.4 (新今宮) を release
+    <td>
+	<ul>
+	  <li>上野さんの Shift_JIS 対応 patch を当てただけ(^_^;;;
+	  <li>守岡版 XEmacs 21.2.19 に sync (coding: cookie が効きます)
+	</ul>
+  <tr><th align=center>1999-09頃
+    <td>utf-2000 mailing list が m17n.org に移転する
+</table>
+<table border>
+  <tr><th align=center>1999-09-09
+    <td>XEmacs 21.2.19 (Shinjuku) UTF-2000 Version 0.6 (東部市場前) を release
+    <td>
+	<ul>
+	  <li>character.h, mule-charset.h, buffer.h 等に散在していた文
+	      字表現、文字列表現に関する部分を
+	      <ul>
+		<li><b>文字表現</b>: character.h
+		    <ul>
+		      <li><b>char-1byte.h</b>: unibyte 表現 (非 MULE
+			  用)
+		      <li><b>char-lb.h</b>: leading-byte 表現 (従来式 MULE 用)
+		      <li><b>char-ucs.h</b>: UCS-2000 表現
+		    </ul>
+		    （従来の character.h の中身の大部分は char-ucs.h
+		    に移動した）
+		<li><b>multibyte.h</b>: 多byte文字列界面
+		    <ul>
+		      <li><b>mb-1byte.h</b>: unibyte 表現 (非 MULE 用)
+		      <li><b>mb-lb.h</b>: leading-byte 表現 (従来式
+			  MULE 用)
+		      <li><b>mb-utf-8.h</b>: UTF-2000 表現
+		    </ul>
+	      </ul>
+	      に整理した（けれど、mule-charset.h
+	      はあんまりいじっていない）。
+	  <li>ucs-bmp も make-char できるようにしてみた（256
+	      文字集合での問題を修正したつもり）
+	  <li>latin-iso8859-2, -3, -4, -9, latin-jisx0201,
+	      vietnamese-viscii-upper, -lower 用の変換表を作って、BMP
+	      に写像するようにした。これにより（FULLWIDTH 系を除く）
+	      Latin 文字に関する重複符号化は解消された
+	  <li>上記を実現するために、簡単な UCS 用の文字→byte
+	      表管理機構を作った（これにより、gmalloc の bug
+	      に遭遇したが、とりあえず見なかったことにする(^_^;）
+	  <li>coding-system の encoder の内部表現依存部を小さくすべく、
+	      coding-system encoder を再実装した (text-coding.c)
+	</ul>
+  <tr><th align=center>1999-09-14
+    <td>XEmacs 21.2.19 (Shinjuku) UTF-2000 Version 0.7 (平野) を release
+    <td>
+	<ul>
+	  <li>charset に変換表関連の slot を設けた。また、
+	      latin-iso8859-2, -3, -4, -9, latin-jisx0201,
+	      vietnamese-viscii-upper, -lower 用の変換表を charset
+	      の属性として指定するようにした
+	  <li>Latin Extended-A 用の決め打ち変換表を廃止した
+	  <li>変数 default-coded-charset-priority-list の追加：
+	      文字の属する符号化文字集合を選択する際の既定値として用いる
+	  <li>text-coding.c において UCS-4, BIG-5, Shift_JIS 用の
+	      generic-encoder 用実装を追加した
+	  <li>text-coding.c の Shift_JIS において、JIS-Latin 用変換表
+	      を用い、7bit の領域を JIS-Latin として解釈するようにした
+	  <li>text-coding.c の generic-encoder での UTF-8 の parse の
+	      switch を if に書き換えた
+	      （でも、順番を逆にすべきだろうな）
+	</ul>
+  <tr><th align=center>1999-10-05
+    <td>XEmacs 21.2.19 (Shinjuku) UTF-2000 Version 0.8 (加美) を release
+    <td>
+	<ul>
+	  <li>coded-charset (Mule-charset) の変換表を文字符号 (Emchar)
+	      の配列から Lisp_Object の vector (Lisp_Object) に変更し
+	      た。vector の要素は文字 (Lisp_Object) か vector
+	      (Lisp_Object) であり、
+	      これにより入れ子状の変換表を表現できるようになった
+	  <li>変換表を Lisp の世界で参照・定義するための関数
+	      charset-mapping-table, set-charset_mapping_table
+	      を追加した
+	  <li>変換表の定義を lisp/utf-2000/ccs-*.el に移した
+	  <li>hiragana-jisx0208, katakana-jisx0208 を追加した
+	      （ものの、これを default-coded-charset-priority-list の
+	      japanese-jisx0208 よりも前に入れると禁則処理等がおかしく
+	      なるので、実際の利用は char-category（しいては
+	      char-table, char-property 等）の再実装の実現まで断念）
+	  <li>japanese-jisx0208 が JIS X 0208:1983
+	      であることを明確化した（EUC-JP や Shift_JIS 等の 1990
+	      年版に基づく符号に対してはこれとは別に coded-charset
+	      を追加する予定） 
+	  <li>coded-charset の文字符号の領域表現（CHARSET_UCS_MIN から 
+	      CHARSET_UCS_MAX
+	      の範囲で定義域を表す）を用いる場合の変換に於いて、従来
+	      CHARSET_CODE_OFFSET と呼んでいたものを
+	      CHARSET_BYTE_OFFSET と改名し、新たに CHARSET_CODE_OFFSET
+	      を追加した。新定義では変換は次の通り：
+	      <pre>
+      	UCS = (byte_1 - CHARSET_BYTE_OFFSET)
+	      * CHARSET_CHARS ^ (CHARSET_DIMENSION - 1)
+	    + (byte_2 - CHARSET_BYTE_OFFSET)
+	      * CHARSET_CHARS ^ (CHARSET_DIMENSION - 2)
+	    :
+	    + byte_(CHARSET_DIMENSION)
+	    - CHARSET_CODE_OFFSET + CHARSET_UCS_MIN
+	      </pre>
+	      但し、UCS は文字の内部表現（文字符号）、
+	      byte_1 ... byte_(CHARSET_DIMENSION) は外部表現での各
+	      byte を表す。
+	      また、UCS は CHARSET_UCS_MAX でなければならない。
+	  <li>text-coding.c の ISO 2022 系 encoder
+	      に於いて、既に指示されている図形文字集合 (coded-charset) 
+	      に符号化する文字が含まれている場合、
+	      もしくは、
+	      既に指示されている図形文字集合の指示シーケンスと
+	      符号化する文字が属する図形文字集合の指示シーケンスが
+	      同一である場合に指示シーケンスを出さないようにした。
+	      これにより、例えば、iso-8859-2
+	      で符号化できるテキストをちゃんと iso-8859-2
+	      で符号化できるようになった（ESC-sequence は入らない。ISO
+	      8859-1 に unify されている文字が ISO 8859-1 にならず、
+	      ISO 8859-2 になる）
+	</ul>
+  <tr><th align=center>1999-10-12
+    <td>XEmacs 21.2.19 (Shinjuku) UTF-2000 Version 0.9 (久宝寺) を release
+    <td>
+	<ul>
+	  <li>code-charset の 文字 → 符号位置 変換表を実装しなおす
+	  <li>なんとなく `vietnamese-viscii-*' を `latin-viscii-*'
+	      に変える（どうして、`vietnamese-*'
+	      なんだろう？クオッグーはもはや Latin script
+	      とはいえないという立場なんだろうか？）
+	  <li>とはいえ、define-charset-alias を付け、
+	      `vietnamese-viscii-*' を alias として残す
+	  <li>『本物』の VISCII 1.1 を表現する coded-charset
+	      `latin-viscii' を定義する（`*-viscii-{upper|lower}'
+	      は所詮 Mule との互換のためなんだから、
+	      `vietnamese-viscii-*'
+	      でも良いのかも；ISO/IEC 2022 系で使う場合は、TCVN 5712
+	      を用いるべき）
+	  <li>text-coding.c の ISO 2022 encoder において、ISO 2022
+	      の符号構造に適合しない coded-charset
+	      を無視するようにした（この場合、
+	      default-coded-charset-priority-list
+	      の順序に従い、探索を続ける）
+	  <li>ucs-bmp に対し標準で font-registry
+	      を付けた（とりあえず、
+	      "\\(ISO10646.*-1\\|UNICODE[23]?-0\\)"
+	      としたが自信なし；本当は、ISO10646.1993-1 には match
+	      しちゃいけないと思う。UNICODE3.0-0
+	      などと書きたい所だけど、年じゃないとまずいんだったっけ？）
+	  <li>ISO 2022 の図形文字の構造に適合し、final byte を指定した
+	      coded-charset を定義する時、Lisp から行う場合も
+	      charset-id を final byte に offset
+	      を足したものになるようにした
+	  <li>そうでない場合の charset-id を 1 byte 系と 2 byte
+	      系で区別するのをやめた
+	  <li>ついに charset-id に関する unsigned char
+	      の呪いを全て解くことに成功した(^_^)
+	  <li>で、なんとなく、
+	      <ul>
+		<li>0 以上は ISO 2022 系
+		<li>負の場合は非 ISO 2022 系
+	      </ul>
+	      という振り方をするようにした
+	  <li>で、発覚した
+	      <a href="http://www.xemacs.org/list-archives/xemacs-beta/9910/msg00166.html">
+	      (format "%03d" -1) → "0-1" となる bug
+	      </a>
+	      を dirty fix する
+	</ul>
+	
+  <tr><th align=center>1999-10-29
+    <td>XEmacs 21.2.19 (Shinjuku) UTF-2000 Version 0.10 (八尾) を release
+    <td>
+	<ul>
+	  <li>なんとなく <a href="http://www.itscj.ipsj.or.jp/ISO-IR/">
+	      ISO/IEC 2022 の国際登記簿</a>にある符号化文字集合の
+	      charset-ID を ISO-IR 番号に変えた（ISO/IEC 2022 系の私的集合の
+	      ID を特別扱いせず allocation を単純化した）
+	      <br>
+	      [TODO] elisp で定義する時に ISO-IR 番号を渡せるようにする
+	  <li>文字オブジェクトの属性を表現する変数 Vcharacter_attribute_table
+	      を設けた
+	  <li>文字オブジェクトの属性に関する以下の API を設けた
+	      <pre>
+	char-attribute-alist (CHARACTER)
+
+		CHARACTER の全ての属性を連想リストにして返す
+
+	get-char-attribute (CHARACTER ATTRIBUTE)
+
+		CHARACTER の ATTRIBUTE の値を返す
+
+	put-char-attribute (CHARACTER ATTRIBUTE VALUE)
+
+		CHARACTER の ATTRIBUTE の値を VALUE にする      
+	      </pre>
+	  <li>文字を charset と code-point に分解する際、code-point
+	      の長さ制限を撤廃できるようにするために、結果を list で返す
+	      SPLIT_CHAR を設け、これを分解用 primitive
+	      とした（でも、効率悪そう(^_^;;;）
+	  <li>coded-charset の encoding_table
+	      を廃止し、文字オブジェクトの属性を用いるようにした
+	      （coded-charset に持つのが良いのか
+	      文字オブジェクトに持つのが良いのかは迷う所；でも API
+	      的には両方 OK にすれば良いのでどっちでも良いかも）
+	</ul>
+</table>
+<table border>
+  <tr><th align=center>1999-11-01
+    <td><A HREF="http://www.iijnet.or.jp/sea/Events/seminar/gnu99n01.html">
+	Fifth Tokyo GNU Technical Seminar</A>
+    <td>守岡、三菱総研に GNU goods とともに置き去りにされる
+	<br>
+	その後、g新部さんと守岡、RMS の note-PC の復旧作業をする羽目になる
+  <tr><th align=center>1999-11-02
+    <td>守岡、<A HREF="http://www.m17n.org/linux-sh/gnome-bof.txt">
+	GNOME BOF in Japan</A> で UTF-2000 Project に関して話す。
+	前日の疲れと準備不足のために判りやすく話すことに失敗する
+</table>
+<table border>
+  <tr><th align=center>1999-11-11
+    <td>XEmacs 21.2.19 (Shinjuku) UTF-2000 Version 0.11 (志紀) を release</h3>
+    <td><ul>
+      <li>文字属性として coded-charset の名前を用いた場合、常に coded-charset
+	  に正規化するようにした
+	  <br>
+	  [TODO] coded-charset は別空間に置く
+      <li>関数 put-char-attribute で coded-charset
+	  もしくはその名前に値を設定した時、その coded-charset
+	  の変換表にも反映するようにした
+      <li>関数 define-char を新設した
+      <li>define-char 形式の文字定義 file: utf-2000/u00000-C0.el,
+	  utf-2000/u00020-Basic-Latin.el, utf-2000/u00080-C1.el,
+	  utf-2000/u000A0-Latin-1-Supplement.el,
+	  utf-2000/u00180-Latin-Extended-B.el,
+	  utf-2000/u00100-Latin-Extended-A.el,
+	  utf-2000/u00250-IPA-Extensions.el,
+	  utf-2000/u002B0-Spacing-Modifier-Letters.el,
+	  utf-2000/u00300-Combining-Diacritical-Marks.el,
+	  utf-2000/u00370-Greek.el を追加した
+	  <br>
+	  [邪悪系] ラテン・ギリシア文字系で fullwidth/halfwidth
+	  を区別した設定にした（簡単な program で unify
+	  することもできます）。これに伴い大量の『代替名称』を導入した
+	  (^_^;;;。
+	  これらは私的領域の文字 ID を与えられる
+      <li>utf-2000/ccs-iso8859-2.el, utf-2000/ccs-iso8859-3.el,
+	  utf-2000/ccs-iso8859-4.el, utf-2000/ccs-iso8859-9.el を削除した
+      <li>Mule-IPA に関してn高橋さんの定義を用いるようにした（UCS
+	  に含まれない部分に関する文字定義 file はまだ作成していない）
+      <li>SPLIT_CHAR での cell の発生を抑制した（つもり）
+	  （文字定義を持たない文字に関しては依然として cell
+	  ができる
+	  （文字定義を与えた方が効率が良くなれば文字定義を行うだろう
+	  という教育的効果があるかも(^_^;;;））
+  <tr><th align=center>1999-11-15
+    <td>XEmacs 21.2.19 (Shinjuku) UTF-2000 Version 0.12 (柏原) を release
+    <td><ul>
+  <li>文字定義が存在しない文字の encode に関する問題を修正した      
+  <li>文字結合に関する表 Vcharacter_composition_table を追加した
+      （文字属性 `->decomposition' の逆を記述する。文字属性
+      `->decomposition' の値から作成する）。
+      <br>
+      また、これに伴い、関数 get-composite-char (LIST) を追加した。
+      LIST に対応する結合文字が存在すればその文字を返す関数である。
+      LIST の要素は、文字、UCS-4 の文字符号、``symbolic
+      character''（後述）の名前 (symbol) である
+  <li>これに伴い "symbolic character" を導入する。これは symbol
+      で表現され、通常の符号表現を持たない『文字のようなもの』で、
+      主に結合文字を表現するために用いる。例えば `circle'
+      を使って `(circle ?1)' で丸の中に１が入った文字を表現できる。
+      現在の実装では内部的には負の文字番号を持つ（UCS-4
+      の範囲外の値になる）
+      <br>
+      [TODO] 任意の "symbolic character" を定義・利用できるようにする
+      （SGML/XML の実体参照のように利用できると良いかも）
+  <li>異体字に関する表 Vcharacter_variant_table
+      を追加した。またこれを参照するための関数 char-variants
+      (CHARACTER) を追加した。これは文字の異体字の list を返す
+  <li>coded-charset `ethiopic-ucs' を新設した。これにより、CCL
+      を使わずにエチオピア（ゲーズ）文字が表示できるようになった
+  <li>coded-charset `lao' を新設した。intlfonts-1.2 等にある Mule-Lao
+      font を入れていれば UCS
+      のラオ文字を表示できる
+      （しかし、文字結合ができる訳ではないので
+      ラオ語が扱えるようになった訳ではない）
+  <li>put-char-attribute/define-char で GR
+      表現の符号化文字集合の符号位置を受理するようにした（内部的には
+      GL 表現に正規化される）
+  <li>M-x what-char-definition [CR]
+      で現在位置の文字定義を表示できるようにした。この他文字定義 file
+      の開発用 utility を含んだ utf-2000/char-db-util.el を追加した
+      （あんまりちゃんとしてませんが）
+      <br>
+      [TODO] ucs-conv の what-character を置き換える
+  <li>文字定義 file utf-2000/u00400-Cyrillic.el,
+      utf-2000/u00530-Armenian.el, utf-2000/u00590-Hebrew.el,
+      utf-2000/u00600-Arabic.el, utf-2000/u00700-Syriac.el,
+      utf-2000/u00780-Thaana.el, utf-2000/u00900-Devanagari.el,
+      utf-2000/u00980-Bengali.el, utf-2000/u00A00-Gurmukhi.el,
+      utf-2000/u00A80-Gujarati.el, utf-2000/u00B00-Oriya.el,
+      utf-2000/u00B80-Tamil.el, utf-2000/u00C00-Telugu.el,
+      utf-2000/u00C80-Kannada.el, utf-2000/u00D00-Malayalam.el,
+      utf-2000/u00D80-Sinhala.el, utf-2000/u00E00-Thai.el,
+      utf-2000/u00E80-Lao.el, utf-2000/u00F00-Tibetan.el,
+      utf-2000/u01000-Myanmar.el, utf-2000/u010A0-Georgian.el,
+      utf-2000/u01100-Hangul-Jamo.el, utf-2000/u01200-Ethiopic.el,
+      utf-2000/u013A0-Cherokee.el, utf-2000/u01400-Canadian.el,
+      utf-2000/u01680-Ogham.el, utf-2000/u016A0-Runic.el,
+      utf-2000/u01780-Khmer.el, utf-2000/u01800-Mongolian.el,
+      utf-2000/u01E00-Latin-Extended-Additional.el,
+      utf-2000/u01F00-Greek-Extended.el,
+      utf-2000/u02000-General-Punctuation.el,
+      utf-2000/u02070-Superscripts.el, utf-2000/u02080-Subscripts.el,
+      utf-2000/u020A0-Currency-Symbols.el,
+      utf-2000/u020D0-Combining-Diacritical-Marks-for-Symbols.el
+      utf-2000/u02100-Letterlike-Symbols.el,
+      utf-2000/u02150-Number-Forms.el, utf-2000/u02190-Arrows.el,
+      utf-2000/u02200-Mathematical-Operators.el,
+      utf-2000/u02300-Miscellaneous-Technical.el,
+      utf-2000/u02400-Control-Pictures.el, utf-2000/u02440-OCR.el,
+      utf-2000/u02460-Enclosed-Alphanumerics.el,
+      utf-2000/u02500-Box-Drawing.el, utf-2000/u02580-Block-Elements.el,
+      utf-2000/u025A0-Geometric-Shapes.el,
+      utf-2000/u02600-Miscellaneous-Symbols.el,
+      utf-2000/u02700-Dingbats.el, utf-2000/u02800-Braille-Patterns.el,
+      utf-2000/u02E00-CJK-Radical-Supplement.el,
+      utf-2000/u02F00-Kangxi-Radicals.el,
+      utf-2000/u02FF0-Ideographic-Description-Characters.el,
+      utf-2000/u03000-CJK-Symbols-and-Punctuation.el,
+      utf-2000/u03040-Hiragana.el, utf-2000/u030A0-Katakana.el,
+      utf-2000/u03100-Bopomofo.el,
+      utf-2000/u03130-Hangul-Compatibility-Jamo.el,
+      utf-2000/u03190-Kanbun.el, utf-2000/u031A0-Extended-Bopomofo.el,
+      utf-2000/u03200-Enclosed-CJK-Letters-and-Months.el,
+      utf-2000/u03300-CJK-Compatibility.el を追加した
+  <li>coded-charset `latin-viscii' の情報を
+      utf-2000/u00020-Basic-Latin.el,
+      utf-2000/u000A0-Latin-1-Supplement.el,
+      utf-2000/u00100-Latin-Extended-A.el,
+      utf-2000/u00180-Latin-Extended-B.el に merge した。これに伴い、
+      utf-2000/ccs-viscii.el を廃止した
+  <li>bytecomp.el で file に非 Latin-1 文字が存在する時、comment
+      中の非 Latin-1 文字を無視して coding-system を反対するようにした
+      （comment を削除するという大技を使っているので心配；
+      きっともっと良い方法があるに違いない（とマーチンも書いていた
+      (^_^;））。
+      <br>
+      また、raw-text で符号化する時、`byte-compile-dynamic'
+      と `byte-compile-dynamic-docstrings'
+      を利用できるようにした（つもり）
+      <br>
+      ;; 本当にうまくいっているのか自信無し(^_^;;;
+      
+  <tr><th align=center>2000-01-20
+    <td>XEmacs 21.2.27 (Hera) UTF-2000 Version 0.13 (高井田) を release
+    <td><ul>
+      <li>諸橋大漢和辞典収録文字 (ideograph-daikanwa) を追加した
+      <li>e-漢字 大漢和 をとりあえず使えるようにした
+      <li>自己言及問題を回避すべく、mule/mule-conf.el を新設した
+      <li>utf-2000/ccs-jisx0201-latin.el
+	  を削除した（変換表形式の coded-charset 定義を完全撤廃した）
+      <li>文字定義 file utf-2000/Ideograph-R001-One.el 〜 
+	  utf-2000/Ideograph-R214-Flute.el および
+	  utf-2000/u0A000-Yi-Syllables.el,
+	  utf-2000/u0AC00-Hangul-Syllables.el,
+	  utf-2000/u0FB00-Alphabetic-Presentation-Forms.el,
+	  utf-2000/u0FB50-Arabic-Presentation-Forms-A.el,
+	  utf-2000/u0FE20-Combining-Half-Marks.el,
+	  utf-2000/u0FE30-CJK-Compatibility-Forms.el,
+	  utf-2000/u0FE50-Small-Form-Variants.el,
+	  utf-2000/u0FE70-Arabic-Presentation-Forms-B.el,
+	  utf-2000/u0FF00-Halfwidth-and-Fullwidth-Forms.el,
+	  utf-2000/u0FFF0-Specials.el を追加した
+      <li>string-to-number が 16 進数をちゃんと変換できない bug の修正
+      <li>coded-charset `hiragana-jisx0208', `katakana-jisx0208' の廃止
+      <li>coded-charset `japanese-jisx0208-1990' の新設
+      <li>今昔文字鏡フォント用 coded-charset
+	  の新設（但し、実際に利用するための設定はまだ行っていない）
+      <li>coded-charset `katakana-jisx0201' の builtin-support の廃止
+      <li>UCS-4 私用領域における XEmacs-UCS 互換領域の builtin-support
+	  の廃止
+      <li>japanese-jisx0213-1, japanese-jisx0213-2
+	  の新設（上述の漢字定義にはこれらの定義も入っているので
+	  （フォントが利用可能な）他の coded-charset
+	  に収録された文字は、新 JIS の font が無くても表示可能）
+      <li>XEmacs 21.2.27 に sync up した（つもり）
+    </ul>
+    <tr><th align=center>2000-02-01
+      <td>XEmacs 21.2.27 (Hera) UTF-2000 Version 0.14 (河内堅上) を release
+      <td><ul>
+	<li>文字定義における coded-charset の code-point
+	    の表現を変更し、記憶容量を少し節約した
+	<li>今昔文字鏡用の font 用の定義を dump
+	    した (これにより、上記の削減分を食い潰した(^_^;;;)
+	<li>やっぱり builtin-character などの解釈時に一時 cell
+	    が発生しないようにした
+	<li>内部的な coded-charset の code-point の上限を 4 byte
+	    かつ表現可能な整数の上限に制限した
+	<li>3, 4 byte の coded-charset を定義可能にした
+	<li>UCS-4 を表現する coded-charset `ucs' を追加した
+	<li>組込み関数 decode-char を追加した
+	<li>what-char-definition 等での文字定義表示における code-point
+	    の表示法を変更した
+      </ul>
+</table>
+<table border>
+      <tr><th align=center>2000-04
+      <td>京都大学 人文科学研究所 附属 東洋学文献センターが改組し、
+	  <a href="http://www.kanji.zinbun.kyoto-u.ac.jp/">
+	  漢字情報研究センター</a>が発足する
+      <tr><th align=center>2000-04-19
+	<td>守岡、Linux Conference 2000 Spring で UTF-2000
+	    に関して発表する
+</table>
+<table border>
+      <tr><th align=center>2000-09-28
+      <td>XEmacs 21.2.35 (Nike) UTF-2000 Version 0.17 (法隆寺) を release
+      <td><ul>
+  <li>XEmacs 21.2.35 への sync（by しおざき かずひこ さん）
+  <li>文字定義の更新（文字定義数 68549）
+  <li>最初の補完が遅いのをとりあえず解消した
+  <li>文字属性の記憶機構を改良し、必要な記憶量を削減した。これにより、
+      32 bit architecture の場合、UTF-2000 0.16 よりも約 3.4 MB
+      実行形式が小さくなる (strip 前: 約 21 MB, strip 後: 約 16 MB)
+      （ちなみに、文字定義数は 2507 字分増加している）
+  <li>とりあえず big5 を読めるようにした
+  <li>ISO 2022 encoder/decoder で 3/4 byte 集合を support した
+  <li>94^3 集合 `mojikyo-2022-1' を新設した
+  <li>coded-charset と code-point の対を表現する Charc 構造体を新設し、
+      display engine 中の従来型 Mule に依存した code をこれで書き換えた。
+      これにより、文字 → coded-charset と code-point の対への分解処理が何
+      度も行われるのを避けた。
+    <tr><th align=center>2001-01
+      <td>
+      <td>通商産業省 工業技術院 が 独立行政法人
+	  産業技術総合研究所に改組する
+    <tr><th align=center>2001-03
+      <td>第５回 多言語情報処理シンポジウム (m17n2001: the Fifth
+	  International Symposium on Multilingual Information
+	  Processing and Open Source Software)
+	  が開催される。守岡、CHISE Project 構想を発表
+    <tr><th align=center>2001-03
+      <td>
+      <td>独立行政法人 産業技術総合研究所 <a
+	  href="http://www.etl.go.jp/">
+	  電子技術総合研究所</a>、
+	  <a href="http://www.aist.go.jp/">産業技術総合研究所</a>
+	  中の１組織として再編され、110 年の歴史に幕をおろす
+	  （多分、この時、Mule lab がなくなったはず）
+    <tr><th align=center>2001-11-21
+      <td>守岡 知彦と Christian Wittern,
+	  <a href="http://www.naic.co.jp/jp/kyoto-seminar.html">
+	  未踏シンポジウムat京都</a> で CHISE Project に関して発表する
+      <tr><th align=center>2002-01-01
+      <td>XEmacs 21.2.44 (Thalia) UTF-2000 Version 0.18 (大和小泉) を release
+      <td>
+	  <ul>
+  <li>文字属性関連機能と char-table 関連機能の実装を統合した
+  <li>ISO/IEC 10646-2:2001 の SMP (0群1面) および SIP (0群2面)
+      のサポート開始
+  <li><a href="http://www.l.u-tokyo.ac.jp/GT/">GT</a> サポートの開始
+  <li><a href="http://www.kanji.zinbun.kyoto-u.ac.jp/db/CHINA3/">
+      CHINA3
+      </a> 外字サポートの開始
+  <li><a href="http://www.cbeta.org/">CBETA</a> 外字サポートの開始
+  <li><a href="http://www.sinica.edu.tw/">台湾 中央研究院</a>の
+      CDP 外字および「漢字庫」サポートの開始
+  <li>ucs-cns, ucs-jis, ucs-cns を新設した
+  <li>`ideograph-daikanwa' が大漢和修訂第２版を表すことを明確化し、
+      それとは別に大漢和修訂版を表す `ideograph-daikanwa-2' を新設した
+  <li>権利関係の問題から文字鏡関連機能を分離した
+  <li>漢字の部品の結合構造に関するデータ形式を定義し、データを追加し始めた
+  <li>その他文字データベースの追加・修正・変更
+  <li>既に定義された coded-charset を継承した coded-charset
+      を定義できるようにした。このため、関数 make-charset の property
+      として
+      <dl>
+	<dt>'mother
+	<dd> 親 coded-charset を指定する
+	<dt>'code-min
+	<dd> 親 coded-charset での code-point の下限を指定する
+	<dt>'code-max
+	<dd> 親 coded-charset での code-point の上限を指定する
+	<dt>'code-offset
+	<dd>親 coded-charset での code-point に対する offset を示す
+	<dt>'conversion
+	<dd>親 coded-charset での code-point に対する変換を指定する
+      </dl>
+      を追加した
+  <li>関数 encode-char を追加した
+  <li>Big5 系 coding-system で使用する coded-charset
+      を指定できるようにした（関数 make-charset の第３引数の
+      property 'charset-g1 で Big5 系 coded-charset を指定する）
+</ul>
+    <tr><th align=center>2002-02-15
+      <td>守岡 知彦と Christian Wittern, <a
+	  href="http://www.naic.co.jp/jp/rinkai-sympo.html">
+	  未踏シンポジウム臨海</a> で CHISE Project に関して発表する
+    <tr><th align=center>2002-05-29
+      <td>守岡 知彦と Christian Wittern, <a
+	  href="http://www.ipa.go.jp/SPC/event/lw2002.html">
+	  LinuxWorld Expo/Tokyo 2002 の .org Pavilion の IPA のブース
+	  </a>
+	  で CHISE Project に関して発表
+    <tr><th align=center>2002-06-28 〜 29
+      <td>守岡 知彦と Christian Wittern,
+	  <a href="http://www.ipa.go.jp/itx2002/summer/">
+	  ITX2002 Summer 「スーパークリエイタの世界」</a>
+	  に出展
+   <tr><th align=center>2002-08-21
+     <td>XEmacs 21.2.46 (Urania) UTF-2000 Version 0.19 (郡山) を
+	 release
+     <td>
+	 <ul>
+  <li>文字属性を
+      外部文字データベースから要求時に遅延読み込みする機能を実装した。
+      現在の実装は XEmacs の `database' 機能に基づいており、Berkeley
+      DB Version 3 での動作を確認している。これにより IA32
+      アーキテクチャで実行形式の大きさが従来約 30
+      MB (文字定義数約７万字) だったのが約 16 MB (文字定義数約10万字)
+      となる
+  <li>これに伴い
+      <ul>
+	<li>関数 mount-char-attribute-table
+	<li>関数 save-char-attribute-table
+	<li>関数 load-char-attribute-table
+	<li>関数 reset-char-attribute-table
+	<li>関数 close-char-attribute-table
+      </ul>
+      を追加した。
+  <li>coded-charset `chinese-big5-eten', `chinese-big5-cdp',
+      `chinese-big5-pua', `chinese-big5-eten-a', `chinese-big5-eten-b' を
+      追加した
+  <li>coded-charset `japanese-jisx0213-1' で `japanese-jisx0208-1990' を継
+      承するようにした
+  <li>次の UTF-8 系 coding-system を追加した：
+      <dl>
+	<dt>utf-8-mcs
+	<dd>独自の写像を採用し、Unicode に含まれない文字を Unicode
+	    外の UCS 外字領域に割り当てる（従来の utf-8 と同等）
+	<dt>utf-8-mcs-er
+	<dd>独自の写像を採用し、Unicode
+	    に含まれない文字を実体参照形式で表現する
+	<dt>utf-8-gb
+	<dd>GB に基づく mapping を採用し、Unicode に含まれない文字を
+	      Unicode 外の UCS 外字領域に割り当てる
+	<dt>utf-8-gb-er
+	<dd>GB に基づく mapping を採用し、Unicode
+	    に含まれない文字を実体参照形式で表現する
+	<dt>utf-8-cns
+	<dd>CNS に基づく mapping を採用し、Unicode
+	    に含まれない文字を Unicode 外の UCS 外字領域に割り当てる
+	<dt>utf-8-cns-er
+	<dd>CNS に基づく mapping を採用し、Unicode
+	    に含まれない文字を実体参照形式で表現する
+	<dt>utf-8-big5
+	<dd>Big5 に基づく mapping を採用し、Unicode
+	    に含まれない文字を Unicode 外の UCS 外字領域に割り当てる
+	<dt>utf-8-big5-er
+	<dd>Big5 に基づく mapping を採用し、Unicode
+	    に含まれない文字を実体参照形式で表現する
+	<dt>utf-8-jis
+	<dd>JIS に基づく mapping を採用し、Unicode
+	    に含まれない文字を Unicode 外の UCS 外字領域に割り当てる
+	<dt>utf-8-jis-er
+	<dd>JIS に基づく mapping を採用し、Unicode
+	    に含まれない文字を実体参照形式で表現する
+	<dt>utf-8-ks
+	<dd>KS に基づく mapping を採用し、Unicode に含まれない文字を
+	    Unicode 外の UCS 外字領域に割り当てる
+	<dt>utf-8-ks-er
+	<dd>KS に基づく mapping を採用し、Unicode
+	    に含まれない文字を実体参照形式で表現する
+      </dl>
+      <p>
+      また、utf-8 を alias とし、既定値では utf-8-mcs を指すものとした
+      （将来的には language-environment に応じて既定値を変えることを考慮
+      している）
+      <p>
+      また、aliast `utf-8-er' を新設し、既定値では utf-8-mcs-er を指す。
+  <li>次の Big5 系 coding-system を追加した：
+      <dl>
+	<dt>big5-er
+	<dd>Big5 にない文字を実体参照形式で表現する
+	<dt>big5-eten
+	<dd>Big5-ETEN
+	<dt>big5-eten-er
+	<dd>Big5-ETEN にない文字を実体参照形式で表現する
+      </dl>
+      <p>
+      また、big5 は ETEN 拡張を含まないものであることを明確化した。
+  <li>実体参照形式の表現や優先度を指定する変数
+      coded-charset-entity-reference-alist を追加
+  <li>文字属性データベースの追加・修正など
+</ul>
+   <tr><th align=center>2002-09-19
+     <td><a
+       href="http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/"
+       >守岡知彦</a>、<a href="http://lc.linux.or.jp/lc2002/">
+       Linux Conference 2002</a>
+       で<a href="http://lc.linux.or.jp/lc2002/19.html#c35">発表</a>
+   <tr><th align=center>2002-09-20
+     <td><a
+       href="http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/">守岡知彦</a>と
+       <a href="http://www.kanji.zinbun.kyoto-u.ac.jp/~wittern/">
+       Christian Wittern</a>, 大阪市立大学で開催された <a
+       href="http://pnc-ecai.oiu.ac.jp/prog2.htm">
+       PNC Annual Conference and Joint Meetings 2002
+       </a> で発表
+   <tr><th align=center>2002-12-06
+     <td><a href="http://web.sfc.keio.ac.jp/~kamichi/">上地 宏一</a>、<a
+	 href="http://www.zinbun.kyoto-u.ac.jp">京都大学
+	 人文科学研究所</a>の研究班『漢字情報基礎論研究会』で
+	 「漢字フォント自動生成サーバ“影 KAGE”」システムに関して講演
+	 <hr>
+         <a href="http://www.ya.sakura.ne.jp/~moro/">師 茂樹</a>、
+	 大阪外国語大学
+	 『多言語同時処理』プロジェクト（第１回研究会）で
+	 『「ユニコードとは何か」から「Unicode4.0」まで』
+	 と
+	 『CHISEプロジェクトが提案する新しい文字のモデル』
+	 という題目で講演
+   <tr><th align=center>2002-12-07
+     <td><a href="http://www.jaet.gr.jp/meeting.html#5">
+	 漢字文献情報処理研究会第5回大会</a>で、
+	 CHISEプロジェクトの特別セッションが行われた
+   <tr><th align=center>2002-12-26
+     <td>XEmacs 21.4.10 (Military Intelligence) UTF-2000 Version 0.20 (奈良)
+	 を release
+     <td>
+	 <ul>
+	   <li>case 関連機能を文字属性データベース機能に基づいて再実装し、
+	       情報を統合した
+	   <li>UTF-16 系 coding-system を定義できるようにした
+	   <li>JIS X 0208 の共通部分を表す coded-charset ‘=jis-x0208’
+	       を導入し、 ‘japanese-jisx0208-1978’, 
+	       ‘japanese-jisx0208’ および ‘japanese-jisx0208-1990’
+	       はこれを継承するようにした
+	   <li>coded-charset ‘ucs-gb’ および文字属性 ‘=>ucs-gb’
+	       を追加し、 coding-system ‘utf-8-gb’ および 
+	       ‘utf-8-gb-er’ でこれらを用いるようにした
+	   <li>文字属性 ‘->ucs’ を廃止した
+	   <li>portable dumper に対応した
+	   <li>関数 encode-char に optional 引数 ‘defined-only’ を追加した
+	   <li>関数 reset-charset-mapping-table を追加した
+	   <li>関数 char-ref= および関数 char-spec= に optional 引数
+	       ‘tester’ を追加した
+	   <li>対話的関数 reset-charset-mapping-table を廃止した
+	   <li>GT 2000 漢字構成要素を表す coded-charset ‘ideograph-gt-k’
+	       および、これのフォント用 coded-charset ‘ideograph-gt-pj-k1’
+	       および ‘ideograph-gt-pj-k2’ を追加した
+	   <li>JIS X 0213 用、KS X 1001 用および GT 2000
+	       漢字構成要素用の実体参照用設定を追加した
+	   <li>文字属性データベースの追加・修正など
+	 </ul>
+   <tr><th align=center>2003-11-04
+     <td>XEmacs CHISE Version 0.21 (平城山)
+	 を release
+     <td>
+	 <ul>
+	   <li>libchise のサポート
+	   <li>幾つかの CCS を C ではなく lisp で定義するようにした
+	   <li>CCS 名の命名規則の変更
+	   <li>word-combining-categories の廃止および
+	       word-separating-categories の修正
+	   <li>UTF-8 などの coding-system での decode 時の文字結合処理の bug を
+	       修正
+	       （Mac OS X において、file-name-coding-system を utf-8-jis
+	       等に設定することで 「ヒラギノ」といった
+	       文字結合を必要とするファイル名を正しく扱うことができるようになった）
+	   <li>文字素性データベースの追加・修正など
+	 </ul>
+</table>
+
+</body>
+</html>

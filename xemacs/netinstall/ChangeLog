@@ -1,0 +1,403 @@
+2008-12-28  Vin Shelton  <acs@xemacs.org>
+
+	* XEmacs 21.4.22 is released
+
+2007-10-07  Vin Shelton  <acs@xemacs.org>
+
+	* XEmacs 21.4.21 is released
+
+2006-12-09  Vin Shelton  <acs@xemacs.org>
+
+	* XEmacs 21.4.20 is released
+
+2006-01-28  Vin Shelton  <acs@xemacs.org>
+
+	* XEmacs 21.4.19 is released
+
+2005-12-03  Vin Shelton <acs@xemacs.org>
+
+	* XEmacs 21.4.18 is released
+
+2005-02-06  Vin Shelton <acs@xemacs.org>
+
+	* XEmacs 21.4.17 is released
+
+2004-12-05  Vin Shelton <acs@xemacs.org>
+
+	* XEmacs 21.4.16 is released
+
+2004-02-02  Vin Shelton <acs@xemacs.org>
+
+	* XEmacs 21.4.15 is released
+
+2003-09-03  Vin Shelton <acs@xemacs.org>
+
+	* XEmacs 21.4.14 is released
+
+2003-05-25  XEmacs Build Bot <builds@cvs.xemacs.org>
+
+	* XEmacs 21.4.13 is released
+
+2003-01-15  Stephen J. Turnbull  <stephen@xemacs.org>
+
+	* XEmacs 21.4.12 "Portable Code" is released.
+
+2003-01-03  Stephen J. Turnbull  <stephen@xemacs.org>
+
+	* XEmacs 21.4.11 "Native Windows TTY Support" is released.
+
+2002-11-02  Stephen J. Turnbull  <stephen@xemacs.org>
+
+	* XEmacs 21.4.10 "Military Intelligence" is released.
+
+2002-08-23  Stephen J. Turnbull  <stephen@xemacs.org>
+
+	* XEmacs 21.4.9 "Informed Management" is released.
+
+2002-05-09  Stephen J. Turnbull  <stephen@xemacs.org>
+
+	* XEmacs 21.4.8 "Honest Recruiter" is released.
+
+2002-02-04  Andy Piper  <andy@xemacs.org>
+
+	* install.cc (install_one): Munge installed filename to fit inside
+	dialog.
+
+2002-05-04  Stephen J. Turnbull  <stephen@xemacs.org>
+
+	* XEmacs 21.4.7 "Economic Science" is released.
+
+2001-12-17  Andy Piper  <andy@xemacs.org>
+
+	* desktop.cc (do_desktop_setup): register the whole gamut of C++
+	file types.
+
+2001-12-12  Andy Piper  <andy@xemacs.org>
+
+	* win32.h (CDECL): reorder to remove warnings.
+
+	* Makefile.in.in: add new dependencies.
+
+	* desktop.h: new file.
+
+	* uninstall.cc: use it.
+
+	* install.cc (uninstall_one): when uninstalling xemacs remove
+	shortcuts also.
+
+	* desktop.cc (remove_xemacs_setup): split out from
+	remove_desktop_setup.
+	(remove_desktop_setup): call it.
+
+2001-12-05  Andy Piper  <andy@xemacs.org>
+
+	* win32.h: re-order declarations for native windows from Fabrice
+	Popineau.
+
+2001-11-22  Andy Piper  <andy@xemacs.org>
+
+	* Makefile.in.in (setup-bin.ini): cope with kit revisions.
+
+	* source.cc (save_dialog): warning removal.
+	(load_dialog): ditto.
+
+	* msg.cc: remove cvs id.
+
+	* desktop.cc (find_xemacs_version): new function. Cope with kit
+	revisions.
+	(find_xemacs_exe_path): use it.
+	(find_xemacs_exe_name): ditto.
+
+2001-12-17  Stephen J. Turnbull  <stephen@xemacs.org>
+
+	* XEmacs 21.4.6 "Common Lisp" is released.
+
+2001-10-27  Andy Piper  <andy@xemacs.org>
+
+	* localdir.cc (dialog_cmd): allow download directory to be
+	created.
+	* log.cc (exit_setup): cygwin -> XEmacs
+	* net.cc (dialog_cmd):
+	 (dialog_proc):
+	 (do_net): sync with cygwin installer.
+	* res.rc:
+	* resource.h (IDS_CREATE_DIR): new.
+	* source.cc (load_dialog):
+	(save_dialog):
+	(dialog_cmd):
+	(dialog_proc):
+	(do_source): sync with cygwin installer.
+	* uninstall.cc (progress): remove log message.
+	* Makefile.in.in: generated setup-bin.ini correctly.
+	
+2001-10-25  Andy Piper  <andy@xemacs.org>
+
+	* Merge 21.5 codeline.
+	
+2001-10-25  Andy Piper  <andy@xemacs.org>
+
+	* setup.mak (OBJS): minor build fixes.
+	(distclean):
+
+2001-10-23  Stephen J. Turnbull  <stephen@xemacs.org>
+
+	* XEmacs 21.4.5 "Civil Service" is released.
+
+2001-07-28  Stephen J. Turnbull  <stephen@xemacs.org>
+
+	* XEmacs 21.4.4 "Artificial Intelligence" is released.
+
+2001-05-17  Andy Piper  <andy@xemacs.org>
+
+	* win32.h:
+	* win32.h (NOCOMATTRIBUTE): sync with latest cygwin version.
+
+2001-05-17  Stephen J. Turnbull  <stephen@xemacs.org>
+
+	* XEmacs 21.4.3 "Academic Rigor" is released.
+
+2001-05-10  Stephen J. Turnbull  <stephen@xemacs.org>
+
+	* XEmacs 21.4.2 "Developer-Friendly Unix APIs" is released.
+
+2001-04-19  Andy Piper  <andy@xemacs.org>
+
+	* Makefile.in.in (setup-bin.ini): new. Just calculate ini for the
+	binaries
+	(desktop.o): add correct dependency
+
+	* reginfo.h: Update arch to i586 and 21.4
+	* reginfo.h (XEMACS_NATIVE_ARCH_NAME): ditto
+
+2001-04-19  Stephen J. Turnbull  <stephen@xemacs.org>
+
+	* XEmacs 21.4.1 "Copyleft" is released.
+
+2001-04-17  Stephen J. Turnbull  <stephen@xemacs.org>
+
+	* reginfo.h: Fixup 21.2 -> 21.4.
+
+2001-04-16  Stephen J. Turnbull  <stephen@xemacs.org>
+
+	* XEmacs 21.4.0 "Solid Vapor" is released.
+
+2001-04-14  Stephen J. Turnbull  <stephen@xemacs.org>
+
+	* XEmacs 21.2.47 "Zephir" is released.
+
+2001-03-21  Martin Buchholz <martin@xemacs.org>
+
+	* XEmacs 21.2.46 "Urania" is released.
+
+2001-03-01  Andy Piper  <andy@xemacs.org>
+
+	* desktop.cc (find_xemacs_exe_name): support 21.1 and 21.2 series.
+
+	* iniparse.c: remove.
+
+	* inilex.c: remove
+
+2001-02-23  Martin Buchholz <martin@xemacs.org>
+
+	* XEmacs 21.2.45 "Thelxepeia" is released.
+
+2001-02-08  Martin Buchholz <martin@xemacs.org>
+
+	* XEmacs 21.2.44 "Thalia" is released.
+
+2001-02-02  Andy Piper  <andy@xemacs.org>
+
+	* res.rc: update mirrors.lst location.
+
+2001-01-26  Martin Buchholz <martin@xemacs.org>
+
+	* XEmacs 21.2.43 "Terspichore" is released.
+
+2001-01-21  Andy Piper  <andy@xemacs.org>
+
+	* Makefile.in.in (%.o): use CXX to compile
+
+	* res.rc: beautify download status and install status.
+
+	* nio-ftp.cc: use xemacs-setup user for identity.
+
+2001-01-20  Martin Buchholz <martin@xemacs.org>
+
+	* XEmacs 21.2.42 "Poseidon" is released.
+
+2001-01-17  Andy Piper  <andy@xemacs.org>
+
+	* ini.h: move extern "C" to aid win32 compilation. From Fabrice
+	Popineau.
+
+2001-01-17  Martin Buchholz <martin@xemacs.org>
+
+	* XEmacs 21.2.41 "Polyhymnia" is released.
+
+2001-01-12  Andy Piper  <andy@xemacs.org>
+
+	* postinstall.cc (do_postinstall): don't pick up shells if cygwin
+	isn't installed.
+
+2001-01-10  Andy Piper  <andy@xemacs.org>
+
+	* README.xemacs: deleted.
+
+	* README: updated.
+
+	* tar.cc (tar_gzctell): new function picked up from some internal
+	cygnus version of zlib.
+
+	* Makefile.in.in (LOCALCFLAGS): use -O2
+	(OBJS): reinstate autoload.
+
+2001-01-09  Andy Piper  <andy@xemacs.org>
+
+	* root.cc (dialog_cmd): backslash root dir.
+
+	* desktop.cc (do_desktop): runemacs.exe is the exe to run.
+
+	* package-net.el (package-net-batch-convert-index-to-ini): new
+	batch command.
+
+	* Makefile.in.in (setup.ini): new target. Automatically create.
+	(LOCALCFLAGS): use extra_includes.
+	(setup.ini): new target.
+	
+	* regedit.cc (create_xemacs_root): write out the package path.
+
+	* reginfo.h (XEMACS_NATIVE_ARCH_NAME): arch dir is i386 not i586
+
+2001-01-08  Martin Buchholz <martin@xemacs.org>
+
+	* XEmacs 21.2.40 is released.
+
+2000-12-31  Martin Buchholz <martin@xemacs.org>
+
+	* XEmacs 21.2.39 is released.
+
+2000-12-28  Andy Piper  <andy@xemacs.org>
+
+	* desktop.cc (FROB): add more app paths.
+
+2000-12-24  Fabrice Popineau  <Fabrice.Popineau@supelec.fr>
+
+	* choose.cc (create_listview): CreateWindowEx() does not take this kind of
+	parameter.
+
+	* choose.cc (package_sort):
+	* hash.cc (rev_len):
+	* site.cc (site_sort): must be __cdecl to be called by qsort().
+
+	* download.cc:
+	* install.cc:
+	* nio-file.cc:
+	* tar.cc: because of the redefinition of stat to _stat, the
+	inclusion of win32 headers has to be delayed.
+	
+	* win32.h: added some declarations, such as CDECL if
+	not defined, #define for functions that are not standard in msvc
+	libc (strdup, stat ...)
+
+	* concat.h, concat.cc (concat): must be declared CDECL
+
+	* desktop.cc: <io.h> is needed.
+
+	* dialog.h (NEXT): cast needed, the first parameter of EndDialog() must
+	be a HWND.
+
+	* diskfull.cc: syntax when declaring GDFS.
+
+	* ini.cc: Various `extern "C"' declarations: yylineno, yyerror()
+	and fprintf(). Various CDECL declarations: yyerror(), fprintf().
+	
+	* inilex.l: <stdlib.h> required.
+	
+	* iniparse.y: use strdup(), require "win32.h" and <string.h>
+	
+	* install.cc (dialog): syntax when declaring. CreateDialog()
+	returns a HWND.
+	
+	* postinstall.cc: <io.h> and <stdio.h> are needed.
+	
+	* regedit.cc (find_cygwin_mount): WIN32_NATIVE does not know
+	anything about Cygwin stuff.
+	
+	* setup.mak: new makefile for WIN32_NATIVE.
+	
+	* splash.cc (load_dialog): GetDlgItem() returns a HWND.
+	
+	* tar.cc: msvc knows about __int64, but not `long long'.
+
+	* win32.h: <winreg.h> is missing for regedit.cc. Also, I ended up
+	in including <windows.h> because the files listed there are not
+	enough for <wininet.h>.
+	
+	* desktop.cc:
+	* fromcwd.cc:
+	* install.cc: 
+	* postinstall.cc: <unistd.h> does not exist for WIN32_NATIVE
+
+	* choose.cc (do_choose):
+	* ini.cc (do_ini):
+	* nio-ftp.cc (ftp_line): the construct (x ?: y) is not standard.
+
+2000-12-24  Andy Piper  <andy@xemacs.org>
+
+	* choose.cc (read_installed_db): grok package versions correctly.
+
+	* Makefile.in.in: add MINGW define.
+
+2000-12-18  Andy Piper  <andy@xemacs.org>
+
+	* res.rc: better look and feel.
+
+2000-12-18  Andy Piper  <andy@xemacs.org>
+
+	* desktop.cc (do_desktop_setup): more app path fiddling.
+
+2000-12-13  Andy Piper  <andy@xemacs.org>
+
+	* root.cc (dialog_cmd): create the root in the registry if we are successful.
+
+	* desktop.cc (find_xemacs_exe_path): new function. Split out from
+	find_xemacs_exe ().
+	(find_xemacs_exe_name): ditto.
+	(do_desktop_setup): setup app paths if we are installing xemacs
+	itself.
+	(do_desktop): use new functions.
+
+	* regedit.cc (create_xemacs_root): fix key name.
+	(find_xemacs_root): set isnative whatever the key value.
+	(set_app_path): new function. Set path for an app.
+
+2000-12-12  Andy Piper  <andy@xemacs.org>
+
+	* package-net.el (package-net-convert-index-to-ini): use sensible defaults.
+
+2000-12-12  Andy Piper  <andy@xemacs.org>
+
+	* reginfo.h: new macros.
+
+	* iniparse.y: define xemacs_package.
+
+	* ini.h: declare xemacs_package.
+
+	* fromcwd.cc (found_file): guess core type from name.
+
+	* concat.cc: kill warnings.
+	* net.cc: ditto.
+
+	* choose.cc (do_choose): pick up core package type chosen.
+
+	* Makefile.in.in: make sure we can pick up a mingw zlib.
+
+	* desktop.cc: fix desktop icon creation.
+
+2000-11-12  Andy Piper  <andy@xemacs.org>
+
+	* all: port from cygwin setup.
+
+%%% $Id: ChangeLog,v 1.2.2.20 2003/01/03 10:49:30 stephent Exp $
+$Revision: 1.2.2.20 $
+

@@ -1,0 +1,244 @@
+2011-03-12  MORIOKA Tomohiko  <tomo@zinbun.kyoto-u.ac.jp>
+
+	* bootstrap.fink: Add `ulimit -n 2048'.
+
+2010-09-30  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* bootstrap.fink: Use sudo to do make install-arphic in
+	chise-fonts-installer/TrueType.
+
+2010-09-17  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* bootstrap.fink: Install Arphic PL fonts.
+
+2010-07-15  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* Makefile.in (CVS_ROOT): Quote.
+	(LEMI_CVS_ROOT): Likewise.
+
+
+2010-06-16  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-base 0.25 released.
+
+	* Makefile.in (distclean): Add cleaner for chise-fonts-installer/.
+	(cvs-base-clean): Delete apel/ and chise-fonts-installer/.
+
+2010-06-16  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* Makefile.in (tar-base): Add `chise-fonts-installer'.
+
+	* configure.in (AC_INIT): Update to 0.25.
+
+2009-12-10  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* bootstrap.fink:
+	- Omit `coreutils-default'.
+	- Install `wget'.
+
+	* Makefile.in (FONTS_OPTS): New variable.
+	(config-fonts): New target.
+	(chise-fonts-installer/config.h): New target.
+	(build-fonts): New target.
+	(install-fonts): New target.
+	(install-base): Call `install-fonts'.
+	(chise-fonts-installer): New target.
+
+2009-12-10  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* bootstrap.fink: Use db48 instead db44.
+
+2009-07-16  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* bootstrap.debian: Install `xbitmaps'.
+
+2009-03-12  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* README.en (updating): New subsection.
+
+2008-10-28  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* Makefile.in ($(LIBDIR)/xemacs/xemacs-packages): Don't install
+	`apel'.
+
+2008-10-14  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* bootstrap.debian: Install `make' and `g++'.
+
+2008-07-31  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* Makefile.in (build-xemacs): Use LC_ALL instead of LANG.
+	(install-apel): Likewise.
+
+2008-07-22  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* bootstrap.macport, bootstrap.macports: Rename
+	`bootstrap.macport' to `bootstrap.macports'.
+
+2008-07-21  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* bootstrap.macport: New file.
+
+	* bootstrap.fink: Specify --with-site-includes,
+	--with-site-libraries and --with-canna.
+
+	* configure.in (xemacs_configure_args): New SUBST.
+	(--with-site-includes=PATH): New argument.
+	(--with-site-libraries=PATH): New argument.
+	(--with-canna): New argument.
+
+	* Makefile.in (XEMACS_OPTS): Use @xemacs_configure_args@ instead
+	of $(OPTS).
+
+
+2008-05-30  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-base 0.24 released.
+
+	* configure.in (AC_INIT): Update to 0.24.
+
+2008-05-30  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* Makefile.in (install-apel): Avoid error when
+	$(LIBDIR)/xemacs/site-packages already exists.
+
+2008-04-05  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* bootstrap.debian: New file.
+
+2008-01-12  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* README.en (Installing CHISE-base in Mac OS X with Fink): New
+	section.
+
+	* bootstrap.fink: New file.
+
+2008-01-12  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* configure.in (lemi_cvs_root): New SUBST.
+
+	* Makefile.in (SUDO): New variable.
+	(LEMI_CVS_ROOT): New variable.
+	(XEMACS_PACKAGES_URL): New variable.
+	($(LIBDIR)/libconcord.a): Use $(SUDO) to make install.
+	($(LIBDIR)/libchise.a): Likewise.
+	(install-db): Use $(SUDO) to install chise-db in
+	$(prefix)/share/chise.
+	(build-xemacs): Build in C locale.
+	($(BINDIR)/xemacs): Use $(SUDO) to make install.
+	(install-apel): New target.
+	(install-tomoyo-tools): Call `install-apel' and
+	`$(LIBDIR)/xemacs/mule-packages'; Use $(SUDO) to make install.
+	(install-ids): Use $(SUDO) to make install.
+	(apel): New target.
+	(.lemi-cvs-login): New target.
+	($(LIBDIR)/xemacs/xemacs-packages): New target.
+	($(LIBDIR)/xemacs/mule-packages): New target.
+
+
+2006-05-19  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-base 0.23 released.
+
+2006-05-17  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* README.en: New file.
+
+2006-05-16  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* configure.in: Put --with-canna into $xemacs_opts when Fink is
+	used.
+
+2006-05-15  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* Makefile.in (concord): Fix problem when the target is bundled.
+	(libchise): Likewise.
+	(xemacs-chise): Likewise.
+	(tomoyo-tools): Likewise.
+	(ids): Likewise.
+	(.cvs-login): Fix problem when $(CVS_ROOT) does not use pserver
+	method.
+
+2006-05-14  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* Makefile.in (install-db): Use $(TAR) instead of `tar'.
+	(chise-db): Likewise.
+	(tar-core): Likewise; call `cvs-base-clean' instead of
+	`cvs-core-clean'; cvs export concord and libchise.
+
+2006-05-14  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* Makefile.in (XEMACS_OPTS): Add --pdump, --without-xim and
+	--with-database=berkdb.
+	(xemacs-chise/src/config.h): Move --without-xim, --pdump and
+	--with-database=berkdb to `XEMACS_OPTS'.
+	(tar-core): Call `cvs-core-clean'; don't copy Makefile concord and
+	libchise.
+	(cvs-clean): Use `cvs-base-clean' and `cvs-core-clean'.
+	(cvs-core-clean): New target.
+	(cvs-base-clean): New target.
+
+	* configure.in: Code to detect version of Berkeley DB for Fink is
+	moved into the if-clause about Fink is used.
+
+2006-05-12  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* Makefile: Deleted.
+
+	* Makefile.in, config.guess, config.sub, configure, configure.in,
+	install-sh: New files.
+
+2005-06-24  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* Makefile (VERSION): Update to 0.23.
+	(CONCORD_OPTS): New variable.
+	(all): Call `build-concord'.
+	(install): Call `install-core'.
+	(force-config-concord): New target.
+	(config-concord): Likewise.
+	(concord/config.h): Likewise.
+	(build-concord): Likewise.
+	(install-concord): Likewise.
+	($(PREFIX)/lib/libconcord.a): Likewise.
+	(config-libchise): Call `install-concord' and `libchise/config.h'.
+	(libchise/config.h): New target.
+	(build-libchise): Cqll `config-libchise'.
+	(install-libchise): Call `build-libchise' and
+	`$(PREFIX)/lib/libchise.a'.
+	($(PREFIX)/lib/libchise.a): New target.
+	(install-core): New target.
+	(install-db): Changed for new layout.
+	(config-xemacs): Call `xemacs-chise/src/config.h'.
+	(xemacs-chise/src/config.h): New target.
+	(install-xemacs): Call `install-libchise' and
+	`$(PREFIX)/bin/xemacs'.
+	($(PREFIX)/bin/xemacs): New target.
+	(install-ids): Call `install-xemacs'.
+	(install-base): New target.
+	(generate-db): Call `install-base' instead of `install-xemacs' and
+	`install-ids'.
+	(chise-db): Change directory layout.
+	(tar-core): Copy `concord'.
+	(get-base): New target.
+	(concord): New target.
+	(libchise): Call `.cvs-login'.
+	(xemacs-chise): Likewise.
+	(ids): Likewise.
+	(.cvs-login): New target.
+	(distclean): Add cleaner for concord/.
+	(db-clean): New target.
+	(cvs-clean): New target.
+
+
+2005-05-25  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-core 0.22 released.
+
+	* Makefile (VERSION): Update to 0.22.
+	(tar-core): Renamed from `tar'; do cvs commin and add version tag;
+	rename package name from `chise-base' to `chise-core'.
+
+2005-03-03  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* Makefile: New file.
+

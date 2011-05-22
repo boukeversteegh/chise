@@ -1,0 +1,37 @@
+* Ruby/CHISE README
+
+Ruby/CHISE is a llibrary to use Chaon model.
+
+** Requirements
+
+- ruby 1.8
+- Berkeley DB
+- Ruby/BDB
+
+** Install
+
+Move "chise" directory to somewhere.
+eg.
+ # mv chise /usr/local/lib/ruby/site_ruby/1.8
+
+Cd to "ext" directory, do like this.
+ % ruby extconf.rb
+ % make
+ # make install
+
+You can use Ruby/CHISE without extension.
+If you have extension, Ruby/CHISE works faster.
+
+** Usage
+
+See "doc/index.html". (in Japanese)
+See "sample", "test" directories.
+Please check http://eto.com/2003/ruby/ for imformation.
+
+** License
+
+This software is distributed under the GPL2.  See COPYING.
+
+** Author
+
+Kouichirou Eto <2004 at eto.com>

@@ -1,0 +1,472 @@
+2010-06-15  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* tomoyo-tools 0.25 released.
+
+2010-04-01  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* char-db-dump.el (char-db-dump-oracle-bones): Dump abstract
+	Oracle-Bones characters.
+
+2008-10-20  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* ideo-trans.el (chinese-simplify-string): Use `char-feature'
+	instead of `get-char-attribute' to retrieve `=>ucs*'; fix typo.
+	(japanese-simplify-string): Support non-JIS variants.
+	(chinese-traditionalize-string): Add new optional argument
+	`selector';
+	(japanese-traditionalize-string): Likewise.
+
+2008-07-17  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* ideo-trans.el:
+	- Use `=ucs@JP' instead of `=ucs@jp'.
+	(japanese-traditionalize-string): Fix typo.
+
+
+2008-05-30  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* tomoyo-tools 0.24 released.
+
+2008-01-22  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* ideo-trans.el (japanese-traditionalize-string): Prefer
+	`<-simplified@JP/Jouyou' and `<-simplified@JP'.
+	(japanese-traditionalize-region): Use `char-feature' instead of
+	`get-char-attribute'.
+	(japanese-simplify-region): Likewise.
+
+
+2006-05-18  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* tomoyo-tools 0.23 released.
+
+2006-05-12  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* TOMOYO-MK (install-tomoyo-package): Use `condition-case' to
+	avoid error.
+
+2005-07-25  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* char-db-dump.el (char-db-dump-additional-precomposed): Use
+	`=decomposition' instead of `->decomposition'.
+
+2005-07-03  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* dump-tables.el (dump-ks-x1001-to-ucs-table): New function.
+
+2005-05-29  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* char-db-dump.el (char-db-dump-oracle-bones): New function.
+	(char-db-dump): Call `char-db-dump-oracle-bones'.
+
+2005-05-13  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* ideo-trans.el (japanese-simplify-region): New function.
+
+2004-11-09  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* char-db-dump.el (char-db-dump-additional-precomposed): New
+	function.
+	(char-db-dump): Call `char-db-dump-additional-precomposed'.
+
+2004-10-30  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* conv-util.el (conv-u-convert-char-fullwidth): Add `->fullwidth'
+	for abstract character; add `<-halfwidth' for *halfwidth* variant;
+	fix problem about `<-fullwidth'.
+
+2004-10-30  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* conv-util.el (conv-u-convert-char): Delete unused local variable
+	`guc'.
+	(conv-u-convert-char-fullwidth): New function.
+
+2004-10-18  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* TOMOYO-ELS (tomoyo-modules-to-compile): Add `conv-util'.
+
+	* conv-util.el: New file.
+
+2004-10-13  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* dump-tables.el (dump-94x94-ccs-to-ucs-table): Use `char-feature'
+	instead of `get-char-attribute'.
+
+2004-10-13  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* dump-tables.el (dump-cns-11643-1-to-ucs-table): New function.
+	(dump-cns-11643-2-to-ucs-table): New function.
+
+2004-09-06  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* ideo-trans.el (chinese-simplify-string): Renamed from
+	`ideo-translate-string-into-simplified-chinese'.
+	(ideo-translate-string-into-simplified-chinese): New obsolete
+	alias for `chinese-simplify-string'.
+	(japanese-simplify-string): Renamed from
+	`ideo-translate-string-into-simplified-japanese'.
+	(ideo-translate-string-into-simplified-japanese): New obsolete
+	alias for `japanese-simplify-string'.
+	(chinese-traditionalize-string): Renamed from
+	`ideo-translate-chinese-string-into-traditional'.
+	(ideo-translate-chinese-string-into-traditional): New obsolete
+	alias for `chinese-traditionalize-string'.
+	(japanese-traditionalize-string): Renamed from
+	`ideo-translate-japanese-string-into-traditional'.
+	(ideo-translate-japanese-string-into-traditional): New obsolete
+	alias for `japanese-traditionalize-string'.
+	(japanese-traditionalize-region): Renamed from
+	`ideo-translate-japanese-region-into-traditional'.
+	(ideo-translate-japanese-region-into-traditional): New obsolete
+	alias for `japanese-traditionalize-region'.
+
+2004-08-24  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* ideo-trans.el (ideo-trans-select-char): New function.
+	(ideo-translate-chinese-string-into-traditional): New function.
+	(ideo-translate-japanese-string-into-traditional): New function.
+	(ideo-translate-string-into-traditional): Deleted.
+	(ideo-translate-japanese-region-into-traditional): Renamed from
+	`ideo-translate-region-into-traditional'; use
+	`ideo-trans-select-char'.
+	(ideo-translate-region-into-traditional): New obsolete alias for
+	`ideo-translate-japanese-region-into-traditional'.
+
+2004-08-24  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* ideo-trans.el (char-cns11643-p): New function [copied from
+	ids/ids-util.el].
+	(char-ks-x1001-p): New function.
+	(find-char-variant): New function.
+	(char-representative-of-ucs): New function.
+	(char-representative-of-domain): New function.
+	(ideo-translate-string-into-ucs): New function.
+	(ideo-translate-string-into-traditional): New function.
+
+2004-04-07  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* char-db-dump.el (char-db-dump-ruimoku6): Use
+	`char-db-file-coding-system'.
+
+2004-04-05  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* ideo-trans.el (ideo-translate-string-into-simplified-chinese):
+	Use `char-feature' to refer `=>ucs@gb'; use `=ucs@gb' instead of
+	`=ucs' to decode; try to convert compatible ideographs to
+	non-compatible ideographs.
+	(ideo-translate-string-into-simplified-japanese): New function.
+
+2004-02-04  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* char-db-dump.el (char-db-dump-ruimoku6): New function.
+	(char-db-dump): Call `char-db-dump-ruimoku6'.
+
+2004-01-26  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* ideo-trans.el (ideo-translate-region-into-traditional): Support
+	`<-simplified@JP/Jouyou', `<-simplified@JP' and `<-simplified'.
+
+2003-11-21  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* char-db-dump.el (char-db-dump-non-ideographs): Fixed.
+
+2003-11-05  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* ideo-trans.el (ideo-translate-region-into-traditional): Refer
+	`<-simplified@jp-jouyou' and `<-simplified@jp'.
+
+2003-10-17  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* ideo-trans.el (ideo-translate-region-into-traditional): New
+	command.
+
+2003-06-13  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* ideo-trans.el (ideo-translate-string-into-simplified-chinese):
+	Renamed from `ideo-trans-simplify-chinese-string'.
+	(ideo-trans-simplify-chinese-string): New alias for
+	`ideo-translate-string-into-simplified-chinese'.
+
+2003-07-04  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* dump-tables.el (dump-jis2ucsdkw): Use `DHonnn' instead of
+	`DHOnnn'.
+
+2003-07-01  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* dump-tables.el (dump-jis2ucsdkw): New function.
+
+2003-07-01  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* dump-tables.el (dump-94x94-ccs-to-ucs-table): Change 5th
+	argument `ucs-ccs' to `ucs-domain'.
+	(dump-jis-x0208-1990-to-ucs-table): Modify for
+	`dump-94x94-ccs-to-ucs-table'.
+	(dump-jis-x0212-to-ucs-table): Likewise.
+	(dump-jis-x0213-1-to-ucs-table): Use `=>ucs@jis' instead of
+	`=>ucs-jis'.
+	(dump-jis-x0213-2-to-ucs-table): Modify for
+	`dump-94x94-ccs-to-ucs-table'.
+	(dump-cns-11643-3-to-ucs-table): Likewise.
+	(dump-cns-11643-4-to-ucs-table): Likewise.
+	(dump-big5-to-ucs-table): Use `=>ucs@big5' instead of
+	`=>ucs-big5'.
+
+2003-06-23  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* dump-tables.el (dump-94x94-ccs-to-ucs-table): Use `encode-char'
+	with `defined-only' mode instead of `get-char-attribute' to get
+	CCS-feature values.
+	(dump-jis-x0213-1-to-ucs-table): Likewise; abolish setting for
+	`->ucs'.
+	(dump-big5-to-ucs-table): Likewise.
+	(dump-jef-china3-to-ucs-table): Use `encode-char' with
+	`defined-only' mode instead of `get-char-attribute' to get
+	CCS-feature values.
+	(dump-cbeta-to-ucs-table): Likewise.
+
+2003-03-25  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* TOMOYO-ELS (tomoyo-modules-to-compile): Add `ideo-trans'.
+
+	* ideo-trans.el: New file.
+
+2003-02-17  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* char-db-dump.el (char-db-dump): Renamed from
+	`char-db-dump-files'.
+
+2003-02-16  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* ideo-dump.el, non-ideo-dump.el: Deleted; moved to char-db-dump.
+
+	* TOMOYO-ELS (tomoyo-modules-to-compile): Use `char-db-dump'
+	instead of `ideo-dump'.
+
+	* char-db-dump.el: New file.
+
+2003-02-07  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* dump-tables.el (dump-94x94-ccs-to-ucs-table): New function.
+	(dump-jis-x0208-1990-to-ucs-table): Use
+	`dump-94x94-ccs-to-ucs-table'.
+	(dump-jis-x0212-to-ucs-table): Likewise.
+	(dump-jis-x0213-1-to-ucs-table): Likewise; use `=ucs-jis-2000'
+	instead of `ucs-jis'.
+	(dump-jis-x0213-2-to-ucs-table): Use
+	`dump-94x94-ccs-to-ucs-table'.
+	(dump-cns-11643-3-to-ucs-table): Likewise.
+	(dump-cns-11643-4-to-ucs-table): Likewise.
+
+2003-02-05  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* non-ideo-dump.el: Modify the range of
+	"u02300-Miscellaneous-Technical.el"; add
+	"u02900-Supplemental-Arrows-B.el",
+	"u02980-Miscellaneous-Mathematical-Symbols-B.el" and
+	"u031F0-Katakana-Phonetic-Extensions.el".
+
+2002-11-25  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* dump-tables.el (dump-jis-x0208-1990-to-ucs-table): Don't print
+	JU+XXXX if the corresponding UCS map has the same code point.
+	(dump-jis-x0212-to-ucs-table): Likewise.
+	(dump-jis-x0213-1-to-ucs-table): Don't print JIS X 0208:1990 code
+	points.
+	(dump-cns-11643-3-to-ucs-table): Don't print CU+XXXX if the
+	corresponding UCS map has the same code point.
+	(dump-jef-china3-to-ucs-table): Fixed.
+
+2002-10-06  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* dump-tables.el (dump-cbeta-to-ucs-table): New function.
+
+2002-10-02  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* TOMOYO-ELS (tomoyo-modules-to-compile): Add `dump-tables'.
+
+2002-09-28  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* dump-tables.el: Add autoload cookies.
+
+2002-09-11  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* dump-tables.el (dump-jef-china3-to-ucs-table): New function.
+
+2002-07-21  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* dump-tables.el: New file.
+
+2002-08-23  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* TOMOYO-ELS (tomoyo-modules-to-compile): Add `ideo-dump'.
+
+	* ideo-dump.el (char-db-dump-ideographs): New function.
+
+2002-04-17  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* TOMOYO-ELS (tomoyo-modules-to-compile): Delete `ids', `ids-util'
+	and `iddef'.
+
+	* iddef.el, ids-util.el, ids.el: Moved to the IDS package.
+
+2002-04-05  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* iddef.el (iddef-check-mapping-buffer): Add `hanyu-dazidian' and
+	remove `hanyu-dazidian-{vol|page|char}'.
+
+2002-04-05  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* ids.el (ids-parse-string): Add DOC-string.
+	(ids-format-list): Likewise; add autoload cookie.
+
+	* ids-util.el (morohashi-char-replace-alist): Add some rules.
+
+2002-04-04  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* ids.el (ids-format-unit): New function.
+	(ids-format-list): New function.
+
+2002-04-03  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* ids-util.el (ideographic-structure-convert-to-daikanwa): Try to
+	replace converted sub-tree with corresponding combined character.
+
+2002-04-03  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* iddef.el (iddef-read-buffer): Add new optional argument
+	`ucs-only'.
+	(iddef-read-file): Likewise.
+
+2002-03-31  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* ids-util.el (morohashi-char-replace-alist): Use `decode-char'
+	for U+4EBD.
+
+2002-03-23  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* non-ideo-dump.el: Add setting for u0FFF0-Specials.el.
+
+2002-03-23  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* non-ideo-dump.el: Add setting for u0AC00-Hangul-Syllables.el.
+
+2002-03-21  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* non-ideo-dump.el: Add setting for U+A000 .. U+A4CF.
+
+2002-03-17  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* non-ideo-dump.el: Add setting for U+1780 .. U+18AF.
+
+2002-03-16  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* non-ideo-dump.el: Add setting for U+1400 .. U+16FF.
+
+2002-02-06  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* non-ideo-dump.el:
+	- Require `char-db-util'.
+	- Add setting for U+0A00 .. U+0DFF and U+0F00 .. U+11FF.
+
+2002-01-07  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* iddef.el (iddef-read-buffer): Fixed problem when corresponding
+	Daikanwa character is not found.
+
+2001-12-19  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* iddef.el (iddef-check-mapping-buffer): New function.
+	(iddef-check-mapping-file): New function.
+
+2001-12-18  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* iddef.el (iddef-read-buffer): Don't add `ideographic-structure'
+	into a character specified in `->same-ideograph' or `->identical'
+	if the character has `ucs'.
+
+	* ids-util.el: Add new character.
+
+2001-12-18  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* ids-util.el: Add coding: magic cookie.
+	(morohashi-char-replace-alist): Add some rules.
+
+2001-12-15  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* ids-util.el (morohashi-char-replace-alist): Add new character.
+
+2001-12-15  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* iddef.el (iddef-read-buffer): Don't add `ideographic-structure'
+	for Daikanwa character if the Daikanwa character has a different
+	`ucs' code point.
+
+2001-12-14  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* TOMOYO-ELS (tomoyo-modules-to-compile): Add `iddef'.
+
+	* iddef.el: New file.
+
+	* ids.el (ids-read-buffer): Moved to iddef.el and renamed to
+	`iddef-read-buffer'; don't require `ids-util'.
+
+2001-12-14  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* TOMOYO-ELS, idc-util.el, idc.el, ids-util.el, ids.el: Rename
+	`idc' to `ids'.
+
+2001-12-14  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* TOMOYO-CFG (load-path): Must add current-directory.
+	- Display error message if `install' is not found.
+
+2001-12-14  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* idc.el (idc-parse-string): Add autoload cookie.
+	(idc-read-buffer): Likewise.
+
+	* idc-util.el (ideographic-structure-convert-to-ucs): Add autoload
+	cookie.
+	(ideographic-structure-convert-to-daikanwa): Likewise.
+
+	* csv.el (csv-parse-string): Add autoload cookie.
+
+2001-12-14  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* TOMOYO-ELS (tomoyo-modules-to-compile): Add `idc'.
+
+	* idc.el: New file.
+
+2001-12-14  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* Makefile, TOMOYO-CFG, TOMOYO-ELS, TOMOYO-MK, csv.el,
+	idc-util.el: New files.
+
+2001-07-31  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* check-mule.el (mule-charset-mapping-table-alist): New constant.
+	(mule-charset-http-url-root): New variable.
+	(mule-charset-url-to-filename): New function.
+	(mule-charset-maybe-retrieve-url): New function.
+	(mule-charset-check-mapping): New function.
+
+2001-07-31  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* ideo-dump.el: Call `update-ideograph-radical-table'.
+
+2001-07-31  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* ideo-dump.el (char-dump-target-directory): New variable.
+
+2001-07-30  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* check-mule.el: New file.
+
+2001-07-29  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* non-ideo-dump.el: New file.
+
+2000-11-24  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* ideo-dump.el: New file.

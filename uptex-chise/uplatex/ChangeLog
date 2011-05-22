@@ -1,0 +1,93 @@
+2010-01-22  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chiseotf.sty (ucssip): New KanjiFamily and FontShape.
+	(urui6): Use JY2.
+	(\ThaiTIS): Use "{...}" to omit settlement code to reselect T1
+	encoding.
+	(\CyrillicScript): Likewise.
+	(\GreekScript): Likewise.
+	(\Hook): New command.
+	(\Horn): New command.
+	(\LATINeng): New command.
+	(\IPAepsilon): New command.
+	(\IPAiota): New command.
+	(\IPArevfishhookr): New command.
+
+2009-01-29  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chiseotf.sty (\CyrillicScript): New command.
+	(\GreekScript): New command.
+
+2008-01-24  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chiseotf.sty: Modify for OTF package on upLaTeX:
+	- Use \otf@JYn instead of JY1.
+	- Use \otf@JTn instead of JT1.
+	(\GTpj[A-M]): Use ugt{01..13} instead of gto{01..13}.
+	(\ThaiTIS): New command.
+
+2008-01-23  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* extaccent.sty (\umacron): Add setting for T1 encoding.
+	(\CircGrave): Likewise.
+	(\CircAcute): Likewise.
+	(\CircMacron): Likewise.
+	(\CircTilde): Likewise.
+	(\CircHook): Likewise.
+	(\Circudot): Likewise.
+	(\HornAcute): Likewise.
+	(\HornTilde): Likewise.
+
+2007-01-24  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* extaccent.sty (\ucirc): Fix typo.
+	(\CircGrave): New command.
+	(\CircAcute): New command.
+	(\CircMacron): New command.
+	(\CircTilde): New command.
+	(\CircHook): New command.
+	(\Circudot): New command.
+	(\HornAcute): New command.
+
+2007-01-23  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chiseotf.sty (\GTpj[A-M]): Use \char\jis"#1 instead of \char"#1.
+
+2007-01-23  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chiseotf.sty (\AdobeJP): New command.
+
+2006-03-30  Izumi MIYAZAKI    <imiyazaki@bun.kyoto-u.ac.jp>
+
+	* chiseotf.sty: add support for gt-pj-11 and gt-pj-12.
+
+2006-03-29  Izumi MIYAZAKI    <imiyazaki@bun.kyoto-u.ac.jp>
+
+	* chiseotf.sty: fix bug of chisesub gothic.
+	add support Ruimoku, Hanziku and CDP.
+
+2004-09-02  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chiseotf.sty: Fix settings for gto{01, 03 ... 11}.
+	(jisgb): New KanjiFamily and FontShape.
+	(\UCSgb): New macro.
+	(\UCSjis): New macro.
+	(\song): New macro.
+
+2003-11-26  Izumi MIYAZAKI    <imiyazaki@bun.kyoto-u.ac.jp>
+
+	* chiseotf.sty: fix comment.
+
+2003-10-22  Izumi MIYAZAKI    <imiyazaki@bun.kyoto-u.ac.jp>
+
+	* chiseotf.sty: add IDC shorthand.
+
+2003-10-16  Izumi MIYAZAKI    <imiyazaki@bun.kyoto-u.ac.jp>
+
+	* chiseotf.sty: correct typo in ProvidePackage.
+
+	* extaccent.sty: created.
+
+2003-10-04  Izumi MIYAZAKI    <imiyazaki@bun.kyoto-u.ac.jp>
+
+	* chiseotf.sty: created.

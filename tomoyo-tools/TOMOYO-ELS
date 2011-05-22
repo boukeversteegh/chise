@@ -1,0 +1,17 @@
+;;; -*-Emacs-Lisp-*-
+
+;; TOMOYO-ELS: list of TOMOYO modules to install
+
+;;; Code:
+
+(setq tomoyo-modules-to-compile
+      '(ideo-trans
+	csv char-db-dump dump-tables
+	conv-util))
+
+(setq tomoyo-modules-not-to-compile nil)
+
+(setq tomoyo-modules (append tomoyo-modules-to-compile
+			     tomoyo-modules-not-to-compile))
+
+;;; TOMOYO-ELS ends here

@@ -1,0 +1,409 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Ruby/CHISE</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+<div class="main">
+
+<div class="adminmenu">
+<a href="index.html.ja">Japanese</a>/<a href="index.html.en">English</a>
+</div>
+
+<h1>Ruby/CHISE</h1>
+
+<div class="day">
+<h2><a href="#about" name="about">&#x25a0;</a>What's Ruby/CHISE?</h2>
+<div class="body">
+<div class="section">
+<p>Ruby/CHISE is a implementation of Chaon model.
+
+<h3>What's Chaon model?</h3>
+<p>Chan model means a model that uses a character as a bundle of
+features not code point.
+<p>Ruby/CHISE extend the model and use a character as a object.
+</div>
+</div>
+</div>
+
+<div class="day">
+<h2><a href="#download" name="download">&#x25a0;</a>download</h2>
+<div class="body">
+<div class="section">
+<h3>new</h3>
+<ul>
+<li><a href="http://eto.com/2003/ruby/ruby-chise-0.2.tar.gz">ruby-chise-0.2.tar.gz</a>
+</ul>
+
+<h3>CHISE Character database</h3>
+<p>You should have CHISE Character database to use Ruby/CHISE.
+The CHISE Character database is distributed with XEmacs CHISE.
+For your convenience, I provide a CHISE Chacater database tarball.
+
+<ul>
+<li>2003-11-04 : <a href="http://eto.com/2003/ruby/char-db.tar.gz">char-db.tar.gz</a> for Windows<br>
+Build XEmacs CHISE on GNU/Linux, use "make-chisedb-tarball.rb" to make tarball.
+<li>2003-11-04 : <a href="http://eto.com/2003/ruby/char-db-linux.tar.bz2">char-db-linux.tar.bz2</a> for Linux<br>
+make a tarball under "/usr/local/lib/xemacs-21.4.12/i686-pc-linux/char-db"
+</ul>
+
+<h3>CVS access</h3>
+<p>You can access the CVS tree.
+<ul>
+<li><a href="http://cvs.m17n.org/cgi-bin/viewcvs/ruby/?cvsroot=chise">CVS access</a>
+</ul>
+
+<h3>license</h3>
+<p>This software is released under GPL．See COPYING.</p>
+
+</div>
+</div>
+</div>
+
+<div class="day">
+<h2><a href="#install" name="install">&#x25a0;</a>install</h2>
+<div class="body">
+<div class="section">
+
+<p>move the direcotory "chise" to somewhere.<br>
+eg.
+<pre>
+# mv chise /usr/local/lib/ruby/site_ruby/1.8
+</pre>
+<p>Usually，it'll be on <em>/usr/local/lib/ruby/site_ruby/</em>.
+
+<p>Cd to "ext", input like this.
+<pre>
+% ruby extconf.rb
+% make
+# make install
+</pre>
+<p>Ruby/CHISE fully functional without C extention.
+If you have it, it works faster.
+
+<h3>config</h3>
+<p>In <em>chise/config.rb</em> and <em>ext/config.h</em>,
+<p><em>DB_DIR = '/usr/local/lib/xemacs-21.4.10/i686-pc-linux/char-db'</em><br>
+change these lines.
+<p><em>IDS_DB_DIR = '/home/eto/work/chise/ids/''</em><br>
+Store IDS Text database files here. (see below "ids" section.)
+
+<h3>dependency</h3>
+<p>You need followings.
+<ul>
+<li><a href="http://www.sleepycat.com/">db3-3.2.9</a> or higher.
+<li><a href="http://www.ruby-lang.org/~eban/ruby/binaries/mingw/ext/">bdb-0.5.0</a> or higher.
+<li><a href="http://www.ruby-lang.org/ja/">ruby 1.8.1</a> or higher.
+</ul>  
+<p>You can find Ruby package by <a href="http://www.ruby-lang.org/raa/"><em>RAA</em></a>.
+
+<h3>Unicode</h3>
+<p>Currentle, you should use utf-8 as a charset when using Ruby/CHISE.
+<p>You can use a editor "Meadow + Mule-UCS" to use Unicode on Windows.
+<p>There are some other free editor.
+<ul>
+<li><a href="http://members.tripod.co.jp/sakura_editor/">Sakura editor</a>
+<li>Notepad.
+<li>IE (to see)
+</ul>
+</div>
+</div>
+</div>
+
+<div class="day">
+<h2><a href="#howto" name="howto">&#x25a0;</a>How to</h2>
+<div class="body">
+<div class="section">
+
+<h3>Basic</h3>
+<pre>
+require "chise"
+
+str = "字"		# extends String. use UTF-8 as charset.
+p str.ucs		# show the code_point in UCS.
+p str.total_strokes	# show the total strokes.
+p str.gb2312		# etc.
+str.each_feature {|f, v|	# show the all features.
+  print f, ": ", v, "\n"
+}
+</pre>
+
+</div>
+</div>
+</div>
+
+<div class="day">
+<h2><a href="#ids" name="ids">&#x25a0;</a>Ideographics Structure</h2>
+<div class="body">
+<div class="section">
+<p>I designed Ruby/CHISE for use ideographic structure of Kanji character.
+<p>Ruby/CHISE uses IDS (Ideographic Description Structure) to describe
+the ideographics structure.  This is a specification in Unicode.
+Start sequence with IDC(Ideographic Description Characters) (U+2FF0 to
+U+2FFB) that specify the connection of the parts.  Followin two or
+three characters are composed.
+
+<h3>preparation to use IDS</h3>
+
+<p>get IDS Text database by following,
+<pre><small>% cd ~/work/chise (change as your environment)
+% cvs -d :pserver:anonymous@cvs.m17n.org:/cvs/root login
+password: (just hit return again)
+
+% cvs -d :pserver:anonymous@cvs.m17n.org:/cvs/chise co -d ids ids
+</small></pre>
+
+<p>Then, change the line in <em>chise/config.rb</em>.
+<em>IDS_DB_DIR = '/home/eto/work/chise/ids/''</em><br>
+Input the direcoty here.
+
+After setting <em>IDS_DB_DIR</em>, run this line.
+<em>./tools/idsdbdumpall.rb</em> (takes time a lot.)
+Then, you'll have a feature like ids.
+
+<h3>Decompose</h3>
+<p>There are two methods String#decompose, String#decompose_all.
+String#decompose decmopose one level.
+String#decompose_all decompose recursively.
+
+<pre>
+p "字".decompose
+p "字".decompose_all
+p "榊".decompose
+p "榊".decompose_all
+p "終了".decompose
+p "終了".decompose_all
+p "鬱".decompose
+p "鬱".decompose_all
+</pre>
+
+<p>The result is a IDS.
+Many environment can not show IDC correctly.
+You can see it with IE.
+
+<h3>Compose</h3>
+<p>Use String#compose.
+<pre>
+p "&#x2ff0;木木".compose	# 林
+</pre>
+
+<p>You can find characters by using String#find method.
+<pre>
+p "日雲".find
+</pre>
+<p>Output is a string of characters that contains "日" and "雲".
+</div>
+</div>
+</div>
+
+<div class="day">
+<h2><a href="#usage" name="usage">&#x25a0;</a>usage</h2>
+<div class="body">
+<div class="section">
+<p>Please see test case to usage.
+<pre>
+class String
+	char	convert it as Characgter.
+
+class Character
+	[]	get a feature.
+		return nil if there is no such features.
+	[]=	set a feature.
+</pre>
+
+<h3>tools</h3>
+<dl>
+<dt>define-kanji-meaning.rb
+<dd>add new features about the meaning of Kanji Character in IDS.
+<dt>dump-database.rb
+<dd>This tool dumps all data of the database to text files. You can see the inside of the database.
+<dt>make-chisedb-tarball.rb
+<dd>
+<pre>
+Usage: make-chisedb-tarball.rb &lt;directory of XEmacs CHISE&gt; &lt;tmp dir&gt;
+</pre>
+<pre><small>example.
+ % ./make-chisedb-tarball.rb /usr/local/lib/xemacs-21.4.14/i686-pc-linux
+</small></pre>
+
+This makes a tarball (chise-db.tar.gz) of the Chise Character DataBase
+files.  Set a directory that contains "chise-db" directory to the
+first argument.  You can input the temp directory to the second arg.
+(default value: /var/tmp)
+
+This tools also rename the characters that contains Windows forbidden
+characters.
+
+Please use <a href="http://member.nifty.ne.jp/beambitious/">eo</a> to
+extract the tarball on Windows.
+
+<dt>make-ids-database.rb
+<dd>This tool read all of the IDS Text database, and store them as features.
+This tool take time a lot.
+
+<dt>move-obsolete-files.rb
+<dd>There are some obsolete features.  This tool moves the obsolete files
+to anothre directory.
+
+<dt>rename-files.rb
+<dd>Currently, the directory tree of XEmacs CHISE and the requirement of
+libchise is not same.  This tool renames the old files trees to the
+new file trees.
+
+<dt>trim_bom.rb
+<dd>This tool remove a BOM (Byte Order Mark) in the head of file.
+
+</dl>
+</div>
+</div>
+</div>
+
+<div class="day">
+<h2><a href="#description" name="description">&#x25a0;</a>description of each library</h2>
+<div class="body">
+<div class="section">
+
+<ul>
+
+<li>ext/*<br>
+Extension using libchise by C.
+
+<li>network.rb, makegraph.rb, graphviz.rb, defkanji.rb, kanjilist.rb<br>
+Calculate the network of Kanji characters.
+Make a graph by Graphiviz.
+<pre>
+ruby makegraph.rb
+</pre>
+<p>You need Graphviz.  Output is "min.svg".
+
+<pre>
+ruby defkanji.rb
+</pre>
+<p>define the meaning under ideographics of Kanji characters.
+
+<li>stroke.rb, kage.rb, kageserver.rb, csf.rb<br>
+Libraries to use StrokeFont.
+You can use two system, KAGE by Koichi Kamichi and CSF by Saka Naozumi.
+You need fonr files.<br>
+change the line in <tt>csf.rb</tt>, <tt>CSF_FONT_DIR = 'd:/work/chise/csf/'</tt>.
+<p>You need sgl (my own graphic library) to use this. sgl is not published yet.
+
+<pre>
+ruby stroke.rb
+</pre>
+<p>Show a code table and you can see the character.
+
+<ul>
+<li><a href="http://www.fonts.jp/">www.fonts.jp</a>
+<li><a href="http://web.sfc.keio.ac.jp/~kamichi/kage/kage.html">KAGE model</a>
+<li><a href="http://www.vector.co.jp/soft/win95/writing/se256880.html">KST32ZX</a>, Zhuanwen-Like Kanji StrokeFont(KST)
+<li><a href="http://www.vector.co.jp/soft/data/writing/se119277.html">KST32A</a>, Very compact JIS X 0208 Kanji (with no-Kanji) Stroke Table.
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+
+<div class="day">
+<h2><a href="#discussion" name="discussion">&#x25a0;</a>discussion</h2>
+<div class="body">
+<div class="section">
+<p>
+<h3>compatibility with Ruby/M17N</h3>
+<p>How to make it compatible with Ruby/M17N.
+<ul>
+<li><a href="http://www.inac.co.jp/~maki/ruby/ruby-i18n.html">M17N/I18N for Ruby</a>
+<li><a href="http://www.inac.co.jp/~maki/ruby/matz-000516.html">a comment for I18N by Matz (2000/05/16)</a>
+<li><a href="http://ns1.php.gr.jp/pipermail/php-dev/2002-April/000274.html">description about Ruby M17N by Masayoshi Takahashi.</a>
+<li><a href="http://cvs.ruby-lang.org/~knu/cgi-bin/cvsweb.cgi/ruby/?only_with_tag=ruby_m17n">Ruby/M17N</a>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div class="day">
+<h2><a href="#links" name="links">&#x25a0;</a>links</h2>
+<div class="body">
+<div class="section">
+
+<p>
+<h3>CHISE project</h3>
+<ul>
+<li><a href="http://cvs.m17n.org/chise/">CHISE project</a>
+(<a href="http://www.kanji.zinbun.kyoto-u.ac.jp/projects/chise/">kyoto-u</a>,
+<a href="http://mousai.as.wakwak.ne.jp/projects/chise/">mousai</a>)
+<li><a href="http://eto.com/2003/ruby/">Ruby/CHISE</a>
+<li><a href="http://cvs.m17n.org/chise/ruby/index.html.ja.iso-2022-jp">Ruby/CHISE page at CHISE project</a>
+<li><a href="http://cvs.m17n.org/cgi-bin/viewcvs/perl/?cvsroot=chise">Perl/CHISE by Moro Shigeki</a>
+</ul>
+
+<h3>Ruby</h3>
+<ul>
+<li><a href="http://www.ruby-lang.org/ja/">Ruby</a>
+<li><a href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-dev/11450">a proposal of Ruby/UTF-2000 by akr</a>
+<li><a href="http://moulon.inra.fr/ruby/bdb.html">Ruby/BDB</a>
+<li><a href="http://www.ruby-lang.org/~eban/ruby/binaries/mingw/ext/">Extension libraried compiled by eban</a>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="day">
+<h2><a href="#history" name="history">&#x25a0;</a>history</h2>
+<div class="body">
+<div class="section">
+<ul>
+<li>2003-0110	: Test
+<li>2003-0112	: add XString
+<li>2003-0115	: add reading IDS Text DB
+<li>2003-0116	: IDS Text DB 1.0
+<li>2003-0117	: remove XString, move the methods to String. read more IDS Text DB.
+<li>2003-0120	: add IDS_Tree.  check integrity of IDS Tree structure.
+<li>2003-0130	: add reverse translation of IDS.
+<li>2003-0213	: <a href="http://eto.com/2003/ruby/ruby-chise-20030213.tar.bz2">ruby-chise-20030213.tar.bz2</a><br>
+change the name to Ruby/CHISE from Ruby/UTF-2000.
+<li>2003-0312	: <a href="http://eto.com/2003/ruby/ruby-chise-20030312.tar.bz2">ruby-chise-20030312.tar.bz2</a><br>
+add some libraries.
+<li>2003-1004	: <a href="http://eto.com/2003/ruby/ruby-chise-20031004.tar.bz2">ruby-chise-20031004.tar.bz2</a><br>
+change feature names.  add Copyright notice.
+<li>2003-10-31	: presentation at <a href="http://lc.linux.or.jp/lc2003/">LC2003</a>.
+<li>2003-1110	: <a href="http://eto.com/2003/ruby/ruby-chise-20031110.tar.bz2">ruby-chise-20031110.tar.bz2</a><br>
+change directory structure to "chise/*.rb".  add installer.
+<li>2004-07-08	: <a href="http://eto.com/2003/ruby/ruby-chise-0.2.tar.gz">ruby-chise-0.2.targz</a><br>
+add libchise extension. make many changes.
+</ul>
+</div>
+</div>
+</div>
+
+<div class="sidebar">
+<h2>menu</h2>
+<ul>
+<li><a href="#about">about</a>
+<li><a href="#download">download</a>
+<li><a href="#install">install</a>
+<li><a href="#howto">howto</a>
+<li><a href="#ids">ids</a>
+<li><a href="#usage">usage</a>
+<li><a href="#description">description</a>
+<li><a href="#discussion">discussion</a>
+<li><a href="#links">links</a>
+<li><a href="#history">history</a>
+</ul>
+</div>
+
+<div class="footer">
+<address>author: <a href="http://eto.com/">Kouichirou Eto</a></address>
+</div>
+
+</div>
+</div>
+
+</body>
+</html>

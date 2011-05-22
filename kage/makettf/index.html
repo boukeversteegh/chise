@@ -1,0 +1,62 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="http://fonts.jp/green.css">
+<html>
+<head>
+<title>TTF(TrueType)フォント生成 (試作その2)</title>
+</head>
+<body>
+<div class="main">
+<h1>TTF(TrueType)フォント生成</h1>
+
+<form action="makettf.cgi" method="POST">
+フォント名(英語)：<input type="text" name="fontname-en" value="Test" size="20"><br>
+フォント名(漢字)：<input type="text" name="fontname-ja" value="テスト" size="20"><br>
+部品データ<br>
+<textarea wrap="off" name="partsdata" cols="80" rows="10">30A8 2:7:8:66:2:95:16:110:33$1:0:2:28:56:102:56$1:22:4:103:56:103:196$1:0:2:3:92:66:92$2:22:7:66:92:48:146:1:178$2:0:7:186:66:163:89:125:112$2:7:0:107:60:130:144:196:182
+一 2:7:8:66:2:95:16:110:33$1:0:2:28:56:102:56$1:22:4:103:56:103:196$1:0:2:3:92:66:92$2:22:7:66:92:48:146:1:178$2:0:7:186:66:163:89:125:112$2:7:0:107:60:130:144:196:182
+</textarea>
+<br>
+<input type="submit" value="生成">
+</form>
+
+<p><a href="checkdata.html">データのチェックを行う</a></p>
+
+<h2>説明</h2>
+
+<p>部品データは 1部品ごとに1行 で、「部品名、スペース、部品データ」の順に記述します。<br>
+実際に生成されるコードポイントは、部品名が「単独の文字」「[単独の文字]」「コードポイント16進数(頭にUu,+-を付けても可)」のいずれかとなります。<br>
+「:」の含まれない行はコメントとして、無視されます。コードポイントは現在はUCSにのみ対応しています。</p>
+
+<p>コードポイント指定例
+<ul>
+<li>30A8</li>
+<li>U+30A8</li>
+<li>u30a8</li>
+<li>u-00020000</li>
+<li>一</li>
+<li>[壱]</li>
+</ul></p>
+
+<p>「生成」ボタンをクリックするとフォントの生成が始まり、フォントをダウンロードするためのリンクが表示されます。データ量によって時間がかかりますので、しばらくお待ちください。生成されたフォントは不定期に削除されます（または別のデータに変更されます）ので早めにダウンロードしてください。
+
+<h2>注意</h2>
+
+<p>TrueTypeフォントを生成するソフトウェア Fontforge の制約により、以下の条件を満たさない場合には、生成したフォントを Microsoft Word 2002 で利用できません。</p>
+
+<dl>
+<dt>日本語フォント</dt><dd>U+30A8「（カタカナ）エ」を含めてください</dd>
+<dt>簡体字中国語フォント</dt><dd>U+3105「ボポモフォB」を含めてください</dd>
+<dt>繁体字中国語フォント</dt><dd>U+592E「央」を含めてください</dd>
+<dt>韓国語フォント</dt><dd>U+3131「ハングル字母1番目」を含めてください</dd>
+</dl>
+
+<a href="http://fonts.jp/makettf/">戻る</a>
+
+<hr class="footer">
+fonts.jp
+</div>
+</body>
+</html>

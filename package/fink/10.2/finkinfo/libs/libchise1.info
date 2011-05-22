@@ -1,0 +1,48 @@
+Package: libchise1
+Version: 0.3.0
+Revision: 1
+Maintainer: MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+Source: http://www.jokoji.jp/chise/libchise-%v.tar.gz
+Source-MD5: c83b6af00ff440b1e57fe04233dcc70c
+#
+BuildDepends: db3
+Depends: %N-shlibs (= %v-%r), db3-shlibs
+Conflicts: libchise, libchise0
+Replaces: libchise, libchise0
+#PatchScript: <<
+# sed 's|@PREFIX@|%p|g' <%a/%n.patch | patch -p1
+#<<
+#ConfigureParams: --prefix=/sw
+CompileScript: <<
+./configure --prefix=/sw
+make prefix=/sw
+<<
+InstallScript: <<
+mkdir -p %i/include
+mkdir -p %i/lib
+make  prefix=%i install
+<<
+Splitoff: <<
+ Package: %N-shlibs
+ Replaces: %N (<< %v-%r), libchise0-shlibs
+ Description: shared libraries for libchise
+ Files: lib/libchise.1.1.0.dylib lib/libchise.1.dylib lib/libchise.dylib
+ Shlibs: %p/lib/libchise.1.1.0.dylib 1.1.0 %n (>= %v-%r)
+ DocFiles: ChangeLog
+<<
+Splitoff2: <<
+ Package: %N-dev
+ Replaces: %N (<< %v-%r), libchise0-dev 
+ Description: headers and static libraries for libchise
+ Files: include/chise.h include/chise-name.h lib/libchise.a
+ DocFiles: ChangeLog
+<<
+DocFiles: ChangeLog sample.c
+#
+Description: CHISE library
+DescDetail: <<
+libchise provides the interface of CHISE. It was written by
+Tomohiko Morioka.
+<<
+Homepage: http://www.kanji.zinbun.kyoto-u.ac.jp/projects/chise/
+License: GPL

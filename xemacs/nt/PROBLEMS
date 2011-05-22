@@ -1,0 +1,177 @@
+                                                  -*- mode:outline -*-
+
+This file describes various problems that have been encountered in
+running XEmacs on Windows 95, 98 and NT. It has been updated for
+XEmacs 21.0.
+
+This is the first release of XEmacs on Windows. In testing it has
+proved to be extremely stable in general use (but see the gnus and
+subprocess problems below), but not all features or packages work
+correctly yet.
+
+Use `C-c C-f' to move to the next equal level of outline, and
+`C-c C-b' to move to previous equal level.  `C-h m' will give more
+info about the Outline mode.
+
+Also, Try finding the things you need using one of the search commands
+XEmacs provides (e.g. `C-s').
+
+General advice:
+    Remember your .emacs file! ~\.emacs is your Emacs init file.  If
+    you observe strange problems, invoke XEmacs with the `-q' option
+    and see if you can repeat the problem.
+
+
+* Problems with running XEmacs
+==============================
+** Conflicts with FSF NTEmacs
+
+Depending on how it is installed, FSF NTEmacs may setup various EMACS*
+variables in your environment. The presence of these variables may
+cause XEmacs to fail at startup, cause you to see corrupted
+doc-strings, or cause other random problems.
+
+You should remove these variables from your environment. These
+variables are not required to run FSF NTEmacs if you start it by
+running emacs.bat.
+
+** XEmacs can't find my .emacs file
+
+XEmacs looks for your .emacs in your "home" directory. XEmacs decides
+that your "home" directory is, in order of preference:
+	
+- The value of the HOME environment variable, if the variable exists.
+- The value of the HOMEDRIVE and HOMEPATH environment variables, if
+  these variables both exist.
+- The directory that XEmacs was started from.
+
+** XEmacs can't find any packages
+
+XEmacs looks for your packages in subdirectories of a directory which
+is set at compile-time, and defaults to C:\Program Files\XEmacs. The
+variable configure-package-path holds the actual path that was
+compiled into your copy of XEmacs.
+
+The compile-time default location can be overridden by the
+EMACSPACKAGEPATH environment variable or by the
+SOFTWARE\GNU\XEmacs\EMACSPACKAGEPATH registry entry. You should check
+that these variables, if they exist, point to the actual location of
+your package tree.
+
+** XEmacs sometimes crashes when using gnus
+
+This is a known bug in this release of XEmacs on Windows.
+
+If you want to use gnus anyway, you should minimize any possible data
+loss by saving any modified buffers before you start and ensuring that
+you haven't set gnus-use-dribble-file to nil or disabled the normal
+XEmacs auto-save mechanism.
+
+** XEmacs doesn't die when shutting down Windows 95 or 98
+
+When shutting down Windows 95 or 98 you may see a dialog that says
+  "xemacs / You must quit this program before you quit Windows".
+It is safe to
+  "Click OK to quit the program and Windows",
+but you won't be offered a chance to save any modified XEmacs buffers.
+
+* Look and feel
+===============
+** Key bindings
+
+The C-z, C-x, C-c, and C-v keystrokes have traditional uses in both
+emacs and Windows programs. XEmacs binds these keys to their
+traditional emacs uses, and provides Windows 3.x style bindings for
+the Cut, Copy and Paste functions.
+
+	Function	XEmacs binding
+	--------	--------------
+	Undo		C-_
+	Cut		Sh-Del
+ 	Copy		C-Insert
+	Paste		Sh-Insert
+
+You can rebind keys to make XEmacs more Windows-compatible; for
+example, to bind C-z to undo:
+
+       (global-set-key [(control z)] 'undo)
+
+Rebindind C-x and C-c is trickier because by default these are prefix
+keys in XEmacs. See the "Key Bindings" node in the XEmacs manual.
+
+** Behavior of selected regions
+
+Selected regions behave differently in XEmacs from typical Windows
+programs. The pc-select package provides various functions to enable
+the standard Windows behavior for selected regions (eg mark via
+shift-arrow, self-inserting deletes region, etc).
+
+** Limitations on the use of the AltGr key.
+
+In some locale and OS combinations you can't generate M-AltGr-key or
+C-M-AltGr-key sequences at all.
+
+To generate C-AltGr-key or C-M-AltGr-key sequences you must use the
+right-hand Control key and you must press it *after* AltGr.
+
+These limitations arise from fundamental problems in the way that the
+win32 API reports AltGr key events. There isn't anything that XEmacs
+can do to work round these problems that it isn't already doing.
+
+You may want to create alternative bindings if any of the standard
+XEmacs bindings require you to use some combination of Control or Meta
+and AltGr.
+
+
+* Features not fully supported in this release
+==============================================
+** Limited support for subprocesses
+
+Attempting to use call-process to run a 16bit program gives a
+"Spawning child process: Exec format error". For example shell-command
+fails under Windows 95 and 98 if you use command.com or any other
+16bit program as your shell.
+
+XEmacs may incorrectly quote your call-process command if it contains
+double quotes, backslashes or spaces.
+
+start-process and functions that rely on it are supported under Windows 95,
+98 and NT. However, starting a 16bit program that requires keyboard input
+may cause XEmacs to hang or crash under Windows 95 and 98, and will leave
+the orphaned 16bit program consuming all available CPU time.
+
+Sending signals to subprocesses started by call-process or by
+start-process fails with a "Cannot send signal to process" error under
+Windows 95 and 98. As a side effect of this, quitting XEmacs while it
+is still running subprocesses causes it to crash under Windows 95 and
+98.
+
+** Changing fonts from the Options menu
+
+The "Font" and "Size" entries on the Options menu don't work yet. This
+will be fixed in a future release. In the meantime, you can either
+change face fonts with customize or manually; for example:
+
+    (set-face-font 'default "Lucida Console:Regular:10::Western")
+    (set-face-font 'modeline "MS Sans Serif:Regular:10::Western")
+
+Font weight and style and character set must be supplied in English as
+above. Common weights and styles are "Regular", "Regular Italic",
+"Bold" and "Bold Italic". Common character sets are "Western",
+"Central European" and "OEM/DOS".
+
+Windows 95 only comes with one fixed-width font that is suitable for
+use by XEmacs, namely "Courier New".
+
+** No MULE support
+
+This release of XEmacs on Windows does not contain MULE support. MULE
+support has not been a priority for the XEmacs on Windows developers.
+
+** Printing
+
+This release of XEmacs on Windows does not support printing natively.
+
+You can use the lpr-command and lpr-switches variables to specify an
+external print program.
+

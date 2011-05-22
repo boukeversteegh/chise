@@ -1,0 +1,280 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>文字データベースに基づく文字表現モデル</TITLE>
+<META NAME="description" CONTENT="文字データベースに基づく文字表現モデル">
+<META NAME="keywords" CONTENT="main">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=euc-jp">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="main.css">
+
+<LINK REL="next" HREF="node3.html">
+<LINK REL="previous" HREF="node1.html">
+<LINK REL="up" HREF="main.html">
+<LINK REL="next" HREF="node3.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html58"
+  HREF="node3.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html56"
+  HREF="main.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html50"
+  HREF="node1.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html59"
+  HREF="node3.html">文字データベースに基づく文書編集系</A>
+<B> Up:</B> <A NAME="tex2html57"
+  HREF="main.html">2001年度未踏ソフトウェア創造事業 文字データベースに基づく 文字オブジェクト技術の構築 （契約番号</A>
+<B> Previous:</B> <A NAME="tex2html51"
+  HREF="node1.html">目的</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html60"
+  HREF="#SECTION00210000000000000000">従来の文字表現の特徴と問題点</A>
+<LI><A NAME="tex2html61"
+  HREF="#SECTION00220000000000000000">符号化文字集合に依存しない文字表現へ</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00200000000000000000">
+文字データベースに基づく文字表現モデル</A>
+</H1>
+
+<P>
+
+<H1><A NAME="SECTION00210000000000000000">
+従来の文字表現の特徴と問題点</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00211000000000000000">
+符号化文字モデル</A>
+</H2>
+
+<P>
+現在、多くの文字処理系では、文字そのものを扱う代わりに、文字に固有の番
+号を振って、その番号で文字を表す手法を用いている。ここで、文字と番号の
+対応規則を「符号化文字集合」(Coded Character Set; CCS) もしくは「文字
+符号」(character code) と呼び、文字に振られた番号を「符号位置」(code
+point) と呼ぶ。また、このように、有限の文字の集合を定め、各文字に固有
+の番号を振りその番号で文字を表現する手法のことを、ここでは『符号化文字
+モデル』と呼ぶことにする。
+
+<P>
+
+<P></P>
+<DIV ALIGN="CENTER"><A NAME="fig:coded-char-model"></A><A NAME="98"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 2.1:</STRONG>
+符号化文字モデルの概念図</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ $\scalebox{0.5}{\includegraphics*[0mm,15mm][300mm,155mm]{char-code.eps}}$
+ -->
+<IMG
+ WIDTH="609" HEIGHT="318" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.png"
+ ALT="\scalebox{0.5}{\includegraphics*[0mm,15mm][300mm,155mm]{char-code.eps}}">
+    <BR>    
+</DIV></TD></TR>
+</TABLE>
+</DIV><P></P>
+
+<P>
+図 <A HREF="node2.html#fig:coded-char-model">2.1.1</A>に示すように、符号化文字モデルでは文字は
+文字に振られた番号で表現される。文字に関する知識は符号化文字集合の定義
+の中に存在し、通常、計算機の中には存在しない。このため、計算機は少ない
+記憶量で文字を表現できる半面、計算機が扱うことができる文字の種類や文字
+の概念は符号化文字集合の定義に束縛される。
+
+<P>
+符号化文字モデルに基づいて通信を行なう場合、送信者と受信者は文字と番号
+の対応規則である文字符号を共有している必要がある。さもなくば文字化けが
+生じる。ある文字符合で表現できない文字が存在した場合、両者が合意して通
+信手順で用いる文字符合を拡張しなければならない。しかし、インターネット
+のような不特定多数が参加しさまざまな種類の機材が存在するような大規模開
+放システムで用いられる標準的な文字符合を拡張することは極めて困難である
+といえる。
+
+<P>
+このため、現実的な方策として、従来、交換可能性をあきらめて外字を用いる
+方法や、検索などの符号化文字としての利便性をあきらめて画像を用いる方法
+が採られてきた。また、国際的な標準符合として ISO/IEC 10646
+(UCS)/Unicode を de jure/de fact standard として制定し、これを全世界で
+共有し、また、これを拡張することによりこの問題を解決しようとする努力が
+続けられているが、これにも技術的・政治的問題があり容易ではない。
+<A NAME="tex2html2"
+  HREF="footnode.html#foot102"><SUP><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="/usr/share/latex2html/icons/footnote.png"></SUP></A>
+<P>
+
+<H2><A NAME="SECTION00212000000000000000">
+符合拡張法 ― Mule 方式</A>
+</H2>
+
+<P>
+前述のように、符号化文字モデルでは、「世の中に存在するさまざまな文字」
+と「符号化され符号位置という番号を振られた文字」の間の関係は、符号化文
+字集合によって定義されている。この考え方では、文字の持ついろいろな性質
+は個々の文字ではなく符号化文字集合が持つことを前提としている。また、さ
+らに、それぞれの符号化文字集合が似た性質の文字の集合であり、特定の用字
+系  (script)  や言語で用いる文字の集合であると仮定できるならば、符号化
+文字集合の種類を特定することにより、用字系や言語を特定できるといえる。
+
+<P>
+この仮定がなりたっていれば、個々の符号化文字集合は用字系や言語を近似す
+るものとして用いることができ、少ない記憶容量で大量の文字を扱うことがで
+きる。UCS/Unicode のような多数の言語を対象に多数の用字系を収録した符号
+化文字集合が利用されるようになるまでは、単一の言語や用字系を想定して作
+られていた符号化文字集合が多く、この前提はほぼ満たされていた。
+
+<P>
+このような仮定を前提に符号化文字集合を追加可能にしたシステムとして 
+Mule [<A
+ HREF="node7.html#Mule">3</A>] が存在する。<A NAME="tex2html3"
+  HREF="footnode.html#foot124"><SUP><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="/usr/share/latex2html/icons/footnote.png"></SUP></A>
+<P>
+しかし、多くの符号化文字集合は通常の文字だけでなく、句読点のような記号
+を含んでおり、また、JIS X 0208 のように複数の用字系を含むような符号化
+文字集合や ISO 8859-1 のように複数の言語で利用される符号化文字集合も多
+く存在したので、当初からこれはあくまで近似に過ぎなかった。
+逆に、同一の文字でも、符号化文字集合が異なれば違う文字として扱われてし
+まう。例えば、ISO 8859-1 の「&#225;」と ISO 8859-2 の「&#225;」や JIS X
+0208:1978 の「あ」と JIS X 0208:1983 の「あ」は別の文字とされる。これ
+では、検索や文字の性質を定義する上で問題がおこる。西欧と東欧のように、
+伝統的には異なる符号化文字集合を使ってきており、近年交流が盛んになりつ
+つあるような環境では、特に不便である。
+
+<P>
+文字の重なりがほとんどないことを前提としている従来の Mule 型の文字表現
+方法は、記憶資源が高価であった時代には一種の近似解として効果的であった。
+しかし記憶資源が比較的豊富になりつつある現在、その利点よりも弊害が多く
+なってきた。より高度な文字処理やより柔軟な拡張可能性を実現するためにも、
+また、現在利用されているさまざまな符号化文字集合をより適切に利用するた
+めにも、著者らは従来の Mule の方式に代わる新たな文字表現の仕組みを実現
+することをめざしている。
+
+<P>
+
+<H1><A NAME="SECTION00220000000000000000"></A>
+<A NAME="sec:utf-2000-model"></A>
+<BR>
+符号化文字集合に依存しない文字表現へ
+</H1>
+
+<P>
+符号化文字モデルに基づかずに文字を表現すること、すなわち、固有の番号で
+同定することなしに文字を指し示そうとするとしたら、どうすれば良いだろう
+か？ おそらくその一つの方法は指し示したい文字の性質を列挙することだろ
+う。例えば、「あ」を指し示すとするならば<DL>
+<DT><STRONG>用字系</STRONG></DT>
+<DD>ひらがな
+  
+</DD>
+<DT><STRONG>音価</STRONG></DT>
+<DD>/a/
+  
+</DD>
+</DL>
+のようにすればよいだろう。<A NAME="tex2html4"
+  HREF="footnode.html#foot114"><SUP><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="/usr/share/latex2html/icons/footnote.png"></SUP></A> 漢字の場合には、発
+音だけでは不十分である。例えば、「字」を指し示したい時に<DL>
+<DT><STRONG>用字系</STRONG></DT>
+<DD>漢字
+  
+</DD>
+<DT><STRONG>音</STRONG></DT>
+<DD>/じ/
+  
+</DD>
+</DL>
+とすれば、「字」以外にも「時」や「次」など /じ/ という音を持つ全ての漢
+字が含まれてしまう。総画数を付け<DL>
+<DT><STRONG>用字系</STRONG></DT>
+<DD>漢字
+  
+</DD>
+<DT><STRONG>音</STRONG></DT>
+<DD>/じ/
+  
+</DD>
+<DT><STRONG>総画数</STRONG></DT>
+<DD>6
+  
+</DD>
+</DL>
+とすれば、「時」や「事」などは除外され、「字」や「次」や「耳」などの総
+画数が６画の /じ/ という音を持つ全ての漢字の集合に限定される。さらに部
+首「子」を指定すればさらに限定されていくだろうし、文字の構造「『宀』の
+下に『子』」を指定したり、字義を指定すればさらに限定されるだろう。
+
+<P>
+このように文字を属性の集合で表現することによって、符号化文字方式に依ら
+ずに文字（ないしは文字の集合）を表現することが可能である。また、指定す
+る属性を多くしたり少なくしたりすることによって、表現する文字の包摂規準
+を細かくしたり粗くしたりすることができる。
+
+<P>
+このような属性に基づく文字表現においては、文字の性質に関する情報は文字
+属性として文字表現自体に含まれている。よって、特定の処理に必要な情報は
+文字属性として文字表現に含めておかなければならない。例えば、表示を行なう
+には文字の字形を示す情報が必要である。逆に、表示という処理を行なわない
+ことを前提とした文字表現には、字形という属性は不要となる。
+
+<P>
+このように各文字をその文字が持つ属性の集合によって表現し、こうした文字
+の属性の集合をデータベース化し、それを参照しながら文字を処理する方式を
+ここでは『UTF-2000 方式』と呼ぶことにする。UTF-2000 方式は文字に関
+する知識を直接プログラムするのではなく、データベース化してそれを参照す
+る方法であるので、計算機が扱うことができる文字の種類や文字の概念は符号
+化文字集合の定義に束縛されない。使用する文字データベースを取り換えるこ
+とによって、容易に文字の種類や概念を変更可能である。このような高度な柔
+軟性を持つ半面、多数の文字を扱う場合、多量の記憶量が必要となると考えら
+れる。このため、文字データベースを柔軟性を損なうことなく効率的に扱うた
+めの機構が必要となる。
+
+<P>
+ところで、UTF-2000 方式自体は既存の符号化文字技術と対立するものではな
+い。符号化文字集合の種類と符号位置は文字属性の一つと捉えることは可能で
+あり、利用したい符号化文字集合を文字属性に含めることにより、それらの符
+号化文字集合の世界と情報交換を行なうことは可能である。
+
+<P>
+
+<P>
+<BR><HR>
+<ADDRESS>
+MORIOKA Tomohiko
+2002-02-15
+</ADDRESS>
+</BODY>
+</HTML>

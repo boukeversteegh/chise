@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+<head>
+<title>Perl/CHISE: CHaracter Information Service Environment</title>
+<link rel=stylesheet href="../chise.css" type="text/css">
+</head>
+<body>
+
+    <p>
+      [<a href="../index.html.ja.iso-2022-jp">CHISE</a>]
+      [<a href="../xemacs/index.html.ja.iso-2022-jp">XEmacs CHISE</a>]
+      [<a href="../ruby/index.html.ja.iso-2022-jp">Ruby/CHISE</a>]
+      [Perl/CHISE]
+      [<a href="../topicmaps/index.html.ja.iso-2022-jp">TopicMaps</a>]
+      [<a href="../ids/index.html.ja.iso-2022-jp">IDS</a>]
+      [<a href="../glyph/index.html.ja.iso-2022-jp">glyph</a>]
+      [<a href="../visualization/index.html.ja.iso-2022-jp">Visualization</a>]
+      [<a href="../omega/index.html.ja.iso-2022-jp">Ω</a>]
+    </p>
+
+<h1>
+<a href="../index.html.ja.iso-2022-jp">CHISE</a> / 
+<a name="ruby">Perl/CHISE</a>
+</h1>
+
+<hr>
+
+    <p>
+      CHISE 文字データベース（現状では <a href="../xemacs/">XEmacs CHISE</a> 用の
+      Berkeley DB 版文字データベース）を Perl からアクセスするモジュールを
+      開発しています。
+      現在、<a href="#chise">CHISE.pm</a> と <a href="#chise_reg">CHISE_REG.pm</a> の
+      2モジュールがあります。
+    </p>
+
+
+<h2><a name="chise">CHISE.pm</a></h2>
+
+<h3>NAME</h3>
+
+    <p>
+      CHISE
+    </p>
+
+<h3>SYNOPSIS</h3>
+
+<pre>use CHISE;
+my $s1 = CHISE->define_char(strokes => 12, radical => 9);
+my $s2 = CHISE->define_char(strokes => 12, radical => 9,
+ideograph_daikanwa => 694);
+my $c = $s1->compare($s2);
+if ($c == $CHISE::EXCLUSIVE) {
+print "排他的\n";
+} elsif ($c == $CHISE::HAVE_INTERSECTION) {
+print "共通部分あり\n";
+} elsif ($c == $CHISE::PROPER_SUBSET) {
+print "完全部分集合\n";
+} elsif ($c == $CHISE::PROPER_SUPERSET) {
+print "完全上位集合\n";
+} elsif ($c == $CHISE::EQSET) {
+print "完全一致\n";
+}</pre>
+
+<h3>METHOD</h3>
+
+    <dl>
+      <dt><code>new(属性名=&gt;値)</code></dt>
+      <dd>属性名とその値に対応する文字オブジェクトを生成する。
+	関連する他の属性も自動的に取り込まれる。
+      <dt><code>define_char(属性名=&gt;値[, ...])</code></dt>
+      <dd>属性名とその値(の集合)を持つ文字オブジェクトを新しく生成する。
+      <dt><code>dump_attr</code></dt>
+      <dd>文字オブジェクトが持つ属性の名前と値を出力する。
+      <dt><code>add_attr(属性名=&gt;値)</code></dt>
+      <dd>文字オブジェクトに属性名とその値を追加する。
+      <dt><code>del_attr(属性名)</code></dt>
+      <dd>文字オブジェクトから属性を削除する。
+      <dt><code>compare(オブジェクト名)</code></dt>
+      <dd>文字オブジェクトの属性どうしを比較して、その重なり具合を返す。
+    </dl>
+
+<h2><a name="chise_reg">CHISE_REG.pm</a></h2>
+
+<h3>NAME</h3>
+
+    <p>
+      CHISE_REG
+    </p>
+
+<h3>SYNOPSIS</h3>
+
+<pre>#!/usr/bin/perl -w
+use CHISE_REG;
+use utf8;
+
+if ('山川' =~ /(.)\same_total-strokes_1/) {
+  print STDERR "matched!\n";
+} else {
+  print STDERR "unmatched...\n";
+}</pre>
+
+<h2>TO DO</h2>
+
+    <ul>
+      <li>実装がらみ
+	<ul>
+	  <li>libchise化</li>
+	  <li>データベースへの書き込み</li>
+	</ul></li>
+      <li>IDSがらみ
+	<ul>
+	  <li>decomposeメソッド</li>
+	  <li>includeメソッド
+	    (あるオブジェクトに部品が含まれているか調べるboolean)</li>
+	  <li>KAGEサーバとの接続</li>
+	</ul></li>
+      <li>他のOSへの対応
+	<ul>
+	  <li>データベースのPath(環境変数？)</li>
+	  <li>データベースの配布方法</li>
+	</ul></li>
+    </ul>
+	    
+
+<hr>
+
+<h2>文書・発表</h2>
+
+    <ul>
+      <li><a href="http://ya.sakura.ne.jp/~moro/">師茂樹</a>
+      「UTF2000.pm: overview」
+      (CHISE14シンポジウム、ATR、2003年2月1日)
+      <a href="../papers/20030201moro/20030201perlUTF2000.html">HTML</a>,
+      <a href="../papers/20030201moro/20030201perlUTF2000.sxi">OpenOffice</a>
+      </li>
+      
+      <li><a href="http://ya.sakura.ne.jp/~moro/">師茂樹</a>
+      <a href="http://lc.linux.or.jp/paper/lc2003/CP-10.pdf"
+      >「Perl/CHISE による正規表現の拡張の試み
+      ―文字素性による後方参照の実装実験と課題―」</a>
+      （<a href="http://lc.linux.or.jp/paper/lc2003/"
+      >Linux Conference 抄録集: 第1巻 (2003年)</a>, ISSN 1348-7876）</li>
+      
+      <li><a href="http://ya.sakura.ne.jp/~moro/">師茂樹</a>
+      <a href="http://www.ipsj.or.jp/members/SIGNotes/Jpn/17/2003/061/article003.html"
+      >Nグラムと文字データベースによる漢字仏教文献の分析</a>
+      （<a href="http://www.ipsj.or.jp/members/SIGNotes/Jpn/17/2003/061/"
+      >『情報処理学会研究報告』Vol. 2004, No. 7 (2004-CH-61)</a>、
+      2004年1月、pp. 13-18）</li>
+    </ul>
+
+<hr>
+
+    <p>
+      [<a href="../">戻る</a>]
+    </p>
+
+    <p>
+<!-- hhmts start -->
+Last modified: Thu Mar 13 01:54:38 JST 2003
+<!-- hhmts end -->.
+    </p>
+
+
+</body>
+</html>

@@ -1,0 +1,713 @@
+#!/usr/bin/perl -w -CSD
+
+# ver.0.2
+
+use strict;
+use vars qw($omegadb_path
+	    $opt_protrude $opt_allow_unify
+	    $opt_use_kage_for_Ext_B
+	    %opt_order %order %order_map
+	    $opt_in_cs $opt_out_cs
+	    $opt_preserve_spaces
+	    $opt_help $usage
+	    $in_cs $out_cs $i @chars
+	    $char $char_id $out_char
+	    $char_unified @chars_unified
+	    $ids $ids_argc %ids $idsdb $geta
+	    $idsdata_file $ids_start $font_start
+	    @CDP @HZK @GT
+	    );
+use Getopt::Long;
+use utf8;
+use Fcntl ':flock';
+use Chise_utils ':all';
+require 5.008;
+
+### Options ###
+
+$opt_order{'UniMulti'}='jGcgk';
+#$opt_order{'UniMulti'}='jGcgkHC';
+$opt_order{'UniCNS'}='c';
+$opt_order{'UniGB'}='g';
+$opt_order{'UniJIS'}='j';
+$opt_order{'UniKS'}='k';
+
+$opt_allow_unify=1; # 1=true, 0=false.
+$opt_protrude=0;# 1=true, 0=false.
+
+# currently does not work.
+$opt_use_kage_for_Ext_B=0;# 1=true, 0=false.
+
+### End ###
+
+my $strictly_forbidden_after = '「【『［（〈‘‛“‟（〔｛《{\[\(〖｛｢';
+
+my $forbidden_after = "\x{0000}";
+
+# ￥¥＄$〒♯＃#￠¢￡£＠@§
+my $slightly_forbidden_after = '￥¥＄$〒♯＃#￠¢￡£＠@§';
+
+# $strictly_forbidden_before
+# All these characters are allowed to protrude
+# in the right margin
+my $strictly_forbidden_before=
+    '!,.:;?、。！，．：；？。\)\]}’”〉》」』】〕〗）］｝」';
+
+my $forbidden_before
+    = 'ー々ぁぃぅぇぉゃゅょっゎァィゥェォャュョッヮヵヶ';
+
+my $slightly_forbidden_before
+    = '\x{000a}\#\-‐−‰′″℃゛゜ゝゞヽヾ＂％－ﾞﾟ';
+
+#my $asian = '\x{1100}-\x{11FF}\x{2E80}-\x{D7AF}\x{F900}-\x{FAFF}\x{FE30}-\x{FE4F}\x{FF00}-\x{FFFFFF}'; # need to be fixed.
+my $asian = '\x{2E80}-\x{312f}\x{3190}-\x{ABFF}\x{F900}-\x{FAFF}\x{FE30}-\x{FE4F}\x{FF00}-\x{FFFFFF}'; # need to be fixed.
+
+my $space = '\x{0020}\x{0009}\x{000A}\x{000C}\x{000D}';
+
+my $hangul='\x{1100}-\x{11ff}\x{3130}-\x{318f}\x{AC00}-\x{D7AF}';
+
+my %tex_meta=('#'=>'\#',
+	      '$'=>'\\textdollar{}',
+	      '%'=>'\%',
+	      '&'=>'\&',
+	      '{'=>'\\textbraceleft{}',
+	      '}'=>'\\textbraceright{}',
+	      '\\'=>'\\textbackslash{}',
+	      '_'=>'\\textunderscore',
+	     );
+
+my $tex_meta_re=join('|',map {quotemeta($_)} keys %tex_meta);
+
+&GetOptions("in=s"=>\$opt_in_cs,
+	    "out=s"=>\$opt_out_cs,
+	    "help",\$opt_help);
+
+$usage=<<EOF;
+Usage: $0 -i <input coding system> -o <cmap encoding>
+    input coding system:
+      Utf8mcs, Utf8cns, Utf8gb, Utf8jis, Utf8ks, Utf8big5
+    cmap encoding:
+      UniCNS, UniGB, UniJIS, UniKS, UniMulti
+EOF
+
+if($opt_in_cs or $opt_out_cs){
+    $in_cs=$opt_in_cs;
+    $out_cs=$opt_out_cs;
+}elsif(@ARGV==0){
+    ($in_cs
+     ,$out_cs
+     ,$opt_preserve_spaces)
+	=($0=~/(Utf8mcs|Utf8cns|Utf8gb|Utf8jis|Utf8ks|Utf8big5)
+	  To (UniCNS|UniGB|UniJIS|UniKS|UniMulti)
+	  (Sp)?/ox);
+}
+
+# $in_cs:
+#   Utf8mcs,Utf8cns,Utf8gb,Utf8jis,Utf8ks,Utf8big5
+# $out_cs:
+#   UniCNS,UniGB,UniJIS,UniKS,UniMulti
+
+$in_cs=~s/Utf8/ucs\@/;
+
+if($opt_help
+   or not defined($in_cs)
+   or not defined($out_cs)){
+    print $usage;
+    exit 1;
+}
+
+$omegadb_path=~s!/$!!;
+
+$idsdata_file="$omegadb_path/idsdata.txt";
+$ids_start=0x00; 
+$font_start=0;
+
+if(-e $idsdata_file){
+    open(IDSDATA,"+<:utf8",$idsdata_file) or die;
+    flock(IDSDATA,LOCK_EX);
+    seek(IDSDATA,0,0);
+    while(<IDSDATA>){
+	utf8::decode($_);
+	if(m/^START\t(\d+)\t(\d+)/){
+	    $font_start=$1,$ids_start=$2;
+	}elsif(m/^(.*?)\t(\d+)\t(\d+)/){
+	    $ids{$1}=[$2,$3,];
+	}else{
+	    die "Irregular IDS file: $idsdata_file.\n";
+	}
+    }
+    seek(IDSDATA,0,0);
+    truncate(IDSDATA,0);
+}else{
+    open(IDSDATA,">:utf8",$idsdata_file) or die;
+    flock(IDSDATA,LOCK_EX);
+    seek(IDSDATA,0,0);
+}
+
+$ids_argc=0;
+$ids="";
+
+#$geta=pack("U",0x3013);
+$geta=pack("U",0xfffd);
+
+@GT=(#"=gt","=gt-k",
+     "=gt-pj-1","=gt-pj-2","=gt-pj-3","=gt-pj-4","=gt-pj-5",
+     "=gt-pj-6","=gt-pj-7","=gt-pj-8","=gt-pj-9","=gt-pj-10",
+     "=gt-pj-11"
+     #,"=gt-pj-k1","=gt-pj-k2"
+     );
+@HZK=("=hanziku-1","=hanziku-2","=hanziku-3","=hanziku-4",
+      "=hanziku-5","=hanziku-6","=hanziku-7","=hanziku-8",
+      "=hanziku-9","=hanziku-10","=hanziku-11","=hanziku-12");
+@CDP=("=big5-cdp");
+
+%order_map=('c'=>'UniCNS',
+	    'g'=>'UniGB',
+	    'j'=>'UniJIS',
+	    'k'=>'UniKS',
+	    'G'=>'GT',
+	    'H'=>'HZK',
+	    'C'=>'CDP',
+	    );
+
+foreach $out_cs ('UniCNS','UniGB','UniJIS','UniKS','UniMulti'){
+    if(defined($opt_order{$out_cs})){
+	if($opt_order{$out_cs}=~/^[cgjkGHC]+$/){
+	    @{$order{$out_cs}}=map {$order_map{$_}}
+	    (split(//,$opt_order{$out_cs}));
+	}else{
+	    print STDERR "Invalid order for $out_cs!\n";
+	    exit 1;
+	}
+    }
+}
+
+$/="";
+
+while(<>){
+    utf8::decode($_);
+
+    print '{\relax{}';
+
+    if($in_cs ne 'ucs@mcs'){
+	s/(.)/&get_char_in_mcs($1,$in_cs)/ge;
+    }
+    s/(amp.+?;)/&de_tex_er($1)/ge;
+#    s/(&.+?;)/&de_tex_er($1)/ge;
+    s/([$asian])[$space]+/$1/go unless($opt_preserve_spaces);
+    s/[$space]+([$asian])/$1/go unless($opt_preserve_spaces);
+    s/([$asian])\s*([^$asian$space])/$1 $2/go;
+    s/([^$asian$idc])\s*([$asian])/$1 $2/go;
+    s/\-\-\-/pack("U",0x2014)/geo;# EM DASH
+    s/\-\-/pack("U",0x2013)/geo;# EN DASH
+#    s/\`\`/pack("U",0x201f)/geo;# DOUBLE HIGH-REVERSED-9 QUOTATION MARK
+    s/\`\`/pack("U",0x201c)/geo;# _TeX compatible_
+#    s/\`/pack("U",0x201b)/geo;# SINGLE HIGH-REVERSED-9 QUOTATION MARK
+    s/\`/pack("U",0x2018)/geo;# _TeX compatible_
+    s/\'\'/pack("U",0x201d)/geo;# RIGHT DOUBLE QUOTATION MARK
+    s/\'/pack("U",0x2019)/geo;# RIGHT DOUBLE QUOTATION MARK
+    @chars=split(//);
+
+  CHAR:
+    for($i=0;$i<=$#chars;$i++){
+	$char=$chars[$i];
+	if($char_id=&get_char_attribute($char,'=ucs@unicode')){
+	    $char=pack("U",$char_id);
+	}else{
+	    $char_id=unpack("U",$char);
+	}
+
+	if($char_id<=0x20){
+	    # add quarter space between asian and non-asian.
+	    if($i>0 and $i<$#chars){
+		if(($chars[$i-1]=~/[$asian]/
+		    and $chars[$i+1]=~/[^$asian]/
+		      and $chars[$i+1]=~/[$strictly_forbidden_before$slightly_forbidden_before]/)
+		   or($chars[$i-1]=~/[^$asian]/
+		      and $chars[$i+1]=~/[$asian]/
+		      and $chars[$i-1]=~/[$strictly_forbidden_after$slightly_forbidden_after]/)
+		   ){
+		    print '';
+		}elsif(($chars[$i-1]=~/[$asian]/
+			and $chars[$i+1]=~/[^$asian]/)){
+		    print '\unskip\kern.25ex';
+		}elsif($chars[$i-1]=~/[^$asian]/
+		       and $chars[$i+1]=~/[$asian]/){
+		    print '\kern.25ex';
+		}else{
+		    print ' ';
+		}
+	    }else{
+		print ' ';
+	    }
+	    next CHAR;
+	}elsif(($char_id>0x20 and $char_id<=0x021f)
+	       # Basic Latin
+	       # Latin-1 Supplement
+	       # Latin Extended-A
+	       # Latin Extended-B (not all)
+	       or($char_id>=0x0250 and $char_id<=0x02af)
+	       # IPA Extensions
+	       or($char_id>=0x0300 and $char_id<=0x033f)
+	       or($char_id>=0x0360 and $char_id<=0x036f)
+	       # Combining Diacritical Marks
+	       or($char_id>=0x1e00 and $char_id<=0x1eff)
+	       # Latin Extended Additional
+	       or($char_id>=0x0370 and $char_id<=0x03ff)
+               # Greek and Coptic
+	       or($char_id>=0x0400 and $char_id<=0x04ff)
+               # Cyrillic
+	       or($char_id>=0x0530 and $char_id<=0x058f)
+               # Armenian
+	       or($char_id>=0x2010 and $char_id<=0x2046)
+	       # General Punctuation (partial)
+	       ){
+	    print &latin_parse();
+	    next CHAR;
+	}elsif($char_id>=0x2ff0 and $char_id<=0x2fff){
+	    # Ideographic Description Characters
+	    print &ids_parse();
+	    next CHAR;
+	}else{
+	    if(($out_char=&get_output_char($char,$out_cs))){
+		print $out_char,&add_break($i);
+	    }else{
+		if($opt_allow_unify){
+		    @chars_unified=&get_chars_unified($char);
+		    if(@chars_unified>0){
+			foreach $char_unified (@chars_unified){
+			    if(($out_char
+				=&get_output_char($char_unified,$out_cs))){
+				print $out_char,&add_break($i);
+				next CHAR;
+			    }
+			}
+		    }
+		}
+		if($opt_use_kage_for_Ext_B){
+		    if($char_id >= 0x20000 && $char_id <=0x2a6df){
+			# CJK Unified Ideographs Extension B
+			if(not defined($ids{$char}) and $ids{$char}[1]>=0){
+			    $ids{$char}[0]=$font_start;
+			    $ids{$char}[1]=$ids_start;
+			    $ids_start++;
+			    if($ids_start>255){
+				$ids_start=0;
+				$font_start++;
+			    }
+			}
+			print "{\\fontencoding{OT1}\\fontfamily{",
+			    sprintf("chise%03d",$ids{$char}[0]) ,
+				"}\\selectfont\\char$ids{$char}[1]}",&add_break($i);
+			next CHAR;
+		    }
+		}
+		if($ids=&get_ids($char)){
+		    print &get_macro_for_ids($ids),&add_break($i);
+		}else{
+		    print '\rule{1ex}{1ex}',&add_break($i);
+		}
+	    }
+	}
+    }
+    print '}';
+}
+
+print IDSDATA 'START',"\t",$font_start,"\t",$ids_start,"\n";
+foreach $ids (keys %ids){
+    print IDSDATA $ids,"\t",join("\t",@{$ids{$ids}}),"\n";
+}
+flock(IDSDATA,LOCK_UN);
+
+exit 0;
+
+sub de_tex_er{
+    my($er)=@_;
+    my($prefix,$suffix);
+    my($output_char,$atr,$value);
+    $er=~/^(amp)(.*)(;)$/
+	and $prefix=$1,$er=$2,$suffix=$3;
+    $prefix or $prefix="",$suffix or $suffix="";
+    if($er=~/^U[\+|\-]([a-fA-F\d]+)/){
+	$output_char=pack("U",hex($1));
+    }elsif($er=~/^(?:I\-)?($er_prefix_re)\-?([0-9a-fA-F]+)$/){
+	($atr,$value)=($1,$2);
+	unless($er_alias{$atr}=~/daikanwa|gt/){
+	    $value=hex($value);
+	}
+	($output_char)=&get_chars_matching($er_alias{$atr},$value);
+    }
+    if($output_char){
+	return $output_char;
+    }else{
+	return $prefix.$er.$suffix;
+    }
+}
+
+sub add_break{
+    my($i)=@_;
+
+    if($i<($#chars-1)){
+	if(($chars[$i+1]=~m/[$strictly_forbidden_before]/o)
+	   and($chars[$i+2]=~m/[$strictly_forbidden_before]/o)){
+	    return "\\CJKunbreakablekernone{}";
+	}elsif($opt_protrude){
+	    if(($chars[$i+1]=~m/[$strictly_forbidden_before]/o)
+	       and($chars[$i+2]=~m/[^$strictly_forbidden_before]/o)){
+		return "\\CJKunbreakablekernone \\CJKprotrude{}";
+	    }
+	}
+    }
+    if(($i<$#chars)
+       and($chars[$i+1]eq" ")){
+       # preserve space.
+ 	return "";
+    }
+    if(($i<$#chars)
+       and($chars[$i+1]=~m/[$strictly_forbidden_before]/o)){
+	return "\\CJKunbreakablekernone{}";
+    }
+    if($chars[$i]=~m/[$strictly_forbidden_after]/o){
+	return "\\CJKunbreakablekernone{}";
+    }
+    if(($i<$#chars)
+       and($chars[$i+1]=~m/[$forbidden_before]/o)){
+	return "\\CJKunbreakablekerntwo{}";
+
+    }
+    if($chars[$i]=~m/[$forbidden_after]/o){
+	return "\\CJKunbreakablekerntwo{}";
+    }
+    if(($i<$#chars)
+       and($chars[$i+1]=~m/[$slightly_forbidden_before]/o)){
+	return "\\CJKunbreakablekernthree{}";
+    }
+    if($chars[$i]=~m/[$slightly_forbidden_after]/o){
+	return "\\CJKunbreakablekernthree{}";
+    }
+    if($chars[$i]=~m/[$asian]/o){
+	return "\\CJKbreakablekern{}";
+    }
+    if(($i<$#chars)and($chars[$i+1]=~m/[$asian]/o)){
+	return "\\CJKbreakablekern{}";
+    }
+}
+
+sub latin_parse{
+    # arguments: none
+    # return: string for output with TeX macro.
+    my($char_id);
+    my $out_str="";
+    while($i<=$#chars){
+	$char_id=unpack("U",$chars[$i]);
+	if($chars[$i]=~m/($tex_meta_re)/o){
+	    $out_str.=$tex_meta{$chars[$i]};
+	}elsif(($char_id>0x20 and $char_id<=0x021f)
+	   or($char_id>=0x0250 and $char_id<=0x02af)# IPA Extensions
+	   or($char_id>=0x0300 and $char_id<=0x033f)# Combining Diacritical Marks
+	   or($char_id>=0x0360 and $char_id<=0x036f)
+	   or($char_id>=0x0370 and $char_id<=0x03ff)# Greek and Coptic
+	   or($char_id>=0x0400 and $char_id<=0x04ff)# Cyrillic
+	   or($char_id>=0x0530 and $char_id<=0x058f)# Armenian
+	   ){
+	    $out_str.=$chars[$i];
+	}elsif($char_id>=0x1e00 and $char_id<=0x1eff){
+	    # Latin Extended Additional
+            # 0x1e00 -> 0x0600, etc.
+	    $out_str.=pack("U",$char_id-0x1800);
+	}elsif($char_id>=0x2010 and $char_id<=0x2046){
+	    # General Punctuation (partial)
+	    $out_str.=pack("U",$char_id-0x1000);
+	}else{
+	    $i--;
+	    last;
+	}
+	$i++;
+    }
+    return '{\fontencoding{OT1}\fontfamily{omlgc}\selectfont '.$out_str.'}';###UT1?
+}
+
+sub ids_parse{
+    # arguments: none
+    # return: character for output,
+    #          TeX macro for ids,
+    #          or GETA character if ids is invalid.
+    my($ids,$ids_argc)=&ids_rest("",0,$chars[$i]);
+
+    while($ids_argc>0){
+	# We are in IDS.
+	$i++;
+	if($i>$#chars){
+	    print STDERR "IDS parse error: $ids\n";
+	    return $geta;
+	}
+
+	($ids,$ids_argc)=&ids_rest($ids,$ids_argc,$chars[$i]);
+	if($ids_argc==0){
+	    if(($char=&get_char_for_ids($ids))
+	       and($out_char=&get_output_char($char,$out_cs))){
+		return $out_char;
+	    }else{
+		return &get_macro_for_ids($ids);
+	    }
+	}
+    }
+}
+
+sub ids_rest{
+    # arguments: <ids>, <rest number of arguments for ids>, <character>
+    # return: ids and rest number of arguments for ids.
+    my($ids,$ids_argc,$char)=@_;
+    my($argc);
+    $argc=&ids_argc($char);
+    if($argc){
+	$ids_argc+=$ids_argc==0?$argc:$argc-1;
+    }else{
+	$ids_argc--;
+    }
+    $ids.=$char;
+    return ($ids,$ids_argc);
+}
+
+sub get_macro_for_ids{
+    # argument: <ids>
+    # return: TeX macro for ids
+    #          or GETA character if ids is invalid for KAGE.
+    my($ids)=@_;
+    # $ids=&normalize_ids($ids,"UniJIS");
+    return $geta if(($ids!~/[$idc]/)
+		    or($ids=~/[\x{10000}-]/));
+                    #irregular for KAGE.
+    if(not defined($ids{$ids})){
+	$ids{$ids}[0]=$font_start;
+	$ids{$ids}[1]=$ids_start;
+	$ids_start++;
+    }
+    if($ids_start>255){
+	$ids_start=0;
+	$font_start++;
+    }
+    return "{\\fontencoding{OT1}\\fontfamily{"
+	.sprintf("chise%03d",$ids{$ids}[0])
+	."}\\selectfont\\char$ids{$ids}[1]}\\relax{}";
+}
+
+sub normalize_ids{
+    # argument: <ids>, <output coding system>
+    # return: ids or GETA character if ids is invalid for KAGE.
+    my($ids,$out_cs)=@_;
+    $out_cs=~s/Uni(.+)/'ucs@'.lc($1)/e;
+
+    my $output_ids="";
+    my($char,$output_char_id);
+    while($ids=~m/(.)/g){
+	$char=$1;
+	if($char=~/[$idc]/){
+	    $output_ids.=$char;
+	}elsif($output_char_id=&get_char_attribute($char,"=$out_cs")
+	   or $output_char_id=&get_char_attribute($char,"=ucs")
+	   or $output_char_id=&get_char_attribute($char,"=>$out_cs")
+	   or $output_char_id=&get_char_attribute($char,"=>ucs")
+	   or $output_char_id=&get_char_attribute($char,"=>ucs*")
+	      ){
+	    $output_ids.=pack("U",$output_char_id);
+	}else{
+	    return $geta;
+	}
+    }
+    return $output_ids;
+}
+
+sub get_output_char{
+    # argument: <char>
+    # return: character in output coding system or TeX macro or undef.
+    my($char,$out_cs)=@_;
+    my($out_char_id,$suffix);
+    my($gt,$hzk,$cdp);
+
+    foreach $out_cs (@{$order{$out_cs}}){
+	if($out_cs eq 'UniJIS'
+	   and &get_char_attribute($char,"vnd-adobe-cid-unijis-utf16-h")){
+	    if($out_char_id=&get_char_attribute($char,'=ucs@jis')
+	       or $out_char_id=&get_char_attribute($char,'=ucs')
+	       or $out_char_id=&get_char_attribute($char,'=>ucs@jis')
+	       or $out_char_id=&get_char_attribute($char,'=>ucs')
+	       or $out_char_id=&get_char_attribute($char,'=>ucs*')
+	       ){
+		return "{\\selectjisfont\\char$out_char_id}";
+	    }
+	}elsif($out_cs eq 'UniGB'
+	       and &get_char_attribute($char,"vnd-adobe-cid-unigb-ucs2-h")){
+	    if($out_char_id=&get_char_attribute($char,'=ucs@gb')
+	       or $out_char_id=&get_char_attribute($char,'=ucs')
+	       or $out_char_id=&get_char_attribute($char,'=>ucs@gb')
+	       or $out_char_id=&get_char_attribute($char,'=>ucs')
+	       or $out_char_id=&get_char_attribute($char,'=>ucs*')
+	       ){
+		return "{\\selectgbsfont\\char$out_char_id}";
+	    }
+	}elsif($out_cs eq 'UniCNS'
+	       and &get_char_attribute($char,"vnd-adobe-cid-unicns-ucs2-h")){
+	    if($out_char_id=&get_char_attribute($char,'=ucs@cns')
+	       or $out_char_id=&get_char_attribute($char,'=ucs')
+	       or $out_char_id=&get_char_attribute($char,'=>ucs@cns')
+	       or $out_char_id=&get_char_attribute($char,'=>ucs')
+	       or $out_char_id=&get_char_attribute($char,'=>ucs*')
+	       ){
+		return "{\\selectcnsfont\\char$out_char_id}";
+	    }
+	}elsif($out_cs eq 'UniKS'
+	       and &get_char_attribute($char,"vnd-adobe-cid-uniks-ucs2-h")){
+	    if($out_char_id=&get_char_attribute($char,'=ucs@ks')
+	       or $out_char_id=&get_char_attribute($char,'=ucs')
+	       or $out_char_id=&get_char_attribute($char,'=>ucs@ks')
+	       or $out_char_id=&get_char_attribute($char,'=>ucs')
+	       or $out_char_id=&get_char_attribute($char,'=>ucs*')
+	       ){
+		return "{\\selectksxfont\\char$out_char_id}";
+	    }
+	}elsif($out_cs eq 'GT'){
+	    return $gt if($gt=&get_macro_for_GT($char));
+	}elsif($out_cs eq 'HZK'){
+	    return $hzk if($hzk=&get_macro_for_HZK($char));
+	}elsif($out_cs eq 'CDP'){
+	    return $cdp if($cdp=&get_macro_for_CDP($char));
+	}
+    }
+    return undef;
+}
+
+sub get_ids{
+    # argument: <character>
+    # return: ids
+    my($char)=@_;
+    my $ids="";
+#    $ids=&get_char_attribute($char,"ids-aggregated")
+#	or $ids=&get_char_attribute($char,"ids");
+    $ids=&get_char_attribute($char,"ids-decomposed")
+	or $ids=&get_char_attribute($char,"ids")
+	  or $ids=&get_char_attribute($char,"ideographic-structure");
+    $ids=~s/[? ()]//g;
+    return $ids;
+}
+
+sub get_char_for_ids{
+    # argument: <ideographic description sequence>
+    # return: char or undef.
+    my($ids)=@_;
+    my($output_char);
+
+    if(($output_char)=&get_chars_matching("ids",$ids)){
+	return $output_char;
+    }else{
+	return undef;
+    }
+}
+
+sub get_char_in_mcs{
+    # argument: <char>, <input coding system>
+    # return:   char in ucs@mcs.
+    my($char,$in_cs)=@_;
+    my($output_char);
+
+    return $char if($in_cs eq 'ucs@mcs' or
+		    $char le "~");
+
+    if(($output_char)=&get_chars_matching("=$in_cs",unpack("U",$char))){
+	return $output_char;
+    }else{
+	return $char;
+    }
+}
+
+sub get_chars_unified{
+    my($char)=@_;
+    my($chars,$ucs,$char_ucs,$char_sub);
+    my(@chars);
+
+    if($chars=&get_char_attribute($char,'->ucs-unified')){
+	$chars=~s/^\((.*)\)$/$1/;
+	return (split(/\s*\?/,$chars));
+    }elsif($ucs=&get_char_attribute($char,'=>ucs*')
+	   or $ucs=&get_char_attribute($char,'=>ucs')){
+	$char_ucs=pack("U",$ucs);
+	if($chars=&get_char_attribute($char_ucs,'->ucs-unified')){
+	    $chars=~s/^\((.*)\)$/$1/;
+	    @chars=grep {not /^$char$/}
+		(split(/\s*\?/,$chars));
+	    push(@chars,$char_ucs);
+	    return @chars;
+	}
+    }elsif($char_sub=&get_char_attribute($char,'<-subsumptive')){
+	$char_sub=~s/[? ()]//g;
+	$chars=&get_char_attribute($char_sub,'->subsumptive');
+	@chars=grep {not /^$char$/} (split(/\s*\?/,$chars));
+	push(@chars,$char_sub);
+	return @chars;
+    }else{
+	return ();
+    }
+}
+
+sub get_macro_for_GT{
+    # argument: <char>
+    # return: TeX macro for GT fonts or undef.
+    my($char)=@_;
+    my($gt,$GT);
+    foreach (@GT){
+	if($gt=&get_char_attribute($char,$_)){
+	    m/gt\-pj\-(\d+)/ and $GT=$1;
+	    last;
+	}
+    }
+    if($gt){
+	return "{\\fontencoding{OT1}\\fontfamily{"
+	    .sprintf("gt%02d",$GT)
+	    ."}\\selectfont\\char".($gt|0x8080)."}";
+    }else{
+	return undef;
+    }
+}
+
+sub get_macro_for_HZK{
+    # argument: <char>
+    # return: TeX macro for Hanziku fonts or undef.
+    my($char)=@_;
+    my($hzk,$HZK);
+    foreach (@HZK){
+	if($hzk=&get_char_attribute($char,$_)){
+	    m/hanziku\-(\d+)/ and $HZK=$1;
+	    last;
+	}
+    }
+    if($hzk){
+	return "{\\fontencoding{OT1}\\fontfamily{"
+	    .sprintf("hzk%02d",$HZK)
+	    ."}\\selectfont\\char".$hzk."}";
+    }else{
+	return undef;
+    }
+}
+
+sub get_macro_for_CDP{
+    # argument: <char>
+    # return: TeX macro for CDP fonts or undef.
+    my($char)=@_;
+    my($cdp,$ucs);
+    foreach (@CDP){
+	if($cdp=&get_char_attribute($char,$_)){
+	    last;
+	}
+    }
+    if($cdp){
+	$ucs=&get_char_attribute(&get_chars_matching("=big5-pua",$cdp),"=ucs");
+	if($ucs){
+	    return "{\\fontencoding{OT1}\\fontfamily{cdp}\\selectfont\\char$ucs}";
+	}else{
+	    print STDERR "This should not happen.\n";
+	    print STDERR "ucs code point of CDP: $cdp not found.\n";
+	}
+    }else{
+	return undef;
+    }
+}

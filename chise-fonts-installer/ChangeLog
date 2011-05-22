@@ -1,0 +1,191 @@
+2011-05-20  MORIOKA Tomohiko  <tomo@zinbun.kyoto-u.ac.jp>
+
+	* BDF/JISX0213/Makefile.in (jiskan24-2003-1.bdf.gz): Use
+	http://www.chise.org/chise/dist/fonts/BDF/JISX0213/jiskan24-2003-1.bdf.gz.
+
+2011-03-17  MORIOKA Tomohiko  <tomo@zinbun.kyoto-u.ac.jp>
+
+	* BDF/JISX0213/Makefile.in (JISX0213_24DOT_FONTS_URL): Use
+	http://distfiles.gentoo.org/distfiles instead of
+	http://freebsd.yz.yamagata-u.ac.jp/pub/FreeBSD/ports/distfiles.
+	(jiskan24-2003-1.bdf.gz): Use
+	"http://s390.koji.fedoraproject.org/koji/fileinfo?rpmID=2670&filename=jiskan24-2003-1.bdf.gz"
+	instead of
+	http://cvs.fedoraproject.org/repo/pkgs/fonts-japanese/jiskan24-2003-1.bdf.gz/d452c1138a4684f864b8d12ec0e2f00d/jiskan24-2003-1.bdf.gz.
+
+2010-11-22  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* BDF/JISX0213/Makefile.in (JISX0213_24DOT_FONTS_URL): Use
+	http://freebsd.yz.yamagata-u.ac.jp/pub/FreeBSD/ports/distfiles
+	instead of http://gitatsu.hp.infoseek.co.jp/bdf.
+	(jiskan24-2003-1.bdf.gz): Use
+	http://cvs.fedoraproject.org/repo/pkgs/fonts-japanese/jiskan24-2003-1.bdf.gz/d452c1138a4684f864b8d12ec0e2f00d/jiskan24-2003-1.bdf.gz.
+
+2010-09-17  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* TrueType/Arphic/Makefile.in (get): Don't add .gz.
+
+2010-09-17  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* TrueType/Arphic/Makefile.in (install): Install encodings.dir.
+
+2010-09-17  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* configure.in: Generate TrueType/Arphic/Makefile.
+
+	* chise-setup-xfonts.in: Add Arphic's path if it is found.
+
+	* TrueType/Makefile.in (build-arphic): New target.
+	(install-arphic): New target.
+	(distclean): Run "make distclean" in Arphic/.
+	(distclean-all): Run "make distclean-all" in Arphic/.
+
+	* TrueType/Arphic/Makefile.in, TrueType/Arphic/encodings.dir,
+	TrueType/Arphic/fonts.dir: New files.
+
+2010-09-17  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* Makefile.in (distclean): Don't delete font distribution files.
+	(distclean-all): New target to delete font distribution files.
+
+	* GT/Makefile.in (distclean): Don't delete fonts.
+	(distclean-all): New target to delete fonts.
+
+	* TrueType/Makefile.in (distclean-all): New target to delete
+	fonts.
+
+	* TrueType/Zinbun/Makefile.in (distclean): Don't delete fonts.
+	(distclean-all): New target to delete fonts.
+
+	* BDF/Makefile.in (distclean-all): New target to delete fonts.
+
+	* BDF/Zinbun/Makefile.in, BDF/Thai-XTIS/Makefile.in,
+	BDF/JISX0213/Makefile.in, BDF/ETL-VN2/Makefile.in,
+	BDF/EGB/Makefile.in, BDF/CBETA/Makefile.in (distclean): Don't
+	delete fonts.
+	(distclean-all): New target to delete fonts.
+
+
+2010-06-16  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-fonts-installer 0.2 released.
+
+	* BDF/Zinbun/Makefile.in, BDF/Thai-XTIS/Makefile.in,
+	BDF/JISX0213/Makefile.in, BDF/ETL-VN2/Makefile.in,
+	BDF/EGB/Makefile.in, BDF/CBETA/Makefile.in (install):
+	Use `gzip - 9' instead of `gzip -best'.
+
+
+2010-06-16  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-fonts-installer 0.1 released.
+
+	* Makefile.in (PACKAGE): New variable.
+	(tar): New target.
+
+	* configure.in: Rename `chise-fonts' to `chise-fonts-installer'.
+
+2010-04-21  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* BDF/EGB/Makefile.in: New file.
+
+	* BDF/EGB/fonts.alias: New file.
+
+	* BDF/Makefile.in (all): Call `build-egb'.
+	(install): Call `install-egb'.
+	(build-egb): New target.
+	(install-egb): New target.
+	(distclean): Run `make distclean' in EGB/.
+
+	* chise-setup-xfonts.in: Add
+	@prefix@/share/fonts/PCF/EGB:unscaled.
+
+	* configure.in: Generate BDF/EGB/Makefile.
+
+2009-12-18  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* BDF/Makefile.in (distclean): Run in JISX0213/.
+
+2009-12-17  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* BDF/JISX0213/Makefile.in (JISX0213_16DOT_FONTS_URL): Renamed
+	from `JISX0213_FONTS_URL'.
+	(JISX0213_24DOT_FONTS_URL): New variable.
+	(BDF_FILES): Add jiskan24-2000-1.bdf.gz, jiskan24-2000-2.bdf.gz
+	and jiskan24-2003-1.bdf.gz.
+	(jiskan24-2000-1.bdf.gz): New target.
+	(jiskan24-2000-2.bdf.gz): New target.
+	(jiskan24-2003-1.bdf.gz): New target.
+
+2009-12-11  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* BDF/JISX0213/Makefile.in: New file.
+
+	* chise-setup-xfonts.in: Add
+	@prefix@/share/fonts/PCF/JISX0213:unscaled.
+
+	* BDF/Makefile.in (all): Call `build-jisx0213'.
+	(install): Call `install-jisx0213'.
+	(build-jisx0213): New target.
+	(install-jisx0213): New target.
+
+	* configure.in: Generate BDF/JISX0213/Makefile.
+
+2009-12-11  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* configure.in: Generate `chise-setup-xfonts'.
+
+	* Makefile.in (MKDIR): New variable.
+	(datadir): New variable.
+	(SCRIPTS_DIR): New variable.
+	(install): Call `all' and `install-scripts'.
+	(install-scripts): New target.
+	(distclean): Delete `chise-setup-xfonts'.
+
+	* chise-setup-xfonts.in: New file.
+
+2009-12-11  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* Makefile.in (all): Call `build-bdf' and `build-truetype'.
+	(install): Call `install-bdf' and `install-truetype'.
+	(build-bdf): New target.
+	(install-bdf): New target.
+	(build-truetype): New target.
+	(install-truetype): New target.
+	(distclean): Run `make distclean' in BDF and TrueType.
+
+	* configure.in: Generate BDF/Makefile, BDF/ETL-VN2/Makefile,
+	BDF/Thai-XTIS/Makefile, BDF/Zinbun/Makefile, BDF/CBETA/Makefile,
+	TrueType/Makefile and TrueType/Zinbun/Makefile.
+
+	* TrueType/Makefile.in, TrueType/Zinbun/Makefile.in,
+	BDF/Makefile.in, BDF/CBETA/Makefile.in, BDF/Thai-XTIS/Makefile.in,
+	BDF/ETL-VN2/Makefile.in, BDF/Zinbun/Makefile.in: New files.
+
+2009-12-07  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* Makefile.in (distclean): Delete intlfonts-1.2.1/ and
+	intlfonts-1.2.1.tar.gz.
+
+2009-12-07  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* Makefile.in (distclean): New target.
+
+2009-12-06  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* GT/Makefile.in: New file.
+
+2003-10-27  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* GT/encodings.dir: New file.
+
+2002-12-25  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* GT/fonts.dir: New file.
+
+2009-12-06  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* configure, config.guess, config.sub, install-sh: New files.
+
+	* Makefile.in, configure.in: New files.
+

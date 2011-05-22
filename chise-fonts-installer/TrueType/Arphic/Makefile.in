@@ -1,0 +1,54 @@
+VERSION = @PACKAGE_VERSION@
+
+RM	= /bin/rm -f
+TAR	= tar
+WGET	= wget
+MKDIR	= mkdir -p
+SUDO	= 
+
+prefix		= @prefix@
+exec_prefix	= @exec_prefix@
+
+datadir	= @datadir@
+
+FONTS_DIR	= $(datadir)/fonts
+TTF_FONTS_DIR	= $(datadir)/fonts/TrueType
+ARPHIC_FONTS_DIR = $(TTF_FONTS_DIR)/Arphic
+
+ARPHIC_FONTS_URL = http://ftp.gnu.org/gnu/non-gnu/chinese-fonts-truetype
+
+OPTS		= @ac_configure_args@
+
+all:	get
+
+get:	bkai00mp.ttf bsmi00lp.ttf gbsn00lp.ttf gkai00mp.ttf
+
+
+bkai00mp.ttf:
+	$(WGET) $(ARPHIC_FONTS_URL)/bkai00mp.ttf.gz
+	gunzip bkai00mp.ttf.gz
+
+bsmi00lp.ttf:
+	$(WGET) $(ARPHIC_FONTS_URL)/bsmi00lp.ttf.gz
+	gunzip bsmi00lp.ttf.gz
+
+gbsn00lp.ttf:
+	$(WGET) $(ARPHIC_FONTS_URL)/gbsn00lp.ttf.gz
+	gunzip gbsn00lp.ttf.gz
+
+gkai00mp.ttf:
+	$(WGET) $(ARPHIC_FONTS_URL)/gkai00mp.ttf.gz
+	gunzip gkai00mp.ttf.gz
+
+
+install:
+	$(MKDIR) $(ARPHIC_FONTS_DIR)
+	( $(TAR) -cf - *.ttf fonts.dir encodings.dir ) | \
+	( cd $(ARPHIC_FONTS_DIR) && $(TAR) -xf - )
+
+
+distclean:
+	-$(RM) Makefile
+
+distclean-all:
+	-$(RM) *.ttf Makefile

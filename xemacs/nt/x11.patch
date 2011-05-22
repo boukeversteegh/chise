@@ -1,0 +1,27 @@
+*** X11.def.old	Thu Apr 10 07:29:27 1997
+--- X11.def	Wed Jul 02 22:20:16 1997
+***************
+*** 5,15 ****
+  VERSION 6.1
+  EXPORTS
+   _Xdebug_p=_Xdebug CONSTANT
+-  _XCreateMutex_fn_p=_XCreateMutex_fn CONSTANT
+-  _XFreeMutex_fn_p=_XFreeMutex_fn CONSTANT
+-  _XLockMutex_fn_p=_XLockMutex_fn CONSTANT
+-  _XUnlockMutex_fn_p=_XUnlockMutex_fn CONSTANT
+-  _Xglobal_lock_p=_Xglobal_lock CONSTANT
+   XActivateScreenSaver
+   XAddConnectionWatch
+   XAddExtension
+--- 5,10 ----
+***************
+*** 623,630 ****
+   _XUnregisterFilter
+   _XUnregisterInternalConnection
+   _XVIDtoVisual
+-  _Xthread_init
+-  _Xthread_waiter
+   XkbIgnoreExtension
+   XkbOpenDisplay
+   XkbQueryExtension
+--- 618,623 ----

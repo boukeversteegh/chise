@@ -1,0 +1,127 @@
+-*- coding: utf-8-gb-er -*-
+
+
+知世 project ― beyond the UTF-2000
+
+
+
+
+
+
+  守岡 知彦 / MORIOKA Tomohiko
+	京都大学 漢字情報硏究センター
+	Document Information Center
+	for Chinese Studies, Kyōto University
+
+
+What is 知世? (1)
+
+    知 (Knowledge, Information)
+
+    世 (world and age)
+
+Not only for worldwide,
+ but also for time (ancient → future)
+
+
+
+What is 知世? (2)
+
+・CHISE (CHaracter Information
+		Service Environment)
+	character information server
+
+・TOMOYO (Text Object Manipulator
+		and Outfit for YOurself)
+
+
+History (1)— Before UTF-2000
+
+・each character is
+	represented by coded character sets
+
+
+
+History (2) — UTF-2000 (1)
+
+・each character is
+	represented by character object
+
+
+
+UTF-2000 (2)
+
+・Every character related information
+	are stored in character database
+
+  - system gets property of character
+	from the database
+
+  - user can add characters by definition
+	→ not only shape
+	→ user can use own unification rule
+
+
+XEmacs UTF-2000
+
+・sample implementation of UTF-2000
+
+	based on XEmacs-Mule
+
+
+
+Problem of XEmacs UTF-2000
+
+・Require too big memory
+  → external database + lazy loading
+
+・There are no UTF-2000 based
+	external representations
+  → XML? for file
+     multipart/related
+	+ application/char-info for MIME
+
+→ 知世 project
+
+
+Plan of 知世 (CHISE)
+
+(1) private character database
+	based on dbm like simple database
+
+(2) local character database server
+	(based on PostgreSQL?)
+
+(3) distributed server system
+	- How to sync
+	- Check conflicts and report
+
+
+Plan of 知世 (TOMOYO)
+
+(0) Complete UTF-2000
+    (a) complete XEmacs UTF-2000
+		and send MEGA patch
+		to xemacs-patches :-)
+    (b) implement GNU Emacs 21 UTF-2000
+
+(1) Multiple representation in one system
+
+(2) Character definition editor
+
+(3) Network representation
+
+
+Related Plan
+
+・Develop high quality character data
+	not depended on any character codes
+
+・Integrate glyph, shape and
+	type setting information
+	into the character database system
+
+・Searchable image based document database
+	(especially for classical
+	 Chinese documents,
+		such as 拓本, 稀覯本)

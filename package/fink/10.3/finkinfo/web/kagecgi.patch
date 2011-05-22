@@ -1,0 +1,20 @@
+diff -uNr kagecgi.orig/Makefile kagecgi-0.4.0.20040508/Makefile
+--- kagecgi.orig/Makefile	Tue May 11 21:41:22 2004
++++ kagecgi-0.4.0.20040508/Makefile	Tue May 11 17:44:58 2004
+@@ -8,12 +8,12 @@
+ SHAREDIR=/usr/local/share/kagecgi
+ DBURL=http://fonts.jp/kagedb/kagedb
+ 
+-CFLAGS=
+-LIBS= -lpng -ldb -lm
++#CFLAGS=
++#LIBS= -lpng -ldb -lm
+ 
+ #for MacOSX with fink
+-#CFLAGS= -I/sw/include -I/sw/include/db3 -I/sw/include/libpng/
+-#LIBS= -L/sw/lib -lpng -ldb
++CFLAGS= -I/sw/include -I/sw/include/db4 -I/sw/include/libpng/
++LIBS= -L/sw/lib -lpng -ldb
+ 
+ all: kage.cgi
+ 

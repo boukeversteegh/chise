@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+<head>
+<title>CHISE + CodeFest Kyoto 2005</title>
+<link rel=stylesheet href="../chise.css" type="text/css">
+</head>
+
+<body>
+<p>
+[<a href="../index.html.ja">CHISE Project</a>]
+[<a href="http://coe21.zinbun.kyoto-u.ac.jp/">京都大学21世紀COE
+「東アジア世界の人文情報学研究教育拠点」</a>]
+[<a href="http://www.fsij.org/">FSIJ</a>]
+</p>
+<h1>CHISE Conference 2005 + CodeFest 京都 開催のご案内</h1>
+<p>
+2003 年に開催された
+<a
+href="http://mousai.kanji.zinbun.kyoto-u.ac.jp/chise/symposium2003/">
+CHISE Symposium 2003</a>, <a
+href="http://coe21.zinbun.kyoto-u.ac.jp/ws-type-2003.html.ja"
+>書体・組版ワークショップ</a> に引続き、CHISE Project
+および多言語処理に関するイベントを開催します。
+</p>
+<p>
+また、今回は発表形式のイベントに加え、<b>CodeFest 京都 2005</b>
+も併催します。
+</p>
+<p>
+「CodeFest」とは、普段はインターネット上でのやり取りのみで
+Face-To-Face では話し合う機会がないあまりないハッカー達が一ヶ所に集い、
+自由にコード（ソフトウェアのソースコード）を持ち寄って頭を突き合わせて議論し
+開発を進めるイベントです。
+</p>
+<p>
+今回の CodeFest 京都 2005 は、日本で２番目、関西では初めて開催される
+CodeFest となります。
+</p>
+<p>
+CHISE Conference, CodeFest 京都 ともども皆様の御参加をお待ちしてます。
+</p>
+
+<hr>
+
+<h2>CHISE Conference 2005</h2>
+<ul style="list-style-type: none;">
+<li> 日 時 ： 2005年10月13日(木)〜14日(金) 13:30〜16:30
+<li> 場 所 ： <a href="http://www.kcif.or.jp/jp/footer/05.html"
+    >京都市国際交流会館</a>
+    研修室
+<li>参加費：無料
+<!-- <li>発表者： -->
+<!--     <ul> -->
+<!--       <li>師茂樹（花園大学）― CHISE（文字モデル関連） -->
+<!--       <li>守岡知彦（京都大学）― CHISE 関連 -->
+<!--       <li>上地宏一（慶應義塾大学）― KAGE（漢字グリフ自動合成システム） -->
+<!--       <li>橋本将（株式会社ネットワーク応用通信研究所）― -->
+<!-- 	  Rast（全文データベースシステム） -->
+<!--     </ul> -->
+<li>要申し込み：<a href="#application"
+    >文末の申込書</a>に記入の上メールにてお送りください。
+</ul>
+
+<h3>プログラム</h3>
+<dl>
+  <dt>10/13（木）
+  <dd>
+      <dl>
+	<dt>13:30〜
+	<dd>Opening
+	<dt>〜14:30
+	<dd>守岡 知彦（京都大学 / CHISE Project）
+	    <!--  「CHISE の現在と未来」（仮題） -->
+	    「文字データベース 2.0!?」
+	<dt>14:30〜15:30
+	<dd>師 茂樹（花園大学 / CHISE Project）
+	    「文字オントロジに基づく文字オブジェクト列間の編集距離」
+	    <blockquote>
+	    文字列どうしがどの程度異なっているかを数値化する
+	    レーベンシュタイン距離（編集距離）を使った比較は、
+	    ワープロなどのスペルチェック機能や、
+	    最近では
+	    バイオインフォマティクスにおける
+	    塩基列の比較などに応用されたことで注目されている。
+	    漢字文化圏の古典学においても、
+	    写本間の「距離」を見いだす有効な方法として、
+	    近年、応用研究が進んでいる。
+	    本発表では、Chaon
+	    モデルに基づく文字オブジェクトの列どうしの
+	    「距離」
+	    を計算する方法として、
+	    木の編集距離を
+	    文字オブジェクトの比較に応用することを提案する。
+	    </blockquote>
+	<dt>15:40〜16:40
+	<dd>上地 宏一（慶應義塾大学 / CHISE Project）
+	    「KAGEシステムによる漢字フォント制作支援」
+	    <blockquote>
+	    <p>
+	    KAGE
+	    システムは、筆画や部品を組み合わせて
+	    自由に漢字字形をデザインし、
+	    ビットマップ画像データやベクトル画像データに
+	    出力することが可能である。特に KAGE
+	    グリフエディタや
+	    Fontforge との組み合わせによって、
+	    外字フォントや自作フォントを容易に作成することが可能となった。
+	    発表ではデモンストレーションを交えて現在の KAGE
+	    システムの概要を紹介する。
+	    <p>
+	    また、従来 KAGE
+	    エンジンでは独自に漢字構造データベースを持っていたが、
+	    より多くのデータを収録する CHISE
+	    文字データベースへの統合を予定している。
+	    この試みについての紹介も行う。
+	    </blockquote>
+      </dl>
+  <dt>10/14（金）
+  <dd>
+      <dl>
+	<dt>13:30〜14:30
+	<dd>橋本 将、かずひこ（株式会社ネットワーク応用通信研究所）
+	    「全文検索システムRastによる全文検索アプリケーションの構築」
+	    <blockquote>
+	    インターネット上の情報や、電子メール、
+	    業務文書、文学作品など、
+	    日々蓄積されていく膨大な情報の中から
+	    目的の情報を探し出すために、
+	    全文検索システムは広く用いられている。
+	    全文検索システム Rast
+	    では全文検索を行う部分をライブラリとして実装する事で、
+	    アプリケーションに登録や検索、削除などといった操作を
+	    アプリケーションから容易に呼び出して使うことができる。
+	    また、Rast の文書登録機能では
+	    文書ファイルからのテキスト抽出機能が実装されており、
+	    多様なファイル形式からの文書登録を行う事ができる。
+	    その他にも Rast では XML-RPC
+	    経由での検索や
+	    検索データベースを複数に分割して対応する
+	    多階層メタ検索機能がある。
+	    Rast
+	    のソースパッケージにはこれらの機能の実用例として
+	    Web 検索 CGI
+	    や検索ベースの電子メールソフトなどが含まれている。
+	    本発表では
+	    Rast
+	    のライブラリ部分が持つ機能やこれらのソフトウェアの紹介を行う。
+	    </blockquote>
+	<dt>14:40〜16:20
+	<dd>BOF
+	<dt>16:20 〜
+	<dd>Closing
+      </dl>
+</dl>
+
+<hr>
+
+<h2>CodeFest 京都 2005</h2>
+<ul style="list-style-type: none;">
+<li> 日 時 ： 2005年10月14日(金) 17:30 〜 15日(土) 17:30
+<li> 場 所 ： <a href="http://www.zinbun.kyoto-u.ac.jp/kotu.html"
+    >京都大学人文科学研究所 本館</a> 大会議室
+<li>参加費：無料
+<li>要申し込み：<a href="#application"
+    >文末の申込書</a>に記入の上メールにてお送りください。
+</ul>
+<ul>
+  <li><a href="https://members.fsij.org/trac/codefestkyoto2005/"
+      >CodeFest 京都 2005 公開 Wiki</a>
+  <li><a href="http://qwik.jp/codefest-kyoto/">参加者専用情報交換サイト
+      (qwikWeb)</a>
+</ul>
+
+<hr>
+
+<h2><a name="application">参加申し込み</a></h2>
+<p>
+下記申込書に記入の上、
+<a href="mailto:chise2005-office@kanji.zinbun.kyoto-u.ac.jp"
+>chise2005-office@kanji.zinbun.kyoto-u.ac.jp</a>
+へメールでお送りください。
+</p>
+
+<pre>----------------------------------------------------------------------
+CHISE Conference 2005, CodeFest 京都 2005 参加申込書
+;; 参加するものの行だけを残し、参加しないものの行を消してください。
+○ CHISE Conference 2005 ― 10/13 (木)
+○ CHISE Conference 2005 ― 10/14 (金)
+○ CodeFest 京都 2005
+への参加を申込みます。
+住所:
+御社名:
+部署名:
+御芳名:
+電子メール:
+予定しているハック（CodeFest 京都 2005 参加希望の方のみ）:
+----------------------------------------------------------------------</pre>
+
+<hr>
+
+<!-- hhmts start -->
+Last modified: Thu Oct  6 17:55:31 JST 2005
+<!-- hhmts end -->
+</body>
+</html>

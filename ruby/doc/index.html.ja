@@ -1,0 +1,396 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Ruby/CHISE</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+<div class="main">
+
+<div class="adminmenu">
+<a href="index.html.ja">Japanese</a>/<a href="index.html.en">English</a>
+</div>
+
+<h1>Ruby/CHISE</h1>
+
+<div class="day">
+<h2><a href="#about" name="about">■</a>Ruby/CHISEとは</h2>
+<div class="body">
+<div class="section">
+<p>Ruby/CHISEは，XEmacs CHISEにおけるChaon実装をRubyへ移植することを試みたモジュールです．
+
+<h3>Chaonモデルとは</h3>
+<p>Chaonモデルとは，文字を符号ではなく素性によって扱う方法を意味します．
+<p>Ruby/CHISEではそれを拡張し，文字をオブジェクトとして扱っています．
+</div>
+</div>
+</div>
+
+<div class="day">
+<h2><a href="#download" name="download">■</a>download</h2>
+<div class="body">
+<div class="section">
+<h3>最新版</h3>
+<ul>
+<li><a href="http://eto.com/2003/ruby/ruby-chise-0.2.tar.gz">ruby-chise-0.2.tar.gz</a>
+</ul>
+
+<h3>文字データベース</h3>
+<p>Ruby/CHISEを使うには，別途文字データベースを用意する必要があります．
+文字データベースはXEmacs CHISEと一緒に配付されてますが，
+必要な環境(GNU/Linux)を用意できない人もいるため，
+文字データベースのみを取り出したファイルを用意しました．
+<ul>
+<li>2003-11-04 : <a href="http://eto.com/2003/ruby/char-db.tar.gz">char-db.tar.gz</a> Windows用<br>
+LinuxでXEmacs CHISEをinstallし，付属のmkdbtarball.rbを使った作成した.tar.gzにしたもの．
+<li>2003-11-04 : <a href="http://eto.com/2003/ruby/char-db-linux.tar.bz2">char-db-linux.tar.bz2</a> Linux用<br>
+/usr/local/lib/xemacs-21.4.12/i686-pc-linux/char-db以下をtar.bz2にしたもの．
+</ul>
+
+<h3>CVS access</h3>
+<p>CVSによる入手もできます．
+<ul>
+<li><a href="http://cvs.m17n.org/cgi-bin/viewcvs/ruby/?cvsroot=chise">CVS access</a>
+</ul>
+
+<h3>ライセンス</h3>
+<p>GPLです．COPYINGをごらんください．</p>
+
+</div>
+</div>
+</div>
+
+<div class="day">
+<h2><a href="#install" name="install">■</a>install</h2>
+<div class="body">
+<div class="section">
+
+<p>chise以下を，適当なdirectoryに移動します．<br>
+例:
+<pre>
+# mv chise /usr/local/lib/ruby/site_ruby/1.8
+</pre>
+<p>通常，<em>/usr/local/lib/ruby/site_ruby/</em>以下にinstallされます．
+
+<p>拡張ライブラリは，ext以下にcdし，下記のように打ち込みます．
+<pre>
+% ruby extconf.rb
+% make
+# make install
+</pre>
+<p>拡張ライブラリが無くても動作します．ある場合は，高速化します．
+
+<h3>config</h3>
+<p><em>chise/config.rb</em>内および，<em>ext/config.h</em>内にて
+<p><em>DB_DIR = '/usr/local/lib/xemacs-21.4.10/i686-pc-linux/char-db'</em><br>
+などを必要に応じて変更してください．
+<p><em>IDS_DB_DIR = '/home/eto/work/chise/ids/''</em><br>
+IDSのテキストファイルが置かれているディレクトリーを指すます．(下記の字形分解・合成についてを参照．)
+
+<h3>依存関係</h3>
+<p>下記のパッケージが必要です．
+<ul>
+<li><a href="http://www.sleepycat.com/">db3-3.2.9</a>以上
+<li><a href="http://www.ruby-lang.org/~eban/ruby/binaries/mingw/ext/">bdb-0.5.0</a>以上
+<li><a href="http://www.ruby-lang.org/ja/">ruby 1.8.1</a>以上
+</ul>  
+<p>一般にRubyのパッケージは
+<a href="http://www.ruby-lang.org/raa/"><em>RAA</em></a>を使って探すことができます．
+
+<h3>Unicode</h3>
+<p>現状では，Ruby/CHISEに渡す文字コードはUTF-8のUnicodeにしておくと便利です．
+<p>将来的にはプログラム自体がSJIS，EUCなどで書かれていても
+問題なく処理できるようにしたいと思っています．
+<p>WindowsでUnicodeを使えるエディターとして，Meadow + Mule-UCSが使えます．
+<p>フリーのUnicode対応エディターとして「<a href="http://members.tripod.co.jp/sakura_editor/">サクラエディタ</a>」が使えます．
+<p>また，Windows付属のメモ帳も使えます．
+<p>見るだけであればIEが使えます．
+</div>
+</div>
+</div>
+
+<div class="day">
+<h2><a href="#howto" name="howto">■</a>使い方</h2>
+<div class="body">
+<div class="section">
+
+<h3>基本的な使い方</h3>
+<pre>
+require "chise"
+
+str = "字"		# Stringを拡張している．UTF8で与える．
+p str.ucs		# その文字のucsの値が表示される．
+p str.total_strokes	# 画数が表示される．
+p str.gb2312		# などなど．
+str.each_feature {|f, v|	# 全素性を表示する．
+  print f, ": ", v, "\n"
+}
+</pre>
+
+</div>
+</div>
+</div>
+
+<div class="day">
+<h2><a href="#ids" name="ids">■</a>字形分解・合成</h2>
+<div class="body">
+<div class="section">
+<p>Ruby/CHISEは，もともと字形分解・合成を扱うために作られたため，その機能が強化されています．
+
+<p>字形分解・合成は，現在はUnicodeにおけるIDS(Ideographic Description Structure)という仕様に準拠しています．
+U+2FF0〜U+2FFBで表わされるIDC(Ideographic Description Characters)によって合成方法を指定し，これに続く二文字から三文字の文字を合成して表示します．
+
+<h3>IDSを使うための準備</h3>
+
+<p>下記のようにして，IDSのテキストファイル群を持ってきます．
+<pre><small>% cd ~/work/chise (このディレクトリーは適宜変更する)
+% cvs -d :pserver:anonymous@cvs.m17n.org:/cvs/root login
+password: (何も入れずにただもう一度return)
+
+% cvs -d :pserver:anonymous@cvs.m17n.org:/cvs/chise co -d ids ids
+</small></pre>
+
+<p>このようにすると，IDSのテキストファイル群を持ってくることができます．
+
+<p>その後，<em>chise/config.rb</em>内の，<br>
+<em>IDS_DB_DIR = '/home/eto/work/chise/ids/''</em><br>
+ここに，上記のIDSテキストファイル群を持ってきたディレクトリーを入れます．
+このようにして適切に<em>IDS_DB_DIR</em>を設定し，
+<em>./tools/idsdbdumpall.rb</em>を実行します．(かなり時間がかかります．)
+これで，文字素性として新たにidsなどが加わります．
+
+<h3>字形分解</h3>
+<p>Stringに，decompose, decompose_allという二つのメソッドがあります．
+decomposeは一段階だけ分解します．decompose_allはそれを再帰的に行います．
+<pre>
+p "字".decompose
+p "字".decompose_all
+p "榊".decompose
+p "榊".decompose_all
+p "終了".decompose
+p "終了".decompose_all
+p "鬱".decompose
+p "鬱".decompose_all
+</pre>
+
+<p>最初の説明から，字形分解されて出てきた結果の文字列には，
+IDSキャラクターが含まれているため，うまく表示されない場合もあります．
+メモ帳だと表示できます．
+
+<h3>字形合成</h3>
+<p>字形合成は，composeメソッドで行います．
+<pre>
+p "&#x2ff0;木木".compose
+</pre>
+
+<p>findメソッドで，ある部品が漢字の一部として含まれている漢字群を探すことができます．
+<pre>
+p "日雲".find
+</pre>
+<p>ここでは，日と雲という部品が含まれている全漢字を出力します．
+
+</div>
+</div>
+</div>
+
+<div class="day">
+<h2><a href="#usage" name="usage">■</a>説明</h2>
+<div class="body">
+<div class="section">
+<p>現時点では，test caseを見たほうが使い方はわかりやすいです．
+<pre>
+class String
+	char	先頭の文字をCharacterに変換したものを返す
+
+class Character
+	[]	ある素性をgetします．
+		存在しない素性を参照したときは，nilが返えってきます．
+	[]=	ある素性をputします．
+</pre>
+
+<h3>tools</h3>
+<dl>
+<dt>define-kanji-meaning.rb
+<dd>漢字の意味による分解を行うための情報を素性として定義します．
+<dt>dump-database.rb
+<dd>文字データベースをテキストとしてダンプします．中身を見ることができます．
+<dt>make-chisedb-tarball.rb
+<dd>
+<pre>
+Usage: make-chisedb-tarball.rb &lt;directory of XEmacs CHISE&gt; &lt;tmp dir&gt;
+</pre>
+<pre><small>example.
+ % ./make-chisedb-tarball.rb /usr/local/lib/xemacs-21.4.14/i686-pc-linux
+</small></pre>
+
+XEmacs CHISEの文字データベースを，一つのtarballにまとめます．Windowsで
+は使えないファイル名を適宜変更します．UNIX上で使います．
+
+Windowsでtar.gzを展開するには，
+<a href="http://member.nifty.ne.jp/beambitious/">eo</a>がおすすめです．
+
+<dt>make-ids-database.rb
+<dd>IDSのテキストファイル群を読みこみ，素性として使えるようにします．
+実行には時間がかかります．
+
+<dt>move-obsolete-files.rb
+<dd>すでにobsoleteになった素性のBDBファイルをobsolete directoryに移動させます．
+
+<dt>rename-files.rb
+<dd>古い構造の文字データベースのディレクトリ構造を，新しいディレクトリ構造に直します．
+
+<dt>trim_bom.rb
+<dd>Unicodeファイルを作ったときの先頭についてくるBOM(byte order mark)を削除します．
+
+</dl>
+</div>
+</div>
+</div>
+
+<div class="day">
+<h2><a href="#description" name="description">■</a>付属libraryの説明</h2>
+<div class="body">
+<div class="section">
+
+<ul>
+
+<li>ext/*<br>
+C言語版のlibchiseを用いたextensionです．
+
+<li>network.rb, makegraph.rb, graphviz.rb, defkanji.rb, kanjilist.rb<br>
+漢字の部品間の接続関係を計算します．Graphvizによるグラフ化も行います．
+<pre>
+ruby makegraph.rb
+</pre>
+<p>Graphvizが必要です．min.svgが生成されます．
+
+<pre>
+ruby defkanji.rb
+</pre>
+<p>漢字の定義を行います．
+
+<li>stroke.rb, kage.rb, kageserver.rb, csf.rb<br>
+StrokeFontを用いるライブラリー群．
+上地宏一氏によるKAGE System, 坂直純氏によるCSFという二つのStrokeFontが使えます．
+別途フォントファイルが必要です．<br>
+<tt>csf.rb</tt>中の<tt>CSF_FONT_DIR = 'd:/work/chise/csf/'</tt>を適切に設定してください．
+<p>sglという独自のグラフィックライブラリーが必要ですが，これはまだ非公開です．
+
+<pre>
+ruby stroke.rb
+</pre>
+<p>漢字のCodeTableが表れ，その中の文字を表示できます．
+
+<ul>
+<li><a href="http://www.fonts.jp/">漢字フォント自動生成技術フォーラム</a>
+<li><a href="http://web.sfc.keio.ac.jp/~kamichi/kage/kage.html">KAGEモデル</a>
+<li><a href="http://www.vector.co.jp/soft/win95/writing/se256880.html">KST32ZX</a>, 篆文風(Zhuanwen-Like),漢字StrokeFont(KST)
+<li><a href="http://www.vector.co.jp/soft/data/writing/se119277.html">KST32A</a>, 極めてコンパクトなJIS第一水準漢字(非漢字)ストローク・テーブル
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+
+<div class="day">
+<h2><a href="#discussion" name="discussion">■</a>discussion</h2>
+<div class="body">
+<div class="section">
+<p>
+<h3>Ruby/M17Nとの整合性</h3>
+<p>Ruby/M17Nとの整合性をどうとればいいか．
+<ul>
+<li><a href="http://www.inac.co.jp/~maki/ruby/ruby-i18n.html">M17N/I18N for Ruby</a>
+<li><a href="http://www.inac.co.jp/~maki/ruby/matz-000516.html">Matz によるI18Nに関するコメント(2000/05/16) </a>
+<li><a href="http://ns1.php.gr.jp/pipermail/php-dev/2002-April/000274.html">高橋征義氏による，Ruby M17Nの解説</a>
+<li><a href="http://cvs.ruby-lang.org/~knu/cgi-bin/cvsweb.cgi/ruby/?only_with_tag=ruby_m17n">Ruby/M17N</a>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div class="day">
+<h2><a href="#links" name="links">■</a>links</h2>
+<div class="body">
+<div class="section">
+
+<p>
+<h3>CHISE project</h3>
+<ul>
+<li><a href="http://cvs.m17n.org/chise/">CHISE project</a>
+(<a href="http://www.kanji.zinbun.kyoto-u.ac.jp/projects/chise/">kyoto-u</a>,
+<a href="http://mousai.as.wakwak.ne.jp/projects/chise/">mousai</a>)
+<li><a href="http://eto.com/2003/ruby/">Ruby/CHISE</a>
+<li><a href="http://cvs.m17n.org/chise/ruby/index.html.ja.iso-2022-jp">Ruby/CHISE page at CHISE project</a>
+<li><a href="http://cvs.m17n.org/cgi-bin/viewcvs/perl/?cvsroot=chise">師茂樹氏 Perl/CHISE → CHISE.pm</a>
+</ul>
+
+<h3>Ruby</h3>
+<ul>
+<li><a href="http://www.ruby-lang.org/ja/">Ruby</a>
+<li><a href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-dev/11450">akr氏によるRuby/CHISE仕様案</a>
+<li><a href="http://moulon.inra.fr/ruby/bdb.html">Ruby/BDB</a>
+<li><a href="http://www.ruby-lang.org/~eban/ruby/binaries/mingw/ext/">eban氏によるコンパイル済みの拡張ライブラリー</a>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="day">
+<h2><a href="#history" name="history">■</a>history</h2>
+<div class="body">
+<div class="section">
+<ul>
+<li>2003-0110	: テスト公開
+<li>2003-0112	: XString追加
+<li>2003-0115	: IDSの読み込み機能β版
+<li>2003-0116	: IDSの読み込み機能1.0
+<li>2003-0117	: XStringを廃止し，Stringに一本化．IDSの読み込み機能を強化．
+<li>2003-0120	: IDS_Treeの読み込み機能を追加．木構造の整合性checkを追加．
+<li>2003-0130	: IDSの逆変換機能などを追加．
+<li>2003-0213	: <a href="http://eto.com/2003/ruby/ruby-chise-20030213.tar.bz2">ruby-chise-20030213.tar.bz2</a><br>
+名称をRuby/UTF-2000からRuby/CHISEへと変更．
+<li>2003-0312	: <a href="http://eto.com/2003/ruby/ruby-chise-20030312.tar.bz2">ruby-chise-20030312.tar.bz2</a><br>
+様々なライブラリを追加．
+<li>2003-1004	: <a href="http://eto.com/2003/ruby/ruby-chise-20031004.tar.bz2">ruby-chise-20031004.tar.bz2</a><br>
+新しい素性名に対応した．Copyright noticeをいれた．
+<li>2003-10-31	: <a href="http://lc.linux.or.jp/lc2003/">LC2003</a>にて発表．
+<li>2003-1110	: <a href="http://eto.com/2003/ruby/ruby-chise-20031110.tar.bz2">ruby-chise-20031110.tar.bz2</a><br>
+ディレクトリ構造をchise/*.rbとなるように変更．installerをつけた．
+<li>2004-07-08	: <a href="http://eto.com/2003/ruby/ruby-chise-0.2.tar.gz">ruby-chise-0.2.targz</a><br>
+libchiseに対応した．他，多数の変更．
+</ul>
+</div>
+</div>
+</div>
+
+<div class="sidebar">
+<h2>menu</h2>
+<ul>
+<li><a href="#about">about</a>
+<li><a href="#download">download</a>
+<li><a href="#install">install</a>
+<li><a href="#howto">howto</a>
+<li><a href="#ids">ids</a>
+<li><a href="#usage">usage</a>
+<li><a href="#description">description</a>
+<li><a href="#discussion">discussion</a>
+<li><a href="#links">links</a>
+<li><a href="#history">history</a>
+</ul>
+</div>
+
+<div class="footer">
+<address>author: <a href="http://eto.com/">Kouichirou Eto</a></address>
+</div>
+
+</div>
+</div>
+
+</body>
+</html>

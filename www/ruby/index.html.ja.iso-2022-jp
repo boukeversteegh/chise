@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+<head>
+<title>CHaracter Information Service Environment</title>
+<link rel=stylesheet href="../chise.css" type="text/css">
+</head>
+<body>
+
+    <p>
+      [<a href="../index.html.ja.iso-2022-jp">CHISE</a>]
+      [<a href="../xemacs/index.html.ja.iso-2022-jp">XEmacs CHISE</a>]
+      [Ruby/CHISE]
+      [<a href="../perl/index.html.ja.iso-2022-jp">Perl/CHISE</a>]
+      [<a href="../topicmaps/index.html.ja.iso-2022-jp">TopicMaps</a>]
+      [<a href="../ids/index.html.ja.iso-2022-jp">IDS</a>]
+      [<a href="../glyph/index.html.ja.iso-2022-jp">glyph</a>]
+      [<a href="../visualization/index.html.ja.iso-2022-jp">Visualization</a>]
+      [<a href="../omega/index.html.ja.iso-2022-jp">Ω</a>]
+    </p>
+
+<h1>
+<a href="../index.html.ja.iso-2022-jp">CHISE</a> / 
+<a name="ruby">Ruby/CHISE</a>
+</h1>
+
+<hr>
+
+    <p>
+      CHISE 文字データベース（現状では XEmacs CHISE 用の Berkeley DB
+      版文字データベース）を Ruby からアクセスする試みを行っています。
+    </p>
+
+    <p>
+      <a href="http://eto.com/2003/ruby/">Ruby/CHISE ホームページ</a><br>
+      <a href="http://cvs.m17n.org/viewcvs/ruby/?cvsroot=chise">Ruby/CHISE CVS access</a>
+    </p>
+
+<!--
+<p>
+また、Ruby 版 UTF-2000 実装を開発すると良いかも知れません。
+(cf.
+<a href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-dev/11450">
+Ruby/UTF-2000の仕様案
+</a> (by akr さん)
+</p>
+-->
+
+<hr>
+
+    <p>
+      [<a href="../">戻る</a>]
+    </p>
+
+    <p>
+<!-- hhmts start --> Last modified: Tue Oct 18 12:32:53 JST 2005 <!-- hhmts end -->.
+    </p>
+
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang=ja>
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-2022-JP">
+<title>How to Install XEmacs CHISE on Mac OS X</title>
+<link rel=stylesheet href="../chise.css" type="text/css">
+</head>
+
+<Body lang=ja>
+
+<p>[ <a href="../index.html.ja.iso-2022-jp">CHISE Top</a> ] [ <a href="index.html.ja.iso-2022-jp">XEmacs CHISE Top</a> ]</p>
+
+<h1>XEmacs CHISE を Mac OS X にインストールする方法</h1>
+
+<hr>
+
+<h2>はじめに</h2>
+<p>
+ここでは
+<a href="http://www.apple.co.jp/macosx/">Mac OS X</a>
+を一通り扱える人を対象に、
+<a href="index.html.ja.iso-2022-jp">XEmacs CHISE</a>（旧称 XEmacs UTF-2000）
+のインストール方法を説明しています。
+</p>
+
+<hr>
+
+<h2>最初にやっておくべきこと</h2>
+
+<p>
+Macintosh HD/アプリケーション/Installers/Developer Tools/Developer.mpkg
+をダブルクリックして、インストールしておく。
+</p>
+
+<h2>fink 用パッケージの利用する場合</h2>
+
+<p>
+<a href="index.html.ja">XEmacs/CHISE</a> と libchise を
+<a href="http://fink.sourceforge.net/">Fink</a>
+のパッケージとしてインストール出来るようにしました。
+</p>
+
+<h3>先に入れておくべきパッケージ</h3>
+
+<p>
+作業に先立って、以下のパッケージをfink installしておいた方がよいでしょう。
+</p>
+
+<ul>
+	<li>wget</li>
+	<li>xfonts-intl</li>
+</ul>
+
+<p>
+また、日本語入力にcannaを使いたい場合には、XEmacs CHISEをインストールする前に、
+以下のパッケージをインストールしなければなりません。</p>
+
+<ul>
+	<li>canna</li>
+	<li>canna-dev</li>
+	<li>canna-shlibs</li>
+</ul>
+
+<p>
+ただし、<u>cannaはunstableパッケージで配布されている</u>ので、/sw/etc/fink.confファイルのTrees行に「unstable/main unstable/crypto」という記述を追加してからfink installします。
+</p>
+
+<p>
+また、<u>cannaのコンパイル時には、「canna」という名前のユーザとグループが必要</u>です。
+もしない場合は、NetInfoマネージャで追加するか、コマンドラインから以下のコマンドで追加します。
+</p>
+<blockquote><kbd>
+% sudo niutil -create / /users/canna<br>
+% sudo niutil -create / /groups/canna
+</kbd></blockquote>
+
+<h3>アーカイブの取得</h3>
+
+<p>
+Fink のパッケージ用の info/patch ファイルのアーカイブを取得して、
+/sw/fink/10.3/local/main/finkinfo に置いてから、
+「fink install 〜」を実行して下さい。
+</p>
+<p class="attention">
+なお、以下では Mac OS X 10.3 を仮定して記述しますが、10.2
+をお使いの方は 10.3 の部分を 10.2 と置き換えて解釈して下さい。
+</p>
+
+<p>
+<blockquote>
+<kbd>% wget '<a
+href="http://cvs.m17n.org/cgi-bin/viewcvs/package/fink/10.3/finkinfo/finkinfo.tar.gz?tarball=1&cvsroot=chise"
+>http://cvs.m17n.org/cgi-bin/viewcvs/package/fink/10.3/finkinfo/finkinfo.tar.gz?tarball=1&cvsroot=chise</a>'
+-O finkinfo-10.3-chise.tar.gz</kbd>
+</blockquote>
+</p>
+
+<h3>/sw/fink/10.3/local/main/finkinfo へ配置</h3>
+<p>
+<blockquote>
+<kbd>% sudo tar xvzf finkinfo-10.3-chise.tar.gz -C /sw/fink/10.3/local/main</kbd>
+</blockquote>
+</p>
+
+
+<h3>stacksizeの変更</h3>
+
+<p>インストールの際には、以下のコマンドを入力してください。</p>
+
+<blockquote>
+<kbd>% limit stacksize 65536</kbd> （tcshの場合）<br>
+<kbd>% ulimit -s 65536</kbd> （bashの場合）
+</blockquote>
+
+<h3>xemacs-chise, libchise のインストール</h3>
+<p>
+xemacs-chise と libchise は相互依存関係にあるので、まず 
+xemacs-chise をインストールして下さい。最初は libchise を使う 
+xemacs-chise をインストールすることは出来ませんが、libchise のイン
+ストール後 build した xemacs-chise は libchise をリンクしたものに
+なるので、xemacs-chise をバージョンアップする時に自動的に入れ換わ
+ります。
+
+<blockquote>
+<kbd>% fink install xemacs-chise</kbd><br>
+<kbd>% fink install xemacs-mule-sumo-pkg xemacs-sumo-pkg
+xemacs-chise-ids-pkg</kbd><br>
+<br>
+<kbd>% fink install libchise0 libchise0-dev libchise0-shlibs</kbd><br>
+</blockquote>
+</p>
+
+<p class="attention">旧版をお使いの方に…
+（10.3 をお使いの方は無視して下さい）</p>
+<p>このfinkのパッケージはCVS版のXEmacs CHISEを使っていて、これまではバージョンを日付のみとしていたのですが、リリース版のバージョンも付加するように変更しました。そのため以前の日付のみのバージョンを持つパッケージをインストールしている場合は、古いパッケージの削除とfinkinfoの削除をする必要があります。</p>
+
+<blockquote>
+<kbd>% dpkg -l | grep chise</kbd>
+</blockquote>
+
+<p>で表示されるパッケージと、パッケージの名前が変わった xemacs-ids-pkg を削除して下さい。</p>
+
+<blockquote>
+<br>
+<kbd>% sudo apt-get remove <パッケージ名></kbd><br>
+<kbd>% sudo apt-get remove xemacs-ids-pkg</kbd>
+</blockquote>
+</p>
+
+<blockquote>
+<br>
+<kbd>% sudo rm /sw/fink/10.2/local/main/finkinfo/editors/*chise*</kbd><br>
+<kbd>% sudo rm /sw/fink/10.2/local/main/finkinfo/libs/*chise*</kbd>
+</blockquote>
+</p>
+
+<p>この後上記の手順にしたがって finkinfo のアーカイブの取得からやり直して下さい。</p>
+
+<p>これから初めてインストールする方には、この作業は必要ありません。</p>
+
+<hr>
+
+<h2>自分でコンパイルする場合 (under construct)</p></h2>
+<p>
+<a href="install.debian.ja.html">
+「XEmacs CHISE を Debian GNU/Linux にインストールする方法」</a>
+を参考にしてください。
+</p>
+
+<hr>
+
+<h2>その他</h2>
+<p>
+XEmacs/CHISE で正しい表示を得るには多くのフォントが必要ですが、
+フォントのインストールについては割愛します。
+<a href="install.debian.ja.html#fonts">Debian GNU/Linux
+でのフォントのインストール方法</a>などを参考に
+必要なフォントをインストールして下さい。
+</p>
+<hr>
+<p>
+<!-- hhmts start -->
+Last modified: Thu May  6 16:54:04 JST 2004
+<!-- hhmts end -->
+</p>
+</body>
+</html>

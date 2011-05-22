@@ -1,0 +1,37 @@
+Package: omega-chise-supportdb
+Version: 20040128
+Revision: 1
+Depends: fink (>= 0.9.3)
+Source: http://www.jokoji.jp/chise/%n-%v.tar.gz
+Source-MD5: c172b252004f0b3416744f55e98ac8b2
+NoSourceDirectory: True
+CompileScript: echo "Nothing to do ..."
+InstallScript: <<
+  #!/bin/sh
+  DB_HOME=`xemacs -q -batch -eval '(princ (file-name-as-directory exec-directory))'`
+  if [ -d $DB_HOME/chise-db/character/ ]; then
+    mkdir -p %i/../$DB_HOME/chise-db/character/feature
+    mkdir -p %i/../$DB_HOME/chise-db/character/by_feature
+    mv chise-db/character/feature/* %i/../$DB_HOME/chise-db/character/feature/
+    mv chise-db/character/by_feature/* %i/../$DB_HOME/chise-db/character/by_feature/
+    chown -R root:admin %i/../$DB_HOME/chise-db
+  else
+    if [ -d $DB_HOME/char-db/system-char-id ]; then
+      mkdir -p %i/../$DB_HOME/char-db/system-char-id
+      mv chise-db/character/feature/* %i/../$DB_HOME/char-db/system-char-id/
+      mv chise-db/character/by_feature/* %i/../$DB_HOME/char-db/
+      chown -R root:admin %i/../$DB_HOME/char-db
+    else
+      echo "CHISE DB not found."
+      exit 1
+    fi
+  fi
+<<
+License: GPL
+Description: Omega CHISE support DB
+DescDetail: <<
+  This package provides reverse IDS DB and
+    vnd-adobe-cid DB.
+<<
+Maintainer: Izumi Miyazaki <imiyazaki@bun.kyoto-u.ac.jp>
+Homepage: http://www.kanji.zinbun.kyoto-u.ac.jp/projects/chise/

@@ -1,0 +1,49 @@
+;;; -*-Emacs-Lisp-*-
+
+;; TOMOYO-MK: installer for TOMOYO.
+
+;;; Code:
+
+(defun config-tomoyo-package ()
+  (let (package-dir)
+    (and (setq package-dir (car command-line-args-left))
+	 (or (string= "NONE" package-dir)
+	     (defvar PACKAGEDIR package-dir)
+	     ))
+    (setq command-line-args-left (cdr command-line-args-left))
+    (load-file "TOMOYO-CFG")
+    (load-file "TOMOYO-ELS")
+					  
+    (princ (format "PACKAGEDIR=%s\n" PACKAGEDIR))
+    ))
+
+(defun compile-tomoyo-package ()
+  (config-tomoyo-package)
+
+  (setq autoload-package-name "tomoyo")
+  (add-to-list 'command-line-args-left ".")
+  (batch-update-directory)
+
+  (add-to-list 'command-line-args-left ".")
+  (Custom-make-dependencies)
+
+  (compile-elisp-modules (append tomoyo-modules-to-compile
+				 '(auto-autoloads custom-load))
+			 ".")
+  )
+
+(defun install-tomoyo-package ()
+  (config-tomoyo-package)
+  (install-elisp-modules (append tomoyo-modules
+				 '(auto-autoloads custom-load))
+			 "./"
+			 (expand-file-name TOMOYO_PREFIX
+					   (expand-file-name "lisp"
+							     PACKAGEDIR)))
+  (delete-file "./auto-autoloads.el")
+  (condition-case nil
+      (delete-file "./custom-load.el")
+    (error nil))
+  )
+
+;;; TOMOYO-MK ends here

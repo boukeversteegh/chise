@@ -1,0 +1,199 @@
+/* Copyright (C) 2003-2004 Hironori Oooka, Kouichirou Eto, All rights reserved.
+   This is free software with ABSOLUTELY NO WARRANTY.
+   You can redistribute it and/or modify it under the terms of the GNU GPL2. */
+
+/* ========== general */
+* {
+ padding: 0;
+ margin: 0;
+}
+body {
+ background-color: #fff;
+ color: #000;
+ font-family: Arial,Verdana,Helvetica,'MS UI Gothic',sans-serif;
+ line-height: 1.33;
+}
+h1, h2, h3, h4, h5, h6, pre {
+ font-size: medium;
+}
+h3, h4, h5, h6 {
+ margin: 1em 0em;
+ padding: 0em 0em 0em 1em;
+ border-bottom: 2px dotted #6cc;
+ color: #099;
+}
+h4 {
+ border-bottom: 2px dotted #9cc;
+}
+h5 {
+ border-bottom: 2px dotted #ccc;
+}
+h6 {
+ border-bottom: 2px dotted #ccc;
+ font-weight: normal;
+}
+
+ul, ol {
+ margin: 1em;
+ padding: 0em;
+}
+ul ul, ol ol, ul ol, ol ul {
+ margin: 0em 1em;
+}
+dl {
+ margin: 1em 0em;
+ padding: 0em;
+}
+dt {
+ margin: 0.5em 0em 0.2em 0em;
+ padding: 0em;
+ font-weight: bold;
+ border-bottom: 1px solid #ccc;
+}
+dd {
+ margin: 0em 0em 0em 1.5em;
+ padding: 0em;
+}
+
+pre {
+ margin: 1em 0em;
+ padding: 0.5em;
+ background-color: #eff;
+ border: 1px solid #999;
+}
+blockquote {
+ margin: 1em 0em;
+ padding: 0.5em;
+ background-color: #dee;
+ border: 1px dotted #696;
+}
+.section blockquote p {
+ margin: 0em;
+ padding: 0em;
+}
+
+table {
+ margin: 1em 0em;
+ padding: 0em;
+ border: 2px solid #999;
+ border-collapse: collapse;
+}
+th, tr, td {
+ padding: 0.1em 0.3em 0.1em 0.3em;
+ border: 1px solid #999;
+}
+
+hr {
+ border: 2px solid #9cc;
+}
+
+em, strong {
+ font-style: normal;
+ font-weight: bold;
+}
+strong {
+ color: #900;
+}
+
+a:link		{ color: #0cc; }
+a:visited	{ color: #066; }
+a:active, a:hover { color: #fff; background-color: #0cc; text-decoration: none; }
+
+/* ========== container */
+.container {
+}
+
+/* ========== main */
+.main {
+ margin: 0em 0em 0em 180px;
+/* padding: 0em 20px 50px 20px;*/
+ padding: 0em 1em 2em;
+}
+.main h1 {
+ margin: 0em 0em 1ex 0em;
+ padding: 1ex 1em 0.5ex 1em;
+ border: 2px solid #9cc;
+ border-left: 10px;
+ color: #099;
+}
+
+/* ==================== main adminmenu */
+.adminmenu {
+ color: #099;
+ margin: 0em;
+ padding: 0.2em 0em 0em 0em;
+ font-size: 90%;
+ text-align: right;
+}
+.adminmenu a:link	{ color: #f66; }
+.adminmenu a:visited	{ color: #c33; }
+.adminmenu a:active, .adminmenu a:hover { color: #fff; background-color: #c00; }
+.adminmenu ul {
+ margin: 0em;
+ padding: 0em;
+}
+
+/* ==================== main day */
+.day {
+ margin: 0.5em 0em 0.5em 0em;
+ padding: 0em;
+ border: 2px solid #9cc;
+}
+.day h2 {
+ margin: 0em;
+ padding: 0.5em 2em 0em 2em;
+ border-bottom: 2px dotted #9cc;
+ color: #099;
+}
+
+/* ============================== main day body */
+.body {
+ margin: 1em 1em 1em 2em;
+ padding: 0em;
+}
+.section {
+ margin: 1em 0em;
+ padding: 0em;
+}
+.section p {
+ margin: 1em 0em;
+ padding: 0em;
+}
+
+/* ============================== main day comment */
+.comment {
+ margin: 0em;
+ padding: 0.5em 2em;
+ color: #099;
+ font-size: small;
+ background-color: #eff;
+}
+#body_leave .day {
+ margin: 1em 0em 1em 0em;
+ border: 0px;
+ background-color: #fff;
+}
+
+/* ========== sidebar */
+.sidebar {
+ position: absolute;
+ left: 0em;
+ top: 0em;
+ width: 180px;
+ font-size: small;
+}
+
+.sidebar h2 {
+ background-color: #099;
+ color: #fff;
+ margin: 1em 0em;
+ padding: 0.1em 1em;
+}
+.sidebar h2, .sidebar h3, .sidebar h4, .sidebar h5, .sidebar h6 {
+ font-size: small;
+}
+.sidebar ul {
+ margin: 0.5em 0em 0.5em 1.5em;
+}
+
+/* end */

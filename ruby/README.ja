@@ -1,0 +1,36 @@
+* Ruby/CHISE README
+
+Ruby/CHISEはRubyにおけるChaon実装です。
+
+** 必要環境
+
+- ruby 1.8
+- Berkeley DB
+- Ruby/BDB
+
+** インストール方法
+
+chise以下を、適当なdirectoryに移動してください。
+例:
+ # mv chise /usr/local/lib/ruby/site_ruby/1.8
+
+拡張ライブラリは、ext以下にcdして、下記のように打ち込んでください。
+ % ruby extconf.rb
+ % make
+ # make install
+
+拡張ライブラリが無くても動きます。あると高速化します。
+
+** 使い方
+
+doc/index.htmlを見てみてください
+また、sample以下、test以下が参考になるかもしれません。
+最新版の情報は http://eto.com/2003/ruby/ をごらん下さい。
+
+** ライセンス
+
+GPLです。COPYINGをごらんください。
+
+** 作者
+
+Kouichirou Eto <2004 at eto.com>

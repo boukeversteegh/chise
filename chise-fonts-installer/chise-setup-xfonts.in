@@ -1,0 +1,17 @@
+#!/bin/sh
+xset +fp @prefix@/share/emacs/fonts:unscaled
+xset +fp @prefix@/share/fonts/PCF/EGB:unscaled
+
+if [ -d "@prefix@/share/fonts/TrueType/Arphic" ]
+then
+    xset fp+ @prefix@/share/fonts/TrueType/Arphic
+fi
+
+xset fp+ @prefix@/share/fonts/TrueType/Zinbun
+xset fp+ @prefix@/share/fonts/TrueType/GT
+xset fp+ @prefix@/share/fonts/PCF/JISX0213:unscaled
+xset fp+ @prefix@/share/fonts/PCF/ETL-VN2:unscaled
+xset fp+ @prefix@/share/fonts/PCF/Thai-XTIS:unscaled
+xset fp+ @prefix@/share/fonts/PCF/CBETA:unscaled
+xset fp+ @prefix@/share/fonts/PCF/Zinbun:unscaled
+xset fp+ @prefix@/share/fonts/PCF/Zinbun

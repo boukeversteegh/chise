@@ -1,0 +1,74 @@
+VERSION = @PACKAGE_VERSION@
+
+RM	= /bin/rm -f
+TAR	= tar
+WGET	= wget
+MKDIR	= mkdir -p
+SUDO	= 
+
+prefix		= @prefix@
+exec_prefix	= @exec_prefix@
+
+datadir	= @datadir@
+
+FONTS_DIR	= $(datadir)/fonts
+BDF_FONTS_DIR	= $(datadir)/fonts/BDF
+PCF_FONTS_DIR	= $(datadir)/fonts/PCF
+JISX0213_BDF_FONTS_DIR = $(BDF_FONTS_DIR)/JISX0213
+JISX0213_PCF_FONTS_DIR = $(PCF_FONTS_DIR)/JISX0213
+
+JISX0213_16DOT_FONTS_URL = http://www12.ocn.ne.jp/~imamura
+JISX0213_24DOT_FONTS_URL = http://distfiles.gentoo.org/distfiles
+
+BDF_FILES	= jiskan16-2000-1.bdf.gz jiskan16-2000-2.bdf.gz \
+		  jiskan16-2004-1.bdf.gz \
+		  jiskan24-2000-1.bdf.gz jiskan24-2000-2.bdf.gz \
+		  jiskan24-2003-1.bdf.gz
+
+OPTS		= @ac_configure_args@
+
+all:	get
+
+get:	$(BDF_FILES)
+
+
+jiskan16-2000-1.bdf.gz:
+	$(WGET) $(JISX0213_16DOT_FONTS_URL)/jiskan16-2000-1.bdf.gz
+
+jiskan16-2000-2.bdf.gz:
+	$(WGET) $(JISX0213_16DOT_FONTS_URL)/jiskan16-2000-2.bdf.gz
+
+jiskan16-2004-1.bdf.gz:
+	$(WGET) $(JISX0213_16DOT_FONTS_URL)/jiskan16-2004-1.bdf.gz
+
+
+jiskan24-2000-1.bdf.gz:
+	$(WGET) $(JISX0213_24DOT_FONTS_URL)/jiskan24-2000-1.bdf.gz
+
+jiskan24-2000-2.bdf.gz:
+	$(WGET) $(JISX0213_24DOT_FONTS_URL)/jiskan24-2000-2.bdf.gz
+
+jiskan24-2003-1.bdf.gz:
+	$(WGET) "http://www.chise.org/chise/dist/fonts/BDF/JISX0213/jiskan24-2003-1.bdf.gz"
+#	$(WGET) http://cvs.fedoraproject.org/repo/pkgs/fonts-japanese/jiskan24-2003-1.bdf.gz/d452c1138a4684f864b8d12ec0e2f00d/jiskan24-2003-1.bdf.gz
+#	$(WGET) $(JISX0213_24DOT_FONTS_URL)/jiskan24-2003-1.bdf.gz
+
+
+install:
+	$(MKDIR) $(JISX0213_BDF_FONTS_DIR)
+	( $(TAR) -cf - *.bdf.gz ) | \
+	( cd $(JISX0213_BDF_FONTS_DIR) && $(TAR) -xf - )
+	$(MKDIR) $(JISX0213_PCF_FONTS_DIR)
+	for file in $(BDF_FILES) ; do \
+		FONT=`basename $${file} .bdf.gz`.pcf.gz ; \
+		zcat $${file} | bdftopcf | gzip -9 \
+		> $(JISX0213_PCF_FONTS_DIR)/$${FONT} ; \
+	done
+	cd $(JISX0213_PCF_FONTS_DIR) && mkfontdir
+
+
+distclean:
+	-$(RM) Makefile
+
+distclean-all:
+	-$(RM) *.bdf.gz Makefile

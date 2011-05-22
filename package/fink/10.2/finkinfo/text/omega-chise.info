@@ -1,0 +1,48 @@
+Package: omega-chise
+Version: 0.3.20040908
+Revision: 1
+Depends: fink (>= 0.9.3)
+Source: http://www.jokoji.jp/chise/omega-chise-texmf-%v.tar.gz
+Source-MD5: d179fe56f279cba24868137907a9a131
+NoSourceDirectory: True
+CompileScript: echo "Nothing to do ..."
+InstallScript: <<
+  #!/bin/sh
+  if [ -e "/usr/local/share/texmf" ]; then
+    mkdir -p %i/../usr/local/share/texmf
+    mv texmf/* %i/../usr/local/share/texmf/
+    chown -R root:admin %i/../usr/local/share/texmf
+  else
+    if [ -e "/usr/share/texmf" ]; then
+      mkdir -p %i/../usr/share/texmf
+      mv texmf/* %i/../usr/share/texmf/
+      chown -R root:admin %i/../usr/share/texmf
+    else
+      if [ -e "/sw/share/texmf" ]; then
+        mkdir -p %i/../sw/share/texmf
+        mv texmf/* %i/../sw/share/texmf/
+        chown -R root:admin %i/../sw/share/texmf
+      else
+    	echo "No TEXMF found"
+    	exit 1
+      fi
+    fi
+  fi
+ mkdir -p %i/../sw/share/chise/omega
+<<
+PostInstScript: <<
+ echo "You need a write permisson to /sw/share/chise/omega."
+ echo "Please check. Otherwise cache files will be stored"
+ echo "  in the current directory."
+ echo "Change the path in chise.sty and makefonts.pl,"
+ echo " if your \$TEXMF is not /usr/local/share/texmf."
+<<
+License: GPL
+Description: Omega CHISE
+DescDetail: <<
+  This macro package for Omega provides the function
+  of typesetting utf-8 documents with CHISE database
+  and KAGE server.
+<<
+Maintainer: Izumi Miyazaki <imiyazaki@bun.kyoto-u.ac.jp>
+Homepage: http://www.kanji.zinbun.kyoto-u.ac.jp/projects/chise/

@@ -1,0 +1,102 @@
+CC = @CC@
+DEFS = @DEFS@
+LIBS = @LIBS@
+CFLAGS	= @CFLAGS@ -c -Wall -Wmissing-prototypes
+
+LIBTOOL = @LIBTOOL@
+
+RM	= /bin/rm -f
+TAR	= tar
+
+
+## The default location for installation.  Everything is placed in
+## subdirectories of this directory.  The default values for many of
+## the variables below are expressed in terms of this one, so you may
+## not need to change them.  This defaults to /usr/local.
+prefix	= @prefix@
+
+## Like `prefix', but used for architecture-specific files.
+exec_prefix = @exec_prefix@
+
+datadir	= @datadir@
+
+libdir	= @libdir@
+
+#libexecdir = @libexecdir@
+
+#localstatedir = @localstatedir@
+
+sharedstatedir = @sharedstatedir@
+
+#target	= @target@
+
+top_builddir = @builddir@
+
+
+INCLUDE_INSTALLDIR = ${prefix}/include
+LIB_INSTALLDIR	= ${libdir}
+#CHISE_DIR_PREFIX = ${libexecdir}/chise
+CHISE_DIR_PREFIX = ${datadir}/chise
+#CHISE_DIR_PREFIX = ${sharedstatedir}/chise
+CHISE_DIR_VERSION = 1.0
+CHISE_DIR	= ${CHISE_DIR_PREFIX}/${CHISE_DIR_VERSION}
+#CHISE_DB_DIR	= ${CHISE_DIR}/${target}
+CHISE_DB_DIR	= ${CHISE_DIR}
+CHISE_SI_DB_DIR	= ${CHISE_DB_DIR}/db
+
+CHISE_CFLAGS	= \
+	-DCHISE_DB_FORMAT_VERSION=\"${CHISE_DIR_VERSION}/\" \
+	-DCHISE_DB_DIR=\"${CHISE_DB_DIR}/\" \
+	-DCHISE_SI_DB_DIR=\"${CHISE_SI_DB_DIR}/\"
+
+VERSION		= @PACKAGE_VERSION@
+ABI_VERSION     = 3:0:2
+
+
+HEADERS	= chise.h
+OBJS	= chise.lo
+
+
+all:	libchise.la
+
+libchise.la:	$(OBJS)
+	$(LIBTOOL) --mode=link \
+		$(CC) -o libchise.la $(OBJS) $(LIBS) \
+		-rpath ${libdir} -version-info $(ABI_VERSION) \
+		-no-undefined
+
+chise.lo:	chise.c chise.h config.h sysdep.h
+	$(LIBTOOL) --mode=compile $(CC) $(CHISE_CFLAGS) $(CFLAGS) chise.c
+
+
+install:	install.h install.libs
+
+install.h:
+	install -c $(HEADERS) $(INCLUDE_INSTALLDIR)
+
+install.libs:	libchise.la
+	$(LIBTOOL) --mode=install install -c libchise.la $(LIB_INSTALLDIR)
+
+
+sample:	sample.c libchise.la
+	gcc -Wall -Wmissing-prototypes -o sample sample.c -lchise
+
+
+clean:
+	-$(RM) -r *.o *.lo *.so *.la .libs sample
+
+distclean: clean
+	-$(RM) Makefile config.h config.status config.log
+	-$(RM) -r autom4te.cache autoscan.log configure.scan libtool
+
+tar:
+	cvs commit
+	sh -c 'cvs tag -R libchise-`echo $(VERSION) \
+				| sed s/\\\\./_/ | sed s/\\\\./_/`; \
+	cd /tmp; \
+	cvs -d :pserver:anonymous@cvs.m17n.org:/cvs/chise \
+		export -d libchise-$(VERSION) \
+		-r libchise-`echo $(VERSION) | tr . _` libchise'
+	cd /tmp; $(RM) libchise-$(VERSION)/.cvsignore ; \
+		$(TAR) cvzf libchise-$(VERSION).tar.gz libchise-$(VERSION)
+	cd /tmp; $(RM) -r libchise-$(VERSION)

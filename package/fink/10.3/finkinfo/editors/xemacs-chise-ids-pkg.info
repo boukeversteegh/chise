@@ -1,0 +1,17 @@
+Package: xemacs-chise-ids-pkg
+Version: 20040508
+Revision: 1
+Source: http://www.jokoji.jp/chise/xemacs-chise-ids-pkg-%v.tar.gz
+Source-MD5: fdbc41c0f8efa383e38969888e7eeb88
+Conflicts: xemacs-ids-pkg
+Replaces: xemacs-ids-pkg
+CompileScript: echo "no compile script"
+NoSourceDirectory: true
+InstallScript: <<
+ mkdir -p %i/lib/xemacs/site-packages/lisp
+ cp -R . %i/lib/xemacs/site-packages/lisp
+<<
+License: GPL
+Description: Allows xemacs-chise to manipulate IDS.
+Maintainer: MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+Homepage: http://www.kanji.zinbun.kyoto-u.ac.jp/projects/chise/xemacs/

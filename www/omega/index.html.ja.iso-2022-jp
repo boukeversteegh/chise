@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+<head>
+<title>CHaracter Information Service Environment</title>
+<link rel=stylesheet href="../chise.css" type="text/css">
+</head>
+<body>
+
+<p>
+[<a href="../index.html.ja.iso-2022-jp">CHISE</a>]
+[<a href="../xemacs/index.html.ja.iso-2022-jp">XEmacs CHISE</a>]
+[<a href="../ruby/index.html.ja.iso-2022-jp">Ruby/CHISE</a>]
+[<a href="../perl/index.html.ja.iso-2022-jp">Perl/CHISE</a>]
+[<a href="../topicmaps/index.html.ja.iso-2022-jp">TopicMaps</a>]
+[<a href="../ids/index.html.ja.iso-2022-jp">IDS</a>]
+[<a href="../glyph/index.html.ja.iso-2022-jp">glyph</a>]
+[<a href="../visualization/index.html.ja.iso-2022-jp">Visualization</a>]
+[Ω]
+</p>
+
+<h1>Ω/CHISE : 文字データベースと連携した組版システム</h1>
+
+<hr>
+
+<blockquote>
+<img alt="chise-omega" src="../images/chise-omega.png">
+</blockquote>
+
+<h2>はじめに</h2>
+<p>
+文字符号に制約されることなく一貫して文書処理する上で
+重要な部品のひとつは組版・印刷システムだといえます。
+このため、現在、CHISE
+プロジェクトでは苫米地等流氏、宮崎泉氏らが中心となって、
+文字データベースより得られる文字オブジェクトの情報に基づいた、
+柔軟かつ拡張性の高い組版システムの設計と実装を行っています。
+</p>
+<p>
+このサブプロジェクトでは組版エンジンとして Ω と呼ばれる TeX に
+基づく多言語組版システムのひとつを採用しています。これは Ω が
+TeX より継承した精密な組版能力に加え、
+入出力文字コードを変換する強力な言語ΩＴＰ (Ω Translation Process)
+を内蔵していることから、多言語・多文字種の文書を処理するにあたって
+現時点で最適なツールと考えられるからです。さらに、ΩＴＰ
+は単に文字コードの変換するだけではなく、
+組版規則に従った入出力の変換処理にも利用可能です。
+また、外部のプログラム（標準入出力フィルタ）をプラグイン（外部ΩＴＰ）
+として付加し、極めて複雑な処理を行わせることも容易です。
+このようなΩの拡張性は、文字データベースと連携した組版に不可欠なものであり、
+符号化文字集合・文字オブジェクト情報の両者を柔軟に組合せた
+実用的で強力な組版システムの構築を可能にすると考えられます。
+</p>
+<p>
+具体的な実装にあたっては、
+データベースとΩ
+のインターフェイスを取るプラグインフィルタの開発を作業の中心としており、
+これと並行して LaTeX/Lambda マクロや XSL
+スタイルファイルの設計を行っています。
+また、多様なグリフ表現に必要となるフォントの実装
+およびそのシステム中での扱いについても研究・実証を行っています。
+入力は LaTeX/Lambda 形式を基本として想定しますが、
+プラグインフィルタから XML パーサや XSLT ツールを呼びだすことによる
+XML 入力への対応も開発の視野に入れています。同じく出力についても、
+LaTeX→dvi, XML→dviに加え、LaTeX→XML/FO, XML→XML/FO のような
+組み合わせも可能としたいと考えています。
+</p>
+
+<hr>
+
+<h2>入手法</h2>
+
+<h3><a name="anon-cvs">Anonymous cvs による入手</a></h3>
+<p>
+Ω/CHISE の現在開発中の最新版を anonymous CVS
+経由で入手することが可能です。
+</p>
+
+<h4>login</h4>
+<p>
+以下は、cvs.m17n.org の /cvs/chise の anonymous CVS
+サービスを初めて利用する時に行ってください。２度目以降は不要です。
+<blockquote>
+<kbd>% cvs -d :pserver:anonymous@cvs.m17n.org:/cvs/chise login</kbd><br>
+<kbd>CVS password: ← 何も入力しないでEnter</kbd>
+</blockquote>
+</p>
+
+<h4>checkout</h4>
+<blockquote>
+<kbd>% cvs -z9 -d :pserver:anonymous@cvs.m17n.org:/cvs/chise checkout omega</kbd>
+</blockquote>
+
+<h4>update</h4>
+<p>
+一度 checkout すれば、２度目以降は CVS
+の作業ディレクトリ（上記の例の場合、XEmacs-CHISE）内で
+<blockquote>
+<kbd>% cvs -z9 update -Pd</kbd>
+</blockquote>
+を行うだけで、作業ディレクトリの中身を最新のソースにする事ができます。
+
+<h3><a href="http://cvs.m17n.org/viewcvs/omega/?cvsroot=chise">
+WWW access</a></h3>
+
+<hr>
+
+<p>
+[<a href="../">戻る</a>]
+</p>
+
+<p>
+<!-- hhmts start --> Last modified: Tue Oct 18 12:37:15 JST 2005 <!-- hhmts end -->.
+</p>
+
+</body>
+</html>

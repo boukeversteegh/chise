@@ -1,0 +1,102 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ(2.57)
+AC_INIT(chise-base, 0.25, chise-en@m17n.org)
+
+AC_CANONICAL_TARGET
+
+# Checks for programs.
+# AC_PROG_CC
+# AC_PROG_LIBTOOL
+#  AC_CHECK_PROGS(LIBTOOL, glibtool libtool, libtool, \
+#  	/usr/local/bin:/opt/bin:/sw/bin:/usr/bin:/bin)
+
+AC_SUBST(ac_configure_args)
+AC_SUBST(xemacs_configure_args)
+AC_SUBST(xemacs_site_includes)
+AC_SUBST(xemacs_site_libraries)
+AC_SUBST(xemacs_opts)
+AC_SUBST(cvs_root)
+AC_SUBST(lemi_cvs_root)
+
+if test -f CVS/Root; then
+	cvs_root=`cat CVS/Root`
+	lemi_cvs_root=`cat CVS/Root|sed 's/chise/root/'`
+else
+	cvs_root=':pserver:anonymous@cvs.m17n.org:/cvs/chise'
+	lemi_cvs_root=':pserver:anonymous@cvs.m17n.org:/cvs/root'
+fi
+
+xemacs_configure_args=`echo $ac_configure_args \
+			| sed 's/--with-site-includes/--site-includes/' \
+			| sed 's/--with-site-libraries/--site-libraries/'`
+
+# Settings for optional paths
+AC_ARG_WITH(site_includes,
+  --with-site-includes=PATH List of directories to search first for header files
+,
+#xemacs_site_includes="$with_site_includes"
+,
+if test -d /sw/include; then
+	xemacs_site_includes="/sw/include"
+	xemacs_opts="--with-dialogs=athena --with-widgets=athena --with-athena=3d"
+
+	if test -f /sw/include/db3/db.h; then
+		xemacs_site_includes="$xemacs_site_includes:/sw/include/db3"
+	elif test -f /sw/include/db4/db.h; then
+		xemacs_site_includes="$xemacs_site_includes:/sw/include/db4"
+	fi
+	if test x"$with_canna" != x"no"; then
+	   if test -d /sw/include/canna; then
+	   	xemacs_opts="$xemacs_opts --with-canna"
+	   fi
+	fi
+fi
+)
+
+AC_ARG_WITH(site_libraries,
+  --with-site-libraries=PATH List of directories to search first for libraries
+,
+#xemacs_site_libraries="$with_site_libraries"
+,
+if test -d /sw/include; then
+	xemacs_site_libraries="/sw/lib"
+fi
+)
+
+AC_ARG_WITH(canna,
+  --with-canna          Support the Canna input method
+,
+#xemacs_opts="$xemacs_opts --with-canna"
+,
+)
+
+# Checks for libraries.
+if test x"$xemacs_site_includes" != x""; then
+	xemacs_opts="$xemacs_opts --site-includes=$xemacs_site_includes"
+fi
+
+if test x"$xemacs_site_libraries" != x""; then
+	xemacs_opts="$xemacs_opts --site-libraries=$xemacs_site_libraries"
+fi
+
+if test x"$with_canna" != x"no"; then
+   AC_CHECK_LIB(canna,jrKanjiControl,
+   xemacs_opts="$xemacs_opts --with-canna")
+fi
+
+# Checks for header files.
+
+# Checks for typedefs, structures, and compiler characteristics.
+#AC_C_CONST
+#AC_C_INLINE
+
+# Checks for library functions.
+#AC_FUNC_ALLOCA
+#AC_FUNC_STRNLEN
+
+#AC_CHECK_FUNCS(strnlen)
+
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT

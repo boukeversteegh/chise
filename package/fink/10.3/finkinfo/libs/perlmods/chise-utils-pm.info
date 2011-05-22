@@ -1,0 +1,17 @@
+Package: chise-utils-pm
+Version: 0.02.20040902
+Revision: 1
+#BuildDepends: berkeleydb-pm
+#Depends: berkeleydb-pm
+Source: http://www.jokoji.jp/chise/Chise_utils-%v.tar.gz
+Source-MD5: 468c69c107f6619399ce9061df171d4a
+Type: perl
+UpdatePOD: True
+DocFiles: scripts/sample.pl
+Description: Perl module to refer CHISE db's.
+DescDetail: <<
+Perl module to refer CHISE db's.
+<<
+License: GPL
+Maintainer: Izumi Miyazaki <imiyazaki@bun.kyoto-u.ac.jp>
+Homepage: http://www.kanji.zinbun.kyoto-u.ac.jp/projects/chise/

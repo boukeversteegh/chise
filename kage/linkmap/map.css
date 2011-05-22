@@ -1,0 +1,22 @@
+div.general { position: absolute; }
+div.gb { position: absolute; font-family: serif, SimSun, 'AR_PL_ShanHeiSun_Uni', 'AR_PL_SungtiL_GB', '文鼎ＰＬ简报宋', STSong; font-size: 40px; }
+div.ucs { position: absolute; font-family: 'ＭＳ 明朝', 'IPAMincho', 'Sazanami Mincho', SimSun, 'SimSun (Founder Extended)', 'AR_PL_ShanHeiSun_Uni', 'AR_PL_Mingti2L_Big5', 'AR_PL_SungtiL_GB', '文鼎ＰＬ简报宋', '文鼎ＰＬ細上海宋', UnBatang, 'Baekmuk Batang', '은 신문', 'ヒラギノ明朝 Pro W3', STSong, 'LiSong Pro', AppleMyungjo; font-size: 40px; }
+div.big5 { position: absolute; font-family: MingLiU, 'AR_PL_Mingti2L_Big5', '文鼎ＰＬ細上海宋', 'LiSong Pro'; font-size: 40px; }
+div.cdp { position: absolute; font-family: EUDC; font-size: 40px; }
+div.jis { position: absolute; font-family: 'ＭＳ 明朝', 'IPAMincho', 'Sazanami Mincho', 'ヒラギノ明朝 Pro W3', HiraMinPro-W3; font-size: 40px; }
+div.ks { position: absolute; font-family: BatangChe, UnBatang, 'Baekmuk Batang', '은 신문', AppleMyungjo; font-size: 40px; }
+div.gt01 { position: absolute; font-family: GT2000-01; font-size: 40px; }
+div.gt02 { position: absolute; font-family: GT2000-02; font-size: 40px; }
+div.gt03 { position: absolute; font-family: GT2000-03; font-size: 40px; }
+div.gt04 { position: absolute; font-family: GT2000-04; font-size: 40px; }
+div.gt05 { position: absolute; font-family: GT2000-05; font-size: 40px; }
+div.gt06 { position: absolute; font-family: GT2000-06; font-size: 40px; }
+div.gt07 { position: absolute; font-family: GT2000-07; font-size: 40px; }
+div.gt08 { position: absolute; font-family: GT2000-08; font-size: 40px; }
+div.gt09 { position: absolute; font-family: GT2000-09; font-size: 40px; }
+div.gt10 { position: absolute; font-family: GT2000-10; font-size: 40px; }
+div.gt11 { position: absolute; font-family: GT2000-11; font-size: 40px; }
+div.gt12 { position: absolute; font-family: GT2000-12; font-size: 40px; }
+div.gt13 { position: absolute; font-family: GT2000-13; font-size: 40px; }
+div.gtK1 { position: absolute; font-family: GT2000-K1; font-size: 40px; }
+div.gtK2 { position: absolute; font-family: GT2000-K2; font-size: 40px; }

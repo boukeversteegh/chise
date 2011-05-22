@@ -1,0 +1,276 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+<head>
+<title>CHaracter Information Service Environment</title>
+<link rel=stylesheet href="../chise.css" type="text/css">
+</head>
+<body>
+
+    <p>
+      [<a href="../index.html.ja.iso-2022-jp">CHISE</a>]
+      [<a href="../xemacs/index.html.ja.iso-2022-jp">XEmacs CHISE</a>]
+      [<a href="../ruby/index.html.ja.iso-2022-jp">Ruby/CHISE</a>]
+      [<a href="../perl/index.html.ja.iso-2022-jp">Perl/CHISE</a>]
+      [<a href="../topicmaps/index.html.ja.iso-2022-jp">TopicMaps</a>]
+      [IDS]
+      [<a href="../glyph/index.html.ja.iso-2022-jp">glyph</a>]
+      [<a href="../visualization/index.html.ja.iso-2022-jp">Visualization</a>]
+      [<a href="../omega/index.html.ja.iso-2022-jp">Ω</a>]
+    </p>
+
+<h1>
+<a href="../index.html.ja.iso-2022-jp">CHISE</a> / 
+漢字構造情報データベース
+</h1>
+
+<hr>
+
+<p>
+ISO/IEC 10646-1:2000 の IDS
+形式に基づく漢字の構造情報データベースを開発中です。
+現在、ISO/IEC 10646-1 の基本統合漢字 (Unicode 例示字形),
+統合漢字拡張 A, ISO/IEC-10646-2 の統合漢字拡張 B
+の約７万字が入力済です。
+</p>
+
+<p>
+<a href="../images/ids-ext-b-1.png">
+<img align="ids" src="../images/ids-ext-b-1-s.png">
+<br>
+構造情報データベースのサンプル
+</a>
+</p>
+
+<blockquote>
+<dl compact>
+  <dt><a
+href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-UCS-Basic.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-UCS-Basic.txt
+      </a>
+  <dd>CJK Unified Ideographs (U+4E00 〜 U+9FA5) of ISO/IEC
+      10646-1:2000
+
+  <dt><a
+href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-UCS-Ext-A.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-UCS-Ext-A.txt
+      </a>
+  <dd>CJK Unified Ideographs Extension A (U+3400 〜 U+4DB5, U+FA1F and
+      U+FA23) of ISO/IEC 10646-1:2000
+
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-UCS-Compat.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-UCS-Compat.txt
+      </a>
+  <dd>CJK Compatibility Ideographs (U+F900 〜 U+FA2D, except U+FA1F
+      and U+FA23) of ISO/IEC 10646-1:2000
+
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-UCS-Ext-B-1.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+       IDS-UCS-Ext-B-1.txt
+      </a>
+  <dd>CJK Unified Ideographs Extension B [part 1] (U-00020000 〜 
+      U-00021FFF) of ISO/IEC 10646-2:2001
+
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-UCS-Ext-B-2.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+       IDS-UCS-Ext-B-2.txt
+      </a>
+  <dd>CJK Unified Ideographs Extension B [part 2] (U-00022000 〜 
+      U-00023FFF) of ISO/IEC 10646-2:2001
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-UCS-Ext-B-3.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+       IDS-UCS-Ext-B-3.txt
+      </a>
+  <dd>CJK Unified Ideographs Extension B [part 3] (U-00024000 〜 
+      U-00025FFF) of ISO/IEC 10646-2:2001
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-UCS-Ext-B-4.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+       IDS-UCS-Ext-B-4.txt
+      </a>
+  <dd>CJK Unified Ideographs Extension B [part 4] (U-00026000 〜
+      U-00027FFF) of ISO/IEC 10646-2:2001
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-UCS-Ext-B-5.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+       IDS-UCS-Ext-B-5.txt
+      </a>
+  <dd>CJK Unified Ideographs Extension B [part 5] (U-00028000 〜
+      U-00029FFF) of ISO/IEC 10646-2:2001
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-UCS-Ext-B-6.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+       IDS-UCS-Ext-B-6.txt
+      </a>
+  <dd>CJK Unified Ideographs Extension B [part 6] (U-0002A000 〜
+      U-0002A6D6) of ISO/IEC 10646-2:2001
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-UCS-Compat-Supplement.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-UCS-Compat-Supplement.txt
+      </a>
+  <dd>CJK Compatibility Ideographs Supplement (U-0002F800 〜 
+      U-0002FA1D) of ISO/IEC 10646-2:2001
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-JIS-X0208-1990.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-JIS-X0208-1990.txt
+      </a>
+  <dd>JIS X 0208:1990
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-01.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-01.txt
+      </a>
+  <dd>諸橋 大漢和辞典 第1巻
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-02.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-02.txt
+      </a>
+  <dd>諸橋 大漢和辞典 第2巻
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-03.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-03.txt
+      </a>
+  <dd>諸橋 大漢和辞典 第3巻
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-04.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-04.txt
+      </a>
+  <dd>諸橋 大漢和辞典 第4巻
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-05.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-05.txt
+      </a>
+  <dd>諸橋 大漢和辞典 第5巻
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-06.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-06.txt
+      </a>
+  <dd>諸橋 大漢和辞典 第6巻
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-07.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-07.txt
+      </a>
+  <dd>諸橋 大漢和辞典 第7巻
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-08.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-08.txt
+      </a>
+  <dd>諸橋 大漢和辞典 第8巻
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-09.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-09.txt
+      </a>
+  <dd>諸橋 大漢和辞典 第9巻
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-10.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-10.txt
+      </a>
+  <dd>諸橋 大漢和辞典 第10巻
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-11.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-11.txt
+      </a>
+  <dd>諸橋 大漢和辞典 第11巻
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-12.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-12.txt
+      </a>
+  <dd>諸橋 大漢和辞典 第12巻
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-dx.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-dx.txt
+      </a>
+  <dd>諸橋 大漢和辞典 索引（補遺）
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-ho.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-ho.txt
+      </a>
+  <dd>諸橋 大漢和辞典 補巻
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-CBETA.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-CBETA.txt
+      </a>
+  <dd><a href="http://www.cbeta.org/">CBETA</a> 外字
+</dl>
+</blockquote>
+
+
+<h2>入手法</h2>
+
+<h3>anonymous cvs による入手</h3>
+<p>
+現在、<a href="http://cvs.m17n.org/">cvs.m17n.org</a> の <a
+href="http://cvs.m17n.org/viewcvs/?cvsroot=chise">/cvs/chise</a> 
+の <a
+href="http://cvs.m17n.org/viewcvs/ids/?cvsroot=chise">ids</a> 
+モジュールから anonymous CVS で入手可能です。</p>
+
+<h4>login</h4>
+
+<blockquote>
+<kbd>% cvs -d :pserver:anonymous@cvs.m17n.org:/cvs/chise login</kbd><br>
+<kbd>CVS password: ← 何も入力しないでEnter</kbd>
+</blockquote>
+
+<h4>checkout</h4>
+
+<blockquote>
+<kbd>% cvs -z9 -d :pserver:anonymous@cvs.m17n.org:/cvs/chise checkout
+ids</kbd>
+</blockquote>
+
+
+
+<h2>関連ツール</h2>
+
+<h3>XEmacs CHISE</h3>
+<p>
+<a href="../xemacs/">XEmacs CHISE</a> を install
+している場合、上記パッケージを make install すれば、Emacs Lisp
+で書かれた検索ツールが利用可能です。
+</p>
+<p>
+なお、XEmacs CHISE のインストール法については
+<a href="../xemacs/install.debian.ja.html">「XEmacs CHISE を Debian
+GNU/Linux にインストールする方法」</a> が参考になると思います。また、
+Mac OS X 用に fink package が用意されています。
+(cf. <a
+href="http://cvs.m17n.org/viewcvs/*checkout*/omega/INSTALL.txt?rev=HEAD&cvsroot=chise">
+Ω/CHISE 附属文書
+</a>)
+</p>
+
+<h3>Ruby/CHISE</h3>
+<p>
+<a href="../ruby/">Ruby/CHISE</a> を用いれば漢字構造情報データベースを
+Ruby で操作することができます。
+</p>
+
+<h3>WWW</h3>
+<ul>
+  <li><a href="http://chise.zinbun.kyoto-u.ac.jp/ids-find">
+      CHISE-IDS 漢字検索
+      </a>：指定した部品を持つ漢字を検索（XEmacs CHISE 上で M-x
+      ideographic-structure-search-chars [CR] 部品文字列 [CR] するのと
+      同等の機能を WWW 上で実現）
+  <li><a href="http://web.sfc.keio.ac.jp/~kamichi/">上地 宏一</a>
+      (<a href="http://www.fonts.jp/">
+      漢字フォント自動生成技術フォーラム
+      </a>)
+      <a href="http://www.fonts.jp/search.html">
+      「漢字分解器」
+      </a>
+</ul>
+
+<hr>
+
+    <p>
+      [<a href="../">戻る</a>]
+    </p>
+
+<p>
+<hr>
+<!-- hhmts start -->
+Last modified: Fri Jun 19 17:59:03 JST 2009
+<!-- hhmts end -->.
+</p>
+
+</body>
+</html>

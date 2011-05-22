@@ -1,0 +1,115 @@
+CHISE character database format (S-expression version)
+
+* Relations between Characters
+
+Feature-name `->foo' or `<-foo' mean relations between characters.
+
+If there are a relationship `foo', feature-name `->foo' means a value
+of the feature is a `foo' of the defined character.  Likewise,
+feature-name `<-foo' means the defined character is a `foo' of each
+value of the feature.
+
+Example 1: If a character ?A has feature `(->lowercase . (?a))', the
+character ?a specified in the feature is a lowercase of the defined
+character ?A.
+
+Example 2: If a character ?a has feature `(<-lowercase . (?A))', the
+defined character ?a is a lowercase of the character ?A specified in
+the feature.
+
+
+** Character Reference
+
+Type of feature `->foo' or `<-foo' are list of ``char-ref''.  The
+type char-ref is defined by following definition:
+
+   char-ref = character | char-spec | char-spec
+
+The type ``char-spec'' is a list of features.  In the list of
+features, some keys are defined in the specification.  Following list
+describes meaning of keys:
+
+  :char
+	Required.  It indicates a character.
+	[type] character | char-spec
+
+  :sources
+	Optional.  It indicates a source of the relation.
+	[type] list of symbols
+
+	Meaning of some symbols are defined.  Following list describes
+	meaning of symbols:
+
+		zhonghua-dazidian (chuuka-daijiten)	$BCf$(Ga^DKGsL((B
+		tongwen-tongkao (doubun-tsuukou)	$BF1J8DL9M(B
+		yupian (gyokuhen)			$B6LJS(B
+		pianhai (henkai)			$BJS3$(B
+		pianhai-leibian (henkai-ruihen)		$BJS3$$(CW>x:(B
+		yunhai (inkai)				$B1$2q(B
+		yunhai-bei (inkaiho)			$B1$2qJd(B
+		zihui (jii)				$B;zWC(B
+		zihui-biansi				$B;zWC(B-$BQ~;w(B
+		zihui-biansi-2char			$B;zWC(B-$BQ~;w(B-$BFs;zAj;w(B
+		zihui-bu (zihui-bei, jiiho)		$B;zWCJd(B
+		cihai (jikai)				$B<-3$(B
+		jiyun (shuuin)				$B=81$(B
+		wuyinjiyun (goon-shuuin)		$B8^2;=81$(B
+		wuyin-pianhai (goon-henkai)		$B8^2;JS3$(B
+		haipian (kaihen)			$B3$JS(B
+		kangxi					$B9/_f;zE5(B
+		kangxi-biansi-2char			$B9/_f;zE5(B-$BQ~;w(B-$BFs;zAj;w(B
+		kangxi-biansi-3char			$B9/_f;zE5(B-$BQ~;w(B-$B;0;zAj;w(B
+		guangyun (kouin)			$B9-1$(B
+		daikanwa (morohashi-daikanwa)		$BBg4AOB<-E5(B
+		(goonruiju)				$B8^2;N`f\(B
+		ruijumyougishou (ruishuu-meigishou)	$BN`f\L>5A>6(B
+		zhengyun (seiin)			$B@51$(B
+		zhengzitong (zhengzi-tong, seiji-tsuu)	$B@5;z$(CwW(B
+		shuowen-tongxun-dingsheng
+			(setsumon-tsuukun-teisei)	$B@bJ8DL71Djfa(B
+		shuowen					$B@bJ8(B
+		shuowen-zhu (danchuu)			$(C`c$BJ82r;zCm!JCJCp!K(B
+		shuowen-changjian			$B@bJ8D9d5(B
+		songyuan-yilai-suzipu
+			(sougen-irai-zokujifu)		$BAW850JMhB/;zIh(B
+		yuquan					$B6L@t(B
+		chuanpian (senhen)			$B@nJS(B
+		hanshu (kanjo)				$B4A=q(B
+		lunheng (ronkou)			$BO@9U(B
+		hougen
+		(jigakushinan)				$B;z3X;XFn(B
+		zengyun (zouin)				$(Cqrj$(B
+
+
+** Features
+
+->lowercase	indicates lowercase
+->uppercase	indicates uppercase
+->titlecase	indicates titlecase (uppercase + lowercase)
+
+->fullwidth	indicates ``fullwidth'' characters
+<-fullwidth	a ``fullwidth'' character of
+
+->same			indicates same characters ($BF1;z(B)
+->original		indicates ``original'' characters ($BK\;z(B)
+<-original		an ``original'' character of
+->ancient		indicates ``ancient'' characters ($B8E;z(B)
+<-ancient		an ``ancient'' character of
+->vulgar		indicates ``vulgar'' characters ($BB/;z(B)
+<-vulgar		a ``vulgar'' character of
+->wrong			indicates ``wrong'' characters ($Bkw;z(B)
+<-wrong			a ``wrong'' character of
+->simplified		indicates simplified characters
+<-simplified		a simplified character of
+->ideographic-variants	indicates variants ($B0[BN;z(B)
+->synonyms		indicates synonyms
+
+->radical		indicates corresponding radical forms
+<-radical		a radical form of
+
+->bopomofo		indicates bopomofo characters
+<-bopomofo		a bopomofo character of
+
+->ideographic		indicates corresponding characters used with
+			Ideographic script
+<-ideographic		an Ideographic symbol of

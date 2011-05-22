@@ -1,0 +1,46 @@
+Ruby/CHISE Extension README
+============
+
+  Ruby/CHISEが使用する、libchiseを用いたExtensionです。
+
+
+必要環境
+--------
+
+  * ruby 1.8
+  * Berkeley DB
+
+インストール方法
+----------------
+
+  libchiseが必要です。
+  http://kanji.zinbun.kyoto-u.ac.jp/projects/chise/dist/libchise/libchise-0.2.1.tar.gz
+  これを解凍し、中にある下記ファイルをコピーします。
+  chise.h chise.c chise-name.h name.c sysdep.h
+
+    $ ruby extconf.rb
+    $ make
+    # make install
+
+  現在はCygwinだけでinstallを確認してあります。
+
+
+サンプル
+--------
+
+    $ ruby sample.rb
+
+
+ドキュメント
+------------
+
+  最新の情報は http://eto.com/2003/ruby/ をごらん下さい。
+
+
+ライセンス
+----------
+
+  GPLです。COPYINGをごらんください。
+
+
+Kouichirou Eto <2004@eto.com>

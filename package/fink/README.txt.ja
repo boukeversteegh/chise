@@ -1,0 +1,68 @@
+-*- Mode: outline; coding: euc-jp -*-
+
+* はじめに
+
+  ここでは Fink
+
+    http://fink.sourceforge.net/
+
+  を利用して、Mac OS X 上で XEmacs/CHISE や libchise をパッケージとし
+  て管理する方法を紹介します。
+
+  パッケージを使う一番のメリットは使わないパッケージを簡単に削除できる
+  ことです。:-) その他にソースから make するのに比べると、patch あてや
+  make の方法がパッケージ情報に記述されているため、比較的簡単にインス
+  トールできることもメリットでしょう。
+
+  その上、ここではパッケージ情報をCVSで管理していますので、CVSを使って
+  パッケージ情報を更新することにより、常に最新のXEmacs/CHISE, libchise 
+  を使うことができます。
+
+  その方法は、下準備として、
+
+     1. fink コマンドが CVS で取得したパッケージ情報を参照するようにリ
+        ンクをはり、
+
+     2. それを /sw/etc/fink.conf に反映させる
+
+  ということを行えば、あとはパッケージ情報が更新されるたびにパッケージ
+  のインストール「sudo fink install 〜」を行うだけです。
+
+  以下にその方法を具体的に見てみましょう。
+
+* 1. リンクをはる
+
+  まず、CVS で取得した finkinfo が fink コマンドで参照されるように、リ
+  ンクをはります。
+
+  1) Mac OS X 10.3 (Panther) の場合
+
+  $ sudo mkdir -p /sw/fink/10.2/chise
+  $ sudo ln -s $CVSDIR/fink/10.2/finkinfo /sw/fink/10.2/chise
+
+  1) Mac OS X 10.2 (Jaguar) の場合
+
+  $ sudo mkdir -p /sw/fink/10.2/chise
+  $ sudo ln -s $CVSDIR/fink/10.2/finkinfo /sw/fink/10.2/chise
+
+* 2. /sw/etc/fink.conf の編集
+
+  /sw/etc/fink.conf の中の Trees に「chise」を加えます。
+
+  ex)
+
+  Trees: chise local/main unstable/main unstable/crypto stable/main stable/crypto local/bootstrap
+
+* 3. インストール
+
+  $ fink index
+  $ fink install xemacs-chise xemacs-mule-sumo-pkg xemacs-chise-ids-pkg
+
+  これで XEmacs/CHISE と libchise が必要なパッケージとともにインストー
+  ルされたはずです。
+
+  CVS で管理しているので、パッケージ情報同士に不整合が出てうまくインス
+  トール出来ないことがあるかもしれません。
+
+  もし疑問や質問がありましたら、メーリングリスト（chise-ja@m17n.org）
+  までお願い致します。

@@ -1,0 +1,36 @@
+
+REGEDIT4
+
+[HKEY_CLASSES_ROOT\.el]
+@="elfile"
+"Content Type"="text/plain"
+
+[HKEY_CLASSES_ROOT\elfile]
+@="Emacs lisp"
+"EditFlags"=hex:00,00,01,00
+
+[HKEY_CLASSES_ROOT\elfile\Shell]
+@=""
+
+[HKEY_CLASSES_ROOT\elfile\Shell\open]
+
+[HKEY_CLASSES_ROOT\elfile\Shell\open\command]
+@="\"C:\\Program Files\\XEmacs\\XEmacs-21.0\\i386-pc-win32\\runemacs.exe\" \"%1\""
+
+[HKEY_CLASSES_ROOT\elfile\Shell\open\ddeexec]
+@="open(\"%1\")"
+
+[HKEY_CLASSES_ROOT\elfile\Shell\open\ddeexec\Application]
+@="XEmacs"
+
+[HKEY_CLASSES_ROOT\elfile\Shell\open\ddeexec\topic]
+@="System"
+
+[HKEY_CLASSES_ROOT\elfile\DefaultIcon]
+@="C:\\Program Files\\XEmacs\\XEmacs-21.0\\i386-pc-win32\\runemacs.exe,2"
+
+[HKEY_CLASSES_ROOT\elfile\QuickView]
+@="*"
+
+
+

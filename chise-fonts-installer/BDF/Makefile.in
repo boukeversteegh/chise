@@ -1,0 +1,79 @@
+VERSION = @PACKAGE_VERSION@
+
+TAR	= tar
+WGET	= wget
+SUDO	= 
+
+prefix		= @prefix@
+exec_prefix	= @exec_prefix@
+BINDIR		= @bindir@
+LIBDIR		= @libdir@
+OPTS		= @ac_configure_args@
+
+
+all:	build-jisx0213 build-egb build-etl-vn2 \
+	build-thai-xtis build-zinbun build-cbeta
+
+install:	install-jisx0213 install-egb install-etl-vn2 \
+		install-thai-xtis install-zinbun install-cbeta
+
+
+build-jisx0213:
+	cd JISX0213 && make
+
+install-jisx0213:
+	cd JISX0213 && make install
+
+
+build-egb:
+	cd EGB && make
+
+install-egb:
+	cd EGB && make install
+
+
+build-etl-vn2:
+	cd ETL-VN2 && make
+
+install-etl-vn2:
+	cd ETL-VN2 && make install
+
+
+build-thai-xtis:
+	cd Thai-XTIS && make
+
+install-thai-xtis:
+	cd Thai-XTIS && make install
+
+
+build-zinbun:
+	cd Zinbun && make
+
+install-zinbun:
+	cd Zinbun && make install
+
+
+build-cbeta:
+	cd CBETA && make
+
+install-cbeta:
+	cd CBETA && make install
+
+
+distclean:
+	cd JISX0213 && make distclean
+	cd EGB && make distclean
+	cd ETL-VN2 && make distclean
+	cd Thai-XTIS && make distclean
+	cd Zinbun && make distclean
+	cd CBETA && make distclean
+	-$(RM) Makefile
+
+distclean-all:
+	cd JISX0213 && make distclean-all
+	cd EGB && make distclean-all
+	cd ETL-VN2 && make distclean-all
+	cd Thai-XTIS && make distclean-all
+	cd Zinbun && make distclean-all
+	cd CBETA && make distclean-all
+	-$(RM) Makefile

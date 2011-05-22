@@ -1,0 +1,103 @@
+VERSION = @PACKAGE_VERSION@
+
+RM	= /bin/rm -f
+TAR	= tar
+WGET	= wget
+MKDIR	= mkdir -p
+SUDO	= 
+
+prefix		= @prefix@
+exec_prefix	= @exec_prefix@
+
+datadir	= @datadir@
+
+FONTS_DIR	= $(datadir)/fonts
+
+TTF_FONTS_DIR	= $(datadir)/fonts/TrueType
+
+GT_FONTS_DIR = $(TTF_FONTS_DIR)/GT
+
+OPTS		= @ac_configure_args@
+
+all:	get
+
+get:	license.html \
+	gt200001.ttf gt200002.ttf gt200003.ttf gt200004.ttf gt200005.ttf \
+	gt200006.ttf gt200007.ttf gt200008.ttf gt200009.ttf gt200010.ttf \
+	gt200011.ttf gt200012.ttf gt200013.ttf gt2000k1.ttf gt2000k2.ttf
+
+license.html:
+	$(WGET) http://www.l.u-tokyo.ac.jp/GT/license.html
+
+gt200001.ttf:
+	$(WGET) http://www.l.u-tokyo.ac.jp/GT/FONTS/WIN/GT200001.TTF \
+	-O gt200001.ttf
+
+gt200002.ttf:
+	$(WGET) http://www.l.u-tokyo.ac.jp/GT/FONTS/WIN/GT200002.TTF \
+	-O gt200002.ttf
+
+gt200003.ttf:
+	$(WGET) http://www.l.u-tokyo.ac.jp/GT/FONTS/WIN/GT200003.TTF \
+	-O gt200003.ttf
+
+gt200004.ttf:
+	$(WGET) http://www.l.u-tokyo.ac.jp/GT/FONTS/WIN/GT200004.TTF \
+	-O gt200004.ttf
+
+gt200005.ttf:
+	$(WGET) http://www.l.u-tokyo.ac.jp/GT/FONTS/WIN/GT200005.TTF \
+	-O gt200005.ttf
+
+gt200006.ttf:
+	$(WGET) http://www.l.u-tokyo.ac.jp/GT/FONTS/WIN/GT200006.TTF \
+	-O gt200006.ttf
+
+gt200007.ttf:
+	$(WGET) http://www.l.u-tokyo.ac.jp/GT/FONTS/WIN/GT200007.TTF \
+	-O gt200007.ttf
+
+gt200008.ttf:
+	$(WGET) http://www.l.u-tokyo.ac.jp/GT/FONTS/WIN/GT200008.TTF \
+	-O gt200008.ttf
+
+gt200009.ttf:
+	$(WGET) http://www.l.u-tokyo.ac.jp/GT/FONTS/WIN/GT200009.TTF \
+	-O gt200009.ttf
+
+gt200010.ttf:
+	$(WGET) http://www.l.u-tokyo.ac.jp/GT/FONTS/WIN/GT200010.TTF \
+	-O gt200010.ttf
+
+gt200011.ttf:
+	$(WGET) http://www.l.u-tokyo.ac.jp/GT/FONTS/WIN/GT200011.TTF \
+	-O gt200011.ttf
+
+gt200012.ttf:
+	$(WGET) http://www.l.u-tokyo.ac.jp/GT/FONTS/WIN/GT200012.TTF \
+	-O gt200012.ttf
+
+gt200013.ttf:
+	$(WGET) http://www.l.u-tokyo.ac.jp/GT/FONTS/WIN/GT200013.TTF \
+	-O gt200013.ttf
+
+gt2000k1.ttf:
+	$(WGET) http://www.l.u-tokyo.ac.jp/GT/FONTS/WIN/GT2000K1.TTF \
+	-O gt2000k1.ttf
+
+gt2000k2.ttf:
+	$(WGET) http://www.l.u-tokyo.ac.jp/GT/FONTS/WIN/GT2000K2.TTF \
+	-O gt2000k2.ttf
+
+
+install:
+	$(MKDIR) $(GT_FONTS_DIR)
+	( $(TAR) -cf - *.ttf *.html *.dir ) | \
+	( cd $(GT_FONTS_DIR) && $(TAR) -xf - )
+
+
+distclean:
+	-$(RM) Makefile
+
+distclean-all:
+	-$(RM) Makefile *.ttf license.html

@@ -1,0 +1,94 @@
+PACKAGE = @PACKAGE_NAME@
+VERSION = @PACKAGE_VERSION@
+
+TAR	= tar
+WGET	= wget
+MKDIR	= mkdir -p
+SUDO	= 
+
+prefix		= @prefix@
+exec_prefix	= @exec_prefix@
+
+datadir	= @datadir@
+
+BINDIR		= @bindir@
+LIBDIR		= @libdir@
+SCRIPTS_DIR	= $(datadir)/scripts
+
+OPTS		= @ac_configure_args@
+
+
+all:	build-intlfonts build-bdf build-truetype build-gt
+
+install:	all \
+	install-intlfonts install-bdf install-truetype install-gt \
+	install-scripts
+
+
+build-intlfonts:	intlfonts-1.2.1/config.log
+	cd intlfonts-1.2.1 && make
+
+intlfonts-1.2.1/config.log:	intlfonts-1.2.1.tar.gz
+	$(TAR) xvzf intlfonts-1.2.1.tar.gz
+	cd intlfonts-1.2.1 && ./configure $(OPTS)
+
+intlfonts-1.2.1.tar.gz:
+	$(WGET) http://ftp.gnu.org/gnu/intlfonts/intlfonts-1.2.1.tar.gz
+
+install-intlfonts:
+	cd intlfonts-1.2.1 && make install
+
+
+build-bdf:
+	cd BDF && make all
+
+install-bdf:
+	cd BDF && make install
+
+
+build-truetype:
+	cd TrueType && make all
+
+install-truetype:
+	cd TrueType && make install
+
+
+build-gt:
+	cd GT && make all
+
+install-gt:
+	cd GT && make install
+
+
+install-scripts:
+	-$(MKDIR) $(SCRIPTS_DIR)
+	install -c chise-setup-xfonts $(SCRIPTS_DIR)
+
+
+distclean:
+	cd BDF && make distclean
+	cd TrueType && make distclean
+	cd GT && make distclean
+	-$(RM) Makefile config.status config.log chise-setup-xfonts
+	-$(RM) -r autom4te.cache/ intlfonts-1.2.1/
+
+
+distclean-all:
+	cd BDF && make distclean-all
+	cd TrueType && make distclean-all
+	cd GT && make distclean-all
+	-$(RM) intlfonts-1.2.1.tar.gz
+	-$(RM) Makefile config.status config.log chise-setup-xfonts
+	-$(RM) -r autom4te.cache/ intlfonts-1.2.1/
+
+
+tar:
+	cvs commit
+	sh -c 'cvs tag -R $(PACKAGE)-`echo $(VERSION) | tr . _`; \
+	cd /tmp; \
+	cvs -d :pserver:anonymous@cvs.m17n.org:/cvs/chise \
+		export -d $(PACKAGE)-$(VERSION) \
+		-r $(PACKAGE)-`echo $(VERSION) | tr . _` \
+		$(PACKAGE)'
+	cd /tmp; $(TAR) cvzf $(PACKAGE)-$(VERSION).tar.gz $(PACKAGE)-$(VERSION)
+	cd /tmp; $(RM) -r $(PACKAGE)-$(VERSION)

@@ -1,0 +1,462 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<title>CHaracter Information Service Environment</title>
+<link rel=stylesheet href="chise.css" type="text/css">
+</head>
+<body>
+
+<table>
+  <tr>
+    <td align="center">
+    <b><a href="http://www.chise.org/">[chise.org]</a></b>
+    <hr>
+    <td align="center">
+    <b>[Mirror Sites]</b>
+    <hr>
+    <td>
+	<b><a href="index.html.en">[English page]</a></b>
+	<hr>
+  </tr>
+  <tr>
+    <td>
+	<a href="http://www.chise.org/"><img
+	alt="chise.org"
+	src="images/diccs-s.jpg" align="middle"></a>
+    <td>
+	<a href="http://cvs.m17n.org/chise/"><img
+	alt="m17n.org" src="images/tomura-s.png" align="middle"></a>
+	<a href="http://kanji.zinbun.kyoto-u.ac.jp/projects/chise/"><img
+	alt="kanji.zinbun.kyoto-u.ac.jp"
+	src="images/diccs-s.jpg" align="middle"></a>
+	<a href="http://www.mousai.info/projects/chise/"><img
+	alt="www.mousai.info" src="images/egret-pond-s.jpg"
+	align="middle"></a>
+    <td>
+  </tr>
+</table>
+
+<hr>
+
+<h1>CHISE project</h1>
+
+<hr>
+
+<h2>CHISE プロジェクトについて</h2>
+<p>
+CHISE (CHaracter Information Service Environment)
+プロジェクトは、文字に関するさまざまな知識を直接利用することで、
+汎用文字符号に制約されない次世代文字処理環境の実現を目指す
+オープンソース型研究・開発プロジェクトです。
+<p>
+我々は自由で高度な文字処理環境の実現を目指し、
+<ul>
+  <li>アーキテクチャの研究
+  <li>基盤システム・アプリケーションの開発
+  <li>文字データ・オントロジーの整備・開発
+</ul>
+を行い、その成果物を自由ソフトウェアとして公開します。
+</p>
+
+<!--  <p> -->
+<!--  プロジェクトは大きく分けて、 -->
+<!--  <ol> -->
+<!--    <li>文字知識データベースに基づく文字処理アーキテクチャの開発 (TOMOYO Project) -->
+<!--    <li>文字知識データベース・サーバーの開発 -->
+<!--    <li>文字に関するさまざまな知識のデータベース化 -->
+<!--  </ol> -->
+<!--  の３つのサブ・プロジェクトからなります。 -->
+<!--  </p> -->
+
+
+<h2>News</h2>
+<ul>
+  <li><a href="http://www.chise.org/">chise.org</a>
+      を取得しました。</li>
+  <li><a href="http://www.chise.org/dist/base/chise-base-0.25.tar.gz"
+      >CHISE-base 0.25</a>,
+      <a href="http://www.chise.org/dist/base/chise-core-0.25.tar.gz"
+      >CHISE-core 0.25</a>
+      を release しました。</li>
+  <li><a href="http://www.chise.org/dist/XEmacs/xemacs-chise-0.25.tar.gz">
+      XEmacs CHISE 0.25 (大河原)
+      </a>
+      を release しました。</li>
+  <li><a
+      href="http://qwik.chise.org/chise-ja/">qwikWeb
+      サイト</a>
+  を試験的に立ち上げました。</li>
+<!--   <li>2008年3月22日(土)に -->
+<!--     <a href="http://kura.hanazono.ac.jp/kanji/20080322.html" -->
+<!--        >「キャラクター・身体・コミュニティ〜第2回人文情報学シンポジウム」</a>を開催します。</li> -->
+<!--   <li>2008年3月3日(月)、<a href="http://www.coe21-lkr.titech.ac.jp/lkr2008/">LKR2008</a>において、 -->
+<!--     守岡知彦が“CHISE: Character Processing based on Character Ontology”と題した研究発表をします。</li> -->
+<!--   <li>守岡知彦が論文<a href="http://fw8.bookpark.ne.jp/cm/ipsj/search.asp?flag=6&keyword=IPSJ-CH06072004&mode=" -->
+<!--        >「文字オントロジーに基づく文字処理について」</a>で、 -->
+<!--     <a href="http://www.ipsj.or.jp/01kyotsu/award/yamashita_kinen/h19_detail.html#ch" -->
+<!--        >平成19年度山下記念研究賞（情報処理学会）を受賞</a>しました。</li> -->
+<!--   <li>2007年3月2日(金)〜3日(土)に -->
+<!--     <a href="http://coe21.zinbun.kyoto-u.ac.jp/ws-hi-2007.html.ja" -->
+<!--       >人文情報学シンポジウム -->
+<!--       — キャラクター・データベース・共同行為 —</a> -->
+<!--       を開催しました。</li> -->
+<!--
+  <li>「<a href="conf/2005/index.html.ja">CHISE Conference
+      2005</a>」の資料を公開しました。
+  <li>「<a href="conf/2005/index.html.ja">CHISE Conference
+      2005</a>」と「<a
+      href="https://members.fsij.org/trac/codefestkyoto2005/"
+      >CodeFest 京都 2005</a>」の成果として、上地宏一氏作
+      「<a href="http://fonts.jp/chise_linkmap/"
+      >CHISE漢字連環図</a>」、「<a
+      href="http://fonts.jp/chise_swig_perl/"
+      >chise_swig_perl</a>」、「<a
+      href="http://fonts.jp/makettf/">makettf</a>」を公開しました。</li>
+  <li>2005年10月13日(木)〜14日(金) に「<a
+      href="conf/2005/index.html.ja">CHISE Conference
+      2005</a>」を開催しました。また、2005年10月14日(金) 〜 15日(土)
+      に近畿初の CodeFest「<a
+      href="https://members.fsij.org/trac/codefestkyoto2005/"
+      >CodeFest 京都 2005</a>」を開催しました。
+  <li>「<a href="http://mousai.kanji.zinbun.kyoto-u.ac.jp/ids-find"
+      > CHISE-IDS 漢字検索</a>」を公開しました。</li>
+  <li>2005年3月25日、<a
+      href="http://kanji.zinbun.kyoto-u.ac.jp/seminars/oricom/2005.html"
+      >東洋学へのコンピュータ利用第16回研究セミナー</a>において、CHISE
+      プロジェクトに関する発表を行いました。</li>
+  <li>2005年1月22日、北京・<a href="http://www.hubeihotel.com/"
+      >湖北大厦</a>で開催された<a
+      href="http://coe21.zinbun.kyoto-u.ac.jp/BeijingWorkshop2005.html"
+      >日中共同シンポジウム「漢字文獻資料庫的新技術」</a>において、
+      CHISE
+      プロジェクトに関する発表を行いました。</li>
+  <li>2004年6月9日(水)に開催された<a
+      href="http://kura.hanazono.ac.jp/kanji/20040609symposium.html"
+      >シンポジウム「文字情報処理のフロンティア: 過去・現在・未来」</a>
+      において、CHISEプロジェクトに関する発表を行いました。</li>
+  <li>2004年5月28日(金)の<a href="http://www.sigch.soken.ac.jp/2004.05/"
+      >情報処理学会・第63回人文科学とコンピュータ研究会</a>で
+      CHISEプロジェクトのメンバーが発表しました。</li>-->
+<!--  <li>2003年11月28日（金）〜29日（土）に -->
+<!--      <a href="http://www.kcif.or.jp/jp/footer/05.html" -->
+<!--      >京都市国際交流会館</a>で<a -->
+<!--      href="http://coe21.zinbun.kyoto-u.ac.jp/ws-type-2003"> -->
+<!--		「書体・組版ワークショップ」</a>が開催されました。 -->
+<!--  </li> -->
+<!--    <li><a href="http://www.mousai.info/projects/chise/dist/XEmacs/xemacs-utf-2000-0.20.tar.gz"> -->
+<!--        XEmacs UTF-2000 0.20 (奈良) -->
+<!--        </a> -->
+<!--        が release されました。 -->
+<!--    </li> -->
+<!--  <li>
+<!--      10月30日〜11月1日にかけて大阪で開催される -->
+<!--      <a href="http://lc.linux.or.jp/lc2003/index.html">Linux Conference 2003</a>で -->
+<!--      CHISEプロジェクトのメンバーが発表しました（10月31日午後の前半セッション）。 -->
+<!--  </li> -->
+<!--  <li> -->
+<!--      <a href="symposium2003/index.html.ja.iso-2022-jp">CHISE Symposium 2003 報告／資料集</a> -->
+<!--      を掲載しました。 -->
+<!--  </li> -->
+</ul>
+
+<hr>
+
+<h2>Sub Projects</h2>
+<p>
+CHISEプロジェクトは、以下のようなサブプロジェクトの集合体です。
+</p>
+
+<ul>
+  <li>文字知識データベースに基づく文字処理アーキテクチャの開発
+      <ul>
+	<li>libchise
+	<li><a href="xemacs/index.html.ja.iso-2022-jp">XEmacs CHISE</a>
+	<li><a href="ruby/index.html.ja.iso-2022-jp">Ruby/CHISE</a>
+	<li><a href="perl/index.html.ja.iso-2022-jp">Perl/CHISE</a>
+	    <ul>
+	      <li><a href="http://fonts.jp/chise_swig_perl/"
+		  >chise_swig_perl</a>
+	    </ul>
+      </ul>
+  </li>
+  <li>Concord:
+      プロトタイプ型オブジェクト・データベース・エンジンの開発</li>
+      <ul>
+	<li>EsT: Concord に基づく構造データ用 Wiki の開発</li>
+      </ul>
+  <li><a href="topicmaps/index.html.ja.iso-2022-jp">
+      TopicMapsによる文字知識データベース・システムの開発</a></li>
+  <li><a href="char-data/">文字に関するさまざまな知識のデータベース化</a>
+      <ul>
+	<li><a href="ids/index.html.ja.iso-2022-jp">
+	    漢字構造情報データベース</a></li>
+	    <ul>
+	      <li><a href="http://www.chise.org/ids-find"
+		  >CHISE-IDS 漢字検索</a>
+	    </ul>
+	<li>異体字・類字データベース
+	    <ul>
+	      <li><a href="http://fonts.jp/chise_linkmap/"
+		  >CHISE漢字連環図</a>
+	    </ul>
+	<li><a href="glyph/index.html.ja.iso-2022-jp">
+	    グリフ・字形情報の統合と合成</a></li>
+	    <ul>
+	      <li><a href="http://fonts.jp/makettf/">makettf</a>
+	    </ul>
+      </ul>
+  </li>
+  <li><a href="visualization/index.html.ja.iso-2022-jp">
+      文字知識情報の数理的解析と可視化</a></li>
+  <li><a href="omega/index.html.ja.iso-2022-jp">
+      Ω/CHISE : 文字データベースと連携した組版システム</a></li>
+  <li>CHISE-core / CHISE-base: 統合パッケージ・インストーラーの開発</li>
+  <li>CHISE-wiki の開発</li>
+</ul>
+
+<hr>
+
+<h2>Download</h2>
+<p>
+<!--<a href="http://cvs.m17n.org/cgi-bin/viewcvs/?cvsroot=chise">/cvs/chise</a>-->
+<a href="http://www.chise.org/dist/">配布パッケージ等</a>
+</p>
+
+<h2>CVS Repository</h2>
+<p>
+<!--<a href="http://cvs.m17n.org/cgi-bin/viewcvs/?cvsroot=chise">/cvs/chise</a>-->
+<a href="http://cvs.m17n.org/viewcvs/?cvsroot=chise">/cvs/chise</a>
+</p>
+
+<h2>Git Repository</h2>
+<p>
+<ul>
+  <li><a
+      href="http://git.chise.org/cgi-bin/gitweb.cgi?p=chise/chise-wiki.git;a=tree"
+      >http://git.chise.org/git/chise-wiki.git</a>
+  <li><a
+      href="http://git.chise.org/cgi-bin/gitweb.cgi?p=chise/est.git;a=tree"
+      >http://git.chise.org/git/est.git</a>
+</ul>
+</p>
+
+<hr>
+
+<h2>Mailing List</h2>
+<p>
+CHISE Project に関する議論等は CHISE-{ja|en} mailing list で行っています。
+<p>
+CHISE Project の開発に参加したい方、CHISE Project 実装を使ってみたい方、
+CHISE Project 実装についての質問・要望、その他 CHISE Project
+に関する議論に参加したい方をお待ちしています。
+
+<p>
+CHISE mailing list に参加希望の方は
+<dl compact>
+  <dt>日本語
+  <dd><a href="mailto:chise-ja-ctl@m17n.org">
+      chise-ja-ctl@m17n.org</a>
+  <dt>英語
+  <dd><a href="mailto:chise-en-ctl@m17n.org">
+      chise-en-ctl@m17n.org</a>
+</dl>
+宛に
+<blockquote>subscribe あなたの名前</blockquote>
+の一行を書いた mail をお送りください。
+
+その後、確認の mail を届きますので、その mail の中にある
+<blockquote>
+confirm PASSWORD あなたの名前
+</blockquote>
+の１行を本文にして返事を送ってください。
+
+<hr>
+
+<h2><a name="presentation">文書・発表等</a></h2>
+
+<ul>
+  <li><a href="xemacs/#presentation">
+      XEmacs CHISE 関連</a></li>
+  <li><a href="visualization#presentation">
+      文字知識情報の数理的解析と可視化関連</a></li>
+  <li><a href="glyph/#presentation">
+      グリフ・字形情報の統合と合成関連</a></li>
+</ul>
+
+<ul>
+  <li><a href="papers/u2k-plan.ja/">
+      「次世代多言語処理系の モデルおよび実装の開発」
+      </a> (1999年10月)
+  <li><a href="http://www.kanji.zinbun.kyoto-u.ac.jp/~wittern/">
+      Christian Wittern
+      </a>, “Non-system characters in XML documents”,
+      「アジア情報学のフロンティア」
+      （全国文献・情報センター人文社会科学学術セミナーシリーズ No.10）,
+      2000年11月
+  <li><a href="http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/">守岡知彦</a>、
+      「UTF-2000 プロジェクト」、
+      <a href="http://www.kanji.zinbun.kyoto-u.ac.jp/publications/kanji-and-info-2.pdf">
+      「漢字と情報」No.2</a>, 2001年3月
+  <li><a href="http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/">MORIOKA Tomohiko</a>,
+      <a href="papers/chise-m17n-2001.txt">“知世 project  — beyond the UTF-2000”</a>,
+      <a href="http://www.m17n.org/m17n2001/">
+      m17n2001: the Fifth International Symposium on Multilingual
+      Information Processing and Open Source Software
+      </a>.
+  <li><a href="http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/">MORIOKA Tomohiko</a>,
+      “A Short Introduction to UTF-2000 Project”,
+      the First TEI Character Set Issues Working Group (October 2001,
+      University of California, Berkeley, USA).</li>
+      
+  <li><a href="http://www.kanji.zinbun.kyoto-u.ac.jp/~wittern/">クリスティアン・ウィッテルン</a>
+      「電子化とは何か？」
+      <a href="http://www.kanji.zinbun.kyoto-u.ac.jp/publications/kanji-and-info-3.pdf">
+      「漢字と情報」No.3</a>, 2001年10月</li>
+      
+  <li><a href="http://ya.sakura.ne.jp/~moro/">師 茂樹</a>
+      「ポスト文字コードの意義」
+      <a href="http://www.kanji.zinbun.kyoto-u.ac.jp/publications/kanji-and-info-3.pdf">
+      「漢字と情報」No.3</a>, 2001年10月</li>
+      
+  <li><a href="http://www.kanji.zinbun.kyoto-u.ac.jp/~wittern/">
+      Christian Wittern
+      </a>, “Some thoughts on the digitization of Kanji”,
+      「人文社会情報と IT」
+      （全国文献・情報センター人文社会科学学術セミナーシリーズ No.11）,
+      2001年11月</li>
+      
+  <li><a href="http://ya.sakura.ne.jp/~moro/">師 茂樹</a>
+      「ソフトウェアレビュー CHISEプロジェクト」、
+      <a href="http://www.jaet.gr.jp/jj/3.html">『漢字文献情報処理研究』第3号</a>、
+      好文出版、2002年10月</li>
+      
+  <li><a href="http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/">守岡
+      知彦</a>、 <a href="papers/dc2002.pdf">
+      「ポスト文字コード時代の文書処理技術に関する展望」</a>、
+      「データベースの活用と人文社会科学」
+      （全国文献・情報センター人文社会科学学術セミナーシリーズ No.12）,
+      2002年11月</li>
+      
+  <li><a href="http://ya.sakura.ne.jp/~moro/">師 茂樹</a>
+      「CHISEプロジェクトが提案する新しい文字のモデル」
+      大阪外国語大学・科学研究費『多言語同時処理』プロジェクト第1回研究会
+      「文字符号と多言語同時処理」、2002年12月6日、千里ライフサイエンスセンタービル</li>
+      
+  <li><a href="http://ya.sakura.ne.jp/~moro/">師 茂樹</a>
+      「CHISEとは何ではないか」、
+      <a href="http://www.jaet.gr.jp/">漢字文献情報処理研究会</a>第5回大会、
+      2002年12月7日（土）、<a href="http://www.hanazono.ac.jp/">花園大学</a></li>
+      
+  <li><a href="http://ya.sakura.ne.jp/~moro/">師 茂樹</a>
+      「Chaonモデルの過去・現在・未来」
+      （<a href="News/20030315.html.ja.iso-2022-jp">CHISE Symposium 2003</a>
+      2003年3月15日（土）、
+      <a href="http://www.ipa.go.jp/ipa/about/officeindex.htm">IPA特別会議室</a>）
+      <a href="symposium2003/moro/20030315CHISE_moro%231.pdf">レジュメその1（PDF）</a>、
+      <a href="symposium2003/moro/20030315CHISE_moro%232.pdf">レジュメその2（PDF）</a></li>
+	  
+  <li><a href="http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/">守岡知彦</a>,
+      <a href="http://ya.sakura.ne.jp/~moro/">師 茂樹</a>
+      「文字素性に基づく文字処理」
+      <a href="http://www.ipsj.or.jp/members/SIGNotes/Jpn/17/2004/062/"
+      >『情報処理学会研究報告』Vol. 2004, No. 58 (2004-CH-62)</a>、
+      2004年5月、pp. 53-60）</li>
+  <li><a href="http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/">守岡知彦</a>. <a href="papers/beijing-2005/b2005-chise.pdf">“Character Processing Based on Character Ontology.”</a>（<a href="http://coe21.zinbun.kyoto-u.ac.jp/BeijingWorkshop2005.html">日中共同シンポジウム「漢字文獻資料庫的新技術」</a>、2005年1月22日、北京・<a href="http://www.hubeihotel.com/">湖北大厦</a>）</li>
+</ul>
+
+<h2>関連イベント</h2>
+<ul>
+  <li><a href="http://coe21.zinbun.kyoto-u.ac.jp/ws-hi-2007.html.ja"
+      >人文情報学シンポジウム
+      — キャラクター・データベース・共同行為 —</a>,
+      2007年3月2日(金)〜3日(土)
+      @ <a href="http://www.kcif.or.jp/jp/footer/05.html"
+      >京都市国際交流会館</a> 第２会議室
+  <li><a
+      href="https://members.fsij.org/trac/codefestkyoto2005/"
+      >CodeFest 京都 2005</a>, 2005年10月14日(金) 〜 15日(土)
+  <li><a
+      href="conf/2005/index.html.ja">CHISE Conference
+      2005</a>, 2005年10月13日(木)〜14日(金) 
+  <li><a
+      href="http://kura.hanazono.ac.jp/kanji/20040609symposium.html"
+      >シンポジウム「文字情報処理のフロンティア: 過去・現在・未来」</a>,
+      2004年6月9日(水)
+  </li>
+  <li><a
+      href="http://coe21.zinbun.kyoto-u.ac.jp/ws-type-2003">
+      「書体・組版ワークショップ」</a>,
+      2003年11月28日(金)〜29日(土)
+     @ <a href="http://www.kcif.or.jp/jp/footer/05.html"
+      >京都市国際交流会館</a>
+  </li>
+  <li><a href="News/20030315.html.ja.iso-2022-jp">CHISE Symposium 2003</a>,
+      2003年3月15日（土）
+      @ IPA特別会議室
+</ul>
+
+<h2><a href="history">歴史</a></h2>
+
+<p>
+このプロジェクトは、<a
+href="http://www.ipa.go.jp/NBP/13nendo/13mito/koubo13.html">2001年度
+「未踏ソフトウェア創造事業」</a>の助成を受けました。
+</p>
+
+<hr>
+
+<b>[<a href="../">戻る</a>]</b>
+
+<p><img SRC="images/dragon.jpg" height=146 width=198></center>
+
+<br>
+
+<b>[<a href="http://www.kyoto-u.ac.jp/">
+京都大学
+</a>
+<a href="http://www.zinbun.kyoto-u.ac.jp/">
+人文科学研究所
+</a>
+<a href="http://kita.zinbun.kyoto-u.ac.jp/">
+東アジア人文情報学研究センター
+</a>]</b>
+<b>[<a href="http://www.m17n.org/">
+m17n.org（多言語化機構）
+</a>
+<a href="http://www.aist.go.jp/">
+（独立行政法人 産業技術総合研究所）
+</a>]</b>
+<br>
+<b>[<a href="http://www.hanazono.ac.jp/">
+花園大学
+</a>
+<a href="http://kura.hanazono.ac.jp/kanji/">
+漢字処理研究室</a>
+]</b>
+<b>[<a href="http://www.atr.co.jp/">
+ATR 人間情報科学研究所
+</a>]</b>
+<b>[<a href="http://www.nagoya-u.ac.jp/">
+名古屋大学
+</a>
+<a href="http://www.is.nagoya-u.ac.jp/">
+情報科学研究科
+</a>
+<a href="http://www.cs.is.nagoya-u.ac.jp/">
+複雑系科学専攻
+</a>
+]</b>
+
+<hr>
+
+<!-- hhmts start -->
+Last modified: Fri Dec  3 06:41:14 JST 2010
+<!-- hhmts end -->.
+<a href="http://www.aurora.dti.ne.jp/~zom/Counter/index.html">
+<img
+ src="http://www.mousai.info/cgi-bin/counterp.cgi?projects_chise.log"
+ alt="counter"></a>
+since Jul 5 2002.
+
+</body>
+</html>

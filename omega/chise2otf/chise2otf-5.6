@@ -1,0 +1,826 @@
+#!/usr/bin/perl
+
+use strict;
+use vars qw($opt_in_cs $opt_order $opt_kage $opt_replace
+	    $opt_help $usage
+	    $in_cs $out_cs $i @chars
+	    @order $order %order
+	    @texmacro
+	    $char $char_id $out_char
+	    $ids $ids_argc %ids $idsdb
+	    $idsdata_file $ids_start $font_start
+	    $perl56 $perl58
+	    @CDP @HZK @GT
+	    );
+use Getopt::Long;
+use utf8;
+use Fcntl ':flock';
+use Chise_utils ':all';
+
+my $omegadb_path="/usr/local/lib/chise/omega";
+$omegadb_path=~s!/$!!;
+
+my $makefonts="$omegadb_path/makefonts.pl";
+my $exec_makefonts=0;
+my $geta=pack("S",8750|0x8080);
+
+if($^V and $^V ge v5.8){
+    $perl58=1;
+}elsif($^V and $^V ge v5.6){
+    $perl56=1;
+}else{
+    print STDERR "This versin is not supported.";
+}
+if($perl58){
+    eval "use Encode";
+    binmode(STDIN, ':encoding(utf8)');
+    binmode(STDOUT, ':encoding(utf8)');
+}
+
+&GetOptions("in=s"=>\$opt_in_cs,
+	    "order=s"=>\$opt_order,
+	    "replace",\$opt_replace,
+	    "kage",\$opt_kage,
+	    "help",\$opt_help);
+
+$usage=<<EOF;
+Usage: $0 [-i <input coding system>] [-o <order of kanji>] [-k] <filename>
+    input coding system: (default: ucs\@mcs)
+      ucs\@mcs, ucs\@cns, ucs\@gb, ucs\@jis, ucs\@ks
+    order of kanji: (default: j)
+       c: CNS
+       g: GB
+       j: JIS
+       k: KS
+       G: GT
+       m: Multi, use \\UTFM of otf.sty
+      You can also combine them, ex. jtcgkm
+    k: use Kage server.
+    r: replace r and l with dot below to those with circle below.
+EOF
+
+%order=('c'=>'UniCNS',
+	'g'=>'UniGB',
+	'j'=>'UniJIS',
+	'k'=>'UniKS',
+	'G'=>'GT',
+	'm'=>'Multi',
+	);
+
+if($opt_help){
+    print STDERR $usage;
+    exit 1;
+}
+
+if(not defined($opt_in_cs)){
+    print STDERR "Assuming input coding system is ucs\@mcs.\n";
+    $in_cs='ucs@mcs';
+}else{
+    if(($opt_in_cs eq 'ucs@mcs')or
+       ($opt_in_cs eq 'ucs@cns')or
+       ($opt_in_cs eq 'ucs@gb')or
+       ($opt_in_cs eq 'ucs@jis')or
+       ($opt_in_cs eq 'ucs@ks')){
+	$in_cs=$opt_in_cs;
+    }else{
+	print STDERR "Invalid arguments.\n";
+	print STDERR $usage;
+	exit 1;
+    }
+}
+
+if(not defined($opt_order)){
+    print STDERR "Using only UniJIS.\n";
+    $opt_order='j';
+}
+
+if(defined($opt_order)){
+    if($opt_order=~/^[cgjkGm]+$/){
+	@order=split(//,$opt_order);
+	@order=map {$order{$_}} @order;
+    }else{
+	print STDERR "Invalid option!\n";
+	print STDERR $usage;
+	exit 1;
+    }
+}
+
+if($opt_kage){
+    $exec_makefonts=1;
+}
+
+&setup_texmacro();
+if($opt_replace){
+    $texmacro[0x1E36]='{\ifmmode \mbox{\ucirc{L}}\else \ucirc{L}\fi}';
+    $texmacro[0x1E37]='{\ifmmode \mbox{\ucirc{l}}\else \ucirc{l}\fi}';
+    $texmacro[0x1E38]='{\ifmmode \ucirc{\bar{L}}\else \ucirc{\={L}}\fi}';
+    $texmacro[0x1E39]='{\ifmmode \ucirc{\bar{l}}\else \ucirc{\={l}}\fi}';
+    $texmacro[0x1E5A]='{\ifmmode \mbox{\ucirc{R}}\else \ucirc{R}\fi}';
+    $texmacro[0x1E5B]='{\ifmmode \mbox{\ucirc{r}}\else \ucirc{r}\fi}';
+    $texmacro[0x1E5C]='{\ifmmode \ucirc{\bar{R}}\else \ucirc{\={R}}\fi}';
+    $texmacro[0x1E5D]='{\ifmmode \ucirc{\bar{r}}\else \ucirc{\={r}}\fi}';
+}
+
+$idsdata_file="$omegadb_path/idsdata.pl";
+$ids_start=0x00; 
+$font_start=0;
+
+if(-e $idsdata_file){
+    open(IDSDATA,"+<$idsdata_file") or die;
+    flock(IDSDATA,LOCK_EX);
+    seek(IDSDATA,0,0);
+    while(<IDSDATA>){
+	eval $_;
+    }
+    seek(IDSDATA,0,0);
+#	  require $idsdata_file;
+}else{
+    open(IDSDATA,">$idsdata_file") or die;
+    flock(IDSDATA,LOCK_EX);
+    seek(IDSDATA,0,0);
+}
+
+$ids_argc=0;
+$ids="";
+
+@GT=(#"=gt","=gt-k",
+     "=gt-pj-1","=gt-pj-2","=gt-pj-3","=gt-pj-4","=gt-pj-5",
+     "=gt-pj-6","=gt-pj-7","=gt-pj-8","=gt-pj-9","=gt-pj-10",
+     "=gt-pj-11"
+     #,"=gt-pj-k1","=gt-pj-k2"
+     );
+@HZK=("=hanziku-1","=hanziku-2","=hanziku-3","=hanziku-4",
+      "=hanziku-5","=hanziku-6","=hanziku-7","=hanziku-8",
+      "=hanziku-9","=hanziku-10","=hanziku-11","=hanziku-12");
+@CDP=("=big5-cdp");
+
+while(<>){
+    if($in_cs ne 'ucs@mcs'){
+	s/(.)/pack("U",&get_char_id(unpack("U",$1),$in_cs))/ge;
+    }
+    s/((?:^|[^\\])(?:\\\\)*)(&.*?;)/$1.&de_er($2)/ge;
+    s/((?:^|[^\\])(?:\\\\)*)\\([$idc])/$1.'\UTFM{'.sprintf("%X",unpack("U",$2)).'}'/ge;
+    @chars=split(//);
+    for($i=0;$i<=$#chars;$i++){
+	$char=$chars[$i];
+	$char_id=unpack("U",$chars[$i]);
+
+	if($char_id<=0x7f){
+	    # Basic Latin
+	    print $char;
+	    next;
+	}elsif(defined($texmacro[$char_id]) and $texmacro[$char_id]){
+	    # already defined for 
+	    # 0080..00FF; Latin-1 Supplement
+	    # 0100..017F; Latin Extended-A
+	    # 1E00..1EFF; Latin Extended Additional
+	    print $texmacro[$char_id];
+	    next;
+	}elsif($char_id>=0x2ff0 and $char_id<=0x2fff){
+	    # Ideographic Description Characters
+	    print &ids_parse();
+	    next;
+	}else{
+	    if(($out_char=&get_output_char($char_id))){
+		print $out_char;
+	    }elsif($char_id >= 0x20000 && $char_id <=0x2a6df){
+		# CJK Unified Ideographs Extension B
+		if(not defined($ids{$char}) and $ids{$char}[1]>=0){
+		    $ids{$char}[0]=$font_start;
+		    $ids{$char}[1]=$ids_start;
+		    $ids_start++;
+		    if($ids_start>255){
+			$ids_start=0;
+			$font_start++;
+		    }
+		}
+		print "{\\fontencoding{OT1}\\fontfamily{" .
+		    sprintf("chise%03d",$ids{$char}[0]) .
+		    "}\\selectfont\\char$ids{$char}[1]}";
+		next;
+	    }else{
+		print &get_macro_for_ids(&get_ids($char));
+	    }
+	}
+    }
+}
+
+print IDSDATA 'use utf8;',"\n";
+foreach $ids (keys %ids){
+    print IDSDATA '$ids{\'',$ids,'\'}='
+	,'[',join ",",@{$ids{$ids}},"];\n" if($perl56);
+    print IDSDATA '$ids{\'',encode('utf8',$ids),'\'}='
+	,'[',join ",",@{$ids{$ids}},"];\n" if($perl58);
+}
+print IDSDATA '$font_start=',$font_start,";\n";
+print IDSDATA '$ids_start=',$ids_start,";\n";
+print IDSDATA "1;";
+
+if($exec_makefonts){
+    if(-f $makefonts){
+	system("/usr/bin/env","perl",$makefonts) ==0
+	    or die "Could not make fonts: $?";
+    }else{
+	print STDERR "cannot find $makefonts\n";
+    }
+}
+
+exit 0;
+
+sub ids_parse{
+    # arguments: none
+    # return: return character for output,
+    #          TeX macro for ids,
+    #          or GETA character if ids is invalid.
+    my($ids,$ids_argc)=&ids_rest("",0,$chars[$i]);
+
+    while($ids_argc>0){
+	# We are in IDS.
+	$i++;
+	if($i>$#chars){
+	    print STDERR "IDS parse error: $ids\n";
+	    return $geta;
+	}
+
+	($ids,$ids_argc)=&ids_rest($ids,$ids_argc,$chars[$i]);
+	if($ids_argc==0){
+	    if(($char_id=&get_char_id_for_ids($ids))
+	       and($out_char=&get_output_char($char_id))){
+		return $out_char;
+	    }else{
+		return &get_macro_for_ids($ids) if($perl56);
+		return encode('utf8', &get_macro_for_ids($ids)) if($perl58);
+	    }
+	}
+    }
+}
+
+sub ids_rest{
+    # arguments: <ids>, <rest number of arguments for ids>, <character>
+    # return: ids and rest number of arguments for ids.
+    my($ids,$ids_argc,$char)=@_;
+    my($argc);
+    $argc=&ids_argc($char);
+    if($argc){
+	$ids_argc+= $ids_argc==0 ? $argc : $argc-1;
+    }else{
+	$ids_argc--;
+    }
+    $ids.=$char if($perl56);
+    $ids.=encode('utf8',$char) if($perl58);
+    return ($ids,$ids_argc);
+}
+
+sub get_macro_for_ids{
+    # argument: <ids>
+    # return: TeX macro for ids
+    #          or GETA character if ids is invalid for KAGE.
+    my($ids)=@_;
+#    return $geta if(not $exec_makefonts);
+    $ids=&normalize_ids($ids,"UniJIS");
+    return $geta if(($ids!~/[$idc]/)
+		    or($ids=~/[\x{10000}-]/));
+                    #irregular for KAGE.
+    if(not defined($ids{$ids}) and $ids{$ids}[1]>=0){
+	$ids{$ids}[0]=$font_start;
+	$ids{$ids}[1]=$ids_start;
+	$ids_start++;
+    }
+    if($ids_start>255){
+	$ids_start=0;
+	$font_start++;
+    }
+    return "{\\fontencoding{T1}\\fontfamily{"
+	.sprintf("chisesub%03d",$ids{$ids}[0])
+	."}\\selectfont\\char$ids{$ids}[1]}";
+}
+
+sub normalize_ids{
+    # argument: <ids>, <output coding system>
+    # return: ids or GETA character if ids is invalid for KAGE.
+    my($ids,$out_cs)=@_;
+    $ids = decode('utf8', $ids) if $perl58;
+    $out_cs=~s/Uni(.+)/'ucs@'.lc($1)/e;
+
+    my $output_ids="";
+    my($char,$char_id,$output_char_id);
+    while($ids=~m/(.)/g){
+	$char=$1;
+	$char_id=unpack("U",$char);
+	if($char=~/[$idc]/){
+	    $output_ids.=$char;
+	}elsif($output_char_id=&get_char_attribute($char,"=$out_cs")){
+	    $output_ids.=pack("U",$output_char_id);
+	}elsif($output_char_id=&get_char_attribute($char,"=ucs")){
+	    $output_ids.=pack("U",$output_char_id);
+	}else{
+	    return $geta;
+	}
+    }
+    return $output_ids;
+}
+
+sub get_output_char{
+    # argument: <char-id>
+    # return: character in EUC-JP or TeX macro for pTeX.
+    my($char_id)=@_;
+    my($char,$out_char,$out_char_id,$gt);
+    
+    $char=pack('U',$char_id);
+
+    if($out_char=&get_char_attribute($char,'=jis-x0208')){
+	return pack("S",$out_char|0x8080);
+    }else{
+	foreach $out_cs (@order){
+	    if($out_cs eq 'UniJIS'
+	       and &get_char_attribute($char,"vnd-adobe-cid-unijis-utf16-h")){
+		if($out_char_id=&get_char_attribute($char,'=ucs@jis')
+		   or $out_char_id=&get_char_attribute($char,'=ucs')
+		   or $out_char_id=&get_char_attribute($char,'=>ucs@jis')
+		   or $out_char_id=&get_char_attribute($char,'=>ucs')
+		   ){
+		    return "\\UTF{".sprintf("%X",$out_char_id)."}";
+		}
+	    }elsif($out_cs eq 'UniGB'
+		   and &get_char_attribute($char,"vnd-adobe-cid-unigb-ucs2-h")){
+		if($out_char_id=&get_char_attribute($char,'=ucs@gb')
+		   or $out_char_id=&get_char_attribute($char,'=ucs')
+		   or $out_char_id=&get_char_attribute($char,'=>ucs@gb')
+		   or $out_char_id=&get_char_attribute($char,'=>ucs')
+		   ){
+		    return "\\UTFC{".sprintf("%X",$out_char_id)."}";
+		}
+	    }elsif($out_cs eq 'UniCNS'
+		   and &get_char_attribute($char,"vnd-adobe-cid-unicns-ucs2-h")){
+		if($out_char_id=&get_char_attribute($char,'=ucs@cns')
+		   or $out_char_id=&get_char_attribute($char,'=ucs')
+		   or $out_char_id=&get_char_attribute($char,'=>ucs@cns')
+		   or $out_char_id=&get_char_attribute($char,'=>ucs')
+		   ){
+		    return "\\UTFT{".sprintf("%X",$out_char_id)."}";
+		}
+	    }elsif($out_cs eq 'UniKS'
+		   and &get_char_attribute($char,"vnd-adobe-cid-uniks-ucs2-h")){
+		if($out_char_id=&get_char_attribute($char,'=ucs@ks')
+		   or $out_char_id=&get_char_attribute($char,'=ucs')
+		   or $out_char_id=&get_char_attribute($char,'=>ucs@ks')
+		   or $out_char_id=&get_char_attribute($char,'=>ucs')
+		   ){
+		    return "\\UTFK{".sprintf("%X",$out_char_id)."}";
+		}
+	    }elsif($out_cs eq 'GT'){
+		return $gt if($gt=&get_macro_for_GT($char_id));
+	    }elsif($out_cs eq 'Multi'){
+		if($out_char_id=&get_char_attribute($char,'=ucs')){
+		    return "\\UTFM{".sprintf("%X",$out_char_id)."}";
+		}
+	    }
+	}
+    }
+    return undef;
+}
+
+sub get_ids{
+    # argument: <character>
+    # return: ids
+    my($char)=@_;
+    my $ids="";
+    $ids=&get_char_attribute($char,"ids-aggregated")
+	or &get_char_attribute($char,"ids");
+    $ids=decode('utf8', $ids) if($perl58);
+    return $ids;
+}
+
+sub get_char_id_for_ids{
+    # argument: <ideographic description sequence>
+    # return: char-id
+    my($ids)=@_;
+    my($output_char);
+    $ids=decode('utf8', $ids) if($perl58);
+
+    if(($output_char)=&get_chars_matching("ids",$ids)){
+	return unpack("U",$output_char);
+    }else{
+	return undef;
+    }
+}
+
+sub get_char_id{
+    # argument: <char-id>, <input coding system>
+    # return:   char-id.
+    my($char_id,$in_cs)=@_;
+    my($output_char);
+
+    if(($output_char)=&get_chars_matching("=$in_cs",$char_id)){
+	return unpack("U",$output_char);
+    }else{
+	return $char_id;
+    }
+}
+
+sub get_macro_for_GT{
+    # argument: <char-id>
+    # return: TeX macro for GT fonts.
+    my($char_id)=@_;
+    my($char,$gt,$GT);
+    $char=pack("U",$char_id);
+    foreach (@GT){
+	if($gt=&get_char_attribute($char,$_)){
+	    m/gt\-pj\-(\d+)/ and $GT=$1;
+	    last;
+	}
+    }
+    if($gt){
+	return "{\\fontfamily{"
+	    .sprintf("gto%02d",$GT)
+	    ."}\\selectfont\\char".($gt|0x8080)."}";
+    }else{
+	return undef;
+    }
+}
+
+sub setup_texmacro{
+    # Most of the TeX macros below are derived from ucharacters.sty of
+    # jadeTeX 3.13. To use all the macros, you need unicode.sty and
+    # dummyels.sty of jadeTeX and extaccent.sty of CHISE.
+    $texmacro[0xffff]="";
+    # 0080..00FF; Latin-1 Supplement
+    $texmacro[0xA0]='{\ensuremath{\penalty10000\ }}';
+    $texmacro[0xA1]='{\textexclamdown}';
+    $texmacro[0xA2]='{\ifmmode \mbox{\textcent}\else \textcent \fi}';
+    $texmacro[0xA3]='{\ifmmode \pounds \else \textsterling \fi}';
+    $texmacro[0xA4]='{\ifmmode \mbox{\textcurrency}\else \textcurrency \fi}';
+    $texmacro[0xA5]='{\ifmmode \yen \else \textyen \fi}';
+    $texmacro[0xA6]='{\textbrokenbar}';
+    $texmacro[0xA7]='{\ifmmode \S \else \textsection \fi}';
+    $texmacro[0xA8]='{\textasciidieresis}';
+    $texmacro[0xA9]='{\ifmmode \copyright \else \textcopyright \fi}';
+    $texmacro[0xAA]='{\textordfeminine}';
+    $texmacro[0xAB]='{\ifmmode \mbox{\guillemotleft}\else \guillemotleft \fi}';
+    $texmacro[0xAC]='{\ensuremath{\lnot }}';
+    $texmacro[0xAD]='{\ensuremath{\-}}';
+    $texmacro[0xAE]='{\ifmmode \circledR \else \textregistered \fi}';
+    $texmacro[0xAF]='{\textasciimacron}';
+    $texmacro[0xB0]='{\ifmmode \mbox{\textdegree}\else \textdegree \fi}';
+    $texmacro[0xB1]='{\ensuremath{\pm }}';
+    $texmacro[0xB2]='{\ensuremath{{^2}}}';
+    $texmacro[0xB3]='{\ensuremath{{^3}}}';
+    $texmacro[0xB4]='{\textasciiacute}';
+    $texmacro[0xB5]='{\ensuremath{\mathrm{\mu}}}';
+    $texmacro[0xB6]='{\ifmmode \P \else \textparagraph \fi}';
+    $texmacro[0xB7]='{\ensuremath{\cdot }}';
+    $texmacro[0xB8]='{\ifmmode \mbox{\c{}}\else \c{}\fi}';
+    $texmacro[0xB9]='{\ensuremath{{^1}}}';
+    $texmacro[0xBA]='{\textordmasculine}';
+    $texmacro[0xBB]='{\ifmmode \mbox{\guillemotright}\else \guillemotright \fi}';
+    $texmacro[0xBC]='{\textonequarter}';
+    $texmacro[0xBD]='{\textonehalf}';
+    $texmacro[0xBE]='{\textthreequarters}';
+    $texmacro[0xBF]='{\textquestiondown}';
+    $texmacro[0xC0]='{\ifmmode \grave{A}\else \`{A}\fi}';
+    $texmacro[0xC1]='{\ifmmode \acute{A}\else \\\'{A}\fi}';
+    $texmacro[0xC2]='{\ifmmode \hat{A}\else \^{A}\fi}';
+    $texmacro[0xC3]='{\ifmmode \tilde{A}\else \~{A}\fi}';
+    $texmacro[0xC4]='{\ifmmode \ddot{A}\else \"{A}\fi}';
+    $texmacro[0xC5]='{\AA}';
+    $texmacro[0xC6]='{\AE}';
+    $texmacro[0xC7]='{\ifmmode \mbox{\c{C}}\else \c{C}\fi}';
+    $texmacro[0xC8]='{\ifmmode \grave{E}\else \`{E}\fi}';
+    $texmacro[0xC9]='{\ifmmode \acute{E}\else \\\'{E}\fi}';
+    $texmacro[0xCA]='{\ifmmode \hat{E}\else \^{E}\fi}';
+    $texmacro[0xCB]='{\ifmmode \ddot{E}\else \"{E}\fi}';
+    $texmacro[0xCC]='{\ifmmode \grave{I}\else \`{I}\fi}';
+    $texmacro[0xCD]='{\ifmmode \acute{I}\else \\\'{I}\fi}';
+    $texmacro[0xCE]='{\ifmmode \hat{I}\else \^{I}\fi}';
+    $texmacro[0xCF]='{\ifmmode \ddot{I}\else \"{I}\fi}';
+    $texmacro[0xD0]='{\DH}';
+    $texmacro[0xD1]='{\ifmmode \tilde{N}\else \~{N}\fi}';
+    $texmacro[0xD2]='{\ifmmode \grave{O}\else \`{O}\fi}';
+    $texmacro[0xD3]='{\ifmmode \acute{O}\else \\\'{O}\fi}';
+    $texmacro[0xD4]='{\ifmmode \hat{O}\else \^{O}\fi}';
+    $texmacro[0xD5]='{\ifmmode \tilde{O}\else \~{O}\fi}';
+    $texmacro[0xD6]='{\ifmmode \ddot{O}\else \"{O}\fi}';
+    $texmacro[0xD7]='{\ifmmode \times \else \texttimes \fi}';
+    $texmacro[0xD8]='{\O}';
+    $texmacro[0xD9]='{\ifmmode \grave{U}\else \`{U}\fi}';
+    $texmacro[0xDA]='{\ifmmode \acute{U}\else \\\'{U}\fi}';
+    $texmacro[0xDB]='{\ifmmode \hat{U}\else \^{U}\fi}';
+    $texmacro[0xDC]='{\ifmmode \ddot{U}\else \"{U}\fi}';
+    $texmacro[0xDD]='{\ifmmode \acute{Y}\else \\\'{Y}\fi}';
+    $texmacro[0xDE]='{\TH}';
+    $texmacro[0xDF]='{\ss}';
+    $texmacro[0xE0]='{\ifmmode \grave{a}\else \`{a}\fi}';
+    $texmacro[0xE1]='{\ifmmode \acute{a}\else \\\'{a}\fi}';
+    $texmacro[0xE2]='{\ifmmode \hat{a}\else \^{a}\fi}';
+    $texmacro[0xE3]='{\ifmmode \tilde{a}\else \~{a}\fi}';
+    $texmacro[0xE4]='{\ifmmode \ddot{a}\else \"{a}\fi}';
+    $texmacro[0xE5]='{\aa}';
+    $texmacro[0xE6]='{\ae}';
+    $texmacro[0xE7]='{\ifmmode \mbox{\c{c}}\else \c{c}\fi}';
+    $texmacro[0xE8]='{\ifmmode \grave{e}\else \`{e}\fi}';
+    $texmacro[0xE9]='{\ifmmode \acute{e}\else \\\'{e}\fi}';
+    $texmacro[0xEA]='{\ifmmode \hat{e}\else \^{e}\fi}';
+    $texmacro[0xEB]='{\ifmmode \ddot{e}\else \"{e}\fi}';
+    $texmacro[0xEC]='{\ifmmode \grave{\imath}\else \`{\i}\fi}';
+    $texmacro[0xED]='{\ifmmode \acute{\imath}\else \\\'{\i}\fi}';
+    $texmacro[0xEE]='{\ifmmode \hat{\imath}\else \^{\i}\fi}';
+    $texmacro[0xEF]='{\ifmmode \ddot{\imath}\else \"{\i}\fi}';
+    $texmacro[0xF0]='{\dh}';
+    $texmacro[0xF1]='{\ifmmode \tilde{n}\else \~{n}\fi}';
+    $texmacro[0xF2]='{\ifmmode \grave{o}\else \`{o}\fi}';
+    $texmacro[0xF3]='{\ifmmode \acute{o}\else \\\'{o}\fi}';
+    $texmacro[0xF4]='{\ifmmode \hat{o}\else \^{o}\fi}';
+    $texmacro[0xF5]='{\ifmmode \tilde{o}\else \~{o}\fi}';
+    $texmacro[0xF6]='{\ifmmode \ddot{o}\else \"{o}\fi}';
+    $texmacro[0xF7]='{\ensuremath{\div }}';
+    $texmacro[0xF8]='{\o}';
+    $texmacro[0xF9]='{\ifmmode \grave{u}\else \`{u}\fi}';
+    $texmacro[0xFA]='{\ifmmode \acute{u}\else \\\'{u}\fi}';
+    $texmacro[0xFB]='{\ifmmode \hat{u}\else \^{u}\fi}';
+    $texmacro[0xFC]='{\ifmmode \ddot{u}\else \"{u}\fi}';
+    $texmacro[0xFD]='{\ifmmode \acute{y}\else \\\'{y}\fi}';
+    $texmacro[0xFE]='{\th}';
+    $texmacro[0xFF]='{\ifmmode \ddot{y}\else \"{y}\fi}';
+    # 0100..017F; Latin Extended-A
+    $texmacro[0x100]='{\ifmmode \bar{A}\else \={A}\fi}';
+    $texmacro[0x101]='{\ifmmode \bar{a}\else \={a}\fi}';
+    $texmacro[0x102]='{\ifmmode \breve{A}\else \u{A}\fi}';
+    $texmacro[0x103]='{\ifmmode \u{a}\else \u{a}\fi}';
+    $texmacro[0x104]='{\k{A}}';
+    $texmacro[0x105]='{\k{a}}';
+    $texmacro[0x106]='{\ifmmode \acute{C}\else \\\'{C}\fi}';
+    $texmacro[0x107]='{\ifmmode \acute{c}\else \\\'{c}\fi}';
+    $texmacro[0x108]='{\ifmmode \hat{C}\else \^{C}\fi}';
+    $texmacro[0x109]='{\ifmmode \hat{c}\else \^{c}\fi}';
+    $texmacro[0x10A]='{\ifmmode \dot{C}\else \.{C}\fi}';
+    $texmacro[0x10B]='{\ifmmode \dot{c}\else \.{c}\fi}';
+    $texmacro[0x10C]='{\ifmmode \check{C}\else \v{C}\fi}';
+    $texmacro[0x10D]='{\ifmmode \check{c}\else \v{c}\fi}';
+    $texmacro[0x10E]='{\ifmmode \check{D}\else \v{D}\fi}';
+    $texmacro[0x10F]='{\ifmmode \check{d}\else \v{d}\fi}';
+    $texmacro[0x110]='{\DJ}';
+    $texmacro[0x111]='{\dj}';
+    $texmacro[0x112]='{\ifmmode \bar{E}\else \={E}\fi}';
+    $texmacro[0x113]='{\ifmmode \bar{e}\else \={e}\fi}';
+    $texmacro[0x114]='{\ifmmode \breve{E}\else \u{E}\fi}';
+    $texmacro[0x115]='{\ifmmode \breve{e}\else \u{e}\fi}';
+    $texmacro[0x116]='{\ifmmode \dot{E}\else \.{E}\fi}';
+    $texmacro[0x117]='{\ifmmode \dot{e}\else \.{e}\fi}';
+    $texmacro[0x118]='{\ifmmode \k{E}\else \k{E}\fi}';
+    $texmacro[0x119]='{\k{e}}';
+    $texmacro[0x11A]='{\ifmmode \check{E}\else \v{E}\fi}';
+    $texmacro[0x11B]='{\ifmmode \check{e}\else \v{e}\fi}';
+    $texmacro[0x11C]='{\ifmmode \hat{G}\else \^{G}\fi}';
+    $texmacro[0x11D]='{\ifmmode \hat{g}\else \^{g}\fi}';
+    $texmacro[0x11E]='{\ifmmode \breve{G}\else \u{G}\fi}';
+    $texmacro[0x11F]='{\ifmmode \breve{g}\else \u{g}\fi}';
+    $texmacro[0x120]='{\ifmmode \dot{G}\else \.{G}\fi}';
+    $texmacro[0x121]='{\ifmmode \dot{g}\else \.{g}\fi}';
+    $texmacro[0x122]='{\ifmmode \mbox{\c{G}}\else \c{G}\fi}';
+    $texmacro[0x123]='{\ifmmode \mbox{\c{g}}\else \c{g}\fi}';
+    $texmacro[0x124]='{\ifmmode \hat{H}\else \^{H}\fi}';
+    $texmacro[0x125]='{\ifmmode \hat{h}\else \^{h}\fi}';
+    $texmacro[0x126]='{{\fontencoding{LELA}\selectfont\char40}}';
+    $texmacro[0x128]='{\ifmmode \tilde{I}\else \~{I}\fi}';
+    $texmacro[0x129]='{\ifmmode \tilde{\imath}\else \~{\i}\fi}';
+    $texmacro[0x12A]='{\ifmmode \bar{I}\else \={I}\fi}';
+    $texmacro[0x12B]='{\ifmmode \bar{\imath}\else \={\i}\fi}';
+    $texmacro[0x12C]='{\ifmmode \breve{I}\else \u{I}\fi}';
+    $texmacro[0x12D]='{\ifmmode \breve{\imath}\else \u{\i}\fi}';
+    $texmacro[0x12E]='{\k{I}}';
+    $texmacro[0x12F]='{\k{i}}';
+    $texmacro[0x130]='{\ifmmode \dot{I}\else \.{I}\fi}';
+    $texmacro[0x131]='{\ifmmode \imath \else \i \fi}';
+    $texmacro[0x132]='{IJ}';
+    $texmacro[0x133]='{ij}';
+    $texmacro[0x134]='{\ifmmode \hat{J}\else \^{J}\fi}';
+    $texmacro[0x135]='{\ifmmode \hat{\jmath}\else \^{\j}\fi}';
+    $texmacro[0x136]='{\ifmmode \mbox{\c{K}}\else \c{K}\fi}';
+    $texmacro[0x137]='{\ifmmode \mbox{\c{k}}\else \c{k}\fi}';
+    $texmacro[0x138]='{{\fontencoding{LELA}\selectfont\char91}}';
+    $texmacro[0x139]='{\ifmmode \acute{L}\else \\\'{L}\fi}';
+    $texmacro[0x13A]='{\ifmmode \acute{l}\else \\\'{l}\fi}';
+    $texmacro[0x13B]='{\ifmmode \mbox{\c{L}}\else \c{L}\fi}';
+    $texmacro[0x13C]='{\ifmmode \mbox{\c{l}}\else \c{l}\fi}';
+    $texmacro[0x13D]='{\ifmmode \check{L}\else \v{L}\fi}';
+    $texmacro[0x13E]='{\ifmmode \check{l}\else \v{l}\fi}';
+    $texmacro[0x13F]='{{\fontencoding{LELA}\selectfont\char201}}';
+    $texmacro[0x140]='{{\fontencoding{LELA}\selectfont\char202}}';
+    $texmacro[0x141]='{\L}';
+    $texmacro[0x142]='{\l}';
+    $texmacro[0x143]='{\ifmmode \acute{N}\else \\\'{N}\fi}';
+    $texmacro[0x144]='{\ifmmode \acute{n}\else \\\'{n}\fi}';
+    $texmacro[0x145]='{\ifmmode \mbox{\c{N}}\else \c{N}\fi}';
+    $texmacro[0x146]='{\ifmmode \mbox{\c{n}}\else \c{n}\fi}';
+    $texmacro[0x147]='{\ifmmode \check{N}\else \v{N}\fi}';
+    $texmacro[0x148]='{\ifmmode \check{n}\else \v{n}\fi}';
+    $texmacro[0x149]='{\'n}';
+    $texmacro[0x14A]='{\NG}';
+    $texmacro[0x14B]='{\ng}';
+    $texmacro[0x14C]='{\ifmmode \bar{O}\else \={O}\fi}';
+    $texmacro[0x14D]='{\ifmmode \bar{o}\else \={o}\fi}';
+    $texmacro[0x14E]='{\ifmmode \breve{O}\else \u{O}\fi}';
+    $texmacro[0x14F]='{\ifmmode \breve{o}\else \u{o}\fi}';
+    $texmacro[0x150]='{\ifmmode \mbox{\H{O}}\else \H{O}\fi}';
+    $texmacro[0x151]='{\ifmmode \mbox{\H{o}}\else \H{o}\fi}';
+    $texmacro[0x152]='{\OE}';
+    $texmacro[0x153]='{\oe}';
+    $texmacro[0x154]='{\ifmmode \acute{R}\else \\\'{R}\fi}';
+    $texmacro[0x155]='{\ifmmode \acute{r}\else \\\'{r}\fi}';
+    $texmacro[0x156]='{\ifmmode \mbox{\c{R}}\else \c{R}\fi}';
+    $texmacro[0x157]='{\ifmmode \mbox{\c{r}}\else \c{r}\fi}';
+    $texmacro[0x158]='{\ifmmode \check{R}\else \v{R}\fi}';
+    $texmacro[0x159]='{\ifmmode \check{r}\else \v{r}\fi}';
+    $texmacro[0x15A]='{\ifmmode \acute{S}\else \\\'{S}\fi}';
+    $texmacro[0x15B]='{\ifmmode \acute{s}\else \\\'{s}\fi}';
+    $texmacro[0x15C]='{\ifmmode \hat{S}\else \^{S}\fi}';
+    $texmacro[0x15D]='{\ifmmode \hat{s}\else \^{s}\fi}';
+    $texmacro[0x15E]='{\ifmmode \mbox{\c{S}}\else \c{S}\fi}';
+    $texmacro[0x15F]='{\ifmmode \mbox{\c{s}}\else \c{s}\fi}';
+    $texmacro[0x160]='{\ifmmode \check{S}\else \v{S}\fi}';
+    $texmacro[0x161]='{\ifmmode \check{s}\else \v{s}\fi}';
+    $texmacro[0x162]='{\ifmmode \mbox{\c{T}}\else \c{T}\fi}';
+    $texmacro[0x163]='{\ifmmode \mbox{\c{t}}\else \c{t}\fi}';
+    $texmacro[0x164]='{\ifmmode \check{T}\else \v{T}\fi}';
+    $texmacro[0x165]='{\ifmmode \check{t}\else \v{t}\fi}';
+    $texmacro[0x166]='{{\fontencoding{LELA}\selectfont\char47}}';
+    $texmacro[0x167]='{{\fontencoding{LELA}\selectfont\char63}}';
+    $texmacro[0x168]='{\ifmmode \tilde{U}\else \~{U}\fi}';
+    $texmacro[0x169]='{\ifmmode \tilde{u}\else \~{u}\fi}';
+    $texmacro[0x16A]='{\ifmmode \bar{U}\else \={U}\fi}';
+    $texmacro[0x16B]='{\ifmmode \bar{u}\else \={u}\fi}';
+    $texmacro[0x16C]='{\ifmmode \breve{U}\else \u{U}\fi}';
+    $texmacro[0x16D]='{\ifmmode \breve{u}\else \u{u}\fi}';
+    $texmacro[0x16E]='{\ifmmode \mathring{U}\else \r{U}\fi}';
+    $texmacro[0x16F]='{\ifmmode \mathring{u}\else \r{u}\fi}';
+    $texmacro[0x170]='{\ifmmode \mbox{\H{U}}\else \H{U}\fi}';
+    $texmacro[0x171]='{\ifmmode \mbox{\H{u}}\else \H{u}\fi}';
+    $texmacro[0x172]='{\ifmmode \k{U}\else \k{U}\fi}';
+    $texmacro[0x173]='{\k{u}}';
+    $texmacro[0x174]='{\ifmmode \hat{W}\else \^{W}\fi}';
+    $texmacro[0x175]='{\ifmmode \hat{w}\else \^{w}\fi}';
+    $texmacro[0x176]='{\ifmmode \hat{Y}\else \^{Y}\fi}';
+    $texmacro[0x177]='{\ifmmode \hat{y}\else \^{y}\fi}';
+    $texmacro[0x178]='{\ifmmode \ddot{Y}\else \"{Y}\fi}';
+    $texmacro[0x179]='{\ifmmode \acute{Z}\else \\\'{Z}\fi}';
+    $texmacro[0x17A]='{\ifmmode \acute{z}\else \\\'{z}\fi}';
+    $texmacro[0x17B]='{\ifmmode \dot{Z}\else \.{Z}\fi}';
+    $texmacro[0x17C]='{\ifmmode \dot{z}\else \.{z}\fi}';
+    $texmacro[0x17D]='{\ifmmode \check{Z}\else \v{Z}\fi}';
+    $texmacro[0x17E]='{\ifmmode \check{z}\else \v{z}\fi}';
+    # 1E00..1EFF; Latin Extended Additional
+    $texmacro[0x1E00]='{\ifmmode \mbox{\ucirc{A}}\else \ucirc{A}\fi}';
+    $texmacro[0x1E01]='{\ifmmode \mbox{\ucirc{a}}\else \ucirc{a}\fi}';
+    $texmacro[0x1E02]='{\ifmmode \dot{B}\else \.{B}\fi}';
+    $texmacro[0x1E03]='{\ifmmode \dot{b}\else \.{b}\fi}';
+    $texmacro[0x1E04]='{\ifmmode \mbox{\d{B}}\else \d{B}\fi}';
+    $texmacro[0x1E05]='{\ifmmode \mbox{\d{b}}\else \d{b}\fi}';
+    $texmacro[0x1E06]='{\ifmmode \mbox{\b{B}}\else \b{B}\fi}';
+    $texmacro[0x1E07]='{\ifmmode \mbox{\b{b}}\else \b{b}\fi}';
+    $texmacro[0x1E08]='{\ifmmode \mbox{\\\'{\c{C}}}\else \\\'{\c{C}}\fi}';
+    $texmacro[0x1E09]='{\ifmmode \mbox{\\\'{\c{c}}}\else \\\'{\c{c}}\fi}';
+    $texmacro[0x1E0A]='{\ifmmode \dot{D}\else \.{D}\fi}';
+    $texmacro[0x1E0B]='{\ifmmode \dot{d}\else \.{d}\fi}';
+    $texmacro[0x1E0C]='{\ifmmode \mbox{\d{D}}\else \d{D}\fi}';
+    $texmacro[0x1E0D]='{\ifmmode \mbox{\d{d}}\else \d{d}\fi}';
+    $texmacro[0x1E0E]='{\ifmmode \mbox{\b{D}}\else \b{D}\fi}';
+    $texmacro[0x1E0F]='{\ifmmode \mbox{\b{d}}\else \b{d}\fi}';
+    $texmacro[0x1E10]='{\ifmmode \mbox{\c{D}}\else \c{D}\fi}';
+    $texmacro[0x1E11]='{\ifmmode \mbox{\c{d}}\else \c{d}\fi}';
+    $texmacro[0x1E12]='{\ifmmode \mbox{\ucircumflex{D}}\else \ucircumflex{D}\fi}';
+    $texmacro[0x1E13]='{\ifmmode \mbox{\ucircumflex{d}}\else \ucircumflex{d}\fi}';
+    $texmacro[0x1E14]='{\ifmmode \mbox{\MacGrave{E}}\else \MacGrave{E}\fi}';
+    $texmacro[0x1E15]='{\ifmmode \mbox{\MacGrave{e}}\else \MacGrave{e}\fi}';
+    $texmacro[0x1E16]='{\ifmmode \mbox{\MacAcute{E}}\else \MacAcute{E}\fi}';
+    $texmacro[0x1E17]='{\ifmmode \mbox{\MacAcute{e}}\else \MacAcute{e}\fi}';
+    $texmacro[0x1E18]='{\ifmmode \mbox{\ucircumflex{E}}\else \ucircumflex{E}\fi}';
+    $texmacro[0x1E19]='{\ifmmode \mbox{\ucircumflex{e}}\else \ucircumflex{e}\fi}';
+    $texmacro[0x1E1A]='{\ifmmode \mbox{\utilde{E}}\else \utilde{E}\fi}';
+    $texmacro[0x1E1B]='{\ifmmode \mbox{\utilde{e}}\else \utilde{e}\fi}';
+    $texmacro[0x1E1C]='{\ifmmode \mbox{\c{\u{E}}}\else \c{\u{E}}\fi}';
+    $texmacro[0x1E1D]='{\ifmmode \mbox{\c{\u{e}}}\else \c{\u{e}}\fi}';
+    $texmacro[0x1E1E]='{\ifmmode \dot{F}\else \.{F}\fi}';
+    $texmacro[0x1E1F]='{\ifmmode \dot{f}\else \.{f}\fi}';
+    $texmacro[0x1E20]='{\ifmmode \bar{G}\else \={G}\fi}';
+    $texmacro[0x1E21]='{\ifmmode \bar{g}\else \={g}\fi}';
+    $texmacro[0x1E22]='{\ifmmode \dot{H}\else \.{H}\fi}';
+    $texmacro[0x1E23]='{\ifmmode \dot{h}\else \.{h}\fi}';
+    $texmacro[0x1E24]='{\ifmmode \mbox{\d{H}}\else \d{H}\fi}';
+    $texmacro[0x1E25]='{\ifmmode \mbox{\d{h}}\else \d{h}\fi}';
+    $texmacro[0x1E26]='{\ifmmode \ddot{H}\else \"{H}\fi}';
+    $texmacro[0x1E27]='{\ifmmode \ddot{h}\else \"{h}\fi}';
+    $texmacro[0x1E28]='{\ifmmode \mbox{\c{H}}\else \c{H}\fi}';
+    $texmacro[0x1E29]='{\ifmmode \mbox{\c{h}}\else \c{h}\fi}';
+    $texmacro[0x1E2A]='{\ifmmode \mbox{\ubreve{H}}\else \ubreve{H}\fi}';
+    $texmacro[0x1E2B]='{\ifmmode \mbox{\ubreve{h}}\else \ubreve{h}\fi}';
+    $texmacro[0x1E2C]='{\ifmmode \mbox{\utilde{I}}\else \utilde{I}\fi}';
+    $texmacro[0x1E2D]='{\ifmmode \mbox{\utilde{i}}\else \utilde{i}\fi}';
+    $texmacro[0x1E2E]='{\ifmmode \mbox{\DiaAcute{I}}\else \DiaAcute{I}\fi}';
+    $texmacro[0x1E2F]='{\ifmmode \mbox{\DiaAcute{\i}}\else \DiaAcute{\i}\fi}';
+    $texmacro[0x1E30]='{\ifmmode \acute{K}\else \\\'{K}\fi}';
+    $texmacro[0x1E31]='{\ifmmode \acute{k}\else \\\'{k}\fi}';
+    $texmacro[0x1E32]='{\ifmmode \mbox{\d{K}}\else \d{K}\fi}';
+    $texmacro[0x1E33]='{\ifmmode \mbox{\d{k}}\else \d{k}\fi}';
+    $texmacro[0x1E34]='{\ifmmode \mbox{\b{K}}\else \b{K}\fi}';
+    $texmacro[0x1E35]='{\ifmmode \mbox{\b{k}}\else \b{k}\fi}';
+    $texmacro[0x1E36]='{\ifmmode \mbox{\d{L}}\else \d{L}\fi}';
+    $texmacro[0x1E37]='{\ifmmode \mbox{\d{l}}\else \d{l}\fi}';
+    $texmacro[0x1E38]='{\ifmmode \udot{\bar{L}}\else \udot{\={L}}\fi}';
+    $texmacro[0x1E39]='{\ifmmode \udot{\bar{l}}\else \udot{\={l}}\fi}';
+    $texmacro[0x1E3A]='{\ifmmode \mbox{\b{L}}\else \b{L}\fi}';
+    $texmacro[0x1E3B]='{\ifmmode \mbox{\b{l}}\else \b{l}\fi}';
+    $texmacro[0x1E3C]='{\ifmmode \mbox{\ucircumflex{L}}\else \ucircumflex{L}\fi}';
+    $texmacro[0x1E3D]='{\ifmmode \mbox{\ucircumflex{l}}\else \ucircumflex{l}\fi}';
+    $texmacro[0x1E3E]='{\ifmmode \acute{M}\else \\\'{M}\fi}';
+    $texmacro[0x1E3F]='{\ifmmode \acute{m}\else \\\'{m}\fi}';
+    $texmacro[0x1E40]='{\ifmmode \dot{M}\else \.{M}\fi}';
+    $texmacro[0x1E41]='{\ifmmode \dot{m}\else \.{m}\fi}';
+    $texmacro[0x1E42]='{\ifmmode \mbox{\d{M}}\else \d{M}\fi}';
+    $texmacro[0x1E43]='{\ifmmode \mbox{\d{m}}\else \d{m}\fi}';
+    $texmacro[0x1E44]='{\ifmmode \dot{N}\else \.{N}\fi}';
+    $texmacro[0x1E45]='{\ifmmode \dot{n}\else \.{n}\fi}';
+    $texmacro[0x1E46]='{\ifmmode \mbox{\d{N}}\else \d{N}\fi}';
+    $texmacro[0x1E47]='{\ifmmode \mbox{\d{n}}\else \d{n}\fi}';
+    $texmacro[0x1E48]='{\ifmmode \mbox{\b{N}}\else \b{N}\fi}';
+    $texmacro[0x1E49]='{\ifmmode \mbox{\b{n}}\else \b{n}\fi}';
+    $texmacro[0x1E4A]='{\ifmmode \mbox{\ucircumflex{N}}\else \ucircumflex{N}\fi}';
+    $texmacro[0x1E4B]='{\ifmmode \mbox{\ucircumflex{n}}\else \ucircumflex{n}\fi}';
+    $texmacro[0x1E4C]='{\ifmmode \mbox{\TilAcute{O}}\else \TilAcute{O}\fi}';
+    $texmacro[0x1E4D]='{\ifmmode \mbox{\TilAcute{o}}\else \TilAcute{o}\fi}';
+    $texmacro[0x1E4E]='{\ifmmode \mbox{\TilDiaresis{O}}\else \TilDiaresis{O}\fi}';
+    $texmacro[0x1E4F]='{\ifmmode \mbox{\TilDiaresis{o}}\else \TilDiaresis{o}\fi}';
+    $texmacro[0x1E50]='{\ifmmode \mbox{\MacGrave{O}}\else \MacGrave{O}\fi}';
+    $texmacro[0x1E51]='{\ifmmode \mbox{\MacGrave{o}}\else \MacGrave{o}\fi}';
+    $texmacro[0x1E52]='{\ifmmode \mbox{\MacAcute{O}}\else \MacAcute{O}\fi}';
+    $texmacro[0x1E53]='{\ifmmode \mbox{\MacAcute{o}}\else \MacAcute{o}\fi}';
+    $texmacro[0x1E54]='{\ifmmode \acute{P}\else \\\'{P}\fi}';
+    $texmacro[0x1E55]='{\ifmmode \acute{p}\else \\\'{p}\fi}';
+    $texmacro[0x1E56]='{\ifmmode \dot{P}\else \.{P}\fi}';
+    $texmacro[0x1E57]='{\ifmmode \dot{p}\else \.{p}\fi}';
+    $texmacro[0x1E58]='{\ifmmode \dot{R}\else \.{R}\fi}';
+    $texmacro[0x1E59]='{\ifmmode \dot{r}\else \.{r}\fi}';
+    $texmacro[0x1E5A]='{\ifmmode \mbox{\d{R}}\else \d{R}\fi}';
+    $texmacro[0x1E5B]='{\ifmmode \mbox{\d{r}}\else \d{r}\fi}';
+    $texmacro[0x1E5C]='{\ifmmode \udot{\bar{R}}\else \udot{\={R}}\fi}';
+    $texmacro[0x1E5D]='{\ifmmode \udot{\bar{r}}\else \udot{\={r}}\fi}';
+    $texmacro[0x1E5E]='{\ifmmode \mbox{\b{R}}\else \b{R}\fi}';
+    $texmacro[0x1E5F]='{\ifmmode \mbox{\b{r}}\else \b{r}\fi}';
+    $texmacro[0x1E60]='{\ifmmode \dot{S}\else \.{S}\fi}';
+    $texmacro[0x1E61]='{\ifmmode \dot{s}\else \.{s}\fi}';
+    $texmacro[0x1E62]='{\ifmmode \mbox{\d{S}}\else \d{S}\fi}';
+    $texmacro[0x1E63]='{\ifmmode \mbox{\d{s}}\else \d{s}\fi}';
+    $texmacro[0x1E64]='{\ifmmode \acute{S}\else \\\'{S}\fi}';
+    $texmacro[0x1E65]='{\ifmmode \acute{s}\else \\\'{s}\fi}';
+    $texmacro[0x1E66]='{\ifmmode \mbox{\CaronDot{S}}\else \CaronDot{S}\fi}';
+    $texmacro[0x1E67]='{\ifmmode \mbox{\CaronDot{s}}\else \CaronDot{s}\fi}';
+    $texmacro[0x1E68]='{\ifmmode \udot{\dot{S}}\else \udot{\.{S}}\fi}';
+    $texmacro[0x1E69]='{\ifmmode \udot{\dot{s}}\else \udot{\.{s}}\fi}';
+    $texmacro[0x1E6A]='{\ifmmode \dot{T}\else \.{T}\fi}';
+    $texmacro[0x1E6B]='{\ifmmode \dot{t}\else \.{t}\fi}';
+    $texmacro[0x1E6C]='{\ifmmode \mbox{\d{T}}\else \d{T}\fi}';
+    $texmacro[0x1E6D]='{\ifmmode \mbox{\d{t}}\else \d{t}\fi}';
+    $texmacro[0x1E6E]='{\ifmmode \mbox{\b{T}}\else \b{T}\fi}';
+    $texmacro[0x1E6F]='{\ifmmode \mbox{\b{t}}\else \b{t}\fi}';
+    $texmacro[0x1E70]='{\ifmmode \mbox{\ucircumflex{T}}\else \ucircumflex{T}\fi}';
+    $texmacro[0x1E71]='{\ifmmode \mbox{\ucircumflex{t}}\else \ucircumflex{t}\fi}';
+    $texmacro[0x1E72]='{\ifmmode \mbox{\udiaresis{U}}\else \udiaresis{U}\fi}';
+    $texmacro[0x1E73]='{\ifmmode \mbox{\udiaresis{u}}\else \udiaresis{u}\fi}';
+    $texmacro[0x1E74]='{\ifmmode \mbox{\utilde{U}}\else \utilde{U}\fi}';
+    $texmacro[0x1E75]='{\ifmmode \mbox{\utilde{u}}\else \utilde{u}\fi}';
+    $texmacro[0x1E76]='{\ifmmode \mbox{\ucircumflex{U}}\else \ucircumflex{U}\fi}';
+    $texmacro[0x1E77]='{\ifmmode \mbox{\ucircumflex{u}}\else \ucircumflex{u}\fi}';
+    $texmacro[0x1E78]='{\ifmmode \mbox{\TilAcute{U}}\else \TilAcute{U}\fi}';
+    $texmacro[0x1E79]='{\ifmmode \mbox{\TilAcute{u}}\else \TilAcute{u}\fi}';
+    $texmacro[0x1E7A]='{\ifmmode \mbox{\MacDiaresis{U}}\else \MacDiaresis{U}\fi}';
+    $texmacro[0x1E7B]='{\ifmmode \mbox{\MacDiaresis{u}}\else \MacDiaresis{u}\fi}';
+    $texmacro[0x1E7C]='{\ifmmode \tilde{V}\else \~{V}\fi}';
+    $texmacro[0x1E7D]='{\ifmmode \tilde{v}\else \~{v}\fi}';
+    $texmacro[0x1E7E]='{\ifmmode \mbox{\d{V}}\else \d{V}\fi}';
+    $texmacro[0x1E7F]='{\ifmmode \mbox{\d{v}}\else \d{v}\fi}';
+    $texmacro[0x1E80]='{\ifmmode \grave{W}\else \`{W}\fi}';
+    $texmacro[0x1E81]='{\ifmmode \grave{w}\else \`{w}\fi}';
+    $texmacro[0x1E82]='{\ifmmode \acute{W}\else \\\'{W}\fi}';
+    $texmacro[0x1E83]='{\ifmmode \acute{w}\else \\\'{w}\fi}';
+    $texmacro[0x1E84]='{\ifmmode \ddot{W}\else \"{W}\fi}';
+    $texmacro[0x1E85]='{\ifmmode \ddot{w}\else \"{w}\fi}';
+    $texmacro[0x1E86]='{\ifmmode \dot{W}\else \.{W}\fi}';
+    $texmacro[0x1E87]='{\ifmmode \dot{w}\else \.{w}\fi}';
+    $texmacro[0x1E88]='{\ifmmode \mbox{\d{W}}\else \d{W}\fi}';
+    $texmacro[0x1E89]='{\ifmmode \mbox{\d{w}}\else \d{w}\fi}';
+    $texmacro[0x1E8A]='{\ifmmode \dot{X}\else \.{X}\fi}';
+    $texmacro[0x1E8B]='{\ifmmode \dot{x}\else \.{x}\fi}';
+    $texmacro[0x1E8C]='{\ifmmode \mbox{\d{X}}\else \d{X}\fi}';
+    $texmacro[0x1E8D]='{\ifmmode \mbox{\d{x}}\else \d{x}\fi}';
+    $texmacro[0x1E8E]='{\ifmmode \dot{Y}\else \.{Y}\fi}';
+    $texmacro[0x1E8F]='{\ifmmode \dot{y}\else \.{y}\fi}';
+    $texmacro[0x1E90]='{\ifmmode \hat{Z}\else \^{Z}\fi}';
+    $texmacro[0x1E91]='{\ifmmode \hat{z}\else \^{z}\fi}';
+    $texmacro[0x1E92]='{\ifmmode \mbox{\d{Z}}\else \d{Z}\fi}';
+    $texmacro[0x1E93]='{\ifmmode \mbox{\d{z}}\else \d{z}\fi}';
+    $texmacro[0x1E94]='{\ifmmode \mbox{\b{Z}}\else \b{Z}\fi}';
+    $texmacro[0x1E95]='{\ifmmode \mbox{\b{z}}\else \b{z}\fi}';
+    $texmacro[0x1E96]='{\ifmmode \mbox{\b{h}}\else \b{h}\fi}';
+    $texmacro[0x1E97]='{\ifmmode \ddot{t}\else \"{t}\fi}';
+    $texmacro[0x1E98]='{\ifmmode \mathring{w}\else \r{w}\fi}';
+    $texmacro[0x1E99]='{\ifmmode \mathring{y}\else \r{y}\fi}';
+}

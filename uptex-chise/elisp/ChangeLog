@@ -1,0 +1,210 @@
+2010-09-02  MORIOKA Tomohiko  <tomo@zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-encode-region-for-utf-8-jis): New
+	optional argument `ptex-mode'; don't encode JIS X 0208:1990
+	characters as the same as JIS X 0208:1983 characters; don't use
+	\UCSsip{hhhhh} when `ptex-mode' is t; don't encode JIS X 0213
+	characters when `ptex-mode' is nil.
+	(chise-ptex-encode-region-for-utf-8-jis): New function.
+	(chise-xetex-encode-region-for-utf-8-jis): Add local variable
+	`rest' and `spec'.
+	(utf-8-jp-ptex): New coding-system.
+
+2010-08-25  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-xetex-encode-region-for-utf-8-jis): New
+	function.
+	(utf-8-jp-tex): Fix DOC.
+	(utf-8-jp-xetex): New coding-system.
+
+2010-01-25  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-coded-charset-expression-alist): Add
+	setting for `=adobe-japan1-5'.	
+	(chise-tex-accents-macro-alist): Add setting for <COMBINING HORN>.
+	(chise-tex-encode-ucs-char-at-point):
+	- Encode <LATIN SMALL LETTER DOTLESS I> as "\i{}".
+	- Use "\LATINeng{}" to encode <LATIN SMALL LETTER ENG>.
+	- Encode <LATIN SMALL LETTER ALPHA> as "\textscripta{}".
+	- Encode <LATIN SMALL LETTER OPEN E> as "\IPAepsilon{}".
+	- Encode <LATIN SMALL LETTER IOTA> as "\IPAiota{}".
+	- Encode <LATIN SMALL LETTER REVERSED R WITH FISHHOOK> as
+	  "\IPArevfishhookr{}".
+	- Encode <MODIFIER LETTER LEFT HALF RING> as \textrevapostrophe{}.
+	- Encode <SUPERSCRIPT FOUR> as "$^4$".
+	(chise-tex-encode-region-for-utf-8-jis):
+	- Don't encode <LATIN SMALL LETTER S WITH ACUTE>.
+	- Encode <LATIN SMALL LIGATURE OE> as "\oe{}".
+	- Encode SIP characters as "\UCSsip{XXXXX}".
+
+2009-08-30  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (decompose-char): New function.
+	(chise-tex-accents-macro-alist): Renamed from
+	`chise-tex-accent-macro-alist'; add some compound accents entries.
+	(chise-tex-encode-region-for-utf-8-jis): Omit local variable
+	`modifier-1'; use `decompose-char'; use
+	`chise-tex-accents-macro-alist' to avoid hard-coded codes.
+
+2009-08-28  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-encode-ucs-char-at-point): Encode
+	<SUPERSCRIPT FIVE> as "$^5$".
+
+2009-02-05  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-encode-region-for-utf-8-jis): Add
+	setting for <COMBINING MACRON> + <COMBINING ACUTE ACCENT>.
+
+2009-02-04  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-accent-macro-alist): Add setting for
+	<COMBINING DOUBLE ACUTE ACCENT> and <COMBINING OGONEK>.
+	(chise-tex-encode-ucs-char-at-point): Add setting for U+00F8 and
+	U+0142.
+
+2009-01-30  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-encode-ucs-char-at-point): Add setting
+	for U+0250, U+0254, U+0264 and U+026F; use \textglotstop{} instead
+	of \UCSjis{0294} for U+0294.
+	(chise-tex-encode-region-for-utf-8-jis): Avoid to insert multiple
+	\CyrillicScript{...} and \GreekScript{...}.
+
+2009-01-29  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-encode-region-for-utf-8-jis): Accept `-'
+	as a Cyrillic character.
+
+2009-01-25  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-encode-region-for-utf-8-jis): Use
+	\CyrillicScript{...} and \GreekScript{...} instead of
+	\fontencoding{T2A|LGR}\selectfont{}.
+
+2009-01-14  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-coded-charset-expression-alist): Add
+	setting for `thai-tis620' to decode \ThaiTIS{XX}.
+	(chise-tex-encode-ucs-char-at-point): New function.
+	(chise-tex-encode-region-for-jis): Use
+	`chise-tex-encode-ucs-char-at-point'.
+	(chise-tex-encode-region-for-utf-8-jis): Likewise.
+
+2008-01-24  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-encode-region-for-utf-8-jis): Support
+	Thai script.
+
+2008-01-24  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-encode-region-for-utf-8-jis): Use
+	\GTpjG{4933} for JU+8DBC.
+
+2008-01-23  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-accent-macro-alist): New variable.
+	(chise-tex-encode-region-for-utf-8-jis): Support Greek characters;
+	don't encode U+00C5 and U+00E5; refer
+	`chise-tex-accent-macro-alist'; use "\'{\^X}" instead of
+	"\CircAcute{X}"; use "\~{\^X}" instead of "\CircTilde{X}"; add
+	setting for `HornTilde'.
+	(chise-tex-decode-region): Decode "\={\i}".
+
+2008-01-22  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-encode-region-for-utf-8-jis): New
+	function.
+	(chise-tex-decode-region): Decode \u, \v and \c.
+	(utf-8-jp-tex): New coding-system.
+
+2008-01-21  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-encode-region-for-jis): Add settings for
+	$_1$ and $_2$.
+
+2008-01-18  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-decode-region): Decode \`, \', \^, \~,
+	\=, \., \" and \d.
+
+2007-02-06  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-coded-charset-expression-alist): Add
+	settings for `=hanziku-{1..12}'.
+
+2007-01-24  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-encode-region-for-jis): Add settings for
+	`CircGrave' and `HornAcute'.
+
+2006-02-27  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-encode-region-for-jis): \UCSjis{XXXX} or
+	\UCSgb{XXXX} can support only BMP.
+
+2006-01-30  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-coded-charset-expression-alist): Add
+	setting for `=ruimoku-v6'.
+	(chise-tex-encode-region-for-jis): Don't decompose <CYRILLIC SMALL
+	LETTER SHORT I>; add settings for <COMBINING BREVE> and <COMBINING
+	HOOK ABOVE>; support some double accents; support <SUPERSCRIPT
+	TWO>, <SUPERSCRIPT THREE>, <LATIN SMALL LETTER D WITH STROKE>,
+	<LATIN SMALL LETTER ENG>, <LATIN SMALL LETTER S WITH HOOK>,
+	<SUBSCRIPT THREE> and <SUBSCRIPT FIVE>.
+
+2006-01-23  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-encode-region-for-jis): Don't decompose
+	<CYRILLIC SMALL LETTER IO>.
+
+2006-01-05  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-encode-region-for-jis): Don't skip
+	Latin-1 characters; try to convert composite characters to LaTeX
+	macros.
+
+2005-06-30  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-coded-charset-expression-alist): Use
+	`=ucs-bmp@{gb|jis|ks|cns}' instead of `=ucs@{gb|jis|ks|cns}';
+	don't use UCSjis for `=ucs@jis/2000; use `GTpj{A|B|C|...|K}'
+	instead of `GTpj{1|2|3|...|11}' for `=gt-pj-{1|2|3|...|11}'.
+	(iso-2022-jp-tex-jis): Specify `ccs-priority-list'; don't setup
+	`input-charset-conversion'.
+
+2005-01-12  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-encode-region-for-gb): Add setting for
+	KS character.
+
+2005-01-12  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-encode-region-for-jis): Add setting for
+	KS character.
+
+2004-12-15  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-coded-charset-expression-alist): Add
+	settings for `=ucs-hangul' and `=ucs@jis/2000'; prefer `=ucs@ks'
+	than `=gt-pj-*'.
+	(chise-tex-encode-region-for-jis): Add settings for JIS X 0213
+	characters, Hangul characters, U+2022 and U+0294; use GB domain
+	characters as a fallback.
+
+2004-08-22  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-encode-region-for-jis): New function.
+	(iso-2022-jp-tex-jis): New coding-system.
+
+2004-06-24  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el (chise-tex-encode-region-for-gb): Renamed from
+	`chise-tex-encode-region'.
+	(iso-2022-jp-tex-gb): Renamed from `iso-2022-jp-tex'.
+
+2004-06-17  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-tex.el: New file.
+

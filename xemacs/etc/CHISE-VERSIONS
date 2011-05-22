@@ -1,0 +1,34 @@
+;; -*- coding: utf-8-jp-er; -*-
+
+[XEmacs UTF-2000 Version names]
+;;-------------------------------------------------------------------------
+;;	West Japan Railway	西日本旅客鉄道	http://www.westjr.co.jp/
+;;	Kansai Line	 	関西本線
+;;-------------------------------------------------------------------------
+0.2				JR 難波
+0.3				今宮
+0.4				新今宮
+0.5				天王寺
+0.6				東部市場前
+0.7				平野
+0.8				加美
+0.9				久宝寺
+0.10				八尾
+0.11				志紀
+0.12				柏原
+0.13				高井田
+0.14				河内堅上
+0.15	Sangō			三郷
+0.16	Ōji			王寺
+0.17	Hōryūji			法隆寺
+0.18	Yamato-Koizumi		大和小泉
+0.19	Kōriyama		郡山
+0.20	Nara			奈良
+
+[XEmacs CHISE Version names]
+0.21	Narayama		平城山
+0.22	Kizu			木津	; <=> 片町線、奈良線
+0.23	Kamo			加茂
+0.24	Kasagi			笠置
+0.25	Ōkawara			大河原
+	Tsukigaseguchi		月ヶ瀬口

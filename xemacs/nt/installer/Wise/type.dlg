@@ -1,0 +1,32 @@
+Document Type: DLG
+item: Custom Dialog
+  Name=type
+  item: Dialog
+    Title=type
+    Width=238
+    Height=208
+    Font Name=Helv
+    Font Size=8
+    item: Radio Button
+      Rectangle=5 5 40 20
+      Enabled Color=00000000000000001111111111111111
+      Create Flags=01010000000000010000000000001001
+      Text=minimal
+      Text=
+    end
+    item: Radio Button
+      Rectangle=5 25 40 40
+      Enabled Color=00000000000000001111111111111111
+      Create Flags=01010000000000010000000000001001
+      Text=custom
+      Text=
+    end
+    item: Radio Button
+      Rectangle=5 45 40 60
+      Enabled Color=00000000000000001111111111111111
+      Create Flags=01010000000000010000000000001001
+      Text=full
+      Text=
+    end
+  end
+end

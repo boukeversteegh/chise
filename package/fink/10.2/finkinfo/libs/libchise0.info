@@ -1,0 +1,58 @@
+Package: libchise0
+Version: 0.0.0.20030811
+Revision: 1
+Maintainer: MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+Source: http://www.jokoji.jp/chise/libchise-%v.tar.gz
+Source-MD5: a68e35e17ea582507410bda11ac74423
+#
+BuildDepends: xemacs-chise, db3
+Depends: %N-shlibs (= %v-%r), db3-shlibs
+Conflicts: libchise
+Replaces: libchise
+#PatchScript: <<
+# sed 's|@PREFIX@|%p|g' <%a/%n.patch | patch -p1
+#<<
+#ConfigureParams: --prefix=/sw
+CompileScript: <<
+./configure --prefix=/sw
+make prefix=/sw
+<<
+InstallScript: <<
+mkdir -p %i/include
+mkdir -p %i/lib
+make  prefix=%i install.libs install.h
+<<
+Splitoff: <<
+ Package: %N-shlibs
+ Replaces: %N (<< %v-%r)
+ Description: shared libraries for libchise
+ Files: lib/libchise.0.0.0.dylib lib/libchise.0.dylib lib/libchise.dylib
+ Shlibs: %p/lib/libchise.0.0.0.dylib 0.0.0 %n (>= %v-%r)
+ DocFiles: ChangeLog
+<<
+Splitoff2: <<
+ Package: %N-dev
+ Replaces: %N (<< %v-%r) 
+ Description: headers and static libraries for libchise
+ Files: include/chise.h
+ DocFiles: ChangeLog
+<<
+DocFiles: ChangeLog sample.c
+#
+PostInstScript: <<
+mkdir -p /usr/local/lib/chise
+ln -sf `xemacs -q -batch -eval '(princ (file-name-as-directory exec-directory))'`char-db /usr/local/lib/chise
+#ln -s %p/lib/libchise.dylib /usr/local/lib
+<<
+PreRmScript: <<
+rm -f /usr/local/lib/chise/char-db
+#rm -f /usr/local/lib/libchise.dylib
+rmdir /usr/local/lib/chise
+<<
+Description: CHISE library
+DescDetail: <<
+libchise provides the interface of CHISE. It was written by
+Tomohiko Morioka.
+<<
+Homepage: http://www.kanji.zinbun.kyoto-u.ac.jp/projects/chise/
+License: GPL

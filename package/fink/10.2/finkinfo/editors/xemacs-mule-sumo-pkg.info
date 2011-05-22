@@ -1,0 +1,28 @@
+Package: xemacs-mule-sumo-pkg
+Version: 20040818
+Revision: 1
+Source: mirror:custom:packages/xemacs-mule-sumo-2004-08-18.tar.gz
+Source-MD5: cd6efa6fe2518a2fab44e02f7f83d136
+CustomMirror: <<
+nam-US: http://helios.dii.utk.edu/ftp/pub/xemacs
+nam-CA: ftp://ftp.ca.xemacs.org/pub/Mirror/xemacs
+sam-BR: ftp://ftp.br.xemacs.org/pub/xemacs/
+asi-JP: ftp://ftp.jp.xemacs.org/pub/editors/xemacs/
+asi-TW: ftp://ftp.tw.xemacs.org/pub/Mirror/xemacs
+asi-KR: ftp://ftp.kr.xemacs.org/pub/tools/emacs/xemacs/
+aus-AU: ftp://ftp.au.xemacs.org/pub/xemacs/
+eur-DE: ftp://ftp.de.xemacs.org/pub/ftp.xemacs.org/tux/xemacs
+eur-FR: ftp://ftp.fr.xemacs.org/pub/xemacs
+eur-UK: ftp://ftp.uk.xemacs.org/sites/ftp.xemacs.org/pub/xemacs/
+eur-IT: ftp://ftp.it.xemacs.org/unix/packages/XEMACS/
+eur-RU: ftp://ftp.ru.xemacs.org/pub/xemacs/
+<<
+CompileScript: echo "no compile script"
+NoSourceDirectory: true
+InstallScript: <<
+ mkdir -p %i/lib/xemacs
+ cp -R . %i/lib/xemacs
+<<
+License: GPL
+Description: All xemacs mule packages together
+Homepage: http://www.xemacs.org/

@@ -1,0 +1,44 @@
+#!/bin/sh
+
+SUDO=sudo
+
+${SUDO} apt-get install cvs
+${SUDO} apt-get install curl
+${SUDO} apt-get install make
+# ${SUDO} apt-get install autoconf2.13
+${SUDO} apt-get install texinfo
+# ${SUDO} apt-get install texi2html
+# ${SUDO} apt-get install debhelper
+# ${SUDO} apt-get install dpatch
+${SUDO} apt-get install g++
+${SUDO} apt-get install libgpmg1-dev
+${SUDO} apt-get install zlib1g-dev
+${SUDO} apt-get install libpam0g-dev
+${SUDO} apt-get install libdb-dev
+${SUDO} apt-get install libldap2-dev
+${SUDO} apt-get install libcompfaceg1-dev
+${SUDO} apt-get install libpng3-dev
+${SUDO} apt-get install libtiff4-dev
+${SUDO} apt-get install libjpeg62-dev
+${SUDO} apt-get install libncurses5-dev
+${SUDO} apt-get install x-dev
+${SUDO} apt-get install libx11-dev
+${SUDO} apt-get install libxaw7-dev
+${SUDO} apt-get install libxau-dev
+${SUDO} apt-get install libxext-dev
+${SUDO} apt-get install libxmu-dev
+${SUDO} apt-get install libxpm-dev
+${SUDO} apt-get install libxt-dev
+${SUDO} apt-get install xlibs-data
+${SUDO} apt-get install xbitmaps
+#${SUDO} apt-get install libgtk1.2-dev
+#${SUDO} apt-get install libgnome-dev
+#${SUDO} apt-get install libart-dev
+${SUDO} apt-get install libesd0-dev
+${SUDO} apt-get install libcanna1g-dev
+
+./configure
+
+make -e SUDO=${SUDO} install-libchise
+${SUDO} ldconfig
+make -e SUDO=${SUDO} install-base

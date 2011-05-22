@@ -1,0 +1,19 @@
+#!/bin/sh
+
+sudo port -v install libpng
+sudo port -v install Xaw3d
+sudo port -v install ncurses
+sudo port -v install db46
+sudo port -v install jpeg
+sudo port -v install tiff
+sudo port -v install compface
+sudo port -v install gettext
+sudo port -v install zlib
+sudo port -v install canna
+
+./configure \
+    --with-site-includes=/opt/local/include/db46:/opt/local/include \
+    --with-site-libraries=/opt/local/lib/db46:/opt/local/lib \
+    --with-canna
+
+make -e SUDO=sudo install-base

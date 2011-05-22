@@ -1,0 +1,568 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+<head>
+<title>CHaracter Information Service Environment</title>
+<link rel=stylesheet href="chise.css" type="text/css">
+</head>
+<body lang="en">
+
+<table>
+  <tr>
+    <td align="center">
+    <b><a href="http://www.chise.org/">[chise.org]</a></b>
+    <td align="center">
+    <b>[Mirror Sites]</b>
+    <hr>
+    <td>
+	<b><a href="index.html.ja.utf-8">[Japanese page]</a></b>
+	<hr>
+  </tr>
+  <tr>
+    <td>
+	<a href="http://www.chise.org/"><img
+	alt="chise.org"
+	src="images/diccs-s.jpg" align="middle"></a>
+    <td>
+	<a href="http://cvs.m17n.org/chise/"><img
+	alt="m17n.org" src="images/tomura-s.png" align="middle"></a>
+	<a href="http://www.kanji.zinbun.kyoto-u.ac.jp/projects/chise/"><img
+	alt="kanji.zinbun.kyoto-u.ac.jp" src="images/diccs-s.jpg" align="middle"></a>
+	<a href="http://mousai.as.wakwak.ne.jp/projects/chise/"><img
+	alt="mousai.as.wakwak.ne.jp" src="images/egret-pond-s.jpg"
+	align="middle"></a>
+    <td>
+  </table>
+  <p>
+
+<hr>
+<h1>CHISE project</h1>
+
+<hr>
+
+<!--<b><a href="index.html.ja.utf-8"><img
+src="images/japanese-page.png">
+</a></b><br>
+<hr>-->
+
+<h2>About the CHISE Project</h2>
+<p>
+The CHISE (CHaracter Information Service Environment) project attempts
+to collect and organize into a Knowledge-Base information about
+characters in the scripts of the world.  A new processing environment
+based on this architecture is currently under development.
+</p>
+
+<h2>News</h2>
+<!-- <ul> -->
+<!--   <li>Koichi Kamichi has published -->
+<!--       <a href="http://fonts.jp/chise_linkmap/">chise_linkmap -->
+<!--       (a visualization system for CHISE character database)</a>, -->
+<!--       <a href="http://fonts.jp/chise_swig_perl/">chise_swig_perl -->
+<!--       (a libchise wrapper for perl 5)</a> and -->
+<!--       <a href="http://fonts.jp/makettf/">makettf -->
+<!--       (simple TTF binder)</a>, which were results of -->
+<!--       <a href="News/20051013-15.html">CHISE Conference 2005 -->
+<!--       and CodeFest Kyoto 2005</a>.</li> -->
+<!-- <li><a href="News/20051013-15.html">CHISE Conference -->
+<!--       2005</a> has been held this October 13 (Thu), 14 (Fri) -->
+<!--       at <a href="http://www.kcif.or.jp/en/">Kyoto International -->
+<!--       Community House</a>.</li> -->
+<!-- <li><a href="http://mousai.kanji.zinbun.kyoto-u.ac.jp/ids-find"> -->
+<!--       CHISE-IDS Hanzi/Hanja/Kanji Searcher -->
+<!--       </a>has been published.</li> -->
+<!-- <!--  <li>2004-06-09 (Wed) -->
+<!--       Tomohiko Morioka will make a presentation on CHISE Project in -->
+<!--       <a href="http://kura.hanazono.ac.jp/kanji/20040609symposium.html" -->
+<!--       >Symposium: <i>Frontier of Character Information Processing: -->
+<!--       Past, Presenta and Future</i></a>.</li> -->
+<!--   <li>2004-05-28 (Fri) -->
+<!--       A presentation on CHISE Project was made in -->
+<!--       <a href="http://www.sigch.soken.ac.jp/2004.05/">the 62nd meeting of -->
+<!--        the IPSJ SIG Computers and the Humanities</a>.</li> -->
+<!--   <li>2003-11-28 (Fri), 29 (Sat) -->
+<!--       <a href="http://coe21.zinbun.kyoto-u.ac.jp/ws-type-2003">Glyph -->
+<!--       and Typesetting Workshop</a> was held at -->
+<!--       <a href="http://www.kcif.or.jp/jp/footer/05.html" -->
+<!--       >Kyoto City International Foundation</a>. -->
+<!--   </li> -->
+<!--  <li>2003-10-31 (Fri) -->
+<!--      Presentations on the CHISE project were made in -->
+<!--      <a href="http://lc.linux.or.jp/lc2003/index.html">Linux Conference -->
+<!--      2003</a>. -->
+<!--  </li> -->
+<!-- </ul> -->
+
+<hr>
+
+<h2>Sub Projects</h2>
+<p>
+The CHISE project is the aggregate of the following sub-projects.
+</p>
+
+<ul>
+  <li>Development of a character processing architecture based on a
+	character knowledge base
+	<!--文字知識データベースに基づく文字処理アーキテクチャの開発-->
+      <ul>
+	<li>libchise
+	<li><a href="xemacs/index.html">XEmacs CHISE</a>
+	<li><a href="ruby/index.html">Ruby/CHISE</a>
+	<li><a href="perl/index.html">Perl/CHISE</a>
+	    <ul>
+	      <li><a href="http://fonts.jp/chise_swig_perl/"
+		  >chise_swig_perl</a>
+	    </ul>
+      </ul>
+  </li>
+  <li>Concord: development of a prototyping OOP database engine
+  <li><a href="topicmaps/index.html">A TopicMaps based approach to a
+	character dababase
+	<!--TopicMapsによる文字知識データベース・システムの開発--></a></li>
+  <li><a href="char-data/">Database of features of characters
+	<!--文字に関するさまざまな知識のデータベース化--></a>
+      <ul>
+	<li><a href="ids/index.html">Database of the component structure of
+	    Chinese Characters<!--漢字構造情報データベース--></a></li>
+	    <ul>
+	      <li><a href="http://chise.zinbun.kyoto-u.ac.jp/ids-find"
+		  >CHISE IDS Find</a>
+	    </ul>
+	<li>Database about variants and related characters
+	    <ul>
+	      <li><a href="http://fonts.jp/chise_linkmap/"
+		  >CHISE linkmap</a>
+	    </ul>
+	<li><a href="glyph/index.html">Intgegration and Composition of
+	    Character Glyphs and Styles<!--グリフ・字形情報の統合と合
+	    成--></a>
+	    <ul>
+	      <li><a href="http://fonts.jp/makettf/">makettf</a>
+	    </ul>
+	</li>
+      </ul>
+  </li>
+  <li><a href="visualization/index.html">Mathematical analysis and visualation
+	of character knowledge<!--文字知識情報の数理的解析と可視化--></a></li>
+  <li><a href="omega/index.html">Omega/CHISE: Typesetting System in cooperation
+	with character knowledge database
+	<!--文字データベースと連携した組版システム--></a></li>
+  <li>CHISE-core / CHISE-base: integrated package and installer
+</ul>
+
+<!--
+<h2>Development of a character processing architecture based on a
+character knowledge base</h2>
+<h3><a name="xemacs/">XEmacs UTF-2000</a></h3> <p>
+ It is now possible to load character
+attributes from a external database on demand ("lazy loading").  On
+Intel 32 bit processor architectures, the size of the executable file
+thus shrinks from the 30 MB required with the traditional built to
+just about 15 MB. This can now be downloaded from <a
+href="http://www.kanji.zinbun.kyoto-u.ac.jp/projects/chise/dist/XEmacs/xemacs-utf-2000-0.19.tar.gz">
+XEmacs UTF-2000 0.19 (Koriyama)</a>. In addtion, there is a UTF-2000
+branch of the XEmacs tree at cvs.m17n.org in /cvs/root, this can be
+accessed by anonymous CVS </p>
+
+<h2>A <a name="topicmaps">
+<a href="http://www.topicmaps.org">TopicMaps</a> based approach to a
+character dababase 
+</a></h2>
+<p>
+In 2001 the prototype of a Topic Map engine has been developed based
+on <a href="http://www.zope.org/">Zope</a>.  This proved less than
+ideal for this purpose, so the focus for this year is to port this
+engine to a relational database backend.  Currently development
+continued with PostgreSQL. It is planned to enable Topic Map editing
+within  XEmacs UTF-2000, but also to allow multiple clients in addtion
+to this.
+</p>
+
+<h2>Database of features of characters</h2>
+
+<h3>Database of the component structure of Chinese Characters</h3>
+
+<p>
+Based on the Ideographic Description Characters (IDS) in 
+ISO/IEC 10646-1:2000 and Unicode, we are now developping a database
+that expresses the structure of Chinese Characters using this syntax. 
+At the moment, we are using the characters in the Unicode tables as a
+reference.  The basic <emph>CJK Unified Ideographs</emph>, as well as
+<emph>Extension A</emph> and <emph>Extension B</epmph>, together more
+than 70000 characters are currently covered.
+</p>
+
+<p>
+<a href="images/ids-ext-b-1.png">
+<img align="ids" src="images/ids-ext-b-1-s.png">
+<br>
+Table of the component structure database
+</a>
+</p>
+
+<p>
+The following tables are currently available via anonymous CVS from <a
+href="http://cvs.m17n.org/">cvs.m17n.org</a> at <a
+href="http://cvs.m17n.org/viewcvs/?cvsroot=chise">/cvs/chise</a> 
+as module <a
+href="http://cvs.m17n.org/viewcvs/ids/?cvsroot=chise">ids:</a> 
+</p>
+
+<blockquote>
+<dl compact>
+  <dt><a
+href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-UCS-Basic.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-UCS-Basic.txt
+      </a>
+  <dd>CJK Unified Ideographs (U+4E00 〜 U+9FA5) of ISO/IEC
+      10646-1:2000
+
+  <dt><a
+href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-UCS-Ext-A.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-UCS-Ext-A.txt
+      </a>
+  <dd>CJK Unified Ideographs Extension A (U+3400 〜 U+4DB5, U+FA1F and
+      U+FA23) of ISO/IEC 10646-1:2000
+
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-UCS-Compat.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-UCS-Compat.txt
+      </a>
+  <dd>CJK Compatibility Ideographs (U+F900 〜 U+FA2D, except U+FA1F
+      and U+FA23) of ISO/IEC 10646-1:2000
+
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-UCS-Ext-B-1.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+       IDS-UCS-Ext-B-1.txt
+      </a>
+  <dd>CJK Unified Ideographs Extension B [part 1] (U-00020000 〜 
+      U-00021FFF) of ISO/IEC 10646-2:2001
+
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-UCS-Ext-B-2.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+       IDS-UCS-Ext-B-2.txt
+      </a>
+  <dd>CJK Unified Ideographs Extension B [part 2] (U-00022000 〜 
+      U-00023FFF) of ISO/IEC 10646-2:2001
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-UCS-Ext-B-3.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+       IDS-UCS-Ext-B-3.txt
+      </a>
+  <dd>CJK Unified Ideographs Extension B [part 3] (U-00024000 〜 
+      U-00025FFF) of ISO/IEC 10646-2:2001
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-UCS-Ext-B-4.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+       IDS-UCS-Ext-B-4.txt
+      </a>
+  <dd>CJK Unified Ideographs Extension B [part 4] (U-00026000 〜
+      U-00027FFF) of ISO/IEC 10646-2:2001
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-UCS-Ext-B-5.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+       IDS-UCS-Ext-B-5.txt
+      </a>
+  <dd>CJK Unified Ideographs Extension B [part 5] (U-00028000 〜
+      U-00029FFF) of ISO/IEC 10646-2:2001
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-UCS-Ext-B-6.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+       IDS-UCS-Ext-B-6.txt
+      </a>
+  <dd>CJK Unified Ideographs Extension B [part 6] (U-0002A000 〜
+      U-0002A6D6) of ISO/IEC 10646-2:2001
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-UCS-Compat-Supplement.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-UCS-Compat-Supplement.txt
+      </a>
+  <dd>CJK Compatibility Ideographs Supplement (U-0002F800 〜 
+      U-0002FA1D) of ISO/IEC 10646-2:2001
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-01.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-01.txt
+      </a>
+  <dd>Morohashi: Daikanwa Jiten, Volume 1
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-02.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-02.txt
+      </a>
+  <dd>Morohashi: Daikanwa Jiten, Volume 2
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-03.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-03.txt
+      </a>
+  <dd>Morohashi: Daikanwa Jiten, Volume 3
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-04.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-04.txt
+      </a>
+  <dd>Morohashi: Daikanwa Jiten, Volume 4
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-05.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-05.txt
+      </a>
+  <dd>Morohashi: Daikanwa Jiten, Volume 5
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-06.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-06.txt
+      </a>
+  <dd>Morohashi: Daikanwa Jiten, Volume 6
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-07.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-07.txt
+      </a>
+  <dd>Morohashi: Daikanwa Jiten, Volume 7
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-08.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-08.txt
+      </a>
+  <dd>Morohashi: Daikanwa Jiten, Volume 8
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-09.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-09.txt
+      </a>
+  <dd>Morohashi: Daikanwa Jiten, Volume 9
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-10.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-10.txt
+      </a>
+  <dd>Morohashi: Daikanwa Jiten, Volume 10
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-11.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-11.txt
+      </a>
+  <dd>Morohashi: Daikanwa Jiten, Volume 11
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-12.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-12.txt
+      </a>
+  <dd>Morohashi: Daikanwa Jiten, Volume 12
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-dx.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-dx.txt
+      </a>
+  <dd>Morohashi: Daikanwa Jiten, Additions
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-Daikanwa-ho.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-Daikanwa-ho.txt
+      </a>
+  <dd>Morohashi: Daikanwa Jiten, Appendix
+  <dt><a
+      href="http://cvs.m17n.org/viewcvs/*checkout*/ids/IDS-CBETA.txt?rev=HEAD&cvsroot=chise&content-type=text/plain">
+      IDS-CBETA.txt
+      </a>
+  <dd>Characters encountered by the <a href="http://www.cbeta.org/">Chinese Buddhist Electronic Text
+      Association (CBETA)</a>
+</dl>
+</blockquote>
+
+<ul>
+  <li><a href="http://web.sfc.keio.ac.jp/~kamichi/">Koichi KAMICHI</a>
+      (<a href="http://www.fonts.jp/">
+      Forum for development of on-the-fly generation of Kanji Fonts
+      </a>)
+      <a href="http://www.fonts.jp/search.html">
+			Analytic tool for Kanji Fonts (in Japanese)
+      </a>
+</ul>
+
+<h3><a name="glyph">Intgegration and Composition of Character Glyphs
+and Styles</a></h3> <p> In the character database is information about
+character glyphs and styles collected.  This allows to use this
+information together with the other knowledge about a character in the
+database to built a system that uses the <a href="#ids">component
+structure information </a> to assemble the font for a character
+depending on the contextual requirements from its components.  With
+this system, occurrences of mismatches based on erroneous association
+or insufficient contextual information are excluded, and it will be
+possible easily display and print character forms that have not been codified and for
+which no fonts exists .
+<ul>
+  <li>
+      <a href="http://www.fonts.jp/">
+      Forum for development of on-the-fly generation of Kanji Fonts
+      </a>
+</ul>
+
+
+<h3><a name="network">Mathematical analysis and visualation of
+character knowledge</a></h3>
+<ul>
+  <li>Yoshi Fujiwara, Yasuhiro Suzuki, Tomohiko
+      Morioka, “<a
+      href="http://www2.crl.go.jp/jt/a134/yoshi/pc/kanji/nw.ps">
+      Network of Words</a>”, <a href="http://arob.cc.oita-u.ac.jp/">
+      Artificial Life and Robotics 2002</a>
+      (<a href="http://www2.crl.go.jp/jt/a134/yoshi/pc/kanji/index.html">
+			Presentation material
+      </a>)
+  <li>Model for the relation of Kanji characters that share a component
+      <br>
+      <a
+			href="http://www2.crl.go.jp/jt/a134/yoshi/pc/kanji/mage1.jpg">
+      <img alt="Image 1"
+      src="images/mage1-s.jpg"><br>Image 1</a>
+&nbsp;<br>
+      <a href="http://www2.crl.go.jp/jt/a134/yoshi/pc/kanji/mage2.jpg">
+      <img alt="模式図2"
+      src="images/mage2-s.jpg"><br>Image 2</a>
+</ul>
+-->
+
+<hr>
+<h2>CVS Repository</h2>
+<p>
+<a href="http://cvs.m17n.org/viewcvs/?cvsroot=chise">/cvs/chise</a>
+</p>
+
+<hr>
+<h2>Mailing List</h2>
+<p>
+Discussion about the CHISE Project occur in the CHISE-{ja|en} mailing list.
+<p>
+Anybody who would like to take part in the discussion about and
+development of the CHISE Project, has ideas or questions about the
+implementation or wishes for new features is welcome to join either
+the English, or the Japanese or both lists.
+<p>
+To become a member in the CHISE mailing, send a message to the
+following address:
+<dl compact>
+  <dt>For Japanese:
+  <dd><a href="mailto:chise-ja-ctl@m17n.org">
+      chise-ja-ctl@m17n.org</a>
+
+  <dt>For English:
+  <dd><a href="mailto:chise-en-ctl@m17n.org">
+      chise-en-ctl@m17n.org</a>
+</dl>
+
+with the word 
+<blockquote>subscribe Your Name</blockquote>
+in the body of the message.  You will then receive a conformation
+message with the line
+
+<blockquote>
+confirm PASSWORD Your Name
+</blockquote> You will have to reply to this message to become a member.
+
+<hr>
+
+<h2>Papers and Presentations</h2>
+<ul>
+  <li><a href="xemacs/#presentation">
+      About XEmacs UTF-2000</a>
+  <li><a href="#network">About mathematical analysis of Character Information</a>
+  <li>Other
+      <ul>
+        <li><a href="papers/u2k-plan.ja/">
+            &ldquo;Model and Implementation of a Next Generation Multilingual
+            Processing System&rdquo;
+            </a> (in Japanese. October 1999)
+        <li><a href="http://www.kanji.zinbun.kyoto-u.ac.jp/~wittern/">WITTERN, Christian</a>, 
+            &ldquo;Non-system characters in XML documents&rdquo;, in:
+            <i>The Frontier of Asian Information Processing</i>
+            [Seminar Series of the National Documentation and
+                                Information Centers in Humanities] No. 10, November 2000
+        <li><a href="http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/">MORIOKA Tomohiko</a>, 
+            &ldquo;The UTF-2000 Project&rdquo;, in:
+            <a
+            href="http://www.kanji.zinbun.kyoto-u.ac.jp/publications/kanji-and-info-2.pdf">
+            Kanji and Information, No.2</a>, March 2001 (in Japanese)
+        <li><a href="http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/">MORIOKA Tomohiko</a>,
+            &ldquo;CHISE project &emdash; beyond the UTF-2000&rdquo;,
+            <a href="http://www.m17n.org/m17n2001/">
+            m17n2001: the Fifth International Symposium on Multilingual
+            Information Processing and Open Source Software
+            </a>.
+        <li><a href="http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/">MORIOKA Tomohiko</a>, 
+            &ldquo;A Short Introduction to UTF-2000 Project&rdquo;,
+            the First TEI Character Set Issues Working Group (October 2001,
+            University of California, Berkeley, USA).
+        <li><a href="http://www.kanji.zinbun.kyoto-u.ac.jp/~wittern/">WITTERN, Christian</a>, 
+            &ldquo;What is Digitisation?&rdquo;, in:
+            <a
+            href="http://www.kanji.zinbun.kyoto-u.ac.jp/publications/kanji-and-info-3.pdf">
+            Kanji and Information, No.3</a>, October 2001 (in Japanese).
+        <li><a href="http://www.ya.sakura.ne.jp/~moro/">MORO, Shigeki</a>, 
+            &ldquo;The meaning of 'beyond character codes'&rdquo;, in:
+            <a
+            href="http://www.kanji.zinbun.kyoto-u.ac.jp/publications/kanji-and-info-3.pdf">
+            Kanji and Information, No.3</a>, October 2001 (in Japanese).
+        <li><a href="http://www.kanji.zinbun.kyoto-u.ac.jp/~wittern/">WITTERN, Christian</a>, 
+            &ldquo;Some thoughts on the digitization of Kanji&rdquo;,
+            <i>Information Technology and the Humanities</i>
+            [Seminar Series of the National Documentation and
+                                Information Centers in Humanities] No. 11, November 2001.
+        <li><a href="http://web.sfc.keio.ac.jp/~kamichi/">KAMICHI, Koichi</a>, 
+            &ldquo;Building KAGE (Kanji-font Automatic Generating Engine):
+            The Next Gerenation of Kanji Processing beyond the Character Code Model&rdquo;
+            in <a href="http://www.jaet.gr.jp/jj/3.html"><i>Journal of Japan Association for 
+            East Asian Text Processing (JAET)</i> No. 3</a>, October 2002 (in Japanese).
+        <li><a href="http://www.ya.sakura.ne.jp/~moro/">MORO, Shigeki</a>, 
+            &ldquo;Software Review: CHISE Project,&rdquo;
+            in <a href="http://www.jaet.gr.jp/jj/3.html"><i>Journal of Japan Association for 
+            East Asian Text Processing (JAET)</i> No. 3</a>, October 2002 (in Japanese).
+        <!-- <li><a href="http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/">MORIOKA, Tomohiko</a>,
+            <a href="papers/dc2002.pdf">
+            「ポスト文字コード時代の文書処理技術に関する展望」</a>、
+            「データベースの活用と人文社会科学」
+            （全国文献・情報センター人文社会科学学術セミナーシリーズ No.12）,
+            2002年11月 -->
+        <li><a href="http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/">Morioka, Tomohiko</a>,
+            <a href="http://ya.sakura.ne.jp/~moro/">Moro, Shigeki</a>.
+            &ldquo;Moji-sosei ni motozuku moji-shori
+            (Character Processing based on Character Features).&rdquo;
+            <cite><a href="http://www.ipsj.or.jp/members/SIGNotes/Jpn/17/2004/062/"
+            >IPSJ SIG Technical Report Vol. 2004, No. 58 (2004-CH-62)</a></cite>.
+            May, 2004. pp. 53-60. (in Japanese)</li>
+    </ul>
+      </ul>
+</ul>
+
+<h2><a href="history">History</a></h2>
+<p>
+This project was assisted by <a
+href="http://www.ipa.go.jp/NBP/13nendo/13mito/koubo13.html">IPA Exploratory
+Software Project, 2001</a>.
+</p>
+
+<hr>
+
+<b>[<a href="../">Above</a>]</b>
+
+<p><img SRC="images/dragon.jpg" height=146 width=198></center>
+
+<br>
+
+<b>[
+<a href="http://www.kanji.zinbun.kyoto-u.ac.jp/">Documentation and Information Center for Chinese Studies (DICCS)</a>,
+<a href="http://www.zinbun.kyoto-u.ac.jp/">Institute for Research in the Humanities</a>, 
+<a href="http://www.kyoto-u.ac.jp/">Kyoto University</a>
+]</b>
+<b>[
+<a href="http://www.m17n.org/">m17n.org (the Organization for Multilingualization)</a>
+<a href="http://www.aist.go.jp/">(National Institute of Advanced Industrial Science and Technology)</a>
+]</b>
+<br>
+<b>[
+<a href="http://www.hanazono.ac.jp/">Hanazono University</a>
+]</b>
+<b>[
+<a href="http://www.aist.go.jp/">National Institute of Advanced Industrial Science and Technology</a>
+]</b>
+<b>[
+<a href="http://bioinfo.tmd.ac.jp/">Dept. of Bioinformatics</a>, 
+<a href="http://www.tmd.ac.jp/mri/mri.html">Medical Research Institute</a>, 
+<a href="http://www.tmd.ac.jp/">Tokyo Medical and Dental University</a>
+]</b>
+
+<hr>
+
+<!-- hhmts start -->
+Last modified: Tue Sep 21 19:50:46 JST 2010
+<!-- hhmts end -->.
+<a href="http://www.aurora.dti.ne.jp/~zom/Counter/index.html">
+<img
+ src="http://mousai.as.wakwak.ne.jp/cgi-bin/counterp.cgi?projects_chise-en.log"
+ alt="counter"></a>
+since Oct 9 2002.
+
+</body>
+</html>

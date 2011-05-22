@@ -1,0 +1,3 @@
+rm chise.h chise.c chise-name.h name.c sysdep.h
+rm config.h
+rm *~

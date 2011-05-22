@@ -1,0 +1,25 @@
+2002-12-16  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-elisp_ja.tex (feature): New environment.
+	(utf-2000): New feature.
+
+2002-12-13  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-elisp_ja.tex: New file.
+
+2002-11-29  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* char-atr.ja.txt: Rearrangement descriptions about CCS
+	attributes.
+	(=>ucs-gb): New attribute.
+	(=>ucs-cns): Likewise.
+	(=>ucs-ks): Likewise.
+	(->confusing): New attribute.
+	(->vulgar-ideograph): Likewise.
+	(wrong-ideograph-of): Deleted.
+	(wrong-char-of-shinjigen-1): Deleted.
+
+2002-09-24  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* char-atr.ja.txt: New file.
+

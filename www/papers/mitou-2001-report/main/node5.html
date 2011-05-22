@@ -1,0 +1,684 @@
+<html>
+   <!--THIS FILE IS GENERATED FROM AN XML MASTER. 
+ DO NOT EDIT-->
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <title>Mitou project: Model and implementation of a Character
+         				Object Database
+      </title>
+   </head>
+   <body>      		
+      <h2>Contents</h2>
+      <ul class="toc">
+         <li class="toc">5. <a class="toc" href="#mitou-report1-div-d0e75">Topic Maps</a><ul class="toc">
+               <li class="toc">5.1. <a class="toc" href="#mitou-report1-div-d0e80">The topic map paradigm</a></li>
+               <li class="toc">5.2. <a class="toc" href="#mitou-report1-div-d0e130">The character database as a topic map</a></li>
+               <li class="toc">5.3. <a class="toc" href="#mitou-report1-div-d0e251">A Topic Map engine with Zope</a><ul class="toc">
+                     <li class="toc">5.3.1. <a class="toc" href="#mitou-report1-div-d0e256">Why Zope?</a></li>
+                     <li class="toc">5.3.2. <a class="toc" href="#mitou-report1-div-d0e268">Requirements for a Topic Map engine</a></li>
+                     <li class="toc">5.3.3. <a class="toc" href="#mitou-report1-div-d0e301">Implementation details</a></li>
+                     <li class="toc">5.3.4. <a class="toc" href="#mitou-report1-div-d0e363">A browser-based interface to the Topic Map engine</a></li>
+                     <li class="toc">5.3.5. <a class="toc" href="#mitou-report1-div-d0e446">The interface to XEmacs UTF-2000</a></li>
+                     <li class="toc">5.3.6. <a class="toc" href="#mitou-report1-div-d0e569">Evaluation</a></li>
+                  </ul>
+               </li>
+               <li class="toc">5.4. <a class="toc" href="#mitou-report1-div-d0e582">Other possibilities</a></li>
+            </ul>
+         </li>
+      </ul>
+      			
+      <div class="teidiv">
+         <h2><a name="mitou-report1-div-d0e75"></a>5. Topic Maps
+         </h2>
+         				
+         				
+         <div class="teidiv">
+            <h3><a name="mitou-report1-div-d0e80"></a>5.1. The topic map paradigm
+            </h3>
+            					
+            					
+            <p><a name="d0e85"></a>The Topic Map Standard 
+                 ‘provides a standardized notation
+               						for interchangeably representing information about the
+               						structure of information resources used to define topics,
+               						and the relationships between topics. ’
+               A set of one or more
+               						interrelated documents that employs the notation defined
+               							by this International Standard is called a `topic map'. In
+               						general, the structural information conveyed by topic maps
+               							includes: 
+               <ol>
+                  <li><a name="d0e95"></a>groupings of addressable information objects
+                     									around `topics' (`occurrences'), and 
+                  </li>
+                  <li><a name="d0e104"></a>relationships between
+                     									topics (`associations'). 
+                  </li>
+               </ol>
+               						
+            </p>
+            					
+            <p><a name="d0e111"></a>A topic map defines a
+               						multidimensional topic space — a space in which the
+               						locations are topics, and in which the distances between
+               						topics are measurable in terms of the number of
+               						intervening topics which must be visited in order to get
+               						from one topic to another, and the kinds of relationships
+               						that define the path from one topic to another, if any,
+               						through the intervening topics, if any. (from the document
+               						defining Topic Maps as ISO/IEC 13250:2000)
+            </p>
+            					
+            <p><a name="d0e114"></a>The standard as published in 2000 includes a
+               						serialization format specification in form of a Document
+               						Type Definition (DTD) originally using HyTime (ISO/IEC
+               						10744:1992) Architectural Forms and a SGML (ISO/IEC
+               						8879:1986) based syntax.  An independent group of vendors
+               						started development of a XML based version, which was
+               						published as XTM 1.0 in December 2000 and per ballot
+               						adopted as an amendment to the ISO standard in December
+               						2001.  The development here is based on the XML syntax,
+               						which has also quite different elements and structure.
+            </p>
+            					
+            <p><a name="d0e117"></a>Since SGML/XML based formats are overly verbose
+               						(especially XTM 1.0) and awkward to work with, other
+               						formats have been suggested, including the `Asymptotic Topic Map Notation, Authoring'
+               						(AsTMA, by Robert Barta) and `Linear Topic Map
+               						Notation' (LTM, by Lars Marius Garshol). Both
+               						are essentially line
+               						based and can be easily edited in UTF-2000 and other
+               						editors.
+            </p>
+            					
+            <p><a name="d0e126"></a>Besides defining a serialization format for the exchange of
+               						information, the Topic Map standard also includes
+               						constructs that are intended to faciliate exchange of
+               						information.  One of the most important tasks is to
+               						reliably identify identical pieces of information across
+               						different sources.  Towards this end, rules for subsetting
+               						and merging of topic maps are laid down in the standard.
+               						Topics can be defined with reference to Published Subject
+               						Indicators (PSI), which function in a similar way to XML
+               						Namespaces. 
+            </p>
+            				
+         </div>
+         				
+         <div class="teidiv">
+            <h3><a name="mitou-report1-div-d0e130"></a>5.2. The character database as a topic map
+            </h3>
+            					
+            
+            					
+            <p><a name="d0e137"></a>Characters are used in scripts for the writing of
+               						languages, languages are distributed in different areas.
+               						The exact form of these characters, as well as their
+               						phonetic representation changes over time and area.  The
+               						adaption of the Topic Map paradigm in a character database
+               					tries to use these different axes to organise them in a way
+               						that is appropriate to the domain they are encountered
+               						in.  Characters are thus not only objects in their own
+               						right, but these objects are organized in a hierarchy of
+               						`super-class / sub-class' and
+               						`class / instance' hierarchies.
+            </p>
+            					
+            <p><a name="d0e146"></a></p>
+            					
+            <p><a name="d0e148"></a>The topic map currently contains information along the
+               						following axes:
+               						
+               <ul>
+                  <li><a name="d0e152"></a>abstract character
+                  </li>
+                  <li><a name="d0e155"></a>character instances
+                  </li>
+                  <li><a name="d0e158"></a>variant shapes
+                  </li>
+                  <li><a name="d0e161"></a>character structure
+                  </li>
+                  <li><a name="d0e164"></a>language
+                  </li>
+                  <li><a name="d0e167"></a>readings
+                  </li>
+                  <li><a name="d0e170"></a>meanings
+                  </li>
+                  <li><a name="d0e173"></a>time
+                  </li>
+                  <li><a name="d0e176"></a>space
+                  </li>
+                  <li><a name="d0e179"></a>frequency of usage
+                  </li>
+                  <li><a name="d0e182"></a>mappings to coded character sets
+                  </li>
+                  <li><a name="d0e185"></a>references to dictionaries
+                  </li>
+               </ul>
+            </p>
+            					
+            <p><a name="d0e189"></a>While most of these are organized as occurrences of the
+               							
+            </p>
+            					
+            <p><a name="d0e192"></a>It might be appropriate to illustrate this with an
+               					example.  The character attributes for the character
+               					U+03432 when viewed within the UTF-2000 framework
+               						might have attributes similar to those shown in <a class="ptr" href="#what-char">Figure 4</a>.
+            </p>
+            					
+            <p><a name="d0e197"></a><a name="what-char"></a><img src="images/mitou-report04.jpg" alt="The character U+03432 displayed with&#xA;								the  function."><p>
+                  							Figure 4
+                  							
+                    &nbsp;&nbsp;The character U+03432 displayed with
+                  								the `what-char-definition' function.
+                  						
+               </p>
+            </p>
+            					
+            <p><a name="d0e210"></a>Transformed to the topic map notation, the attributes of
+               						the same character will look similar to <a class="ptr" href="#tm-examp1">Figure 5</a>
+               						content has not changed, only the notation, within the
+               					<tt>&lt;occurrence&gt;</tt> element, the attributes are similar to
+               					key / value pairs.  What is not visible here, however, is
+               					the underlying structure, which has been used to define the
+               					topic map.
+            </p>
+            					
+            <p><a name="d0e218"></a>
+               						<a name="tm-examp1"></a><img src="images/mitou-report05.jpg" alt=" The attributes of character U+03432&#xA;							in Topic Map notation."><p>
+                  							Figure 5
+                  							
+                    &nbsp;&nbsp; The attributes of character U+03432
+                  							in Topic Map notation.
+                  						
+               </p>
+               						It should also be noted, that the attributes under
+               						`ideographic-structure' are not listed
+               						as occurences.  These attributes are expressed using
+               						separate topics for the character components and the
+               						<tt>&lt;association&gt;</tt> element to connect them, as shown in
+               						<a class="ptr" href="#tm-examp2">Figure 6</a>.
+            </p>
+            					
+            <p><a name="d0e238"></a>
+               						<a name="tm-examp2"></a><img src="images/mitou-report06.jpg" alt=" The ideographic-structure of character U+03432&#xA;							in Topic Map notation."><p>
+                  							Figure 6
+                  							
+                    &nbsp;&nbsp; The ideographic-structure of character U+03432
+                  							in Topic Map notation.
+                  						
+               </p>
+               					
+            </p>
+            				
+         </div>
+         				
+         <div class="teidiv">
+            <h3><a name="mitou-report1-div-d0e251"></a>5.3. A Topic Map engine with Zope
+            </h3>
+            					
+            				
+            <div class="teidiv">
+               <h4><a name="mitou-report1-div-d0e256"></a>5.3.1. Why Zope?
+               </h4>
+               					
+               					
+               <p><a name="d0e261"></a>Zope (Zope Object Publishing Environment) is an
+                  							object-oriented Web-Application server developped by Zope
+                  							Corporation (former Digital Creations) using a
+                  							community-based open-source development model.  It is
+                  							written in Python, with only a few critical parts in C.
+                  							Although it is mostly considered as an environment for rapid
+                  							development of dynamic Web content, it is originally and
+                  							formostly an environment for publishing objects.  The
+                  							underlying storage is a object oriented database, which
+                  							makes it uniquely suited for storing hierarchical data
+                  							structures like a Topic Map.
+               </p>
+               						
+               <p><a name="d0e264"></a>Since Zope acts as a Web-Server, it can also be seen as a
+                  							networked database.  It can be accessed through the HTTP
+                  							protocol, but also through WebDAV and XML-RPC.  One of the
+                  							advantages of using a Zope based implementation is thus that
+                  							it can also be used as a distributed editing environment and
+                  							at the same time act as a backend to be accessed from XEmacs
+                  							UTF-2000.
+               </p>
+               					
+            </div>
+            					
+            <div class="teidiv">
+               <h4><a name="mitou-report1-div-d0e268"></a>5.3.2. Requirements for a Topic Map engine
+               </h4>
+               						
+               						
+               <p><a name="d0e273"></a>Since some of the concepts of Topic Maps are quite new
+                  						and not yet fully fleshed out in the Topic Map community
+                  						(for example is the Topic Maps Query Language TMQL still
+                  						in the stage of requirements and no consensus has been
+                  						reached, what it will mean to query a topic map), some of
+                  						the more arcane features will not be covered by this
+                  						prototype.  Instead of more demanding  Topic Map queries,
+                  						which might involve inferences and other Topic Map calculus, searches
+                  						will directly access the data in the Topic Map.  Merging
+                  						directives, which are problematic among other things
+                  						because of the `Topic Map Basename
+                  						Constraint' (TMBC) are not initially supported.
+               </p>
+               						
+               <p><a name="d0e279"></a>The prototype should be able to :
+                  							
+                  <ul>
+                     <li><a name="d0e283"></a>Import and export data from XEmacs UTF-2000
+                     </li>
+                     <li><a name="d0e286"></a>Use a network based communiction protocol to communicate
+                     </li>
+                     <li><a name="d0e289"></a>Provide access to the Topic Map (read/write
+                        								topics, occurrences and associations) 
+                     </li>
+                     <li><a name="d0e292"></a>Be designed for generic Topic Maps, not for
+                        								specific data types
+                     </li>
+                     <li><a name="d0e295"></a>Allow an assessment of the feasability of this approach.
+                     </li>
+                  </ul>
+                  						
+               </p>
+               					
+            </div>
+            					
+            <div class="teidiv">
+               <h4><a name="mitou-report1-div-d0e301"></a>5.3.3. Implementation details
+               </h4>
+               					
+               						
+               <p><a name="d0e306"></a>Zope is extended in functionality by developing add-on
+                  							modules, called `Products' in
+                  							Zope-speach.  Products can be developped within the
+                  							Zope-Database based on ZClasses or as file-system based
+                  							Python classes.  In a first implementation, ZClasses
+                  						have been used. 
+               </p>
+               						
+               <p><a name="d0e312"></a>In this implementation, four classes have been used to
+                  							represent the different objects of a Topic Map:
+                  <ul>
+                     <li><a name="d0e316"></a>topicmap:  The container item for all the other classes
+                     </li>
+                     <li><a name="d0e319"></a>topic:  Container item for occurrences
+                     </li>
+                     <li><a name="d0e322"></a>occurrence:  Holds the key / value pairs of occurrences
+                     </li>
+                     <li><a name="d0e325"></a>association: Information about the type, role
+                        						and value of the members is hold in instance attributes
+                     </li>
+                  </ul>
+                  						This data structure was closely modelled on the underlying
+                  						data structure of the Topic Map serialization format, as
+                  						realized in the XTM 1.0 DTD.  The built-in Zope search
+                  						engine ZCatalog was used to built indices and access the
+                  							different information axes.  <a class="ptr" href="#zope-man">Figure 7</a>
+                  						shows a screenshot from the Zope development interface
+                  						showing the classes being developed.
+               </p>
+               						
+               <p><a name="d0e332"></a>
+                  							<a name="zope-man"></a><img src="images/mitou-report07.jpg" alt="The Zope Management screen with the ZClasses&#xA;								under development"><p>
+                     								Figure 7
+                     								
+                       &nbsp;&nbsp;The Zope Management screen with the ZClasses
+                     								under development
+                     							
+                  </p>
+                  						
+               </p>
+               						
+               <p><a name="d0e344"></a>This approach turned out to induce a large overhead for
+                  						the data and proved problematic for Topic Maps with more
+                  						than approximately 1000 topics and associations.  For this
+                  						reasons, this approach has been given up.
+               </p>
+               						
+               <p><a name="d0e347"></a>The next logical step was to use a native Python
+                  						Product, insted of the ZClasses.  This should give better
+                  						performance, since less overhead is involved, it also
+                  						allows greater flexibility in the data structures. An
+                  						additional advantage is that a more efficient development
+                  						environment could be used due to the fact that the source
+                  						is on the file system and not in the Zope database.
+               </p>
+               						
+               <p><a name="d0e350"></a>Performance was slightly improved, but not as much as
+                  						hoped for.   It also turned out that some flaws in the
+                  						data structure defined for the Python classes did not
+                  						allow the full expressive power that was required for
+                  						Topic Maps in XTM 1.0.  
+               </p>
+               						
+               <p><a name="d0e353"></a>Around this time, development activity started once
+                  						again in the Zope ParsedXML product, which is the Zope
+                  						product that provides XML functionality.  Since an XML
+                  						Document Object Model (DOM) tree shares some similiarity
+                  						to the Zope DOM (ZDOM) used to store the Zope objects, it
+                  						was expected that this approach might scale better.  An
+                  						additional advantage was that Zope procedures could be
+                  						used to directly expose XML elements in DTML (Document
+                  						Template Markup Language).  For this reason, it was
+                  						decided to start once again, this time with ZClasses using
+                  						the ParsedXML product. 
+               </p>
+               						
+               <p><a name="d0e356"></a>Development of this prototype had progressed quite some
+                  						while, when it was realized that the support for Unicode
+                  						in Zope, which was introduced in Zope 2.4.0 had some
+                  						flaws.  While UTF-8 could be used with out problems in
+                  						previous versions, the partial support for Unicode meant
+                  						that Python UnicodeStrings in some cases could be cast as
+                  						AsciiStrings, which would crash the process.  While some
+                  						patches became available and development of the Zope core
+                  						continued to adress this problem, it remained acute even
+                  						with the recent 2.5.0 release and will probably only
+                  						resolved in the upcoming Zope 3.0 release, which will be a
+                  						major rewrite.
+               </p>
+               						
+               <p><a name="d0e359"></a>While the improvement of the support for Unicode within
+                  						Zope is important, it remains outside of the scope and
+                  						timeframe of this project.  As a temporary fix therefore,
+                  						no Unicode characters can be used in the TopicMap engine.
+                  						While this is unfortunate, since the XML standard
+                  						explicitly requires conformant XML processors to support
+                  						at least UTF-8 and UTF-16, there is nothing that can be
+                  						done about this at the moment, this situation will improve
+                  						with the arrival of a fully Unicode compliant version of
+                  						Zope.
+               </p>
+               					
+            </div>
+            					
+            <div class="teidiv">
+               <h4><a name="mitou-report1-div-d0e363"></a>5.3.4. A browser-based interface to the Topic Map engine
+               </h4>
+               						
+               						
+               <p><a name="d0e368"></a>When a new Topic Map has been created or imported into
+                  						the Zope Topic Map engine, it can be explored on the 
+                  							Topic Map overview screen, as shown in <a class="ptr" href="#ztm-overview">Figure 8</a></p>
+               						
+               <p><a name="d0e372"></a><a name="ztm-overview"></a><img src="images/mitou-report08.jpg" alt="The Topic Map overview screen"><p>
+                     								Figure 8
+                     								
+                       &nbsp;&nbsp;The Topic Map overview screen
+                     							
+                  </p>
+                  						
+               </p>
+               						
+               <p><a name="d0e383"></a>This screen is divided in several parts.  The top frame
+                  						provides a general interface to manage the display of the
+                  						Topic Map, it also here that other Topic Maps can be
+                  						selected.  This part allows also the addition of new
+                  						topics as well as global searches over the Topic Map.  The
+                  						frame on the left is for navigating the Topic Map.  By
+                  						default, it shows a list of topics in the topic map.
+                  						Since this list can be potentially very long, the default
+                  						length is set to 20, if there are more topics, the list
+                  						will be displayed in batches.  The list can be limited
+                  							down in various ways: 
+                  <ul>
+                     <li><a name="d0e387"></a>by using the scopes (or themes) defined in the
+                        						Topic Map
+                     </li>
+                     <li><a name="d0e390"></a>by searching the Topic Map; this will limit the
+                        						list to the search results
+                     </li>
+                     <li><a name="d0e393"></a>by defining new scopes (if the user has the
+                        						appropriate rights, these can also be stored in the Topic
+                        						Map and be used in the future)
+                     </li>
+                  </ul>
+                  						
+               </p>
+               						
+               <p><a name="d0e398"></a>The main frame shows a short information about this
+                  						Topic Map engine, this will be used to display the topic
+                  							details as shown in <a class="ptr" href="#tm-details">Figure 9</a></p>
+               						
+               <p><a name="d0e402"></a><a name="tm-details"></a><img src="images/mitou-report09.jpg" alt="The details of a topic"><p>
+                     								Figure 9
+                     								
+                       &nbsp;&nbsp;The details of a topic
+                     							
+                  </p>
+                  						
+               </p>
+               						
+               <p><a name="d0e413"></a>The Topic Map engine can not only be used to browse the
+                  						Topic Map, but also to add or edit new topics, occurrences
+                  							or associations. A click on the `Add'
+                  							button in the upper right area of <a class="ptr" href="#ztm-overview">Figure 8</a> will lead to the entry screen
+                  						in <a class="ptr" href="#tm-add-topic">Figure 10</a></p>
+               						
+               <p><a name="d0e422"></a>
+                  							<a name="tm-add-topic"></a><img src="images/mitou-report10.jpg" alt="The entry form for new topics"><p>
+                     								Figure 10
+                     								
+                       &nbsp;&nbsp;The entry form for new topics
+                     							
+                  </p>
+                  						
+               </p>
+               						
+               <p><a name="d0e434"></a>Occurences for topics can be added from the topic
+                  							details screen as shown in <a class="ptr" href="#tm-details">Figure 9</a>,
+                  							associations can be added by checking the topics to be
+                  							associated in the list of topics on the left frame and
+                  							then clicking on the `Add
+                  							Association' button.
+               </p>
+               						
+               <p><a name="d0e442"></a>The interface to the Topic Map as developed here is
+                  							generic and rather primitive.  It does however however to
+                  							develop and maintain Topic Maps in a distributed way.
+                  							Because of its generic nature, it is cumbersome to use
+                  							for specific Topic Maps, since it is not aware of topics
+                  							that might be defined as Topic Map templates.  Since
+                  							there is not yet a standardized way to define Topic Map
+                  							templates, automatic generation of a customized user
+                  							interface for specific Topic Maps will have to wait
+                  							until such a definition is finalized.
+                  						
+               </p>
+               					
+            </div>
+            					
+            <div class="teidiv">
+               <h4><a name="mitou-report1-div-d0e446"></a>5.3.5. The interface to XEmacs UTF-2000
+               </h4>
+               						
+               						
+               <p><a name="d0e451"></a>Beside the browser based user interface described in
+                  						the previous section, the Zope Topic Map engine can also
+                  						be interfaced from XEmacs UTF-2000.  This can be done
+                  						through XML-RPC, WebDAV or HTTP.  The format of the
+                  						returned values can be either in XML, HTML or in a list
+                  						formatted in LISP syntax.  
+               </p>
+               						
+               <p><a name="d0e454"></a>Currently, the following commands are implemented
+                  						(parameters are key/value pairs that are submitted using
+                  						the appropriate syntax):
+                  							
+                  <p><em>Retrieval</em></p>
+                  <ul>
+                     <li><a name="d0e461"></a><em>tm-topics</em>:  Lists topics.  Parameters are:
+                        <ul>
+                           <li><a name="d0e467"></a>scope: string that specifies the scoping topics
+                           </li>
+                           <li><a name="d0e470"></a>name: string that will be used to search for
+                              											the <tt>&lt;baseName&gt;</tt> of topics
+                           </li>
+                           <li><a name="d0e476"></a>display: scope to be used to select a name
+                              											to return
+                           </li>
+                           <li><a name="d0e479"></a>occurences: type or scope of the occurrences
+                              											to be returned
+                           </li>
+                           <li><a name="d0e482"></a>format: `XML',
+                              											`HTML' or `LISP'.
+                           </li>
+                        </ul>
+                        								
+                     </li>
+                     <li><a name="d0e496"></a><em>tm-members</em>: Lists associations that
+                        									have members as specified in the query. Parameters
+                        									are:
+                        <ul>
+                           <li><a name="d0e502"></a>scope: string that specifies the members to
+                              									look for
+                           </li>
+                           <li><a name="d0e505"></a>display: scope to be used to select a name
+                              									to return
+                           </li>
+                           <li><a name="d0e508"></a>occurences: type or scope of the occurrences
+                              											to be returned for the members
+                           </li>
+                           <li><a name="d0e511"></a>format: `XML',
+                              											`HTML' or `LISP'.
+                           </li>
+                        </ul>
+                         								
+                     </li>
+                  </ul>
+                  							
+                  <p><em>Maintenance</em></p>
+                  <ul>
+                     <li><a name="d0e533"></a><em>tm-add</em>: This command will add a new
+                        								topic.  If the topic already exists, it will replace
+                        									or add <tt>&lt;occurrence&gt;</tt> or <tt>&lt;baseName&gt;</tt>
+                        									elements as specified in the request.  It can also
+                        								be used to change the list of scoping topics. Parameters:
+                        									
+                        <ul>
+                           <li><a name="d0e545"></a>args: A string that gives the items to be
+                              										added as key/value pairs
+                           </li>
+                        </ul>
+                        								
+                     </li>
+                     <li><a name="d0e550"></a><em>tm-delete</em>: This command will delete
+                        									the specified topic.
+                        <ul>
+                           <li><a name="d0e556"></a>topic: the topic to be deleted
+                           </li>
+                        </ul>
+                        								
+                     </li>
+                  </ul>
+                  						
+               </p>
+               						
+               <p><a name="d0e563"></a>This is a very low-level interface that will need to be
+                  						complemented with higher-level commands to integrate it
+                  						with the oeverall workings of XEmacs and the XEmacs
+                  						UTF-2000 character database.
+               </p>
+               
+               					
+            </div>
+            					
+            <div class="teidiv">
+               <h4><a name="mitou-report1-div-d0e569"></a>5.3.6. Evaluation
+               </h4>
+               						
+               						
+               <p><a name="d0e574"></a>The goal of developping a complete Topic Map engine
+                  						based on Zope has not been reached.  This has been partly
+                  						due to the development process, which had to confront some
+                  						fundamental issues of processing Topic Maps, which had not
+                  						been solved so far.  While the goal of developing a
+                  						generic Topic Map engine is worthwhile and important, it
+                  						proved to be too ambitious for the context of this
+                  						project.  We therefore had to settle to a solution that
+                  						works well for this context and are confident that it will
+                  						be possible to generalize from there.
+               </p>
+               						
+               <p><a name="d0e577"></a>It has also been realized that Zope is maybe not a
+                  						suitable platform for holding the potentially very large
+                  						data of a Topic Map.  Using a database for this approach
+                  						would be better.
+               </p>
+               					
+            </div>
+            				
+         </div>
+         				
+         <div class="teidiv">
+            <h3><a name="mitou-report1-div-d0e582"></a>5.4. Other possibilities
+            </h3>
+            					
+            					
+            <p><a name="d0e587"></a>The current model of implementing the Topic Map engine
+               					and interfacing it with XEmacs UTF-2000 is 
+               					based on a two way connection.  
+            </p>
+            					
+            <p><a name="d0e590"></a>Storing the Topic Map in the Zope object database proved
+               					to be a performance bottleneck.  The logical way to solve
+               					this problem is to move the data to an external storage.  To
+               					test the feasability of this approach, the Topic Map
+               					datastructure has been mapped to a set of relational
+               					database tables and a Topic Map has been imported into the database
+               					Postgresql.  
+            </p>
+            					
+            <p><a name="d0e593"></a>The connection between XEmacs UTF-2000, the
+               					Topic Map engine within Zope and the storage backend can now
+               						be established in a triangular way as shown in <a class="ptr" href="#pg-u2k-zope">Figure 12</a>.  The red arrows symbolize updates to
+               					the database, while the green arrows stand for data that are
+               					retrieved from the databases.  Both, XEmacs UTF-2000 and the
+               					Zope Topic Map engine will be able to commit updates and
+               					retrieve data.  While the model employed so far
+               					assumed a direct communication between XEmacs UTF-2000 and
+               					the Zope Topic Map engine, this model provides a far more
+               					flexible way of communication by introducing another layer
+               					between them.  This model is also extendible, since more
+               					partners can be connected to the database through a set of
+               					well defined interfaces and a cascade of such layers can be
+               					built in a distributed way.
+            </p>
+            					
+            <p><a name="d0e598"></a><a name="pg-u2k-zope"></a><img src="images/mitou-report12.jpg" alt="Communication between XEmacs UTF-2000, Zope and&#xA;					the PostgreSQL database"><p>
+                  							Figure 12
+                  							
+                    &nbsp;&nbsp;Communication between XEmacs UTF-2000, Zope and
+                  					the PostgreSQL database
+                  						
+               </p>
+               					
+            </p>
+            					
+            <p><a name="d0e609"></a>
+               						While time did not permit to properly change the backend
+               						of the Topic Map engine,
+               						this will be a straightforward task that is not expected to
+               						require changes to the other layers of the program.  
+            </p>
+            				
+         </div>
+         			
+      </div>
+      		
+      <hr>
+      <address>Date: Time-stamp: "02/02/13 17:30:32 chris"
+          &nbsp;Author: Christian Wittern.
+          <br>
+         <!--
+Generated from mitou-report1using an XSLT version 1 stylesheet
+based on /pfiles/xml/xsl/tei/teihtml.xsl
+processed using SAXON 6.4.4 from Michael Kay--></address>
+   </body>
+</html>

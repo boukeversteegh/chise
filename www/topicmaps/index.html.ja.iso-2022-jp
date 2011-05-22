@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+<head>
+<title>CHaracter Information Service Environment</title>
+<link rel=stylesheet href="../chise.css" type="text/css">
+</head>
+<body>
+
+    <p>
+      [<a href="../index.html.ja.iso-2022-jp">CHISE</a>]
+      [<a href="../xemacs/index.html.ja.iso-2022-jp">XEmacs CHISE</a>]
+      [<a href="../ruby/index.html.ja.iso-2022-jp">Ruby/CHISE</a>]
+      [<a href="../perl/index.html.ja.iso-2022-jp">Perl/CHISE</a>]
+      [TopicMaps]
+      [<a href="../ids/index.html.ja.iso-2022-jp">IDS</a>]
+      [<a href="../glyph/index.html.ja.iso-2022-jp">glyph</a>]
+      [<a href="../visualization/index.html.ja.iso-2022-jp">Visualization</a>]
+      [<a href="../omega/index.html.ja.iso-2022-jp">Ω</a>]
+    </p>
+
+<h1>
+<a href="../index.html.ja.iso-2022-jp">CHISE</a> / 
+<a href="http://www.topicmaps.org">TopicMaps</a>
+による文字知識データベース・システムの開発</a></h1>
+
+<hr>
+
+<p>
+2001 年度には
+<a href="http://www.zope.org/">Zope</a>
+による <a href="http://www.topicmaps.org">TopicMaps</a>
+エンジンのプロトタイプを開発しました。
+現在、PostgreSQL を用いた実装と XEmacs UTF-2000 上で動作する editor の
+開発を計画中です。
+</p>
+
+
+<hr>
+
+    <p>
+      [<a href="../">戻る</a>]
+    </p>
+
+    <p>
+<!-- hhmts start -->
+Last modified: Tue Dec  3 23:54:09 JST 2002
+<!-- hhmts end -->.
+    </p>
+
+</body>
+</html>

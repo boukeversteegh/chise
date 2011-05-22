@@ -1,0 +1,9 @@
+#!/usr/local/bin/pfaedit
+
+Open($1)
+SelectAll()
+Simplify()
+Simplify(-1,5)
+AutoHint()
+Generate($1)
+Close()

@@ -1,0 +1,130 @@
+/* ---------------------------------------------------------------------- by eto 2003-0314 */
+
+/*----------------------------------------------------------------------body*/
+body	{
+ margin: 0em;
+ padding: 0em;
+ font-family: "è¨íÀÉSÉVÉbÉN Std R", "ÉqÉâÉMÉmäpÉS Pro W3";
+/* letter-spacing: 0.040em;*/
+/* scrollbar-3d-light-color: #ff0000;*/
+ scrollbar-arrow-color: #ff6600;
+ scrollbar-base-color: #ffffff;
+/* scrollbar-dark-shadow-color: #ff0000;*/
+ scrollbar-face-color: #ffffff;	
+ scrollbar-highlight-color: #ffffff;
+ scrollbar-shadow-color: #ff6600;
+}
+
+/*----------------------------------------------------------------------*/
+.rb	{
+ margin: 0em;
+ padding: 0em;
+ text-align: right;
+}
+
+.addr, .get	{
+ color: #000000;
+ text-decoration: none;
+}
+.addr	{
+ font-size: medium;
+}
+
+/*----------------------------------------------------------------------page*/
+.page	{
+ width: 100%; height: 100%;
+ margin: 0em;
+ padding: 4em 2em 2em 4em;
+/* border: 0.05em solid #000000;*/
+}
+
+/*----------------------------------------------------------------------index*/
+.a	{ color:#ffffff; font-size: 1pt;}
+.indexpage	{
+ width: 100%; height: 100%;
+ margin:0em;  padding:0em;
+/* text-align:right;*/
+ text-align:center;
+ font-size: xx-large;
+ font-family: "è¨íÀÉSÉVÉbÉN Std EL", "ÉqÉâÉMÉmäpÉS Pro W3";
+ text-decoration:none;
+}
+.indexpage a	{
+ text-decoration:none;
+}
+.indexpage a:hover	{
+ background-color: #ff6600; color:#ffffff; text-decoration:none;
+}
+
+/*----------------------------------------------------------------------a*/
+a		{ color:#ff6600; }
+a:link		{ color:#ff7700; }
+a:visited	{ color:#ff8800; }
+a:active	{ color:#ff0000; }
+a:hover	{ color:#ff0000; text-decoration:none; }
+
+/*----------------------------------------------------------------------header*/
+h1,h2,h3,h4,address	{
+ color:#ff6600;
+ font-family:"è¨íÀÉSÉVÉbÉN Std H";
+ margin: 0em;
+ padding: 0em;
+ font-weight: normal;
+}
+h1	{ font-size: xx-large; font-family:"è¨íÀÉSÉVÉbÉN Std L", "ÉqÉâÉMÉmäpÉS Pro W3";}
+h2	{ font-size: xx-large; font-family:"è¨íÀÉSÉVÉbÉN Std L", "ÉqÉâÉMÉmäpÉS Pro W3"; }
+
+/*----------------------------------------------------------------------p*/
+p	{
+ font-size: large;
+ font-family: "è¨íÀÉSÉVÉbÉN Std R", "ÉqÉâÉMÉmäpÉS Pro W3";
+ margin: 0.5em;
+ padding: 0em;
+}
+
+/*----------------------------------------------------------------------pre*/
+pre	{
+ margin: 0.1em 0.5em 0.5em 0.5em;
+ padding: 0.5em;
+/* border: 0.05em solid #000000;*/
+ background-color: #fff8f0;
+ border: 0.02em solid #ff6600;
+ font-size: large;
+ font-family: "è¨íÀÉSÉVÉbÉN Std R", "ÉqÉâÉMÉmäpÉS Pro W3";
+}
+
+/*----------------------------------------------------------------------list*/
+ul, dl	{
+ margin: 0.5em 0em 0.5em 1.5em;
+ list-style-type: square;
+ font-size: large;
+}
+dt	{
+ color:#ff6600;
+}
+/*----------------------------------------------------------------------list*/
+table 	{
+ font-size: large;
+ margin: 0em;
+ padding: 0em;
+}
+td, table .b	{
+ padding: 0.2em;
+ border: 0.05em solid #ffbb99;
+}
+.e	{
+ width: 3em;
+/* color: #ff0000;*/
+ text-align: center;
+}
+.n	{
+ width: 3em;
+ color: #000000;
+ text-align: right;
+}
+.bb	{
+ text-align: center;
+ width: 100em;
+}
+
+/* ---------------------------------------------------------------------- end. */

@@ -1,0 +1,98 @@
+CC = @CC@
+DEFS = @DEFS@
+LIBS = @LIBS@
+CFLAGS	= -I. @CFLAGS@ -c -Wall -Wmissing-prototypes
+
+LIBTOOL = @LIBTOOL@
+
+RM	= /bin/rm -f
+TAR	= tar
+MKDIR	= mkdir -p
+
+
+## The default location for installation.  Everything is placed in
+## subdirectories of this directory.  The default values for many of
+## the variables below are expressed in terms of this one, so you may
+## not need to change them.  This defaults to /usr/local.
+prefix	= @prefix@
+
+## Like `prefix', but used for architecture-specific files.
+exec_prefix = @exec_prefix@
+
+datadir	= @datadir@
+
+libdir	= @libdir@
+
+#libexecdir = @libexecdir@
+
+#localstatedir = @localstatedir@
+
+sharedstatedir = @sharedstatedir@
+
+#target	= @target@
+
+top_builddir = @builddir@
+
+
+INCLUDE_INSTALLDIR = ${prefix}/include
+LIB_INSTALLDIR	= ${libdir}
+
+VERSION		= @PACKAGE_VERSION@
+ABI_VERSION     = 0:0:0
+
+
+HEADERS	= concord.h concord-name.h concord-bdb.h
+OBJS	= concord.lo concord-bdb.lo name.lo
+
+
+all:	libconcord.la
+
+libconcord.la:	$(OBJS)
+	$(LIBTOOL) --mode=link \
+		$(CC) -o libconcord.la $(OBJS) $(LIBS) \
+		-rpath ${libdir} -version-info $(ABI_VERSION) \
+		-no-undefined
+
+concord.lo:	concord.c concord.h config.h sysdep.h
+	$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) concord.c
+
+concord-bdb.lo:	concord-bdb.c concord-bdb.h concord-name.h
+	$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) concord-bdb.c
+
+name.lo:	name.c concord-name.h
+	$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) name.c
+
+
+install:	install.h install.libs
+
+install.h:
+	$(MKDIR) $(INCLUDE_INSTALLDIR)
+	install -c $(HEADERS) $(INCLUDE_INSTALLDIR)
+
+install.libs:	libconcord.la
+	$(MKDIR) $(LIB_INSTALLDIR)
+	$(LIBTOOL) --mode=install install -c libconcord.la $(LIB_INSTALLDIR)
+
+
+sample:	sample.c libconcord.la
+	gcc -Wall -Wmissing-prototypes -o sample sample.c -lconcord
+
+
+clean:
+	-$(RM) -r *.o *.lo *.so *.la .libs sample
+
+distclean: clean
+	-$(RM) Makefile config.h config.status config.log
+
+
+tar:
+	cvs commit
+	sh -c 'cvs tag -R concord-`echo $(VERSION) \
+				| sed s/\\\\./_/ | sed s/\\\\./_/`; \
+	cd /tmp; \
+	cvs -d :pserver:anonymous@cvs.m17n.org:/cvs/chise \
+		export -d concord-$(VERSION) \
+		-r concord-`echo $(VERSION) | tr . _` concord'
+	cd /tmp; $(RM) concord-$(VERSION)/.cvsignore ; \
+		$(TAR) cvzf concord-$(VERSION).tar.gz concord-$(VERSION)
+	cd /tmp; $(RM) -r concord-$(VERSION)

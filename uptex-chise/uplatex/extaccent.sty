@@ -1,0 +1,104 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{extaccent}%
+   [2003/10/11 v1.0 Accent Commands extension for Unicode (Omega/CHISE Team)]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Based on                             %%
+%% Special Accent Commands for Sanskrit %%
+%% version 1.0 (C) 1996 Toru Tomabechi  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclareRobustCommand{\DoubleAccent}[5]{%
+  \setbox1=\hbox{\char#1}\dimen1=\wd1%
+  \setbox1=\hbox{\char#2}\dimen2=\wd1\dimen3=\ht1%
+  \advance\dimen1 by\dimen2\dimen1=.5\dimen1%
+  \setbox1=\hbox{#5}\dimen2=\wd1\dimen4=\ht1%
+  \advance\dimen4 by#3%
+  \setbox2=\hbox to \dimen2{\hss\raisebox{-\dimen3}{{\char#2}%
+      \kern-\dimen1{\raisebox{#4}{\char#1}}}\hss}%
+ \leavevmode\rlap{\hbox to\dimen2{\raisebox{\dimen4}{\box2}}}{\box1}}
+
+%%% For T1 encoding %%%
+\DeclareTextCommand{\MacAcute}{T1}[1]{\DoubleAccent{1}{9}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\MacGrave}{T1}[1]{\DoubleAccent{0}{9}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\MacBreve}{T1}[1]{\DoubleAccent{8}{9}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\MacTilde}{T1}[1]{\DoubleAccent{3}{9}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\MacDiaresis}{T1}[1]{\DoubleAccent{4}{9}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\DiaAcute}{T1}[1]{\DoubleAccent{1}{4}{.2ex}{.45ex}{#1}}
+\DeclareTextCommand{\TilAcute}{T1}[1]{\DoubleAccent{1}{3}{.2ex}{.45ex}{#1}}
+\DeclareTextCommand{\TilDiaresis}{T1}[1]{\DoubleAccent{4}{3}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\CaronDot}{T1}[1]{\DoubleAccent{10}{7}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\CandraBindu}{T1}[1]{\DoubleAccent{10}{8}{.4ex}{.15ex}{#1}}
+\DeclareTextCommand{\ucirc}{T1}[1]{%
+   {\o@lign{\relax#1\crcr\hidewidth\sh@ft{29}%
+     \vbox to.2ex{\hbox{\char6}\vss}\hidewidth}}}
+\DeclareTextCommand{\ucircumflex}{T1}[1]{%
+   {\o@lign{\relax#1\crcr\hidewidth\sh@ft{29}%
+     \vbox to.2ex{\hbox{\char2}\vss}\hidewidth}}}
+\DeclareTextCommand{\udiaresis}{T1}[1]{%
+   {\o@lign{\relax#1\crcr\hidewidth\sh@ft{29}%
+     \vbox to.2ex{\hbox{\char4}\vss}\hidewidth}}}
+\DeclareTextCommand{\utilde}{T1}[1]{%
+   {\o@lign{\relax#1\crcr\hidewidth\sh@ft{29}%
+     \vbox to.2ex{\hbox{\char3}\vss}\hidewidth}}}
+\DeclareTextCommand{\ubreve}{T1}[1]{%
+   {\o@lign{\relax#1\crcr\hidewidth\sh@ft{29}%
+     \vbox to.2ex{\hbox{\char8}\vss}\hidewidth}}}
+\DeclareTextCommand{\udot}{T1}[1]{%
+   {\o@lign{\relax#1\crcr\hidewidth\sh@ft{29}%
+     \vbox to.2ex{\hbox{.}\vss}\hidewidth}}}
+\DeclareTextCommand{\umacron}{T1}[1]{%
+   {\o@lign{\relax#1\crcr\hidewidth\sh@ft{29}%
+     \vbox to.3ex{\hbox{-}\vss}\hidewidth}}}
+
+\DeclareTextCommand{\CircGrave}{T1}[1]{\DoubleAccent{18}{94}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\CircAcute}{T1}[1]{\DoubleAccent{19}{94}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\CircMacron}{T1}[1]{\DoubleAccent{22}{94}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\CircTilde}{T1}[1]{\DoubleAccent{126}{94}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\CircHook}{T1}[1]{\DoubleAccent{39}{94}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\Circudot}{T1}[1]{\DoubleAccent{46}{94}{.4ex}{-.2ex}{#1}}
+
+\DeclareTextCommand{\HornAcute}{T1}[1]{\'{#1}\hspace*{-0.2em}'}
+\DeclareTextCommand{\HornTilde}{T1}[1]{\~{#1}\hspace*{-0.2em}'}
+
+%%% For OT1 encoding %%%
+\DeclareTextCommand{\MacAcute}{OT1}[1]{\DoubleAccent{19}{22}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\MacGrave}{OT1}[1]{\DoubleAccent{18}{22}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\MacBreve}{OT1}[1]{\DoubleAccent{21}{22}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\MacTilde}{OT1}[1]{\DoubleAccent{126}{22}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\MacDiaresis}{OT1}[1]{\DoubleAccent{127}{22}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\DiaAcute}{OT1}[1]{\DoubleAccent{19}{127}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\TilAcute}{OT1}[1]{\DoubleAccent{19}{126}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\CaronDot}{OT1}[1]{\DoubleAccent{95}{20}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\TilDiaresis}{OT1}[1]{\DoubleAccent{127}{126}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\CandraBindu}{OT1}[1]%
+                                     {\DoubleAccent{95}{21}{.4ex}{.15ex}{#1}}
+\DeclareTextCommand{\ucirc}{OT1}[1]{%
+   {\o@lign{\relax#1\crcr\hidewidth\sh@ft{29}%
+     \vbox to.2ex{\hbox{\char23}\vss}\hidewidth}}}
+\DeclareTextCommand{\ucircumflex}{OT1}[1]{%
+   {\o@lign{\relax#1\crcr\hidewidth\sh@ft{29}%
+     \vbox to.2ex{\hbox{\char94}\vss}\hidewidth}}}
+\DeclareTextCommand{\udiaresis}{OT1}[1]{%
+   {\o@lign{\relax#1\crcr\hidewidth\sh@ft{29}%
+     \vbox to.2ex{\hbox{\char127}\vss}\hidewidth}}}
+\DeclareTextCommand{\utilde}{OT1}[1]{%
+   {\o@lign{\relax#1\crcr\hidewidth\sh@ft{29}%
+     \vbox to.2ex{\hbox{\char126}\vss}\hidewidth}}}
+\DeclareTextCommand{\ubreve}{OT1}[1]{%
+   {\o@lign{\relax#1\crcr\hidewidth\sh@ft{29}%
+     \vbox to.2ex{\hbox{\char21}\vss}\hidewidth}}}
+\DeclareTextCommand{\udot}{OT1}[1]{%
+   {\o@lign{\relax#1\crcr\hidewidth\sh@ft{29}%
+     \vbox to.2ex{\hbox{.}\vss}\hidewidth}}}
+
+\DeclareTextCommand{\CircGrave}{OT1}[1]{\DoubleAccent{18}{94}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\CircAcute}{OT1}[1]{\DoubleAccent{19}{94}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\CircMacron}{OT1}[1]{\DoubleAccent{22}{94}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\CircTilde}{OT1}[1]{\DoubleAccent{126}{94}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\CircHook}{OT1}[1]{\DoubleAccent{39}{94}{.4ex}{.45ex}{#1}}
+\DeclareTextCommand{\Circudot}{OT1}[1]{\DoubleAccent{46}{94}{.4ex}{-.2ex}{#1}}
+
+\DeclareTextCommand{\HornAcute}{OT1}[1]{\'{#1}\hspace*{-0.2em}'}
+
+\endinput

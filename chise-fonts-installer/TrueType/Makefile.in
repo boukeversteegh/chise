@@ -1,0 +1,41 @@
+VERSION = @PACKAGE_VERSION@
+
+TAR	= tar
+WGET	= wget
+SUDO	= 
+
+prefix		= @prefix@
+exec_prefix	= @exec_prefix@
+BINDIR		= @bindir@
+LIBDIR		= @libdir@
+OPTS		= @ac_configure_args@
+
+
+all:	build-zinbun
+
+install:	install-zinbun
+
+
+build-arphic:
+	cd Arphic && make
+
+install-arphic:
+	cd Arphic && make install
+
+
+build-zinbun:
+	cd Zinbun && make
+
+install-zinbun:
+	cd Zinbun && make install
+
+
+distclean:
+	cd Arphic && make distclean
+	cd Zinbun && make distclean
+	-$(RM) Makefile
+
+distclean-all:
+	cd Arphic && make distclean-all
+	cd Zinbun && make distclean-all
+	-$(RM) Makefile

@@ -1,0 +1,6 @@
+Revision history for Perl extension Chise_utils.
+
+0.01  Sat Feb 22 00:30:24 2003
+	- original version; created by h2xs 1.2 with options
+		-X Chise_utils
+

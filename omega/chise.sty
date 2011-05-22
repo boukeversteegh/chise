@@ -1,0 +1,618 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{chise}[2003/11/26 v.0.2 (Omega/CHISE Team)]
+% based on mulambda and omega-japanese
+%\RequirePackage{omega}
+\RequirePackage[OT1]{fontenc}
+
+%% options %%
+
+%% You must change the path of inCHISE,
+%%   if inCHISE is not located in the default directory.
+%% Replace all "/usr/local/share/texmf/omega/ocp/local/chise/"
+%%   to the appropriate path.
+
+\DeclareOption{utf8mcs}{
+  \CHISEsetupOCP{Utf8mcs}
+}
+\DeclareOption{utf8gb}{
+  \CHISEsetupOCP{Utf8gb}
+}
+\DeclareOption{utf8cns}{
+  \CHISEsetupOCP{Utf8cns}
+}
+\DeclareOption{utf8jis}{
+  \CHISEsetupOCP{Utf8jis}
+}
+\DeclareOption{utf8ks}{
+  \CHISEsetupOCP{Utf8ks}
+}
+\DeclareOption{utf8big5}{
+  \CHISEsetupOCP{Utf8big5}
+}
+
+\DeclareOption{gbfont}{
+  \AtBeginDocument{
+    \GBfont
+  }
+}
+\DeclareOption{cnsfont}{
+  \AtBeginDocument{
+    \CNSfont
+  }
+}
+\DeclareOption{jisfont}{
+  \AtBeginDocument{
+    \JISfont
+  }
+}
+\DeclareOption{ksfont}{
+  \AtBeginDocument{
+    \KSfont
+  }
+}
+\DeclareOption{multifont}{
+  \AtBeginDocument{
+    \Multifont
+  }
+}
+
+\DeclareOption{kage}{
+  % to use KAGE server
+  \externalocp\OCPmkfont=/usr/local/share/texmf/omega/ocp/local/chise/makefonts.pl {}
+  \ocplist\mkfontOCP=
+  \addbeforeocplist 1 \OCPmkfont
+  \nullocplist
+
+  \AtEndDocument{
+    \pushocplist\mkfontOCP
+  }
+}
+
+%% end options %%
+
+\ocp\OCPutf=inutf8fix
+\ocplist\inutf
+\addbeforeocplist 1 \OCPutf
+\nullocplist
+
+\ocp\OCPTeX=omtex
+\ocp\OCPGrUniToFont=uni2greekfix
+\ocp\OCPCyrUniToFont=uni2latfix
+\ocp\OCPLatinUniToFont=uni2latfix
+\ocplist\GreekOCP
+  \addbeforeocplist 1 \OCPutf
+  \addbeforeocplist 1 \OCPTeX
+  \addbeforeocplist 1 \OCPGrUniToFont
+  \nullocplist
+\ocplist\CyrillicOCP
+  \addbeforeocplist 1 \OCPutf
+  \addbeforeocplist 1 \OCPTeX
+  \addbeforeocplist 1 \OCPCyrUniToFont
+  \nullocplist
+\ocplist\LatinOCP
+  \addbeforeocplist 1 \OCPutf
+  \addbeforeocplist 1 \OCPTeX
+  \addbeforeocplist 1 \OCPLatinUniToFont
+  \nullocplist
+
+\AtBeginDocument{
+  \LatinScript
+}
+
+\def\rmdefault{omlgc}
+\def\ttdefault{uctt}
+
+% Settings for CJK
+
+\def\CHISEsetupOCP#1{
+  \externalocp\OCPuniGBrmSP=/usr/local/share/texmf/omega/ocp/local/chise/#1ToUniGB {}
+  \ocplist\uniGBrmSP=
+    \addbeforeocplist 1 \OCPuniGBrmSP
+    \nullocplist
+  \externalocp\OCPuniCNSrmSP=/usr/local/share/texmf/omega/ocp/local/chise/#1ToUniCNS {}
+  \ocplist\uniCNSrmSP=
+    \addbeforeocplist 1 \OCPuniCNSrmSP
+    \nullocplist
+  \externalocp\OCPuniJISrmSP=/usr/local/share/texmf/omega/ocp/local/chise/#1ToUniJIS {}
+  \ocplist\uniJISrmSP=
+    \addbeforeocplist 1 \OCPuniJISrmSP
+    \nullocplist
+  \externalocp\OCPuniKSrmSP=/usr/local/share/texmf/omega/ocp/local/chise/#1ToUniKS {}
+  \ocplist\uniKSrmSP=
+    \addbeforeocplist 1 \OCPuniKSrmSP
+    \nullocplist
+  \externalocp\OCPuniMultirmSP=/usr/local/share/texmf/omega/ocp/local/chise/#1ToUniMulti {}
+  \ocplist\uniMultirmSP=
+    \addbeforeocplist 1 \OCPuniMultirmSP
+    \nullocplist
+  \externalocp\OCPuniGBwithSP=/usr/local/share/texmf/omega/ocp/local/chise/#1ToUniGBSp {}
+  \ocplist\uniGBwithSP=
+    \addbeforeocplist 1 \OCPuniGBwithSP
+    \nullocplist
+  \externalocp\OCPuniCNSwithSP=/usr/local/share/texmf/omega/ocp/local/chise/#1ToUniCNSSp {}
+  \ocplist\uniCNSwithSP=
+    \addbeforeocplist 1 \OCPuniCNSwithSP
+    \nullocplist
+  \externalocp\OCPuniJISwithSP=/usr/local/share/texmf/omega/ocp/local/chise/#1ToUniJISSp {}
+  \ocplist\uniJISwithSP=
+    \addbeforeocplist 1 \OCPuniJISwithSP
+    \nullocplist
+  \externalocp\OCPuniKSwithSP=/usr/local/share/texmf/omega/ocp/local/chise/#1ToUniKSSp {}
+  \ocplist\uniKSwithSP=
+    \addbeforeocplist 1 \OCPuniKSwithSP
+    \nullocplist
+  \externalocp\OCPuniMultiwithSP=/usr/local/share/texmf/omega/ocp/local/chise/#1ToUniMultiSp {}
+  \ocplist\uniMultiwithSP=
+    \addbeforeocplist 1 \OCPuniMultiwithSP
+    \nullocplist
+  \let\uniGB=\uniGBrmSP
+  \let\uniCNS=\uniCNSrmSP
+  \let\uniJIS=\uniJISrmSP
+  \let\uniKS=\uniKSrmSP
+  \let\uniMulti=\uniMultirmSP
+}
+
+\def\selectjisfont{\fontencoding{OT1}\fontfamily{omjis}\selectfont}
+\def\selectgbsfont{\fontencoding{OT1}\fontfamily{omgbs}\selectfont}
+\def\selectcnsfont{\fontencoding{OT1}\fontfamily{omcns}\selectfont}
+\def\selectksxfont{\fontencoding{OT1}\fontfamily{omksx}\selectfont}
+\def\selectlgcfont{\fontencoding{OT1}\fontfamily{omlgc}\selectfont}
+
+\newenvironment{JISfont}{\pushocplist\uniJIS}{}
+\newenvironment{GBfont}{\pushocplist\uniGB}{}
+\newenvironment{KSfont}{\pushocplist\uniKS}{}
+\newenvironment{CNSfont}{\pushocplist\uniCNS}{}
+\newenvironment{Multifont}{\pushocplist\uniMulti}{}
+\newenvironment{NonCJK}{\pushocplist\inutf\selectlgcfont}{}
+\newenvironment{ASCII}{\clearocplists\fontencoding{T1}\selectnormalfont}{}
+
+\newenvironment{GreekScript}{\pushocplist\GreekOCP\selectlgcfont%
+\language=3\lefthyphenmin=2\righthyphenmin=2}{%
+}
+\newenvironment{CyrillicScript}{\pushocplist\CyrillicOCP\selectlgcfont}{}
+\newenvironment{LatinScript}{\pushocplist\LatinOCP\selectlgcfont}{}
+
+\newcommand{\jisfont}[1]{\begingroup%
+  \pushocplist\uniJIS #1\endgroup}
+\newcommand{\gbfont}[1]{\begingroup%
+  \pushocplist\uniGB #1\endgroup}
+\newcommand{\ksfont}[1]{\begingroup%
+  \pushocplist\uniKS #1\endgroup}
+\newcommand{\cnsfont}[1]{\begingroup%
+  \pushocplist\uniCNS #1\endgroup}
+\newcommand{\multifont}[1]{\begingroup%
+  \pushocplist\uniMulti #1\endgroup}
+\newcommand{\noncjk}[1]{\begingroup%
+  \pushocplist\inutf\selectlgcfont #1\endgroup}
+%  \normalfont\pushocplist\inutf #1\endgroup}
+\newcommand{\ascii}[1]{\begingroup%
+  \clearocplists\selectlgcfont #1\endgroup}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Entity Reference
+% ----------------
+\def\ER#1{amp#1;}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% IDC for print
+% -------------
+\def\idc@#1{{\selectgbsfont\clearocplists\char"#1}}
+\def\idcltr{\idc@{2FF0}}
+\def\idcatb{\idc@{2FF1}}
+\def\idcltmr{\idc@{2FF2}}
+\def\idcatmb{\idc@{2FF3}}
+\def\idcfs{\idc@{2FF4}}
+\def\idcsfa{\idc@{2FF5}}
+\def\idcsfb{\idc@{2FF6}}
+\def\idcsfl{\idc@{2FF7}}
+\def\idcsful{\idc@{2FF8}}
+\def\idcsfur{\idc@{2FF9}}
+\def\idcsfll{\idc@{2FFA}}
+\def\idcol{\idc@{2FFB}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Font Declaration
+% ----------------
+%% omgbs
+\DeclareFontFamily{OT1}{omgbs}{}
+\DeclareFontShape{OT1}{omgbs}{m}{n}{
+   <->omgbs
+}{}
+\DeclareFontShape{OT1}{omgbs}{m}{sc}{
+   <-> ssub * omgbs/m/n
+}{}
+\DeclareFontShape{OT1}{omgbs}{m}{it}{
+   <->omgb
+}{}
+\DeclareFontShape{OT1}{omgbs}{m}{sl}{
+   <-> ssub * omgbs/m/it
+}{}
+\DeclareFontShape{OT1}{omgbs}{m}{itsc}{
+   <-> ssub * omgbs/m/it
+}{}
+\DeclareFontShape{OT1}{omgbs}{m}{slsc}{
+   <-> ssub * omgbs/m/it
+}{}
+\DeclareFontShape{OT1}{omgbs}{bx}{n}{
+   <->omgbsgt
+}{}
+\DeclareFontShape{OT1}{omgbs}{bx}{sc}{
+   <-> ssub * omgbs/bx/n
+}{}
+\DeclareFontShape{OT1}{omgbs}{bx}{it}{
+   <->omgbsgt
+}{}
+\DeclareFontShape{OT1}{omgbs}{bx}{itsc}{
+   <-> ssub * omgbs/bx/it
+}{}
+\DeclareFontShape{OT1}{omgbs}{bx}{sl}{
+   <-> ssub * omgbs/bx/it
+}{}
+\DeclareFontShape{OT1}{omgbs}{bx}{slsc}{
+   <-> ssub * omgbs/bx/it
+}{}
+
+%% omcns
+\DeclareFontFamily{OT1}{omcns}{}
+\DeclareFontShape{OT1}{omcns}{m}{n}{
+   <->omcns
+}{}
+\DeclareFontShape{OT1}{omcns}{m}{sc}{
+   <-> ssub * omcns/m/n
+}{}
+\DeclareFontShape{OT1}{omcns}{m}{it}{
+   <->omcns
+}{}
+\DeclareFontShape{OT1}{omcns}{m}{sl}{
+   <-> ssub * omcns/m/it
+}{}
+\DeclareFontShape{OT1}{omcns}{m}{itsc}{
+   <-> ssub * omcns/m/it
+}{}
+\DeclareFontShape{OT1}{omcns}{m}{slsc}{
+   <-> ssub * omcns/m/it
+}{}
+\DeclareFontShape{OT1}{omcns}{bx}{n}{
+   <->omcnsgt
+}{}
+\DeclareFontShape{OT1}{omcns}{bx}{sc}{
+   <-> ssub * omcns/bx/n
+}{}
+\DeclareFontShape{OT1}{omcns}{bx}{it}{
+   <->omcnsgt
+}{}
+\DeclareFontShape{OT1}{omcns}{bx}{itsc}{
+   <-> ssub * omcns/bx/it
+}{}
+\DeclareFontShape{OT1}{omcns}{bx}{sl}{
+   <-> ssub * omcns/bx/it
+}{}
+\DeclareFontShape{OT1}{omcns}{bx}{slsc}{
+   <-> ssub * omcns/bx/it
+}{}
+
+%%
+\DeclareFontFamily{OT1}{omjis}{}
+\DeclareFontShape{OT1}{omjis}{m}{n}{
+   <->omjis
+}{}
+\DeclareFontShape{OT1}{omjis}{m}{sc}{
+   <-> ssub * omjis/m/n
+}{}
+\DeclareFontShape{OT1}{omjis}{m}{it}{
+   <->omjis
+}{}
+\DeclareFontShape{OT1}{omjis}{m}{sl}{
+   <-> ssub * omjis/m/it
+}{}
+\DeclareFontShape{OT1}{omjis}{m}{itsc}{
+   <-> ssub * omjis/m/it
+}{}
+\DeclareFontShape{OT1}{omjis}{m}{slsc}{
+   <-> ssub * omjis/m/it
+}{}
+\DeclareFontShape{OT1}{omjis}{bx}{n}{
+   <->omjisgt
+}{}
+\DeclareFontShape{OT1}{omjis}{bx}{sc}{
+   <-> ssub * omjis/bx/n
+}{}
+\DeclareFontShape{OT1}{omjis}{bx}{it}{
+   <->omjisgt
+}{}
+\DeclareFontShape{OT1}{omjis}{bx}{itsc}{
+   <-> ssub * omjis/bx/it
+}{}
+\DeclareFontShape{OT1}{omjis}{bx}{sl}{
+   <-> ssub * omjis/bx/it
+}{}
+\DeclareFontShape{OT1}{omjis}{bx}{slsc}{
+   <-> ssub * omjis/bx/it
+}{}
+
+%% omksx
+\DeclareFontFamily{OT1}{omksx}{}
+\DeclareFontShape{OT1}{omksx}{m}{n}{
+   <->omksx
+}{}
+\DeclareFontShape{OT1}{omksx}{m}{sc}{
+   <-> ssub * omksx/m/n
+}{}
+\DeclareFontShape{OT1}{omksx}{m}{it}{
+   <->omksx
+}{}
+\DeclareFontShape{OT1}{omksx}{m}{sl}{
+   <-> ssub * omksx/m/it
+}{}
+\DeclareFontShape{OT1}{omksx}{m}{itsc}{
+   <-> ssub * omksx/m/it
+}{}
+\DeclareFontShape{OT1}{omksx}{m}{slsc}{
+   <-> ssub * omksx/m/it
+}{}
+\DeclareFontShape{OT1}{omksx}{bx}{n}{
+   <->omksxgt
+}{}
+\DeclareFontShape{OT1}{omksx}{bx}{sc}{
+   <-> ssub * omksx/bx/n
+}{}
+\DeclareFontShape{OT1}{omksx}{bx}{it}{
+   <->omksxgt
+}{}
+\DeclareFontShape{OT1}{omksx}{bx}{itsc}{
+   <-> ssub * omksx/bx/it
+}{}
+\DeclareFontShape{OT1}{omksx}{bx}{sl}{
+   <-> ssub * omksx/bx/it
+}{}
+\DeclareFontShape{OT1}{omksx}{bx}{slsc}{
+   <-> ssub * omksx/bx/it
+}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareFontFamily{OT1}{chise000}{}
+\DeclareFontShape{OT1}{chise000}{m}{n}{
+   <-> [.96] chise000min
+}{}
+\DeclareFontShape{OT1}{chise000}{m}{sc}{
+   <-> [.96] ssub * chise000min/m/n
+}{}
+\DeclareFontShape{OT1}{chise000}{m}{it}{
+   <-> [.96] chise000min
+}{}
+\DeclareFontShape{OT1}{chise000}{m}{sl}{
+   <-> [.96] ssub * chise000min/m/it
+}{}
+\DeclareFontShape{OT1}{chise000}{m}{itsc}{
+   <-> [.96] ssub * chise000min/m/it
+}{}
+\DeclareFontShape{OT1}{chise000}{m}{slsc}{
+   <-> [.96] ssub * chise000min/m/it
+}{}
+\DeclareFontShape{OT1}{chise000}{bx}{n}{
+   <-> [.96] chise000got
+}{}
+\DeclareFontShape{OT1}{chise000}{bx}{sc}{
+   <-> [.96] ssub * chise000got/bx/n
+}{}
+\DeclareFontShape{OT1}{chise000}{bx}{it}{
+   <-> [.96] chise000got
+}{}
+\DeclareFontShape{OT1}{chise000}{bx}{itsc}{
+   <-> [.96] ssub * chise000got/bx/it
+}{}
+\DeclareFontShape{OT1}{chise000}{bx}{sl}{
+   <-> [.96] ssub * chise000got/bx/it
+}{}
+\DeclareFontShape{OT1}{chise000}{bx}{slsc}{
+   <-> [.96] ssub * chise000got/bx/it
+}{}
+%%% GT
+\DeclareFontFamily{OT1}{gt01}{}
+\DeclareFontShape{OT1}{gt01}{m}{n}{
+   <-> gt01
+}{}
+\DeclareFontFamily{OT1}{gt02}{}
+\DeclareFontShape{OT1}{gt02}{m}{n}{
+   <-> gt02
+}{}
+\DeclareFontFamily{OT1}{gt03}{}
+\DeclareFontShape{OT1}{gt03}{m}{n}{
+   <-> gt03
+}{}
+\DeclareFontFamily{OT1}{gt04}{}
+\DeclareFontShape{OT1}{gt04}{m}{n}{
+   <-> gt04
+}{}
+\DeclareFontFamily{OT1}{gt05}{}
+\DeclareFontShape{OT1}{gt05}{m}{n}{
+   <-> gt05
+}{}
+\DeclareFontFamily{OT1}{gt06}{}
+\DeclareFontShape{OT1}{gt06}{m}{n}{
+   <-> gt06
+}{}
+\DeclareFontFamily{OT1}{gt07}{}
+\DeclareFontShape{OT1}{gt07}{m}{n}{
+   <-> gt07
+}{}
+\DeclareFontFamily{OT1}{gt08}{}
+\DeclareFontShape{OT1}{gt08}{m}{n}{
+   <-> gt08
+}{}
+\DeclareFontFamily{OT1}{gt09}{}
+\DeclareFontShape{OT1}{gt09}{m}{n}{
+   <-> gt09
+}{}
+\DeclareFontFamily{OT1}{gt10}{}
+\DeclareFontShape{OT1}{gt10}{m}{n}{
+   <-> gt10
+}{}
+\DeclareFontFamily{OT1}{gt11}{}
+\DeclareFontShape{OT1}{gt11}{m}{n}{
+   <-> gt11
+}{}
+% CDP
+\DeclareFontFamily{OT1}{cdp}{}
+\DeclareFontShape{OT1}{cdp}{m}{n}{
+   <-> cdp
+}{}
+% Hanziku
+\DeclareFontFamily{OT1}{hzk01}{}
+\DeclareFontShape{OT1}{hzk01}{m}{n}{
+   <-> hzk01
+}{}
+\DeclareFontFamily{OT1}{hzk02}{}
+\DeclareFontShape{OT1}{hzk02}{m}{n}{
+   <-> hzk02
+}{}
+\DeclareFontFamily{OT1}{hzk03}{}
+\DeclareFontShape{OT1}{hzk03}{m}{n}{
+   <-> hzk03
+}{}
+\DeclareFontFamily{OT1}{hzk04}{}
+\DeclareFontShape{OT1}{hzk04}{m}{n}{
+   <-> hzk04
+}{}
+\DeclareFontFamily{OT1}{hzk05}{}
+\DeclareFontShape{OT1}{hzk05}{m}{n}{
+   <-> hzk05
+}{}
+\DeclareFontFamily{OT1}{hzk06}{}
+\DeclareFontShape{OT1}{hzk06}{m}{n}{
+   <-> hzk06
+}{}
+\DeclareFontFamily{OT1}{hzk07}{}
+\DeclareFontShape{OT1}{hzk07}{m}{n}{
+   <-> hzk07
+}{}
+\DeclareFontFamily{OT1}{hzk08}{}
+\DeclareFontShape{OT1}{hzk08}{m}{n}{
+   <-> hzk08
+}{}
+\DeclareFontFamily{OT1}{hzk09}{}
+\DeclareFontShape{OT1}{hzk09}{m}{n}{
+   <-> hzk09
+}{}
+\DeclareFontFamily{OT1}{hzk10}{}
+\DeclareFontShape{OT1}{hzk10}{m}{n}{
+   <-> hzk10
+}{}
+\DeclareFontFamily{OT1}{hzk11}{}
+\DeclareFontShape{OT1}{hzk11}{m}{n}{
+   <-> hzk11
+}{}
+\DeclareFontFamily{OT1}{hzk12}{}
+\DeclareFontShape{OT1}{hzk12}{m}{n}{
+   <-> hzk12
+}{}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% line break, from omega-japanese.
+
+\def\CJKunbreakablekernone{%
+  \nobreak
+  \hskip 0sp plus 2sp minus 2sp
+  \nobreak
+}
+\def\CJKunbreakablekerntwo{%
+  \penalty 500
+  \hskip 0sp plus 2sp minus 2sp
+  \penalty 500
+}
+\def\CJKunbreakablekernthree{%
+  \penalty 200
+  \hskip 0sp plus 2sp minus 2sp
+  \penalty 200
+}
+\def\CJKbreakablekern{\hskip 0sp plus 2pt minus 2sp}
+% BUG: \rlap should preserve the current font
+\def\CJKprotrude#1{%
+  \discretionary{\rlap{#1}}%
+                {}%
+                {#1}%
+}
+%% Hyphenation parameters
+  % If the badness does not exceed this, no hyphenation is
+  % attempted
+  \pretolerance=-1
+
+  % Maximal badness
+  \tolerance=200
+
+  % Penalty added for the first hyphenation
+  % in the current paragraph
+  \hyphenpenalty=0 % Was 50
+
+  % Penalty added for subsequent hyphenations
+  \exhyphenpenalty=0 % Was 50
+
+  % TeX tries to minimize the demerit of the lines:
+  % (\linepenalty^2 + badness^2) + penalty^2
+  \linepenalty=10
+
+  % If a tight line is followed by a loose one
+  % (or conversely), we add \adjdemerits 
+  % to the demerit
+  \adjdemerits=0 % Was 10000 % ???
+
+  % two hyphens on consecutive lines also add 
+  % to the demerit
+  \doublehyphendemerits=0 % Was 10000
+
+  % A hyphen on the last line also adds to
+  % the demerit.
+  \finalhyphendemerits=0 % Was 5000
+
+  % Minimum number of characters in the current word
+  % before or after a hyphenation point
+  \lefthyphenmin=2
+  \righthyphenmin=3
+
+% line break definition ends.
+
+%%%% redundant font definition to avoid bug of omega.
+
+\DeclareFontFamily{OT1}{omlgc}{}
+
+\DeclareFontShape{OT1}{omlgc}{m}{n}{
+   <->omlgc
+}{}
+\DeclareFontShape{OT1}{omlgc}{m}{sc}{
+   <-> ssub * omlgc/m/n
+}{}
+\DeclareFontShape{OT1}{omlgc}{m}{it}{
+   <->omlgci
+}{}
+\DeclareFontShape{OT1}{omlgc}{m}{sl}{
+   <-> ssub * omlgc/m/it
+}{}
+\DeclareFontShape{OT1}{omlgc}{m}{itsc}{
+   <-> ssub * omlgc/m/it
+}{}
+\DeclareFontShape{OT1}{omlgc}{m}{slsc}{
+   <-> ssub * omlgc/m/it
+}{}
+\DeclareFontShape{OT1}{omlgc}{bx}{n}{
+   <->omlgcb
+}{}
+\DeclareFontShape{OT1}{omlgc}{bx}{sc}{
+   <-> ssub * omlgc/bx/n
+}{}
+\DeclareFontShape{OT1}{omlgc}{bx}{it}{
+   <->omlgcbi
+}{}
+\DeclareFontShape{OT1}{omlgc}{bx}{itsc}{
+   <-> ssub * omlgc/bx/it
+}{}
+\DeclareFontShape{OT1}{omlgc}{bx}{sl}{
+   <-> ssub * omlgc/bx/it
+}{}
+\DeclareFontShape{OT1}{omlgc}{bx}{slsc}{
+   <-> ssub * omlgc/bx/it
+}{}
+
+% The declaration below should be in ot1enc.def.
+\DeclareTextSymbol{\textbullet}{OT1}{"2022}
+
+\ProcessOptions
+\endinput

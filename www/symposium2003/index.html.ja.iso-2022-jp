@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+<head>
+<title>CHISE Symposium 2003: CHaracter Information Service Environment</title>
+<link rel=stylesheet href="../chise.css" type="text/css">
+</head>
+<body>
+
+    <p>
+      [<a href="../index.html.ja.iso-2022-jp">CHISE</a>]
+    </p>
+
+    <h1>CHISE Symposium 2003 報告／資料集</h1>
+
+    <dl>
+      <dt>日時</dt>
+      <dd>2003年 3月15日(土) 10:00〜</dd>
+      <dt>場所</dt>
+      <dd><a href="http://www.ipa.go.jp/ipa/about/officeindex.htm">IPA特別会議室</a></dd>
+    </dl>
+
+    <hr>
+
+    <h2>開会の挨拶</h2>
+    <p>
+      g新部裕氏より開会の挨拶をいただく。
+      曰く「CHISE プロジェクトは IPA の未踏ソフトウェア創造事業でやろうと思っていたが、
+      諸般の事情によりうまくいかなかった。しかし、こうして年度末にシンポジウムを開くことが
+      できて、よかったと思う。ところでこの未踏ソフトウェア創造事業とは、元々、
+      プログラミングに喜びを見出し、それによって世の中を変えて行こうとする
+      スーパーハッカーを発掘するという計画だった。現在は、メディア的によろしくない
+      という理由で「スーパークリエイター」ということになっているが。
+      今朝、バスでここに来る途中で、人はハッカーに生まれるのか、あるいはハッカーになるのか、
+      という根源的な問いについて考えていた。結論としては、ここに集まっているCHISEのメンバーは、
+      皆生まれながらのハッカーなのではないかと思う。
+      今日は長い一日だが、楽しんで頂きたい。Happy Hacking!」(取意)
+    </p>
+
+    <h2>題目</h2>
+
+    <p>
+      スケジュールの都合により、
+      <a href="../News/20030315.html.ja.iso-2022-jp">事前のアナウンス</a>から
+      若干の変更があった。
+    </p>
+
+    <h3>基調講演</h3>
+
+    <h4>師茂樹（花園大学専任講師）「Chaonモデルの過去・現在・未来」</h4>
+	<p class="abstract">CHISEプロジェクトは、文字コードによる従来の文字処理からの本質的な脱却
+	を目指している。ここで提唱されている文字処理モデルのひとつ、Chaonモデ
+	ルが、言語（哲）学や文字学・文字論などにおいて積み重ねられてきた議論の
+	中にどのように位置づけることができるのか、あるいはそこからCHISEにとっ
+	て有意義な議論を導くことができないか、仮説を交えながら概観した。</p>
+	<ul>
+	  <li><a href="moro/20030315CHISE_moro%231.pdf">資料1 (スライド、pdf)</a></li>
+	  <li><a href="moro/20030315CHISE_moro%232.pdf">資料2 (引用集、pdf)</a></li>
+	</ul>
+
+    <h3>Chaon実装セッション</h3>
+    
+    <h4>
+      守岡知彦（京都大学人文科学研究所附属漢字情報研究センター助手）
+	「Chaon 実装の歩み: XEmacs CHISE から libchise へ」
+	</h4>
+	<p class="abstract">Chaon 実装は当初 XEmacs UTF-2000（現、XEmacs CHISE）として登場したが、
+	文字データベースの外部化やそれを利用する XEmacs 以外のアプリケーション
+	の登場により徐々にXEmacs 内部に閉じた形から環境へと展開しつつある。そ
+	こで Chaon 実装の基本部分のライブラリ化が計画されている。ここでは、
+	XEmacs CHISE のこれまでの歩みとライブラリ化に向けての課題について述べた。</p>
+	<ul>
+	  <li>資料: <a href="tomo/xelib-pr-chise-2003.pdf">pdf</a> / 
+	    <a href="tomo/xelib-pr-chise-2003.ps">ps</a></li>
+	</ul>
+
+	<h4>
+     江渡浩一郎（独立行政法人産業技術総合研究所研究員）
+	「Ruby/CHISEの実装, IDSによる字形構造分析の試み」
+	</h4>
+	<p class="abstract">Rubyより多言語・多スクリプト環境を使えるようにしたRuby/CHISEについて、
+	その使用方法、実装方法について解説を行う。またそれにより可能となった、
+	漢字内部の字形構造分析について、頻度分布の統計を取るなどの実験を試みた。</p>
+	<ul>
+	  <li><a href="eto/RubyCHISE.html">資料1 (html)</a></li>
+	  <li><a href="eto/RubyCHISE.pdf">資料2 (配布資料、pdf)</a></li>
+	</ul>
+
+    <h3>可視化セッション</h3>
+
+	<h4>
+      藤原義久（ATR人間情報科学研究所主任研究員）、
+	  江渡浩一郎（独立行政法人産業技術総合研究所研究員）、
+	  鈴木泰博（東京医科歯科大学難治疾患研究所助手、ATR研究所客員研究員）
+	  「説文解字のネットワーク」
+	</h4>
+	<p class="abstract">CHISEユーザーとして，漢字の織りなす形・意味・音のつながりを可視化する
+	試みについて述べた．また、意味を表す部品(意符)が漢字に対して持つつながりを含
+	む数理的な解析に関する前段階的な結果についても述べた．</p>
+	<ul>
+	  <li><a href="eto/KanjiNetwork.html">江渡・資料1 (html)</a></li>
+	  <li><a href="eto/KanjiNetwork.pdf">江渡・資料2 (配布資料、pdf)</a></li>
+	</ul>
+
+    <h3>グリフ・組版セッション</h3>
+
+	<h4>
+      上地宏一（慶應義塾大学大学院政策・メディア研究科博士課程）
+	「KAGEシステム: グリフ配信と生成文字品質の向上にむけて」
+	</h4>
+	<p class="abstract">自由に部品を組み合わせて漢字字形を自動生成・配信するKAGEシステムの拡張
+	として、SVG形式による輪郭データと骨組みデータの配信機能や、
+	自動生成された文字をオンラインで調整するための機能を付加した。
+	本発表では、KAGEシステムの概要を含めたこれらの機能の紹介を行った。</p>
+	<ul>
+	  <li><a href="kamichi/chise2003kamichi.pdf">資料 (pdf)</a></li>
+	</ul>
+
+	<h4>
+      宮崎泉（京都大学大学院文学研究科COE研究員）、
+	  苫米地等流（ローザンヌ大学共同研究員）
+	  「Chise-Ω、実装の現状と課題」
+	</h4>
+	<p class="abstract">Ωという多言語を利用しやすくなったTeXとKAGEシステムを組合せて、
+	CHISE文字知識情報をベースにIDSの処理・文字合成を行う場合の
+	問題点について、現時点での実装のデモも交えて解説した。</p>
+	<ul>
+	  <li><a href="omega/chise-omega-030315.pdf">資料 (pdf)</a></li>
+	</ul>
+
+    <h3>CHISEセッション</h3>
+
+	<h4>CHISE BOF、Chaonモデルセッション</h4>
+
+	<p>
+	  まず、時間の都合上、先の発表内にデモンストレーションができなかった発表者が
+	  デモを行い、併せて来聴していた田畑悠介氏による「フリーでセキュアな日本語入力システム」
+	  Anthyのデモンストレーションが飛び入りで行われた。
+	</p>
+
+	<ul>
+	  <li>師茂樹によるPerl/CHISEのデモ</li>
+	  <li>守岡知彦によるXEmacs-CHISEのデモ</li>
+	  <li>田畑悠介氏による<a href="http://sourceforge.jp/projects/anthy/">Anthy</a>のデモ</li>
+	</ul>
+
+	<p>
+	  その後、様々な議論が尽きることなく戦わされた。いくつかトピックを拾ってみると:
+	</p>
+
+	<ul>
+	  <li><a href="http://www.icot.or.jp/ARCHIVE/Museum/SOFTWARE/QUIXOTE/HomePage.html">Quixote</a></li>
+	  <li>CHISEを使ったテキスト分析（CHISE-grep, CHISE + N-gramが欲しい)</li>
+	  <li>難しい漢字を入力するための（CHISEのデータベースを使った）
+	  漢字―漢字変換機能をAnthyに是非実装して欲しい。</li>
+	</ul>
+
+    <h3>懇親会（会費制）</h3>
+	<p>
+	  
+	</p>
+	
+    <hr>
+
+<!-- hhmts start -->
+Last modified: Wed Apr  2 15:43:24 JST 2003
+<!-- hhmts end -->.
+
+</body>
+</html>

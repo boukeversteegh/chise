@@ -1,0 +1,802 @@
+CHISE $BJ8;zAG@-0lMwI=(B	$BBh(B0.3$BHG(B
+
+* $BAG@-L>$N7A<0(B
+
+	<$BAG@-L>(B> := <$B0lHLAG@-L>(B>
+		 | <$B0lHLAG@-L>(B>@<$B%I%a%$%s;XDj;R(B>
+		 | <$B%a%?%G!<%?AG@-L>(B>
+		 | <$B%a%?%G!<%?AG@-L>(B>@<$B%I%a%$%s;XDj;R(B>
+
+	<$B%a%?%G!<%?AG@-L>(B> := <$BAG@-L>(B>*<$B%a%?%G!<%?;XDj;R(B>
+
+	<$B%I%a%$%s;XDj;R(B> := <$B0lHL%I%a%$%s;XDj;R(B>
+			 | <$B%I%a%$%s;XDj;R(B>/<$B0lHL%I%a%$%s;XDj;R(B>
+
+	<$B0lHL%I%a%$%s;XDj;R(B> := <$BCO0h;XDj;R(B> | <$B8@8l;XDj;R(B>
+			     | <$BMQ;z7O;XDj;R(B> | <$B5,3J;XDj;R(B>
+			     | <$BJ88%;XDj;R(B> | <$BG/;XDj;R(B> | <$BHG;XDj;R(B>
+			     | <$B5,3J;XDj;R(B>=<$BHV9f(B>
+			     | <$BJ88%;XDj;R(B>=<$BHV9f(B>
+
+	<$BHV9f(B> := <10$B?JHV9f(B> | <16$B?JHV9f(B>
+
+	<10$B?JHV9f(B> := [0-9]+
+
+	<16$B?JHV9f(B> := 0x[0-9A-F]+
+
+	<$BCO0h;XDj;R(B> := <2-letter country codes> | [A-Z]+
+
+	<2-letter country codes> := [A-Z][A-Z] ; ISO 3166 2 letter codes
+
+	<$B8@8l;XDj;R(B> := {<2-letter language codes> |
+			 <3-letter language codes> |
+			 [A-Z][a-z]+}(-[a-z]+)
+
+	<2-letter codes> := [a-z][a-z] ; ISO 639 2 letter codes
+
+	<3-letter codes> := [a-z][a-z][a-z] ; ISO 639 3 letter codes
+
+	<$BG/;XDj;R(B> := [0-9]+ | -[0-9]+
+
+
+* $B%I%a%$%s;XDj;R(B
+
+** $BCO0h;XDj;R(B
+
+JP	$BF|K\!"F|K\9q(B
+JP/old	$BF|K\!J2a5n!"Nr;KE*MQNcEy!K(B
+CN	$BCf9q!"Cf2Z?ML16&OB9q(B
+
+
+** $B8@8l;XDj;R(B
+
+ja	$BF|K\8l(B
+
+
+** $BMQ;z7O;XDj;R(B
+
+component	$B!J4A;z!KItIJ(B
+
+
+** $B5,3J;XDj;R(B
+
+iso
+ucs
+unicode
+jis
+jis/a
+jis/b
+jis-x0212
+jis-x0213
+jis/1990 (jis-1990)
+jis/2000
+jis/fw
+ks
+gb
+gb/fw
+cns
+big5
+cns11643
+big5/cns11643
+gt
+cdp
+
+
+** $BJ88%;XDj;R(B
+
+cf. biblio-list.txt$B!J8=:_:n@.Cf!#5^$.$NJ}$O=);3$5$s$^$G!K(B
+
+$B2a5n$K%"%I%[%C%/$K$d$C$?$b$N!'(B
+
+(goon-shuuin)				$B8^2;=81$(B
+chuanpian (senhen)			$B@nJS(B
+cihai (jikai)				$B<-3$(B
+daikanwa (morohashi-daikanwa)		$BBg4AOB<-E5(B
+(danchuu)				$BCJCp(B
+guangyun (kouin)			$B9-1$(B
+haipian (kaihen)			$B3$JS(B
+jiyun (shuuin)				$B=81$(B
+kangxi					$B9/_f;zE5(B
+kanjo					$B4A=q(B
+pianhai (henkai)			$BJS3$(B
+pianhai-leibian (henkai-ruihen)		$BJS3$$(CW>x:(B
+(ronkou)				$BO@9U(B
+ruijumyougishou (ruishuu-meigishou)	$BN`$A>[C{$B5A>6(B
+shinjigen				$B?7;z8;(B
+shuowen					$B@bJ8(B
+shuowen-tongxun-dingsheng (setsumon-tsuukun-teisei)	$B@bJ8DL71Djfa(B
+songyuan-yilai-suzipu (sougen-irai-zokujifu)		$BAW850JMhB/;zIh(B
+tongwen-tongkao (doubun-tsuukou)	$BF1J8DL$A?<(B
+yunhai (inkai)				$B1$2q(B
+yunhai-bei (inkaiho)			$B1$2qJd(B
+yupian (gyokuhen)			$B6LJS(B
+yuquan					$B6L@t(B
+zhengyun (seiin)			$B@51$(B
+zhengzi-tong (seiji-tsuu)		$B@5;z$(CwW(B
+zhonghua-dazidian (chuuka-daijiten)	$BCf$(Ga^DKGsL((B
+zihui (jii)				$B;zWC(B
+zihui-bei (jiiho)			$B;zWCJd(B
+
+abos/2001				$BElMN3XJ88%N`L\(B2001$BG/HG(B
+
+
+** $BHG;XDj;R(B
+
+rev1	$B2~D{Bh#1HG(B
+rev2	$B2~D{Bh#2HG(B
+
+
+** $B$=$NB>(B
+
+JP/Jouyou	$BF|K\(B/$B>oMQ4A;z(B
+ja/on		$BF|K\8l(B/$B2;FI$_(B
+ja/on/kan	$BF|K\8l(B/$B2;FI$_(B/$B4A2;(B
+ja/on/go	$BF|K\8l(B/$B2;FI$_(B/$B8b2;(B
+ja/kun/name	$BF|K\8l(B/$B71FI$_(B/$BL>A0(B
+ja/kun (ja/on/kun) $BF|K\8l(B/$B71FI$_(B
+ja/name		$BF|K\8l(B/$BL>A0(B
+kun		$B71FI$_(B
+misc		$B;(B?!"N.I[K\Ey(B
+unknown		$BITL@(B
+
+
+* $B%a%?%G!<%?;XDj;R(B
+
+sources		$B=PE5!"E55r>pJs(B
+  $B7?!'(B list: (symbol ...)
+  $B0UL#!'(B $B=PE5!"E55r>pJs(B
+  $BCm0U!'(B $BCM$GMQ$$$i$l$k(B symbol $B$O%I%a%$%s;XDj;R$G$"$k!#(B
+
+
+* $BAG@-(B
+
+** $B0lHL(B
+
+name
+  $B7?!'(B string
+  $B0UL#!'(B $BJ8;zL>>N(B
+  $BCm0U!'(B $B8xE*I8=`$GDj5A$5$l$?J8;z$NL>A0$rBgJ8;z$G<($9!#(B
+	 $B;dE*$JJ8;zL>>N$O(B name* $BAG@-$rMQ$$$k$3$H$K$J$C$F$$$k$,!"2a5n$K(B
+	 $B;dE*$JL>>N$r$3$NAG@-$K>.J8;z$G<($7$F$$$?$?$a!">.J8;z$G5-:\$5(B
+	 $B$l$?$b$N$O;dE*L>>N$H$7$F07$&$3$H!#(B
+
+name*
+  $B7?!'(B string
+  $B0UL#!'(B $B;dE*J8;zL>>N(B
+
+general-category
+  $B7?!'(B list: (symbol ...)
+  $B0UL#!'(B Unicode $B$K$*$1$k0lHL<oJL(B
+
+script
+  $B7?!'(B list: (symbol ...)
+  $B0UL#!'(B $BMQ;z7O(B (script)
+  $BCm0U!'(B $BCM$GMQ$$$i$l$k(B symbol $B$O%I%a%$%s;XDj;R$G$"$k!#(B
+
+
+** BIDI
+
+bidi-category
+  $B7?!'(B string
+  $B0UL#!'(B Unicode $B$K$*$1$k(B Bi-direction $B=hM}$K$*$1$k<oJL(B
+
+mirrored
+  $B7?!'(B bool
+  $B0UL#!'(B $B2#=q$-$9$k>l9g$K$*$$$F!"=q;zJ}8~$K1~$8$F:81&H?E>$9$k$+$I$&$+(B
+	 $B$r<($9(B
+
+
+** $BJ8;z7k9g(B
+
+->decomposition
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z$r9=@.$9$k7k9gJ8;zNs$r<($9(B
+
+composition
+  $B7?!'(B Alist: ((char . char) ...)
+  $B0UL#!'(B $BHoDj5A;z$H7k9g2DG=$JJ8;z$H7k9g8e$NJ8;z$NBP1~$r<($9(B
+  $BCm0U!'(B ->decomposition $B$+$i<+F0@8@.$5$l$k(B
+
+
+** $B2;2A(B
+
+sound@ja		$BF|K\8l2;(B
+sound@ja/kun		$BF|K\8l2;!J71FI$_!K(B
+sound@ja/kun/name	$BF|K\8l2;!J71FI$_!JL>A0MQ!K!K(B
+sound@ja/name		$BF|K\8l2;!JL>A0MQ!K(B
+sound@ja/on		$BF|K\8l2;!J2;FI$_!K(B
+sound@ja/on/go		$BF|K\8l2;!J8b2;!K(B
+sound@ja/on/kan		$BF|K\8l2;!J4A2;!K(B
+sound@ja/on/kun		sound@ja/kun $B$N8m$j(B
+sound@kun		sound@ja/kun $B$N5lI=5-(B
+
+
+** $B?t2A(B
+
+decimal-digit-value
+  $B7?!'(B int
+  $B0UL#!'(B $B==?J?t2A(B
+	
+digit-value
+  $B7?!'(B {int|symbol}
+  $B0UL#!'(B $B@0?t2A(B
+
+numeric-value
+  $B7?!'(B {number|symbol}
+  $B0UL#!'(B $B?t2A(B
+
+
+** $B4A;z(B
+
+*** $BIt<s(B
+
+ideographic-radical
+  $B7?!'(B int
+  $B0UL#!'(B $BIt<sHV9f!J9/_f;zE5$NBN7O$K4p$E$/!K(B
+
+cns-radical
+  $B7?!'(B int
+  $B0UL#!'(B CNS 11643 $B$K$*$1$kIt<s(B
+  $BCm0U!'(B $BGQ;_M=Dj!J(Bideographic-radical@cns $B$r;H$&$3$H!K(B
+
+cns-radical?
+  $B7?!'(B int
+  $B0UL#!'(B CNS 11643 $B$K$*$1$kIt<s!J>pJs$KIT?3$JE@$,$"$k$N$b$N!K(B
+  $BCm0U!'(B $BGQ;_M=Dj!J(Bideographic-radical@cns $B$H(B
+	 ideographic-radical@cns*note $B$rMQ$$$k$3$H!K(B
+
+kangxi-radical
+  $B7?!'(B int
+  $B0UL#!'(B $B9/_fIt<sHV9f(B
+  $BCm0U!'(B $BGQ;_M=Dj!J(Bideographic-radical@kangxi $B$r;H$&$3$H!K(B
+
+daikanwa-radical
+  $B7?!'(B int
+  $B0UL#!'(B $BBg4AOB<-E5$K$*$1$kIt<s(B
+  $BCm0U!'(B $BGQ;_M=Dj!J(Bideographic-radical@daikanwa $B$r;H$&$3$H!K(B
+
+shinjigen-1-radical
+  $B7?!'(B int
+  $B0UL#!'(B $B?7;z8;!J=iHG!K$K$*$1$kIt<s(B
+  $BCm0U!'(B $BGQ;_M=Dj!J(Bideographic-radical@shinjigen-1 $B$r;H$&$3$H!K(B
+
+
+*** $BIt<sFb2h?t(B
+
+ideographic-strokes
+  $B7?!'(B int
+  $B0UL#!'(B $BIt<sFb2h?t(B
+
+cns-strokes
+  $B7?!'(B int
+  $B0UL#!'(B CNS 11643 $B$K$*$1$kIt<sFb2h?t(B
+  $BCm0U!'(B $BGQ;_M=Dj!J(Bideographic-strokes@cns $B$r;H$&$3$H!K(B
+
+kangxi-strokes
+  $B7?!'(B int
+  $B0UL#!'(B $B9/_f;zE5$K$*$1$kIt<sFb2h?t(B
+  $BCm0U!'(B $BGQ;_M=Dj!J(Bideographic-strokes@kangxi $B$r;H$&$3$H!K(B
+
+daikanwa-strokes
+  $B7?!'(B int
+  $B0UL#!'(B $BBg4AOB<-E5$K$*$1$kIt<sFb2h?t(B
+  $BCm0U!'(B $BGQ;_M=Dj!J(Bideographic-strokes@daikanwa $B$r;H$&$3$H!K(B
+
+japanese-strokes
+  $B7?!'(B int
+  $B0UL#!'(B UCS $B$NF|K\=PE5J8;z;z7?$NIt<sFb2h?t(B
+  $BCm0U!'(B $BGQ;_M=Dj!J(Bideographic-strokes@JA $B$r;H$&$3$H!K(B
+
+jis-strokes-a
+  $B7?!'(B int
+  $B0UL#!'(B JIS $B$K$*$1$kIt<sFb2h?t(B (a)$B!JJ#?t$"$k>l9g$KMQ$$$k!K(B
+  $BCm0U!'(B $BGQ;_M=Dj!J(Bideographic-strokes@jis/a $B$r;H$&$3$H!K(B
+
+
+*** $BAm2h?t(B
+
+total-strokes
+  $B7?!'(B int
+  $B0UL#!'(B $BAm2h?t(B
+
+cns-total-strokes
+  $B7?!'(B int
+  $B0UL#!'(B CNS 11643 $B$K$*$1$kAm2h?t(B
+  $BCm0U!'(B $BGQ;_M=Dj!J(Btotal-strokes@cns $B$r;H$&$3$H!K(B
+
+
+*** $B9=B$>pJs(B
+
+ideographic-structure
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $B4A;z9=B$>pJs!J(BIDS $B$K$*$$$F3FMWAG$rJ8;z$^$?$OJ8;z;XDj$^$?$OJ8(B
+	 $B;z;2>H$GI=8=$7$?$b$N!#C"$7!"3FMWAG$K$O(B UCS $B$K$J$$J8;z$bMxMQ2D!K(B
+
+
+*** $B$=$NB>(B
+
+ideographic-
+  $B7?!'(B list: (property-list ...)
+  $B0UL#!'(B $B4A;z4XO"$N=tB0@-$r<($9!#FC$K!"$"$kAG@-$K4X$7$FJ#?t$NCM$,<h$j(B
+	 $BF@$k;~!"$=$l$r(B property-list $BKh$K=q$/!#(B
+	 $B3F(B property-list $B$N(B property $BL>$NFb!"(B:foo $B$N$h$&$K(B `:' $B$+$i$O(B
+	 $B$8$^$k$b$N$O!"J8;zAG@-(B ideographic-foo $B$HEy2A$H$9$k!#(B
+
+	 $BNc!'(B (ideographic-	(:radical	4 ; $(G'$(B
+				 :strokes	1)
+				(:radical	1 ; $(G'!(B
+				 :strokes	1)
+				(:radical	9 ; $(G')(B
+				 :strokes	0))
+	 $B$3$3$G!"(B:radical, :strokes $B$O$=$l$>$l(B `ideographic-radical',
+	 `ideographic-strokes' $B$HEy2A$G$"$k!#(B
+  $BCm0U!'(B $BGQ;_M=Dj!J(Bideographic-{radical|strokes} $BAG@-Ey$H(B domain $B<1JL(B
+	 $B;R$NAH9g$;$r;H$&$3$H!K(B
+
+jisx0208-1978/4X
+  $B7?!'(B int
+  $B0UL#!'(B JIS X 0208:1978 $BBh#4:~0JA0$N;z7A:w0z$KMQ$$$i$l!"(B
+	 $BBh#4:~IUB0$N@58mI=$GCV49$($i$l$?;z7A$NId9f0LCV(B
+
+jisx0208-difference
+  $B7?!'(B symbol
+  $B0UL#!'(B JIS X 0208 $B$K$*$$$F!"0[$J$kNc<(;z7A!&;zBNEy$N<oN`(B
+
+jisx0208-type
+  $B7?!'(B symbol
+  $B0UL#!'(B JIS X 0208 $B$K$*$1$kNc<(;z7A!&;zBNEy$N2~JQ$N<oN`(B
+
+non-morohashi
+  $B7?!'(B list: (int ...)
+  $B0UL#!'(B $BBg4AOB<-E5$K<}O?$5$l$F$$$J$$4A;z$N@0M}HV9f(B
+  $BCm0U!'(B $BGQ;_M=Dj(B
+
+
+* $B<LA|(B
+
+=>ucs
+  $B7?!'(B int
+  $B0UL#!'(B UCS $B$NId9f0LCV$X$N<LA|!J(BBMP $B$K4X$7$F$O(B Unicode $BK\!"(BSIP $B$K4X(B
+	 $B$7$F$O(B ISO/IEC 10646-2:2001 $B$NNc<(;z7A$K4p$E$/!K(B
+
+=>ucs*
+  $B7?!'(B int
+  $B0UL#!'(B UCS $B$NId9f0LCV$X$N<LA|!J8_49NN0h$rMQ$$$J$$!K(B
+  $BCm0U!'(B database $B$K$*$$$F$OGQ;_M=Dj(B
+
+=>ucs@gb
+  $B7?!'(B int
+  $B0UL#!'(B GB $B$K4p$E$/(B UCS $B$NId9f0LCV$X$N<LA|(B
+
+=>ucs@cns
+  $B7?!'(B int
+  $B0UL#!'(B CNS $B$K4p$E$/(B UCS $B$NId9f0LCV$X$N<LA|(B
+
+=>ucs@jis
+  $B7?!'(B int
+  $B0UL#!'(B JIS $B$K4p$E$/(B UCS $B$NId9f0LCV$X$N<LA|(B
+
+=>ucs@jis-1990
+  $B7?!'(B int
+  $B0UL#!'(B JIS X0208:1990 $B$*$h$S(B JIS X0212:1990 $B$K4p$E$/(B UCS $B$NId9f0LCV(B
+	 $B$X$N<LA|(B
+  $BCm0U!'(B =>ucs@jis/1990 $B$K2~L>M=Dj(B
+
+=>ucs@ks
+  $B7?!'(B int
+  $B0UL#!'(B KS $B$K4p$E$/(B UCS $B$NId9f0LCV$X$N<LA|(B
+
+=>ucs@big5
+  $B7?!'(B int
+  $B0UL#!'(B Big5 $B$K4p$E$/(B UCS $B$NId9f0LCV$X$N<LA|(B
+
+=>mojikyo
+  $B7?!'(B int
+  $B0UL#!'(B $BJ8;z6@HV9f$X$N<LA|(B
+  $BCm0U!'(B $BCN:b8"$NLdBj$+$i(B free software/data $B$G$OMxMQ$G$-$J$$(B
+
+=mojikyo
+  $B7?!'(B int
+  $B0UL#!'(B $BJ8;z6@HV9f$H$NN>J}8~<LA|(B
+  $BCm0U!'(B $BCN:b8"$NLdBj$+$i(B free software/data $B$G$OMxMQ$G$-$J$$(B
+
+morohashi-daikanwa
+  $B7?!'(B list: ({int|'ho} int ...)
+  $B0UL#!'(B $B@hF,MWAG$HBh#2MWAG$,BP1~$9$kBg4AOBHV9f$rI=$7!"Bh#3MWAG0J2<$,(B
+	 $BB8:_$9$k>l9g!"@0M}HV9f$rI=$9!#(B
+	 $BC"$7!"(B
+	 (n 0 ...) $B$OBg4AOBHV9f(B n $B$X$NBP1~!"(B
+	 (n 1) $B$OBg4AOBHV9f(B n' $B$H$NN>J}8~<LA|!"(B
+	 (n 1 ...) $B$OBg4AOBHV9f(B n' $B$X$NBP1~!"(B
+	 (n 2) $B$OBg4AOBHV9f(B n" $B$H$NN>J}8~<LA|!"(B
+	 (n 2 ...) $B$OBg4AOBHV9f(B n" $B$X$NBP1~!"(B
+	 (`ho' n) $B$OBg4AOBHV9f(B $BJd(B n $B$H$NN>J}8~<LA|!"(B
+	 (`ho' n ...) $B$OBg4AOBHV9f(B $BJd(B n $B$X$NBP1~(B
+	 $B$rI=$9(B
+  $BCm0U!'(B $B@0M}HV9f$rGQ;_$7(B =>daikanwa $B$KJQ99$9$k$3$H$r8!F$$7$F$$$k(B
+
+=>daikanwa
+  $B7?!'(B int
+  $B0UL#!'(B $BBg4AOBHV9f$X$N<LA|(B
+
+shinjigen-1
+  $B7?!'(B int
+  $B0UL#!'(B $B?7;z8;!J=iHG!KHV9f(B
+
+shinjigen-2
+  $B7?!'(B int
+  $B0UL#!'(B $B?7;z8;!J2~DjHG!K$NHV9f(B
+
+
+** Mule-charset
+
+Mule-charset $B$K4X$9$kAG@-$O(B =foo $B$K=`$8!"7?$,(B int $B$G$"$j!"$=$NL>A0$G<((B
+$B$5$l$k(B Mule-charset $B$NId9f0LCV$H$NN>J}8~<LA|$r<($9!#(B
+
+*** UCS $B7O(B
+=ucs		ISO/IEC 10646
+=ucs@gb		ISO/IEC 10646 for GB
+=ucs@gb/fw	ISO/IEC 10646 for GB$B!J(BGB 2312 $B$K4^$^$l$k%"%k%U%!%Y%C%H(B
+		$BEy$rA43Q$G07$&!K(B
+=ucs@jis	ISO/IEC 10646 for JIS X 0208, 0212 and 0213
+=ucs@jis/1990	ISO/IEC 10646 for JIS X 0212:1990
+=ucs@jis/2000	ISO/IEC 10646 for JIS X 0213:2000
+=ucs@jis/fw	ISO/IEC 10646 for JIS X 0208, 0212 and 0213$B!J(BJIS X
+		0208, 0212, 0213 $B$K4^$^$l$k%"%k%U%!%Y%C%HEy$rA43Q$G07(B
+		$B$&!K(B
+=ucs@JP		ISO/IEC 10646 for Japanese writing systems
+=ucs@ks		ISO/IEC 10646 for Korean Standards
+=ucs@cns	ISO/IEC 10646 for CNS 11643
+=ucs@cns11643	ISO/IEC 10646 for CNS 11643
+		$B!J(Bhttp://www.cns11643.gov.tw $B$NDj5A$K=>$&!K(B
+=ucs@big5	ISO/IEC 10646 for Big5
+=ucs@big5/cns11643 ISO/IEC 10646 for Big5$B!J(Bhttp://www.cns11643.gov.tw
+		   $B$NDj5A$K=>$&!K(B
+=ucs@iso	ISO/IEC 10646 for representative glyph of ISO/IEC 10646
+=ucs@unicode	ISO/IEC 10646 for representative glyph of Unicode
+ethiopic-ucs	Ethiopic of UCS
+
+*** ISO $BEP5-Jm(B 94 $BJ8;z=89g(B
+ascii			ASCII (ISO646 IRV)
+katakana-jisx0201	JISX0201.1976 Japanese Kana
+latin-jisx0201		JISX0201.1976 Japanese Roman
+
+*** ISO $BEP5-Jm(B 96 $BJ8;z=89g(B
+latin-iso8859-1		ISO8859-1 (Latin-1)
+latin-iso8859-2		ISO8859-2 (Latin-2)
+latin-iso8859-3		ISO8859-3 (Latin-3)
+latin-iso8859-4		ISO8859-4 (Latin-4)
+greek-iso8859-7		ISO8859-7 (Greek)
+arabic-iso8859-6	ISO8859-6 (Arabic)
+hebrew-iso8859-8	ISO8859-8 (Hebrew)
+cyrillic-iso8859-5	ISO8859-5 (Cyrillic)
+latin-iso8859-9		ISO8859-9 (Latin-5)
+thai-tis620		TIS620.2529 (Thai)
+latin-tcvn5712		Vietnamese TCVN 5712:1983 (VSCII-2)
+
+*** ISO $BEP5-Jm(B 94$B!_(B94 $BJ8;z=89g(B
+=jisx0208@1978		JIS X0208:1978 Japanese Kanji (so called "old JIS")
+=gb2312			GB2312 Chinese simplified
+=jis-x0208		JIS X0208 Common part
+=jisx0208@1983		JIS X0208:1983 Japanese Kanji
+=jisx0208@1990		JIS X0208:1990 Japanese Kanji
+=jisx0208@1997		abstract characters based on the unification
+			rule of JIS X0208:1997
+=iso-ir165		ISO-IR-165 (CCITT Extended GB; Chinese simplified)
+=ks-x1001		KSC5601 Korean Hangul and Hanja
+=jis-x0212		JISX0212 Japanese Supplement
+=cns11643-1		CNS 11643 Plane 1 Chinese traditional
+=cns11643-2		CNS 11643 Plane 2 Chinese traditional
+=cns11643-3		CNS 11643 Plane 3 (Chinese traditional)
+=cns11643-4		CNS 11643 Plane 4 (Chinese traditional)
+=cns11643-5		CNS 11643 Plane 5 (Chinese traditional)
+=cns11643-6		CNS 11643 Plane 6 (Chinese traditional)
+=cns11643-7		CNS 11643 Plane 7 (Chinese traditional)
+=jis-x0213-1-2000	JIS X 0213:2000 Plain 1
+=jis-x0213-2-2000	JIS X 0213:2000 Plain 2
+
+*** Big5 $B7O(B
+=big5			Big5 Chinese traditional
+=big5-pua		Big5-PUA
+=big5-eten		Big5-ETEN
+=big5-cdp		Private characters defined by CDP Lab. of
+			Academia Sinica (Big5 encoding)
+
+*** $B$=$NB>8xE*=89g(B
+=gb12345		GB 12345-1990
+
+*** Mule $B8_49=89g(B
+arabic-digit		Arabic digits
+arabic-1-column		Arabic 1-column
+arabic-2-column		Arabic 2-column
+latin-viscii-lower	VISCII lower (Vietnamese)
+latin-viscii-upper	VISCII lower (Vietnamese)
+lao			Lao script
+ipa			International Phonetic Alphabet
+ethiopic		Ethiopic
+
+*** $B$=$NB>$N;dE*=89g(B
+latin-viscii		VISCII 1.1 (Vietnamese)
+=daikanwa		Daikanwa dictionary (common part)
+=daikanwa@rev1		Daikanwa dictionary (revised version)
+=daikanwa@rev2		Daikanwa dictionary (second revised version)
+=gt			GT
+=gt-pj-1		GT 2000 (pseudo JIS encoding) part 1
+=gt-pj-2		GT 2000 (pseudo JIS encoding) part 2
+=gt-pj-3		GT 2000 (pseudo JIS encoding) part 3
+=gt-pj-4		GT 2000 (pseudo JIS encoding) part 4
+=gt-pj-5		GT 2000 (pseudo JIS encoding) part 5
+=gt-pj-7		GT 2000 (pseudo JIS encoding) part 7
+=gt-pj-9		GT 2000 (pseudo JIS encoding) part 9
+=gt-pj-10		GT 2000 (pseudo JIS encoding) part 10
+=gt-pj-11		GT 2000 (pseudo JIS encoding) part 11
+=gt-k			Ideographic components for GT
+=gt-pj-k1		GT-K (pseudo JIS encoding) part 1
+=gt-pj-k2		GT-K (pseudo JIS encoding) part 2
+=jef-china3		JEF + CHINA3 private characters
+=cbeta			CBETA private characters
+=hanziku-1		HANZIKU (pseudo BIG5 encoding) part 1
+=hanziku-2		HANZIKU (pseudo BIG5 encoding) part 2
+=hanziku-3		HANZIKU (pseudo BIG5 encoding) part 3
+=hanziku-4		HANZIKU (pseudo BIG5 encoding) part 4
+=hanziku-5		HANZIKU (pseudo BIG5 encoding) part 5
+=hanziku-6		HANZIKU (pseudo BIG5 encoding) part 6
+=hanziku-7		HANZIKU (pseudo BIG5 encoding) part 7
+=hanziku-8		HANZIKU (pseudo BIG5 encoding) part 8
+=hanziku-9		HANZIKU (pseudo BIG5 encoding) part 9
+=hanziku-10		HANZIKU (pseudo BIG5 encoding) part 10
+=hanziku-11		HANZIKU (pseudo BIG5 encoding) part 11
+=hanziku-12		HANZIKU (pseudo BIG5 encoding) part 12
+=ruimoku-v6		$BElMN3XJ88%N`L\%7%9%F%`Bh#6HG30;z(B
+
+
+** $B$=$NB>(B
+
+hanyu-dazidian
+  $B7?!'(B list: (int int int)
+  $B0UL#!'(B $(CySe^S^m.np*H*N$BN>J}8~<LA|!J(B($B4,(B $BJG(B $BJGFb$G$NHV9f(B) $B$GI=$9!K(B
+
+hanyu-dazidian-vol
+  $B7?!'(B int
+  $B0UL#!'(B $(CySe^S^m.np*H*N$BN>J}8~<LA|$K$*$1$k4,HV9f(B
+  $BCm0U!'(B obsolete$B!J(Bhanyu-dazidian $B$r;H$&$3$H!K(B
+
+hanyu-dazidian-page
+  $B7?!'(B int
+  $B0UL#!'(B $(CySe^S^m.np*H*N$BN>J}8~<LA|$K$*$1$kJGHV9f(B
+  $BCm0U!'(B obsolete$B!J(Bhanyu-dazidian $B$r;H$&$3$H!K(B
+
+hanyu-dazidian-char
+  $B7?!'(B int
+  $B0UL#!'(B $(CySe^S^m.np*H*N$BN>J}8~<LA|$K$*$1$kJGFb$G$NHV9f(B
+  $BCm0U!'(B obsolete$B!J(Bhanyu-dazidian $B$r;H$&$3$H!K(B
+
+ideograph-cdp
+
+
+* $BJ8;z4V$N4X78(B
+
+** $B?F;R4X78(B
+
+->denotational
+->subsumptive
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z$N!X;R!Y!J@-<A$r7Q>5$7$?J8;z!K$r<($9(B
+
+<-denotational
+<-subsumptive
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z$,AG@-CM$N3FMWAG$N!X;R!Y$G$"$k$3$H$r<($9(B
+
+
+** Case
+
+->lowercase
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z$N>.J8;z$r<($9(B
+
+->uppercase
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z$NBgJ8;z$r<($9(B
+
+->titlecase
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z$KBP1~$9$k@hF,$@$1BgJ8;z2=$7$?J8;z$r<($9(B
+
+->identical
+<-identical
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z$H!X40A4$KF10l$N;z!Y$r<($9(B
+  $BCm0U!'(B obsoleted$B!J!X40A4$KF10l$N;z!Y$O86B'$H$7$FF10l$NJ8;zDj5A$K$^$H(B
+	 $B$a$k$3$H!K(B
+
+
+** $B4A;z$N0[BN;z4XO"(B
+
+->ancient
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z!J4A;z!K$N!X8E;z!Y$r<($9(B
+
+<-ancient
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z!J4A;z!K$,AG@-CM$N3FMWAG$N!X8E;z!Y$G$"$k$3$H$r<($9(B
+
+ancient-char-of-shinjigen-1
+  $B7?!'(B int
+  $B0UL#!'(B $BHoDj5A;z!J4A;z!K$,AG@-CM$r?7;z8;!J=iHG!KHV9f$H$9$kJ8;z$N!X8E(B
+	 $B;z!Y$G$"$k$3$H$r<($9(B
+  $BCm0U!'(B obsoleted$B!J(B`<-ancient' $B$rMQ$$$h!K(B
+
+->original
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z!J4A;z!K$N!XK\;z!Y$r<($9(B
+
+<-original
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z!J4A;z!K$,AG@-CM$N3FMWAG$N!XK\;z!Y$G$"$k$3$H$r<($9(B
+
+original-ideograph-of
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z!J4A;z!K$,AG@-CM$N3FMWAG$N!XK\;z!Y$G$"$k$3$H$r<($9(B
+  $BCm0U!'(B obsoleted$B!J(B`<-original' $B$rMQ$$$h!K(B
+
+original-char-of-shinjigen-1
+  $B7?!'(B int
+  $B0UL#!'(B $BHoDj5A;z!J4A;z!K$,AG@-CM$r?7;z8;!J=iHG!KHV9f$H$9$kJ8;z$N!XK\(B
+	 $B;z!Y$G$"$k$3$H$r<($9(B
+  $BCm0U!'(B obsoleted$B!J(B`<-original' $B$rMQ$$$h!K(B
+
+->simplified
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z!J4A;z!K$N4JN,;z$r<($9(B
+  $B<g$J%I%a%$%s;XDj;RIU$-AG@-!'(B
+	->simplified@CN
+	->simplified@JP
+	->simplified@JP/Jouyou
+	->simplified@JP/old
+	->simplified@component
+	->simplified@daikanwa
+	->simplified@misc
+
+<-simplified
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z!J4A;z!K$,AG@-CM$N3FMWAG$N4JN,;z$G$"$k$3$H$r<($9(B
+  $B<g$J%I%a%$%s;XDj;RIU$-AG@-!'(B
+	<-simplified@CN
+	<-simplified@JP
+	<-simplified@JP/Jouyou
+	<-simplified@JP/old
+
+->vulgar
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z!J4A;z!K$N!XB/;z!Y$r<($9(B
+
+<-vulgar
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z!J4A;z!K$,AG@-CM$N3FMWAG$N!XB/;z!Y$G$"$k$3$H$r<($9(B
+
+vulgar-char-of-shinjigen-1
+  $B7?!'(B int
+  $B0UL#!'(B $BHoDj5A;z!J4A;z!K$,AG@-CM$r?7;z8;!J=iHG!KHV9f$H$9$kJ8;z$N!XB/(B
+	 $B;z!Y$G$"$k$3$H$r<($9(B
+  $BCm0U!'(B obsoleted$B!J(B`<-vulgar' $B$rMQ$$$h!K(B
+
+->wrong
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z!J4A;z!K$N!Xkw!J8m!K;z!K!Y$r<($9(B
+
+<-wrong
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z!J4A;z!K$,AG@-CM$N3FMWAG$N!Xkw!J8m!K;z!K!Y$G$"$k$3$H(B
+	 $B$r<($9(B
+
+->same
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z!J4A;z!K$N!XF1;z!Y$r<($9(B
+
+<-same
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z!J4A;z!K$,AG@-CM$N3FMWAG$N!XF1;z!Y$G$"$k$3$H$r<($9(B
+
+->synonyms
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z!J4A;z!K$N!JJ8L.0MB8$J!K!XF1;z!Y$r<($9(B
+
+->ideographic-variants
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z!J4A;z!K$N$=$NB>0[BN;z$r<($9(B
+
+ideographic-variants
+  $B0UL#!'(B $BHoDj5A;z!J4A;z!K$N$=$NB>0[BN;z$r<($9(B
+  $BCm0U!'(B obsoleted$B!J(B`->ideographic-variants' $B$rMQ$$$h!K(B
+
+variant-of-shinjigen-1
+  $B7?!'(B int
+  $B0UL#!'(B $BHoDj5A;z!J4A;z!K$,AG@-CM$r?7;z8;!J=iHG!KHV9f$H$9$kJ8;z$N$=$N(B
+	 $BB>0[BN;z$G$"$k$3$H$r<($9(B
+  $BCm0U!'(B obsoleted$B!J(B`->ideographic-variants' $B$rMQ$$$h!K(B
+
+
+** $BMQ;z7O!&;z<o4V$NBP1~(B
+
+->bopomofo
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z!J4A;z!K$KBP1~$9$kCm1$;zJl$r<($9(B
+
+<-bopomofo
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z$,AG@-CM$N3FMWAG$KBP1~$9$kCm1$;zJl$G$"$k$3$H$r<($9(B
+
+<-ideographic
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z$,AG@-CM$N3FMWAG$KBP1~$9$k4A;z$G$"$k$3$H$r<($9(B
+
+<-Large-Seal
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z$,AG@-CM$N3FMWAG$KBP1~$9$kBgd?$G$"$k$3$H$r<($9(B
+
+->fullwidth
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z$KBP1~$9$k!XA43Q!YJ8;z$r<($9(B
+
+<-fullwidth
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z$,AG@-CM$N3FMWAG$N!XA43Q!YJ8;z$G$"$k$3$H$r<($9(B
+
+->halfwidth
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z$KBP1~$9$k!XH>3Q!YJ8;z$r<($9(B
+
+<-halfwidth
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z$,AG@-CM$N3FMWAG$N!XH>3Q!YJ8;z$G$"$k$3$H$r<($9(B
+
+<-radical
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z$,AG@-CM$N3FMWAG$KBP1~$9$kIt<sJ8;z$G$"$k$3$H$r<($9(B
+
+->ideographic-component-forms
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z$KBP1~$9$kItIJJ8;z$G$"$k$3$H$r<($9(B
+
+<-ideographic-component-forms
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z$,AG@-CM$N3FMWAG$KBP1~$9$kItIJJ8;z$G$"$k$3$H$r<($9(B
+
+
+** $B$=$NB>(B
+
+<-unknown
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z$HAG@-CM$N3FMWAG$N4X78$,ITL@$G$"$k$3$H$r<($9(B
+
+->confusing
+->mistakable
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z$H7A$,;w$F$$$FJ6$i$o$7$$JL;z$r<($9(B
+
+<-error@abos/2001
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B $BHoDj5A;z$,AG@-CM$N3FMWAG$N8m;z$G$"$k$3$H$r<($9(B
+
+->ucs-unified
+  $B7?!'(B list: ({char|char-spec|char-ref} ...)
+  $B0UL#!'(B UCS $B$K$*$$$FHoDj5A;z$KJq@]$5$l$?J8;z$r<($9(B
+  $BCm0U!'(B =>ucs $B$+$i<+F0@8@.$5$l$k(B
+
+
+* $B$=$NB>(B
+
+sources
+  $B7?!'(B list: (symbol ...)
+  $B0UL#!'(B $B=PE5!"E55r>pJs(B
+  $BCm0U!'(B $BCM$GMQ$$$i$l$k(B symbol $B$O%I%a%$%s;XDj;R$G$"$k!#(B
+
+comment
+  $B7?!'(B string
+  $B0UL#!'(B $BIU5->pJs(B
+
+iso-10646-comment
+  $B7?!'(B string
+  $B0UL#!'(B ISO/IEC 10646 $B$K$*$1$kIU5->pJs(B
+  $BCm0U!'(B $BGQ;_M=Dj(B

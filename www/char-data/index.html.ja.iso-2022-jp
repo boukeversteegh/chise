@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+<head>
+<title>CHISE Character Database Contents</title>
+<link rel=stylesheet href="../chise.css" type="text/css">
+</head>
+
+<body>
+
+<table>
+  <tr>
+    <td align="center">
+    <b>[Mirror Sites]</b>
+    <hr>
+    <td>
+	<b><a href="index.html.en">[English page]</a></b>
+	<hr>
+  </tr>
+  <tr>
+    <td>
+	<a href="http://cvs.m17n.org/chise/char-data/"><img
+	alt="m17n.org" src="../images/tomura-s.png" align="middle"></a>
+	<a href="http://www.kanji.zinbun.kyoto-u.ac.jp/projects/chise/char-data/"><img
+	alt="kanji.zinbun.kyoto-u.ac.jp" src="../images/diccs-s.jpg" align="middle"></a>
+	<a href="http://mousai.as.wakwak.ne.jp/projects/chise/char-data/"><img
+	alt="mousai.as.wakwak.ne.jp" src="../images/egret-pond-s.jpg"
+	align="middle"></a>
+    <td>
+  </table>
+
+<p>[ <a href="../index.html.ja.iso-2022-jp">CHISE Top</a> ]</p>
+
+<h1>文字に関するさまざまな知識のデータベース化</h1>
+
+  <ul>
+    <li><a href="../xemacs/">XEmacs UTF-2000</a>
+	附属の<a
+	href="http://cvs.m17n.org/viewcvs/xemacs/lisp/utf-2000/?cvsroot=chise">
+	文字属性データベース</a>
+    <li><a href="../ids/">漢字構造情報データベース</a></h2>
+    <li><a href="../glyph/">グリフ・字形情報の統合と合成</a></h2>
+    <li><a
+	href="http://cvs.m17n.org/viewcvs/xemacs/etc/char-data/?cvsroot=chise">
+	写像表</a></h2>
+	<ul>
+	  <li><a
+	      href="http://cvs.m17n.org/viewcvs/xemacs/etc/char-data/J90-to-UCS.txt?rev=HEAD&cvsroot=chise&content-type=text/vnd.viewcvs-markup">
+	      JIS X 0208:1990 (JIS level 1 and 2) to UCS</a>
+	  <li><a
+	      href="http://cvs.m17n.org/viewcvs/xemacs/etc/char-data/JSP-to-UCS.txt?rev=HEAD&cvsroot=chise&content-type=text/vnd.viewcvs-markup">
+	      JIS X 0212 to UCS</a>
+	  <li><a
+	      href="http://cvs.m17n.org/viewcvs/xemacs/etc/char-data/JX1-to-UCS.txt?rev=HEAD&cvsroot=chise&content-type=text/vnd.viewcvs-markup">
+	      JIS X 0213 plain 1 (JIS level 3) to UCS</a>
+	  <li><a
+	      href="http://cvs.m17n.org/viewcvs/xemacs/etc/char-data/JX2-to-UCS.txt?rev=HEAD&cvsroot=chise&content-type=text/vnd.viewcvs-markup">
+	      JIS X 0213 plain 2 (JIS level 4) to UCS</a>
+	  <li><a
+	      href="http://cvs.m17n.org/viewcvs/xemacs/etc/char-data/C1-to-UCS.txt?rev=HEAD&cvsroot=chise&content-type=text/vnd.viewcvs-markup">
+	      CNS 11643 plain 1 to UCS</a>
+	  <li><a
+	      href="http://cvs.m17n.org/viewcvs/xemacs/etc/char-data/C2-to-UCS.txt?rev=HEAD&cvsroot=chise&content-type=text/vnd.viewcvs-markup">
+	      CNS 11643 plain 2 to UCS</a>
+	  <li><a
+	      href="http://cvs.m17n.org/viewcvs/xemacs/etc/char-data/C3-to-UCS.txt?rev=HEAD&cvsroot=chise&content-type=text/vnd.viewcvs-markup">
+	      CNS 11643 plain 3 to UCS</a>
+	  <li><a
+	      href="http://cvs.m17n.org/viewcvs/xemacs/etc/char-data/C4-to-UCS.txt?rev=HEAD&cvsroot=chise&content-type=text/vnd.viewcvs-markup">
+	      CNS 11643 plain 4 to UCS</a>
+	  <li><a
+	      href="http://cvs.m17n.org/viewcvs/xemacs/etc/char-data/B-to-UCS.txt?rev=HEAD&cvsroot=chise&content-type=text/vnd.viewcvs-markup">
+	      Big5 to UCS</a>
+	  <li><a
+	      href="CBETA-to-UCS.txt">
+	      CBETA PUA to UCS</a>
+	  <li><a
+	      href="http://cvs.m17n.org/viewcvs/xemacs/etc/char-data/JC3-to-UCS.txt?rev=HEAD&cvsroot=chise&content-type=text/vnd.viewcvs-markup">
+	      CHINA3 PUA to UCS</a>
+	</ul>
+  </ul>
+  
+<hr>
+
+<!-- hhmts start --> Last modified: Tue Oct 18 12:29:14 JST 2005 <!-- hhmts end -->
+<br>
+閲覧者数: 2002年12月4日以降、のべ
+<a href="http://www.aurora.dti.ne.jp/~zom/Counter/index.html">
+<img
+ src="http://mousai.as.wakwak.ne.jp/cgi-bin/counterp.cgi?projects_chise_char-data.log"
+ alt="counter"></a>人
+
+</body>
+</html>

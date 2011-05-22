@@ -1,0 +1,233 @@
+VERSION = @PACKAGE_VERSION@
+
+TAR	= tar
+SUDO	= 
+
+prefix		= @prefix@
+exec_prefix	= @exec_prefix@
+BINDIR		= @bindir@
+LIBDIR		= @libdir@
+OPTS		= @ac_configure_args@
+CONCORD_OPTS	= $(OPTS)
+LIBCHISE_OPTS	= $(OPTS)
+XEMACS_OPTS	= @xemacs_configure_args@ --pdump @xemacs_opts@ --without-xim --with-database=berkdb
+FONTS_OPTS	= $(OPTS)
+
+CVS_ROOT = "@cvs_root@"
+LEMI_CVS_ROOT = "@lemi_cvs_root@"
+XEMACS_PACKAGES_URL = http://ftp.xemacs.org/pub/xemacs/packages/
+
+all:	build-concord build-libchise
+
+install:	install-core
+
+
+force-config-concord:	concord
+	cd concord && ./configure $(CONCORD_OPTS)
+
+config-concord:	concord concord/config.h
+
+concord/config.h:
+	cd concord && ./configure $(CONCORD_OPTS)
+
+build-concord:	config-concord
+	cd concord && make
+
+install-concord:	build-concord $(LIBDIR)/libconcord.a
+
+$(LIBDIR)/libconcord.a:	concord/libconcord.la
+	cd concord && $(SUDO) make install
+
+
+config-libchise:	install-concord libchise libchise/config.h
+
+libchise/config.h:
+	cd libchise && ./configure $(LIBCHISE_OPTS)
+
+build-libchise:	config-libchise
+	cd libchise && make
+
+install-libchise:	build-libchise $(LIBDIR)/libchise.a
+
+$(LIBDIR)/libchise.a:	libchise/libchise.la
+	cd libchise && $(SUDO) make install
+
+
+install-core:	install-concord install-libchise install-db
+
+install-db:
+	-cd $(prefix)/share; $(SUDO) mkdir chise
+	(cd chise-db; $(TAR) cvf - db* ) \
+		| (cd $(prefix)/share/chise; $(SUDO) $(TAR) xvf -)
+
+
+config-xemacs:	xemacs-chise xemacs-chise/src/config.h
+
+xemacs-chise/src/config.h:
+	cd xemacs-chise && ./configure --with-chise $(XEMACS_OPTS)
+
+build-xemacs:	config-xemacs
+	cd xemacs-chise && LC_ALL=C make
+
+install-xemacs:	install-libchise $(BINDIR)/xemacs
+
+$(BINDIR)/xemacs:	build-xemacs xemacs-chise/src/xemacs
+	cd xemacs-chise && $(SUDO) make install
+
+
+install-apel:	install-xemacs apel $(LIBDIR)/xemacs/xemacs-packages
+	-$(SUDO) mkdir $(LIBDIR)/xemacs/site-packages
+	cd apel && LC_ALL=C $(SUDO) make install-package
+
+install-tomoyo-tools:	install-apel tomoyo-tools $(LIBDIR)/xemacs/mule-packages
+	cd tomoyo-tools && $(SUDO) make install
+
+install-ids:	install-tomoyo-tools ids
+	cd ids && $(SUDO) make install
+
+
+config-fonts:	chise-fonts-installer chise-fonts-installer/config.h
+
+chise-fonts-installer/config.h:
+	cd chise-fonts-installer && ./configure $(FONTS_OPTS)
+
+build-fonts:	config-fonts
+	cd chise-fonts-installer && make
+
+install-fonts:	build-fonts
+	cd chise-fonts-installer && $(SUDO) make install
+
+
+install-base:	install-ids install-fonts
+
+
+generate-db:	install-base
+
+chise-db:
+	-mkdir chise-db
+	-cd chise-db && mkdir db-$(VERSION)
+	(cd `xemacs -batch -vanilla -eval \
+	'(princ (file-name-as-directory data-directory))'`chise-db; \
+		$(TAR) cvf - * ) \
+		| (cd chise-db/db-$(VERSION); $(TAR) xvf - )
+	-cd chise-db && ln -s db-$(VERSION) db
+
+tar-core:	cvs-base-clean
+	cvs commit
+	sh -c 'cvs tag -R chise-core-`echo $(VERSION) | tr . _`; \
+	cd /tmp; \
+	cvs -d $(CVS_ROOT) export -d chise-core-$(VERSION) \
+		-r chise-core-`echo $(VERSION) | tr . _` \
+		chise-base; \
+	cd chise-core-$(VERSION); \
+	cvs -d $(CVS_ROOT) export \
+		-r chise-core-`echo $(VERSION) | tr . _` \
+		concord; \
+	cvs -d $(CVS_ROOT) export \
+		-r chise-core-`echo $(VERSION) | tr . _` \
+		libchise'
+	rsync -av chise-db /tmp/chise-core-$(VERSION)
+	cd /tmp; $(TAR) cvzf chise-core-$(VERSION).tar.gz \
+		chise-core-$(VERSION)
+
+tar-base:
+	cvs commit
+	sh -c 'cvs tag -R chise-base-`echo $(VERSION) | tr . _`; \
+	cd /tmp; \
+	cvs -d $(CVS_ROOT) export -d chise-base-$(VERSION) \
+		-r chise-base-`echo $(VERSION) | tr . _` \
+		chise-base; \
+	cd chise-base-$(VERSION); \
+	cvs -d $(CVS_ROOT) export \
+		-r chise-base-`echo $(VERSION) | tr . _` \
+		concord; \
+	cvs -d $(CVS_ROOT) export \
+		-r chise-base-`echo $(VERSION) | tr . _` \
+		libchise; \
+	cvs -d $(CVS_ROOT) export \
+		-r chise-base-`echo $(VERSION) | tr . _` \
+		-d xemacs-chise xemacs; \
+	cvs -d $(CVS_ROOT) export \
+		-r chise-base-`echo $(VERSION) | tr . _` \
+		tomoyo-tools; \
+	cvs -d $(CVS_ROOT) export \
+		-r chise-base-`echo $(VERSION) | tr . _` \
+		ids; \
+	cvs -d $(CVS_ROOT) export \
+		-r chise-base-`echo $(VERSION) | tr . _` \
+		chise-fonts-installer'
+	rsync -av chise-db /tmp/chise-base-$(VERSION)
+	cd /tmp; $(TAR) cvzf chise-base-$(VERSION).tar.gz \
+		chise-base-$(VERSION)
+
+get-base:	concord libchise xemacs-chise tomoyo-tools ids
+
+concord:
+	make .cvs-login
+	cvs -z9 -d $(CVS_ROOT) co concord
+
+libchise:
+	make .cvs-login
+	cvs -z9 -d $(CVS_ROOT) co libchise
+
+xemacs-chise:
+	make .cvs-login
+	cvs -z9 -d $(CVS_ROOT) co -d xemacs-chise xemacs
+
+tomoyo-tools:
+	make .cvs-login
+	cvs -z9 -d $(CVS_ROOT) co tomoyo-tools
+
+ids:
+	make .cvs-login
+	cvs -z9 -d $(CVS_ROOT) co ids
+
+chise-fonts-installer:
+	make .cvs-login
+	cvs -z9 -d $(CVS_ROOT) co chise-fonts-installer
+
+.cvs-login:
+	if test "`echo $(CVS_ROOT)|grep '^:pserver:'`" != ""; then \
+		cvs -d $(CVS_ROOT) login;\
+	fi
+	touch .cvs-login
+
+apel:
+	make .lemi-cvs-login
+	cvs -z9 -d $(LEMI_CVS_ROOT) co apel
+
+.lemi-cvs-login:
+	if test "`echo $(LEMI_CVS_ROOT)|grep '^:pserver:'`" != ""; then \
+		cvs -d $(LEMI_CVS_ROOT) login;\
+	fi
+	touch .lemi-cvs-login
+
+$(LIBDIR)/xemacs/xemacs-packages:
+	cd $(LIBDIR)/xemacs && \
+	curl $(XEMACS_PACKAGES_URL)/xemacs-sumo.tar.gz \
+	| $(SUDO) $(TAR) xvzf - --exclude=apel
+
+$(LIBDIR)/xemacs/mule-packages:
+	cd $(LIBDIR)/xemacs && \
+	curl $(XEMACS_PACKAGES_URL)/xemacs-mule-sumo.tar.gz \
+	| $(SUDO) $(TAR) xvzf -
+
+
+distclean:
+	cd concord; make distclean
+	cd libchise; make distclean
+	cd xemacs-chise; make distclean
+	cd ids; make clean
+	cd chise-fonts-installer; make distclean
+
+
+db-clean:
+	rm -rf chise-db
+
+cvs-clean:	cvs-base-clean cvs-core-clean db-clean
+
+cvs-core-clean:
+	rm -rf concord libchise
+
+cvs-base-clean:
+	rm -rf xemacs-chise apel tomoyo-tools ids chise-fonts-installer

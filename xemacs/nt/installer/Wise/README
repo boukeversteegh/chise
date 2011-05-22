@@ -1,0 +1,31 @@
+To use:
+
+You need to build and install the XEmacs distribution.  Also you need
+the xemacs packages in both source and installed versions.
+
+Edit "dirs.py" to reflect the locations of the above components.
+
+Edit "version.py" to reflect the current version, as well as the
+welcome message.
+
+Run 
+	python pre_wise.py > xemacs-XXX.wse
+
+	(for XXX use a version or date code of your choosing)
+
+Run 
+	cmd /c xemacs-XXX.wse 
+
+to produce xemacs-XXX.exe
+
+
+"pre_wise.py" is a preprocessor for the Wise installer maker.  It
+reads "xemacs.tmpl" which is a Wise input file, except that certain
+portions are enclosed in triple angle brackets <<<like this>>>
+
+These portions are evaluated as Python expressions and replaced by the 
+string representations of the resulting value.  This allows for
+things to change from release to release without having to re-do the
+Wise installation each time.  Also it keeps you from having to
+manually drag-n-drop all the package files, which is rather tedious!
+

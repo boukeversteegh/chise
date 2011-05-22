@@ -1,0 +1,5 @@
+cp ../../libchise/chise.h .
+cp ../../libchise/chise.c .
+cp ../../libchise/chise-name.h .
+cp ../../libchise/name.c .
+cp ../../libchise/sysdep.h .

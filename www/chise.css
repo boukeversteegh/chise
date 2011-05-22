@@ -1,0 +1,31 @@
+BODY {
+	color: black;
+	background: white;
+	font-size: 12pt;
+	font-family: arial, helvetica, sans-serif;
+	line-height: 1.6;
+}
+
+P.attention {
+	color: red;
+}
+
+H1 {
+	fontsize: 150%;
+	color: #004800;
+}
+
+H2 {
+	fontsize: 120%;
+	color: navy;
+}
+
+H3 {
+	fontsize: 100%;
+	text-decoration: underline;
+}
+
+.abstract {
+	font-size: 11pt;
+	color: navy;
+}

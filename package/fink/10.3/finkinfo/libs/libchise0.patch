@@ -1,0 +1,11 @@
+diff -uNr libchise-0.0.0.20030806.orig/chise.h libchise-0.0.0.20030806/chise.h
+--- libchise-0.0.0.20030806.orig/chise.h	Thu Jul 17 13:13:08 2003
++++ libchise-0.0.0.20030806/chise.h	Mon Aug 11 11:26:41 2003
+@@ -1,6 +1,6 @@
+ #ifndef _CHISE_H
+ 
+-#include <db.h>
++#include <db3/db.h>
+ #include <errno.h>
+ 
+ typedef enum CHISE_DS_Type

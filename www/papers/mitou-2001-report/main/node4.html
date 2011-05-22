@@ -1,0 +1,901 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>文字属性データベース</TITLE>
+<META NAME="description" CONTENT="文字属性データベース">
+<META NAME="keywords" CONTENT="main">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=euc-jp">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="main.css">
+
+<LINK REL="next" HREF="node5.html">
+<LINK REL="previous" HREF="node3.html">
+<LINK REL="up" HREF="main.html">
+<LINK REL="next" HREF="node5.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html84"
+  HREF="node5.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html82"
+  HREF="main.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html76"
+  HREF="node3.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html85"
+  HREF="node5.html">Topic Maps に基づく大域文字データベース</A>
+<B> Up:</B> <A NAME="tex2html83"
+  HREF="main.html">2001年度未踏ソフトウェア創造事業 文字データベースに基づく 文字オブジェクト技術の構築 （契約番号</A>
+<B> Previous:</B> <A NAME="tex2html77"
+  HREF="node3.html">文字データベースに基づく文書編集系</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html86"
+  HREF="#SECTION00410000000000000000">文字属性名の命名規約</A>
+<LI><A NAME="tex2html87"
+  HREF="#SECTION00420000000000000000">符合位置属性</A>
+<LI><A NAME="tex2html88"
+  HREF="#SECTION00430000000000000000">⇒ucs 属性</A>
+<LI><A NAME="tex2html89"
+  HREF="#SECTION00440000000000000000">→decomposition 属性</A>
+<LI><A NAME="tex2html90"
+  HREF="#SECTION00450000000000000000">漢字の部品組み合わせ情報</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00400000000000000000"></A>
+<A NAME="cha:char-db"></A>
+<BR>
+文字属性データベース
+</H1>
+
+<P>
+これまで述べてきたように、『UTF-2000 方式』の実装（以下では『UTF-2000 
+実装』と呼ぶ）では文字にに対して何らかの処理を行なう時に対象となる文字
+の処理に必要な属性を参照する必要がある。このため、各文字の属性を機械可
+読な形で格納したデータベースが必要となる。
+
+<P>
+このため、我々は define-char 形式で表現される文字属性データベースを開
+発中である。これは、UTF-2000 技術の実証を目的とするとともに、将来にお
+ける UTF-2000 技術に基づく文字情報交換のベースとなる標準的なデータベー
+スを構築することも視野に置いている。
+
+<P>
+現在のデータベースは
+
+<UL>
+<LI>Unicode Database
+</LI>
+<LI>CNS 11643 と諸橋大漢和辞典の対照表 <A NAME="tex2html11"
+  HREF="footnode.html#foot437"><SUP><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="/usr/share/latex2html/icons/footnote.png"></SUP></A>
+</LI>
+<LI>CDP (Chinese Document Processing) データベース <A NAME="tex2html12"
+  HREF="footnode.html#foot438"><SUP><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="/usr/share/latex2html/icons/footnote.png"></SUP></A>
+</LI>
+<LI>CBETA (Chinese Buddhist Electronic Text Association) 外字データ
+  ベース
+</LI>
+<LI>CHINA3 外字データベース <A NAME="tex2html13"
+  HREF="footnode.html#foot439"><SUP><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="/usr/share/latex2html/icons/footnote.png"></SUP></A>
+</LI>
+<LI>開発者がこれまで作成してきたその他の雑多なデータベース
+</LI>
+</UL>
+等を統合し、互いの矛盾点を修正するものである。まだ誤りも多く、品質は高
+くはないが、現時点で約 7 万字分の定義が存在する。
+
+<P>
+この標準文字データベースでは、非漢字に関してはおおむね Unicode
+[<A
+ HREF="node6.html#Unicode">5</A>] の定義にのっとっている一方、漢字に関しては微小な字体差
+も区別している。漢字の各文字（字体）の内、大漢和辞典と同じ字体でないも
+のについては、 <TT>morohashi-daikanwa</TT> という属性の値として、大漢和番
+号と差異の度合および整理番号を持たせている。また、<I>The Unicode
+Standard</I> [<A
+ HREF="node6.html#Unicode">5</A>] の例示字体と同じ字体でないものに対しては、対
+応する Unicode の符号位置を <code>=&gt;ucs</code> <A NAME="tex2html14"
+  HREF="footnode.html#foot445"><SUP><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="/usr/share/latex2html/icons/footnote.png"></SUP></A> という属性の値とする。
+
+<P>
+UTF-2000 実装にとって、文字属性データベースは実装の挙動を定義するもの
+であるので、処理に必要な文字属性と UTF-2000 実装の挙動を対応付ける必要
+がある。すなわち、少なくとも処理に用いる文字属性に対しては、名前や型や
+意味を定義する必要があるといえる。また、人間がこのデータベースを字書と
+して用いる場合やデータベースのメンテナンスを行なう上でも文字属性の形式
+や意味を規定することは重要である。
+
+<P>
+このような観点に基づき、XEmacs UTF-2000 を対象に幾つかの文字属性の命名
+規約と幾つかの文字属性の形式・意味を規定し、それに基づく文字属性データ
+ベースを開発している。この章では文字属性に関する規約と文字属性データベー
+スについて概説する。
+
+<P>
+
+<H1><A NAME="SECTION00410000000000000000"></A>
+<A NAME="sec:attribute-naming"></A>
+<BR>
+文字属性名の命名規約
+</H1>
+
+<P>
+UTF-2000 モデルは XEmacs UTF-2000 は現在のところ、
+<A HREF="node4.html#sec:coded-charset">4.2</A> 節で述べる『符合位置属性』と
+<A HREF="node4.html#sec:decomposition">4.4</A> 節で述べる 『<code>-&gt;decomposition</code> 属性』を除
+き、文字属性の意味を規定していない。しかしながら、文字属性データベース
+を構築・メンテナンスしたり、文字属性データベースを利用するアプリケーショ
+ン・プログラムを実現する上では一定の規約があった方が望ましいといえる。
+そこで、経験的に文字属性の命名規約を整備し、文字属性の名称のパターンと
+大まかな形式および意味を対応付けようとしている。
+
+<P>
+
+<H2><A NAME="SECTION00411000000000000000">
+文字間の関係に関する属性</A>
+</H2>
+
+<P>
+ある文字 <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img6.png"
+ ALT="$C$"> に対して関係 <I>foo</I> を持つ文字 <IMG
+ WIDTH="18" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="img7.png"
+ ALT="$\gamma_i$"> が存在す
+る時、文字 <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img6.png"
+ ALT="$C$"> の属性 <code>-&gt;</code><I>foo</I> は値の各要素 <IMG
+ WIDTH="18" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="img7.png"
+ ALT="$\gamma_i$"> が 
+<IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img6.png"
+ ALT="$C$"> の<I>foo</I> であることを意味する。ここで、<code>-&gt;</code><I>foo</I>
+の値 <!-- MATH
+ $\gamma_1 ... \gamma_n$
+ -->
+<IMG
+ WIDTH="51" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$\gamma_1 ... \gamma_n$"> はリストである。
+
+<P>
+同様に、<IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img6.png"
+ ALT="$C$"> の属性 <code>&lt;-</code><I>foo</I> は文字 <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img6.png"
+ ALT="$C$"> が値の各要素 
+<IMG
+ WIDTH="19" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="img9.png"
+ ALT="$\gamma_j$"> の <I>foo</I> であることを意味する。<code>-&gt;</code><I>foo</I> 
+と同様に、<code>&lt;-</code><I>foo</I> の値 <!-- MATH
+ $\gamma_1 ... \gamma_m$
+ -->
+<IMG
+ WIDTH="54" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="img10.png"
+ ALT="$\gamma_1 ... \gamma_m$"> もリスト
+である。
+
+<P>
+<DL>
+<DT><STRONG>例</STRONG></DT>
+<DD>小文字を表す関係を <B>lowercase</B> とする時、
+  <DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>文字 <B>A</B> の属性 <code>(-&gt;lowercase ?a)</code> は、文字 
+    <B>a</B> が文字 <B>A</B> の小文字であることを表している。
+  
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>文字 <B>a</B> の属性 <code>(&lt;-lowercase ?A)</code> は、文字
+    <B>a</B> が文字 <B>A</B> の小文字であることを表している。
+  
+</DD>
+</DL>
+</DD>
+</DL>
+
+<P>
+
+<H2><A NAME="SECTION00412000000000000000"></A>
+<A NAME="Character_Specification"></A>
+<BR>
+文字指定形式
+</H2>
+
+<P>
+UTF-2000 実装の中では文字はオブジェクトの一種として符号化せずに扱うこ
+とができるが、UTF-2000 実装の外の世界との間ではなんらかの翻訳手法が必
+要となる。
+
+<P>
+このとき、もし符号化文字集合が利用可能でかつ表現したい文字を十分に表現
+可能であるなら、その符号化文字集合の符合位置を使ってその文字を表現する
+ことができる（この目的のために XEmacs UTF-2000 は 
+<A HREF="node4.html#sec:coded-charset">4.2</A> 節で述べた <I>coded-charset</I> 機能を用意して
+いる）。しかしながら、表現したい文字が利用可能な符号化文字集合に収録さ
+れていない場合や、対応する文字が収録されていてもそこで規定された抽象文
+字と表現したい文字との差異が許容できない場合、符号化文字集合を用いるこ
+とはできない。
+
+<P>
+そのような問題を解決するためには UTF-2000 方式に基づき文字オブジェクト
+の性質を列挙するような形式があれば良い。こうしたものとして XEmacs
+UTF-2000 では<I>文字指定 (character-specification; char-spec)</I>形式
+を規定している。
+
+<P>
+文字指定の形式は Lisp の連想リスト (association-list) で、リストの各要
+素が各文字属性を表現する。連想リストの鍵 (key) 部（各要素の先頭 (car) 
+部）が属性名を表し、連想リストの値 (value) 部（各要素の残り (cdr) 部）
+が属性値を表す。
+
+<P>
+文字指定が表す意味はその性質を有する抽象文字（具象文字（書かれた文字）
+の集合）である。
+
+<P>
+なお、この形式は関数 define-char の引数で指定されるものと同じである。
+
+<P>
+
+<H2><A NAME="SECTION00413000000000000000">
+文字参照形式</A>
+</H2>
+
+<P>
+文字データベースにおいて文字間の関係を記述するような場合、値に記載する
+文字の他に文字間の関係にも属性を付けたい場合がある。例えば、文字の正規
+化を行なう場合、アプリケーションによって正規化規則が異なるので、このた
+めの異体字データベースを作る場合、どの正規化規則を用いているかを記載す
+る必要がある。また、学術的なデータベースを作る場合において、文字学上の
+学説が異なる場合に出典やどの学説を用いているかなどを記載する必要がある。
+この他、知的財産権の管理を行なう場合にもデータの出典や権利情報を記録す
+る必要がある。
+
+<P>
+このような目的のために、XEmacs UTF-2000 では<I>文字参照
+(character-reference; char-ref)</I> 形式を規定している。
+
+<P>
+文字参照の形式は Lisp の属性リスト (property-list) である。ここでは任
+意の属性が利用可能であるが、幾つかの属性名に対してはその意味が予め規定
+されている。
+
+<P>
+以下に意味が規定されている属性について説明する：
+
+<P>
+<DL>
+<DT><STRONG>:char</STRONG></DT>
+<DD>参照される文字
+
+<P>
+[型] 文字、もしくは、文字指定
+
+<P>
+</DD>
+<DT><STRONG>:source</STRONG></DT>
+<DD>出典・典拠等
+
+<P>
+[型] 出典・典拠を表すシンボル（出典シンボル）のリスト。
+
+<P>
+以下に XEmacs UTF-2000 の基本文字データベースで用いている出典シンボル
+を列挙する。我々は漢籍および現代中国文献に対する出典シンボルは国際的に
+用いられている中国語のピンイン表記を採用することにしたが、歴史的事情か
+ら日本語ローマ字表記のものも存在している。表 <A HREF="node4.html#tab:source-symbol">4.1.3</A> 
+では、今後用いていく出典シンボル名を「名前」に記載し、歴史的事情から現
+在用いている日本語ローマ字表記の出典シンボルを「代替名称」に記載してい
+る。
+
+<P>
+<BR><P></P>
+<DIV ALIGN="CENTER">
+  <A NAME="tab:source-symbol"></A>  <DIV ALIGN="CENTER">  
+  </DIV>
+<P>
+<BR>
+<DIV ALIGN="CENTER">  <A NAME="481"></A>
+<TABLE CELLPADDING=3 BORDER="1">
+<CAPTION><STRONG>Table 4.1:</STRONG>
+文字参照における :source 属性</CAPTION>
+<TR><TD ALIGN="LEFT">名前</TD>
+<TD ALIGN="LEFT">代替名称</TD>
+<TD ALIGN="LEFT">内容</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">chuuka-daijiten</TD>
+<TD ALIGN="LEFT">中華大字典</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">doubun-tsuukou</TD>
+<TD ALIGN="LEFT">同文通考</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">gyokuhen</TD>
+<TD ALIGN="LEFT">玉編</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">henkai</TD>
+<TD ALIGN="LEFT">篇海</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">inkai</TD>
+<TD ALIGN="LEFT">韻会</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">inkaiho</TD>
+<TD ALIGN="LEFT">韻会捕</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">jii</TD>
+<TD ALIGN="LEFT">字彙</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">jiiho</TD>
+<TD ALIGN="LEFT">字彙捕</TD>
+</TR>
+<TR><TD ALIGN="LEFT">jiyun</TD>
+<TD ALIGN="LEFT">shuuin</TD>
+<TD ALIGN="LEFT">集韻</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">kaihen</TD>
+<TD ALIGN="LEFT">海篇</TD>
+</TR>
+<TR><TD ALIGN="LEFT">kangxi</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">康熙字典</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">kouin</TD>
+<TD ALIGN="LEFT">広韻</TD>
+</TR>
+<TR><TD ALIGN="LEFT">morohashi-daikanwa</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">大漢和辞典</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">ruishuu-meigishou</TD>
+<TD ALIGN="LEFT">類聚名義抄</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">seiin</TD>
+<TD ALIGN="LEFT">正韻</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">seiji-tsuu</TD>
+<TD ALIGN="LEFT">正字通</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">setumon-tuukun-teisei</TD>
+<TD ALIGN="LEFT">説文通訓定声</TD>
+</TR>
+<TR><TD ALIGN="LEFT">shouwen</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">説文解字</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">sougen-irai-zokujifu</TD>
+<TD ALIGN="LEFT">宋元以来俗字譜</TD>
+</TR>
+<TR><TD ALIGN="LEFT">yuquan</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">玉泉</TD>
+</TR>
+</TABLE></DIV>
+</DIV>
+<BR>
+
+<P>
+</DD>
+</DL>
+
+<P>
+
+<H1><A NAME="SECTION00420000000000000000"></A>
+<A NAME="sec:coded-charset"></A>
+<BR>
+符合位置属性
+</H1>
+
+<P>
+<A HREF="node4.html#sec:coded-charset">4.2</A> 節で述べたように、XEmacs UTF-2000 では
+coded-charset の名前を属性名とする文字属性は coded-charset における符
+合位置を表す特別な文字属性である。この属性に関する情報は、ファイル入出
+力などにおける文字符合の変換処理において利用される。
+
+<P>
+符合位置属性の値の形式は整数である。整数値のとり得る範囲は対応する 
+coded-charset によって制約される。
+
+<P>
+ところで、現在のところ、ある文字属性名が符合位置属性名であるかどうかは、
+その属性名を名前とする coded-charset が存在するかによっている。すなわ
+ち、符合位置属性を表す属性名の命名規約は今のところ存在しておらず、属性
+名だけではその文字属性が符合位置属性かどうかを機械的に決定することがで
+きない。現在の XEmacs UTF-2000 においては別に coded-charset が定義され
+るためにこれで問題はないのであるが、文字属性データベースとしては何らか
+の規約があった方が良いかも知れない。
+
+<P>
+
+<H1><A NAME="SECTION00430000000000000000">
+⇒ucs 属性</A>
+</H1>
+
+<P>
+The attribute named <code>=&gt;ucs</code> is used to indicate a UCS code point of
+a character.  If a user would not like to unify characters that are
+unified in UCS, or would like to define a character that is not
+included in UCS, this attribute is available to specify the  nearest
+UCS code point.
+
+<P>
+If a user need to refer a code point of UCS, the user can use
+<BLOCKQUOTE>
+<TT>(or (get-char-attribute CHAR 'ucs)
+           (get-char-attribute CHAR '<code>=&gt;ucs</code>))</TT>
+
+</BLOCKQUOTE>
+instead of <TT>(get-char-attribute CHAR 'ucs)</TT>.
+
+<P>
+The information of <code>=&gt;ucs</code> attributes are stored in the internal
+variants database,
+and users can find variant characters corresponding
+to a UCS code point by the following function:
+
+<P>
+<BLOCKQUOTE>
+ 
+  関数 <B>char-variants</B> (<I>character</I>)
+  
+<BLOCKQUOTE>
+This function returns variants of <I>character</I>.
+</BLOCKQUOTE></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><BLOCKQUOTE>Perhaps there are another kind of variant relations, so we are
+    planning to extend this  feature more generally.
+  
+</BLOCKQUOTE>
+</BLOCKQUOTE>
+
+<P>
+
+<H1><A NAME="SECTION00440000000000000000"></A>
+<A NAME="sec:decomposition"></A>
+<BR>
+→decomposition 属性
+</H1>
+
+<P>
+The attribute named <code>-&gt;decomposition</code> is used to specify combining
+sequences of composite (precomposed) characters.  The value of
+<code>-&gt;decomposition</code> attribute is a list of characters or
+character-specifications <A HREF="node4.html#Character_Specification">4.1.2</A>, which means
+that a character defined with a <code>-&gt;decomposition</code> attribute can be
+interpreted as the sequence of characters specified by the value of
+the attribute.
+For example, if <B>&#225;</B> has an attribute
+<TT>(<code>-&gt;decomposition</code> ?a ?&#180;)</TT>,
+ the sequence <TT>(?a ?&#180;)</TT> can be composed into <B>&#225;</B>.
+
+<P>
+This information can be used in the coding-system features, which is
+code-conversion features of the Mule API <A NAME="tex2html16"
+  HREF="footnode.html#foot511"><SUP><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="/usr/share/latex2html/icons/footnote.png"></SUP></A>.
+
+<P>
+In addition, there is a builtin function to find a precomposed
+character from a list of combining sequence.
+
+<P>
+<BLOCKQUOTE>
+ 
+  関数 <B>get-composite-char</B> (<I>list</I>)
+  
+<BLOCKQUOTE>
+This function returns a character composed from elements of the
+    <I>list</I>.
+</BLOCKQUOTE></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><BLOCKQUOTE>Each element is a character, an integer or a
+    character-specification.  If an element is an integer, it is
+    interpreted as a code point of UCS character.
+    
+
+</BLOCKQUOTE>
+</BLOCKQUOTE>
+
+<P>
+
+<H1><A NAME="SECTION00450000000000000000">
+漢字の部品組み合わせ情報</A>
+</H1>
+
+<P>
+多くの漢字は偏と旁などの部品の組み合わせによって構成されている。しかし
+ながら、従来の多くの符号化方法では組み合わされた漢字を単位にして扱われ
+ており、漢字の部品組み合わせ構造に関する情報は符号化の対象とならないこ
+とが多かった。このため、自由に利用可能なデータの蓄積も不十分である。
+
+<P>
+本プロジェクトでは漢字の部品組み合わせ情報を利用するために
+<A HREF="node4.html#sec:ideographic-structure">4.5.5</A> 節で述べる
+<B>ideographic-structure 属性</B>を定義し、XEmacs UTF-2000 において
+この属性を扱えるようにした。
+
+<P>
+また、漢字の部品組み合わせ情報に関するこれまでの試みを調査し、自由に利
+用可能なものに対しては ideographic-structure 形式に変換するためのプロ
+グラムを作成した。
+
+<P>
+
+<H2><A NAME="SECTION00451000000000000000">
+What are glyph expressions</A>
+</H2>
+
+<P>
+Kanji characters are very visibly composed not of atomic units, but of
+a relatively small number of components.  The tradition of defining a
+character by its components is as old as the script itself.  Encoding
+of Kanji in computers, however, has so far failed to take advantage of
+this structural feature and treated every Kanji as an atomic unit.  To
+make Kanji encoding more efficient, it has been suggested to encode
+these parts and compose the characters on the fly.  This will make the
+rendering process more complex and potentially less appealing.  The
+feasability of this will depend on the applictions available for
+rendering and certainly will require more research.  Even if not used
+as the primary encoding in text, however, such a character component
+database will still serve an important purpose for classifying,
+analysing and retrieving characters.
+
+<P>
+Since the 1970's, research concerning such an analytic encoding has
+been conducted in Taiwan, China, Japan and elsewhere.  One of the most
+important and thoroughly researched proposal has been that of Hsieh
+Ching-chun (謝清俊) of Academia Sinica, Taiwan.  Building on previous
+results, he started in 1990 to build a database of the structure of
+Kanji characters.  Since this work was carried out at his `Chinese
+Document Processing' lab, it came to be known as the CDP database.
+Christian Wittern has been involved with this project since 1994.
+Currently, the database contains glyph expressions of more than 55500
+characters, including all characters contained in the <I>漢語大辞典</I>.
+The database has been developed on the Traditional Chinese version of
+Windows using Access as the database engine.  The user interface only
+runs on versions of Chinese Windows from Windows 95 up to Windows ME.
+Professor Hsieh graciously gave permission to port the content of the
+CDP database to the UTF-2000 project and release it under the GPL.
+
+<P>
+
+<H2><A NAME="SECTION00452000000000000000">
+The CDP database</A>
+</H2>
+
+<P>
+The expressions in the CDP database are based on Big5, the local
+encoding for Kanji characters mostly used in Taiwan.  For the purpose
+of expressing the parts of characters, that are not characters
+themselves, more than 2000 codepoints from the private use area (PUA)
+of Big5 had been used.  Furthermore, the CDP database uses a set of
+only three operators for connecting the characters, although in
+practice, this has been expanded to 11 due to the introduction of
+shortcut operators for handling multiple occurrences of the same
+component in one character.  Figure <A HREF="node4.html#fig:mitou-report01">4.5.2</A> shows a
+list of these operators.  There are three more operator-like
+characters, which are used when embedding glyph expressions into
+running text.
+
+<P>
+
+<P></P>
+<DIV ALIGN="CENTER"><A NAME="fig:mitou-report01"></A><A NAME="533"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 4.1:</STRONG>
+The connecting operators used in the CDP</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ $\scalebox{0.5}{\includegraphics{mitou-report01.eps}}$
+ -->
+<IMG
+ WIDTH="212" HEIGHT="327" ALIGN="BOTTOM" BORDER="0"
+ SRC="images/mitou-report01.jpg"
+ ALT="\scalebox{0.5}{\includegraphics{mitou-report01.eps}}">    
+</DIV></TD></TR>
+</TABLE>
+</DIV><P></P>
+
+<P>
+
+<H2><A NAME="SECTION00453000000000000000">
+The CBETA database</A>
+</H2>
+
+<P>
+Another database of Chinese characters and glyph expressions, if
+somewhat smaller than the CDP with around 13000 characters at the
+moment, is the database developed by the Chinese Buddhist Electronic
+Text Association (CBETA).  This is a sideproduct of CBETA's
+groundbreaking work of creating an electronic version of Chinese
+Buddhist scriptures.  So far, more than 80 million characters of text
+have been input, carefully proofread and marked up in XML according to
+the Guidelines of the Text Electronic Initiative.  The base character
+set used for this is again Big5.  Characters that could not be found
+in Big5 have been collected and expressed with glyph expressions.  The
+CBETA database again uses a simple system of three basic connecting
+operators, expressed with ASCII interpunction as follows:
+
+<P>
+<BR><P></P>
+<DIV ALIGN="CENTER">
+  <A NAME="tab:cbeta-op"></A>  <DIV ALIGN="CENTER">  
+  </DIV>
+<P>
+<BR>
+<DIV ALIGN="CENTER">  <A NAME="539"></A>
+<TABLE CELLPADDING=3 BORDER="1">
+<CAPTION><STRONG>Table 4.2:</STRONG>
+The operators used in the CBETA character database</CAPTION>
+<TR><TD ALIGN="LEFT">operator</TD>
+<TD ALIGN="LEFT">meaning</TD>
+</TR>
+<TR><TD ALIGN="LEFT">/</TD>
+<TD ALIGN="LEFT">top/bottom connection</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$*$"></TD>
+<TD ALIGN="LEFT">left/right connection</TD>
+</TR>
+<TR><TD ALIGN="LEFT">@</TD>
+<TD ALIGN="LEFT">enclosure connection</TD>
+</TR>
+</TABLE></DIV>
+</DIV>
+<BR>
+
+<P>
+The CBETA character database avoids the reliance on characters from
+the PUA.  Instead, character components are expressed by using
+arithmetic operators - and + for deletion and replacement of
+characters.  In this manner, a glyph exression for the character 寵 
+could thus be constructed as: [宋-木+龍], here the part 木 is replaced
+with 龍.  Using this simple arithmetic, a surprisingly large number of
+characters can be expressed without much effort.  Some expressions do
+however get more complicated, for example
+[((((嘹-口)-小)-日+(工/十))*支)/皿].
+
+<P>
+Since Christian Wittern has been involved with the CBETA project for
+some time, it has been possible to gain permission to include the
+CBETA character database into the UTF-2000 character database.  This
+is especially interesting, since the CBETA data are derived directly
+from text input and sources for the characters are easily determined,
+quite contrary to dictionaries and standard documents, where it is not
+easy to find real world examples for some of the characters.
+
+<P>
+
+<H2><A NAME="SECTION00454000000000000000"></A>
+<A NAME="sec:ideographic-structure"></A>
+<BR>
+ideographic-structure 属性
+</H2>
+
+<P>
+漢字の部品組み合わせ構造に関する情報を XEmacs UTF-2000 で利用するため
+に<B>ideographic-structure 属性</B>を定義した。
+
+<P>
+ideographic-structure 属性の型は、文字、文字指定または文字参照のリスト
+である。
+
+<P>
+ideographic-structure 属性の値の要素として指定された文字（および文字指
+定、または、文字参照の :char 属性で指定された文字・文字参照）は 
+ideographic-structure 属性を取ることができる。これにより、
+ideographic-structure 属性は入れ子構造を取ることができる。
+
+<P>
+
+<H2><A NAME="SECTION00455000000000000000">
+Extending the UTF-2000 character database</A>
+</H2>
+
+<P>
+The Unicode Standard introduced in version 3.0 a set of socalled
+`IDEOGRAPHIC DESCRIPTION CHARACTER' (IDC) to allow the construction of
+Kanji glyph sequences.  This set of operators followed a proposal from
+China, based on research done there and describes 12 operators.  For
+the purpose of using glyph expressions in the UTF-2000 character
+database, we decided to use the operator set from Unicode/ISO 10646.
+This set is shown in Figure <A HREF="node4.html#fig:mitou-report02">4.5.4</A>.
+
+<P>
+
+<P></P>
+<DIV ALIGN="CENTER"><A NAME="fig:mitou-report02"></A><A NAME="554"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 4.2:</STRONG>
+The IDC from Unicode/ISO 10646</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ $\scalebox{0.5}{\includegraphics{mitou-report02.eps}}$
+ -->
+<IMG
+ WIDTH="462" HEIGHT="619" ALIGN="BOTTOM" BORDER="0"
+ SRC="images/mitou-report02.gif"
+ ALT="\scalebox{0.5}{\includegraphics{mitou-report02.eps}}">    
+</DIV></TD></TR>
+</TABLE>
+</DIV><P></P>
+
+<P>
+The adaption of the CDP and CBETA database and subsequent inclusion in
+the UTF-2000 character database thus involved the following steps:
+
+<P>
+
+<OL>
+<LI>Converting the underlying character code from Big5 to Unicode
+</LI>
+<LI>Mapping of entries for characters outside of the reference
+encoding Big5 to Unicode
+</LI>
+<LI>Mapping of the characters from the PUA to Unicode
+where possible
+</LI>
+<LI>Where the previous step did not produce a mapping,
+a recursive use of IDC was applied where possible
+</LI>
+<LI>Modify the glyph expressions to adjust for the
+different scope of the operators
+</LI>
+<LI>Add new glyph expressions for characters not in CDP
+</LI>
+</OL>
+
+<P>
+Apart from this, some related supporting tasks were also necessary.
+Since it is difficult to input unknown and rare Kanji characters, a
+new input method had to be devised.  For this purpose, a table of
+input keys of the Four Corner system originally created by Christian
+Wittern for the Kanji characters in CNS-11642:1992 as part of the
+`KanjiBase' has been ported and adopted so that it could be used
+within UTF-2000.  Additionally, input keys for Kanji radicals in
+different shapes and other characters from Unicode that where not yet
+covered (essentially, characters with less than 7 strokes) have been
+added. This newly expanded input table contains now more than 50000
+input keys and will be part of the UTF-2000 character database.
+
+<P>
+Quite a different problem, that requires further attention is the way
+the glyph expressions are composed.  The CDP database uses a
+`intuitive' approach and splits characters where the most logical
+cut-off line is.  This is, however not always the ethymological
+correct way of splitting.  In the UTF-2000 character database, we
+prefer to have ethymological splitting and new expressions are added
+in this way. The task of systematically identifying and changing the
+intuitive splittings has not yet been done.
+
+<P>
+The whole process, which is not yet fully completed, involved a
+tedious and time consuming task of meticulously checking the accuracy
+of every single entry for more than 70000 characters.  At the time of
+this writing, the porting and checking is done in a first go for more
+than 40000 characters.  This is an important and fundamental addition
+to the UTF-2000 character database.
+
+<P>
+
+<P></P>
+<DIV ALIGN="CENTER"><A NAME="fig:mitou-report03"></A><A NAME="564"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 4.3:</STRONG>
+A table of glyph expressions in XEmacs UTF-2000</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ $\scalebox{0.5}{\includegraphics{mitou-report03.eps}}$
+ -->
+<IMG
+ WIDTH="610" HEIGHT="487" ALIGN="BOTTOM" BORDER="0"
+ SRC="images/mitou-report03.jpg"
+ ALT="\scalebox{0.5}{\includegraphics{mitou-report03.eps}}">    
+</DIV></TD></TR>
+</TABLE>
+</DIV><P></P>
+
+<P>
+
+<H2><A NAME="SECTION00456000000000000000">
+Additional benefits</A>
+</H2>
+
+<P>
+As has been mentioned above, a table of input keys for the Four Corner
+method has been ported to UTF-2000 to be used as input keys.  Since
+the Four Corner numbers are systematically assigned to the four
+corners of a character, it is possible to generate new Four Corner
+values based on existing characters, if the composition of characters
+is known.  Since this information is exactly the content of the glyph
+expressions, new Four Corner input keys can automatically be
+generated, thus covering the whole 70000 Unicode characters.  This
+provides also an additional method for proofreading both the glyph
+expression data and the Four Corner input codes.
+
+<P>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html84"
+  HREF="node5.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html82"
+  HREF="main.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html76"
+  HREF="node3.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html85"
+  HREF="node5.html">Topic Maps に基づく大域文字データベース</A>
+<B> Up:</B> <A NAME="tex2html83"
+  HREF="main.html">2001年度未踏ソフトウェア創造事業 文字データベースに基づく 文字オブジェクト技術の構築 （契約番号</A>
+<B> Previous:</B> <A NAME="tex2html77"
+  HREF="node3.html">文字データベースに基づく文書編集系</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+MORIOKA Tomohiko
+2002-02-15
+</ADDRESS>
+</BODY>
+</HTML>

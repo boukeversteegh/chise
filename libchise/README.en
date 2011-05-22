@@ -1,0 +1,75 @@
+This package contains the CHISE Library.
+
+Installing the CHISE Library
+****************************
+
+PREREQUISITES
+=============
+
+Please install
+ - Berkeley DB Version 3 or later
+ - CONCORD
+before installing the CHISE Library.
+
+
+CONFIGURATION
+=============
+
+In the top level directory of the CHISE Library distribution, run the
+program `configure' as follows:
+
+  % ./configure
+
+
+RUNNING MAKE
+============
+
+Run the program `make' as follows:
+
+  % make
+
+
+Installing
+==========
+
+Type `make install' as follows:
+
+  % make install
+
+
+Reporting Bugs
+**************
+
+If you write bug-reports and/or suggestions for improvement, please
+send them to the CHISE Mailing List:
+
+  chise-en@m17n.org	(English)
+  chise-ja@m17n.org	(Japanese)
+
+Via the CHISE mailing list, you can report libchise bugs, obtain the
+latest release of libchise, and discuss future enhancements to
+libchise.  To join the CHISE mailing list, send an empty e-mail to
+
+  chise-en-ctl@m17n.org	(English)
+  chise-ja-ctl@m17n.org	(Japanese)
+
+
+* CVS
+
+Development of libchise uses CVS.  So latest developing version is
+available at CVS.
+
+** cvs login (first time only)
+
+  % cvs -d :pserver:anonymous@cvs.m17n.org:/cvs/chise login
+
+  CVS password: [CR] # NULL string
+
+** checkout
+
+  % cvs -d :pserver:anonymous@cvs.m17n.org:/cvs/chise checkout libchise
+
+  If you would like to join CVS based development, please declare it
+in the CHISE mailing list.
+
+We hope you will join the open development.

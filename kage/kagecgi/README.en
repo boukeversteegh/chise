@@ -1,0 +1,76 @@
+KAGE/cgi is a Kanji-glyph generating engine.
+
+It can use by command prompt and for executable cgi for httpd server.
+
+
+PREREQUISITES
+=============
+
+KAGE/cgi needs following librarys:
+
+ - Berkely DB 4
+ - libpng
+
+
+CONFIGURATION
+=============
+
+Please edit `Makefile' fit with your environment.
+
+
+RUNNING MAKE
+============
+
+Run the program `make' as follows:
+
+  % make
+
+
+INSTALLING
+==========
+
+1) Engine program
+
+  # make install
+
+  (by default, it will be installed as /usr/local/bin/kage.cgi)
+
+ Also, if you need to use as cgi, copy/make symbolic link to proper directory.
+ (ex. % cp /usr/local/bin/kage.cgi /var/www/cgi-bin/)
+ 
+2) Parts database (wget is required)
+
+  # make database
+
+  (by default, it will be installed as /usr/local/share/kagecgi/kagedb) 
+
+
+TEST
+====
+
+1) Run from command prompt
+
+ - % kage.cgi u2ff0.u6c35.u6c38 > result.png
+ - % kage.cgi u4e08-k > result.png
+ - % kage.cgi 'u7389&shotai=gothic' > result.png
+ - % kage.cgi 'u4e5f&type=eps' > result.eps
+
+2) Run as cgi program
+
+Call engine by a web browser like as `http://hoge.hoge/cgi-bin/kage.cgi?u4e00'.
+
+Glyph will be appear (`ICHI (one)' : u4e00 in ISO/IEC 10646-1).
+
+Another examples:
+ - kage.cgi?u2ff0.u6c35.u6c38 (combination of parts)
+ - kage.cgi?u4e08-k (fix a glyph design to K-Source of ISO/IEC 10646-1 [Default: J-Source])
+ - kage.cgi?u7389&shotai=gothic (generate as Gothic glyph [Default: Mincho])
+ - kage.cgi?u4e5f&type=eps (generate as .eps file [Default: .png file])
+
+
+GETTING MORE INFORMATION
+========================
+
+Please visit http://fonts.jp/ for further information.
+
+(Currently, only Japanese language site are avalable)

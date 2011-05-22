@@ -1,0 +1,1280 @@
+!/var/www/glyphwiki.org/index.cgi
+:633
+$temp = sprintf("<div class=\"texts\"><p>グリフ実装率：%d\% (実装済：%dグリフ、未実装：%dグリフ)</p></div>", int($implemented / ($unimplemented + $implemented) * 100), $implemented, $unimplemented);
+$temp = sprintf("<div class=\"texts\"><p>作字率 ：%d\% (已作：%d字、未作：%d字)</p></div>", int($implemented / ($unimplemented + $implemented) * 100), $implemented, $unimplemented);
+:634
+$temp2 = sprintf("グリフ実装率：%d\% [済%d、未%d]", int($implemented / ($unimplemented + $implemented) * 100), $implemented, $unimplemented);
+$temp2 = sprintf("作字率：%d\% [已%d、未%d]", int($implemented / ($unimplemented + $implemented) * 100), $implemented, $unimplemented);
+
+!/home/kamichi/glyphwiki/page_others.pl
+:48
+$buffer = "最終更新 ".&local_localtime($lastupdate)."。";
+$buffer = "最后修订于".&local_localtime($lastupdate).".";
+:56
+<a href="/wiki/GlyphWiki:$URL_LICENSE">データ・記事のライセンス</a>
+<a href="/wiki/GlyphWiki:License">著作权</a>
+:57
+<a href="/wiki/GlyphWiki:$URL_PRIVACY">プライバシー・ポリシー</a>
+<a href="/wiki/GlyphWiki:PrivacyPolicy">隐私政策</a>
+:58
+<a href="/wiki/GlyphWiki:$URL_ABOUT">グリフウィキについて</a>
+<a href="/wiki/GlyphWiki:About">关于字维基</a>
+:59
+<a href="/wiki/GlyphWiki:$URL_MENSEKI">免責事項</a>
+<a href="/wiki/GlyphWiki:Disclaimers">免责声明</a>
+:75
+$buffer .= qq|<div class="loginned"><div><img src="/images/user.gif"> <a href="/wiki/User:$loginname">$loginname</a></div> <div><a href="/wiki/User-talk:$loginname">マイ・トーク</a></div> <div><a href="/wiki/Special:Confirmemail">メールアドレスの登録・確認</a></div> <div><a href="/wiki/Special:Userlogout?returnto=$url_query">ログアウト</a></div></div>|;
+$buffer .= qq|<div class="loginned"><div><img src="/images/user.gif"> <a href="/wiki/User:$loginname">$loginname</a></div> <div><a href="/wiki/User-talk:$loginname">讨论页</a></div> <div><a href="/wiki/Special:Confirmemail">电子邮件注册、确认</a></div> <div><a href="/wiki/Special:Userlogout?returnto=$url_query">退出</a></div></div>|;
+:77
+$buffer .= qq|<div class="login"><img src="/images/user.gif"> <a href="/wiki/Special:Userlogin?returnto=$url_query">ログインまたはアカウント作成</a></div>|;
+$buffer .= qq|<div class="login"><img src="/images/user.gif"> <a href="/wiki/Special:Userlogin?returnto=$url_query">登录或注册帐户</a></div>|;
+
+!/home/kamichi/glyphwiki/config.pl
+
+!/home/kamichi/glyphwiki/get_dir.pl
+
+!/home/kamichi/glyphwiki/makeglyphfont.pl
+
+!/home/kamichi/glyphwiki/page_right_others.pl
+:26
+$title = qq|古い部品を引用しているグリフ|;
+$title = qq|使用旧零件的字|;
+:29
+$buffer .= qq!<div class="texts"><a href="?view=parts">部品名別に表示する</a> | <a href="?view=glyphs">グリフ名順で一覧する</a></div>!;
+$buffer .= qq!<div class="texts"><a href="?view=parts">按零件的名字排列</a> | <a href="?view=glyphs">按字排列</a></div>!;
+:64
+$temp_list .= qq|<hr><br>(残りは省略されています)|;
+$temp_list .= qq|<hr><br>(以下从略)|;
+:81
+$mustrenew_list .= "<br><br><a href=\"/wiki/Special:Mustrenew?view=listup&target=$pname\">この部品について一覧形式で更新する</a>";
+$mustrenew_list .= "<br><br><a href=\"/wiki/Special:Mustrenew?view=listup&target=$pname\">关于该零件更新一览</a>";
+:89
+$mustrenew_list .= "<br>(残りは省略されています)";
+$mustrenew_list .= "<br>(以下从略)";
+:100
+$buffer .= qq|<span class="text">該当するグリフはありません。</span>|;
+$buffer .= qq|<span class="text">找不到</span>|;
+:117
+$title = qq|古い部品を引用しているグリフの一括更新|;
+$title = qq|更新所有使用旧零件的字|;
+:121
+$buffer .= qq|<div class="texts">更新対象：<a href="/wiki/$cgi_target"><img class="thumb related" src="/glyph/$cgi_target.50px.png" border="0"></a> <a href="/wiki/$cgi_target">$cgi_target</a></div>|;
+$buffer .= qq|<div class="texts">更新对象：<a href="/wiki/$cgi_target"><img class="thumb related" src="/glyph/$cgi_target.50px.png" border="0"></a> <a href="/wiki/$cgi_target">$cgi_target</a></div>|;
+:125,267,272
+$cgi_value = "(指定した値が不正です)";
+$cgi_value = "(the specified value is invalid)";
+:129,274
+if($cgi_value eq "" || $cgi_value eq "(指定した値が不正です)"){
+if($cgi_value eq "" || $cgi_value eq "(the specified value is invalid)"){
+:188
+$mustrenew_list .= "<li class=\"history\"><a href=\"/wiki/$name\">$name</a> 現在 : <a href=\"/wiki/$name\"><img class=\"thumb100\" src=\"/glyph/$name\@$version.100px.png\" border=\"0\"></a> vs 最新部品 : ";
+$mustrenew_list .= "<li class=\"history\"><a href=\"/wiki/$name\">$name</a> current : <a href=\"/wiki/$name\"><img class=\"thumb100\" src=\"/glyph/$name\@$version.100px.png\" border=\"0\"></a> vs. use the newest component : ";
+:190
+$mustrenew_list .= "<input type=\"checkbox\" name=\"target:$name\@$version\" value=\"update\" id=\"$name\"><label for=\"$name\">最新部品に更新する</label>";
+$mustrenew_list .= "<input type=\"checkbox\" name=\"target:$name\@$version\" value=\"update\" id=\"$name\"><label for=\"$name\">用最新零件更新</label>";
+:202,358
+<div class="notice">部品の配置について</div>
+<div class="notice">关于组装零件</div>
+:203,359
+標準では、古い部品の大きさと位置に合わせて新しい部品を配置しますが、変形させたり、固定させることができます。
+默认状态按旧零件的大小和位置组装零件。也可能变形或固定。
+:206,362
+<li>部品の大きさを新旧で合わせる
+<li>调和新旧零件的大小。
+:207
+<br>これが標準です。古い部品の大きさと位置に合わせて新しい部品を配置します。テキストボックスには何も入力しないでください
+<br>这是默认状态。按旧零件的大小和位置组装新零件。本文框里不要输入。
+:208,364
+<li>縦横ともに部品の大きさを基準に変形
+<li>按零件大小变形
+:209
+<br>標準配置後の部品の領域を調節できます。「type1,左上X座標への増分値,Y座標への増分値,右下X座標への増分値,Y座標への増分値」と入力してください 例: type1,5,-4,10,-20 （配置領域の左上座標について左に5ドット、上に4ドット移動、右下座標について10ドット右に、20ドット上に移動する）
+<br>標準配置後の部品の領域を調節できます。「type1,左上X座標への増分値,Y座標への増分値,右下X座標への増分値,Y座標への増分値」と入力してください 例: type1,5,-4,10,-20 （配置領域の左上座標について左に5ドット、上に4ドット移動、右下座標について10ドット右に、20ドット上に移動する）
+:210,366
+<li>縦横ともに新たな配置領域座標を記述
+<li>縦横ともに新たな配置領域座標を記述
+:211
+<br>部品を指定した領域に配置します。「type2,左上X座標,Y座標,右下X座標,Y座標」と入力してください。
+<br>部品を指定した領域に配置します。「type2,左上X座標,Y座標,右下X座標,Y座標」と入力してください。
+:212,368
+<li>横は部品の大きさを基準に変形、縦は新たな配置領域座標を記述
+<li>横は部品の大きさを基準に変形、縦は新たな配置領域座標を記述
+:213
+<br>「type3,左上X座標への増分値,右下X座標への増分値,左上Y座標,右下Y座標」と入力してください（順番に注意）。
+<br>「type3,左上X座標への増分値,右下X座標への増分値,左上Y座標,右下Y座標」と入力してください（順番に注意）。
+:214,370
+<li>横は新たな配置領域座標を記述、縦は部品の大きさを基準に変形
+<li>横は新たな配置領域座標を記述、縦は部品の大きさを基準に変形
+:215
+<br>「type4,左上X座標,右下X座標,左上Y座標への増分値,右下Y座標への増分値,」と入力してください（順番に注意）。
+<br>「type4,左上X座標,右下X座標,左上Y座標への増分値,右下Y座標への増分値,」と入力してください（順番に注意）。
+:223
+$buffer .= " 配置調整指定：<input type=\"text\" name=\"value\" size=\"60\" value=\"$cgi_value\">";
+$buffer .= " 配置調整指定：<input type=\"text\" name=\"value\" size=\"60\" value=\"$cgi_value\">";
+:224,381
+$buffer .= " <input type=\"submit\" value=\"リストのプレビューを更新する\"></form>";
+$buffer .= " <input type=\"submit\" value=\"リストのプレビューを更新する\"></form>";
+:238
+$buffer .= "<div class=\"texts\">(残りは省略されています)</div>";
+$buffer .= "<div class=\"texts\">(snipped left)</div>";
+:240
+$buffer .= "<hr><div class=\"texts\">ボタンをクリックすると「最新部品に更新する」にチェックをしたグリフをプレビューせずに一度に更新します。更新グリフの量が多いとブラウザが時間切れでエラーとなる場合がありますが、更新処理は問題なく実行できます。</div>";
+$buffer .= "<hr><div class=\"texts\">ボタンをクリックすると「最新部品に更新する」にチェックをしたグリフをプレビューせずに一度に更新します。更新グリフの量が多いとブラウザが時間切れでエラーとなる場合がありますが、更新処理は問題なく実行できます。</div>";
+:241,407
+$buffer .= "<input type=\"button\" value=\"全グリフにチェックを入れる\" onClick=\"for(i=0;i<document.list.elements.length;i++){document.list.elements[i].checked=true;}\">";
+$buffer .= "<input type=\"button\" value=\"set checked mark at all glyphs\" onClick=\"for(i=0;i<document.list.elements.length;i++){document.list.elements[i].checked=true;}\">";
+:242,408
+$buffer .= "<br><br><input type=\"submit\" value=\"チェックをつけたグリフを一括で新しい部品に更新する\"></form>";
+$buffer .= "<br><br><input type=\"submit\" value=\"チェックをつけたグリフを一括で新しい部品に更新する\"></form>";
+:244
+$buffer .= qq|<div class="texts">該当するグリフはありません。<br><br><a href=\"/wiki/Special:Mustrenew?view=parts\">他の旧部品引用グリフ一覧へ戻る</a></div>|;
+$buffer .= qq|<div class="texts">There are no glyphs that you selected<br><br><a href=\"/wiki/Special:Mustrenew?view=parts\">back to the list of another glyphs which are using old components</a></div>|;
+:261
+$title = qq|部品の一括更新|;
+$title = qq|部品の一括更新|;
+:282
+$buffer .= qq|<div class="texts">更新対象：<a href="/wiki/$cgi_target"><img class="thumb related" src="/glyph/$cgi_target.50px.png" border="0"></a> <a href="/wiki/$cgi_target">$cgi_target</a> → <a href="/wiki/$vg"><img class="thumb related" src="/glyph/$vg.50px.png" border="0"></a> <a href="/wiki/$vg">$vg</a></div>|;
+$buffer .= qq|<div class="texts">The target of update：<a href="/wiki/$cgi_target"><img class="thumb related" src="/glyph/$cgi_target.50px.png" border="0"></a> <a href="/wiki/$cgi_target">$cgi_target</a> → <a href="/wiki/$vg"><img class="thumb related" src="/glyph/$vg.50px.png" border="0"></a> <a href="/wiki/$vg">$vg</a></div>|;
+:284
+$buffer .= qq|<div class="texts">更新対象：<a href="/wiki/$cgi_target"><img class="thumb related" src="/glyph/$cgi_target.50px.png" border="0"></a> <a href="/wiki/$cgi_target">$cgi_target</a> → （まだ指定されていません）</div>|;
+$buffer .= qq|<div class="texts">The target of update：<a href="/wiki/$cgi_target"><img class="thumb related" src="/glyph/$cgi_target.50px.png" border="0"></a> <a href="/wiki/$cgi_target">$cgi_target</a> → (unselected yet)</div>|;
+:344
+$mustrenew_list .= "<li class=\"history\"><a href=\"/wiki/$name\">$name</a> 現在 : <a href=\"/wiki/$name\"><img class=\"thumb100\" src=\"/glyph/$name\@$version.100px.png\" border=\"0\"></a> vs 更新後 : ";
+$mustrenew_list .= "<li class=\"history\"><a href=\"/wiki/$name\">$name</a> Current : <a href=\"/wiki/$name\"><img class=\"thumb100\" src=\"/glyph/$name\@$version.100px.png\" border=\"0\"></a> vs After updated : ";
+:346
+$mustrenew_list .= "<input type=\"checkbox\" name=\"target:$name\@$version\" value=\"update\" id=\"$name\"><label for=\"$name\">部品を更新する</label>";
+$mustrenew_list .= "<input type=\"checkbox\" name=\"target:$name\@$version\" value=\"update\" id=\"$name\"><label for=\"$name\">Update element</label>";
+:363
+<br>これが標準です。古い部品の大きさと位置に合わせて新しい部品を配置します。テキストボックスには置き換え部品グリフ名を入力してください
+<br>これが標準です。古い部品の大きさと位置に合わせて新しい部品を配置します。テキストボックスには置き換え部品グリフ名を入力してください
+:365
+<br>標準配置後の部品の領域を調節できます。「置き換え部品グリフ名,type1,左上X座標への増分値,Y座標への増分値,右下X座標への増分値,Y座標への増分値」と入力してください 例: u6c38,type1,5,-4,10,-20 （配置領域の左上座標について左に5ドット、上に4ドット移動、右下座標について10ドット右に、20ドット上に移動する）
+<br>標準配置後の部品の領域を調節できます。「置き換え部品グリフ名,type1,左上X座標への増分値,Y座標への増分値,右下X座標への増分値,Y座標への増分値」と入力してください 例: u6c38,type1,5,-4,10,-20 （配置領域の左上座標について左に5ドット、上に4ドット移動、右下座標について10ドット右に、20ドット上に移動する）
+:367
+<br>部品を指定した領域に配置します。「置き換え部品グリフ名,type2,左上X座標,Y座標,右下X座標,Y座標」と入力してください。
+<br>部品を指定した領域に配置します。「置き換え部品グリフ名,type2,左上X座標,Y座標,右下X座標,Y座標」と入力してください。
+:369
+<br>「置き換え部品グリフ名,type3,左上X座標への増分値,右下X座標への増分値,左上Y座標,右下Y座標」と入力してください（順番に注意）。
+<br>「置き換え部品グリフ名,type3,左上X座標への増分値,右下X座標への増分値,左上Y座標,右下Y座標」と入力してください（順番に注意）。
+:371
+<br>「置き換え部品グリフ名,type4,左上X座標,右下X座標,左上Y座標への増分値,右下Y座標への増分値,」と入力してください（順番に注意）。
+<br>「置き換え部品グリフ名,type4,左上X座標,右下X座標,左上Y座標への増分値,右下Y座標への増分値,」と入力してください（順番に注意）。
+:380
+$buffer .= " 置き換え部品グリフ、配置調整指定：<input type=\"text\" name=\"value\" size=\"60\" value=\"$cgi_value\">";
+$buffer .= " 置き換え部品グリフ、配置調整指定：<input type=\"text\" name=\"value\" size=\"60\" value=\"$cgi_value\">";
+:396,400
+$buffer .= qq|<div class="texts"><a href="?view=listup&target=$cgi_target&value=$cgi_value&offset=$prev">これより前の検索結果を見る</a></div>|;
+$buffer .= qq|<div class="texts"><a href="?view=listup&target=$cgi_target&value=$cgi_value&offset=$prev">これより前の検索結果を見る</a></div>|;
+:404
+$buffer .= "<div class=\"texts\">さらに対象グリフが存在する可能性があります。<a href=\"?view=listup&target=$cgi_target&value=$cgi_value&offset=$next\">これ以降の対象グリフを見る</a></div>";
+$buffer .= "<div class=\"texts\">さらに対象グリフが存在する可能性があります。<a href=\"?view=listup&target=$cgi_target&value=$cgi_value&offset=$next\">これ以降の対象グリフを見る</a></div>";
+:406
+$buffer .= "<hr><div class=\"texts\">ボタンをクリックすると「部品を更新する」にチェックをしたグリフをプレビューせずに一度に更新します。更新グリフの量が多いとブラウザが時間切れでエラーとなる場合がありますが、更新処理は問題なく実行できます。</div>";
+$buffer .= "<hr><div class=\"texts\">ボタンをクリックすると「部品を更新する」にチェックをしたグリフをプレビューせずに一度に更新します。更新グリフの量が多いとブラウザが時間切れでエラーとなる場合がありますが、更新処理は問題なく実行できます。</div>";
+:410
+$buffer .= qq|<div class="texts">該当するグリフはありません。<br><br><a href=\"/wiki/$cgi_target\">グリフページに戻る</a></div>|;
+$buffer .= qq|<div class="texts">該当するグリフはありません。<br><br><a href=\"/wiki/$cgi_target\">グリフページに戻る</a></div>|;
+:440
+$title = qq|旧部品一括更新の完了|;
+$title = qq|Completion of lump update of old components|;
+:512
+($new_version, $time) = &put_page($dbh, $name, $loginname, $temp, '旧部品の一括更新', $env_remoteaddress, $related);
+($new_version, $time) = &put_page($dbh, $name, $loginname, $temp, 'lump update of old components', $env_remoteaddress, $related);
+:524
+$buffer .= "<div class=\"texts\">${done}個のグリフを更新しました。<br><br><a href=\"/wiki/Special:Mustrenew?view=listup&target=$cgi_target\">一覧へ戻る</a></div>";
+$buffer .= "<div class=\"texts\">Updated ${done} glyphs.<br><br><a href=\"/wiki/Special:Mustrenew?view=listup&target=$cgi_target\">back to the list</a></div>";
+:526
+$buffer .= "<div class=\"texts\">${done}個のグリフを更新しました。<br><br><a href=\"/wiki/Special:Mustrenew?view=parts\">他の旧部品引用グリフ一覧へ戻る</a></div>";
+$buffer .= "<div class=\"texts\">Updated ${done} glyphs<br><br><a href=\"/wiki/Special:Mustrenew?view=parts\">back to the list of another glyphs using old components</a></div>";
+:528,650
+$buffer .= "<h2>更新したグリフ</h2>$donelist";
+$buffer .= "<h2>Updated glyphs</h2>$donelist";
+:530
+$buffer .= "<div class=\"texts\">更新したグリフはありません。<br><br><a href=\"/wiki/Special:Mustrenew?view=listup&target=$cgi_target\">一覧へ戻る</a></div>";
+$buffer .= "<div class=\"texts\">There are no glyphs being updated.<br><br><a href=\"/wiki/Special:Mustrenew?view=listup&target=$cgi_target\">back to the list</a></div>";
+:562
+$title = qq|部品一括更新の完了|;
+$title = qq|部品一括更新の完了|;
+:634
+($new_version, $time) = &put_page($dbh, $name, $loginname, $temp, '部品の一括更新', $env_remoteaddress, $related);
+($new_version, $time) = &put_page($dbh, $name, $loginname, $temp, '部品の一括更新', $env_remoteaddress, $related);
+:646
+$buffer .= "<div class=\"texts\">${done}個のグリフを更新しました。<br><br><a href=\"/wiki/Special:Renewall?view=listup&target=$cgi_target\">部品引用グリフ一覧へ戻る</a></div>";
+$buffer .= "<div class=\"texts\">${done}個のグリフを更新しました。<br><br><a href=\"/wiki/Special:Renewall?view=listup&target=$cgi_target\">部品引用グリフ一覧へ戻る</a></div>";
+:648
+$buffer .= "<div class=\"texts\">${done}個のグリフを更新しました。<br><br><a href=\"/wiki/$cgi_target\">グリフページへ戻る</a></div>";
+$buffer .= "<div class=\"texts\">${done}個のグリフを更新しました。<br><br><a href=\"/wiki/$cgi_target\">グリフページへ戻る</a></div>";
+:652
+$buffer .= "<div class=\"texts\">更新したグリフはありません。<br><br><a href=\"/wiki/Special:Renewall?view=listup&target=$cgi_target\">部品引用グリフ一覧へ戻る</a></div>";
+$buffer .= "<div class=\"texts\">更新したグリフはありません。<br><br><a href=\"/wiki/Special:Renewall?view=listup&target=$cgi_target\">部品引用グリフ一覧へ戻る</a></div>";
+:735
+$title = qq|最近更新したページ|;
+$title = qq|Recent Changes|;
+:807
+$byuser = " $cgi_user に";
+$byuser = " by $cgi_user";
+:809
+$buffer .= qq|<div class="texts">以下は${now}までに${byuser}編集された <span class="notice">$pages</span> ページです。（<span class="notice">N</span>=新規項目、日時は日本時間）<br>|;
+$buffer .= qq|<div class="texts">Below are the last <span class="notice">$pages</span> changes${byuser}, as of ${now}. (<span class="notice">N</span>=new page, notations of time are at JST[GMT+09:00])<br>|;
+:810
+$buffer .= qq(最近の <a href="/wiki/Special:Recentchanges?view=50$hidebots$hideanons$hideliu$hidemyself$hideauto$listtype$setuser">50</a> | <a href="/wiki/Special:Recentchanges?view=100$hidebots$hideanons$hideliu$hidemyself$hideauto$listtype$setuser">100</a> | <a href="/wiki/Special:Recentchanges?view=250$hidebots$hideanons$hideliu$hidemyself$hideauto$listtype$setuser">250</a> | <a href="/wiki/Special:Recentchanges?view=500$hidebots$hideanons$hideliu$hidemyself$hideauto$listtype$setuser">500</a> 件分を表示する<br>);
+$buffer .= qq(Show last <a href="/wiki/Special:Recentchanges?view=50$hidebots$hideanons$hideliu$hidemyself$hideauto$listtype$setuser">50</a> | <a href="/wiki/Special:Recentchanges?view=100$hidebots$hideanons$hideliu$hidemyself$hideauto$listtype$setuser">100</a> | <a href="/wiki/Special:Recentchanges?view=250$hidebots$hideanons$hideliu$hidemyself$hideauto$listtype$setuser">250</a> | <a href="/wiki/Special:Recentchanges?view=500$hidebots$hideanons$hideliu$hidemyself$hideauto$listtype$setuser">500</a> changes<br>);
+:811
+$buffer .= qq(表示の対象: <a href="/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons$hideliu$hidemyself$hideauto&listtype=glyph$offset$offsetdir$setuser">グリフのみ</a> | <a href="/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons$hideliu$hidemyself$hideauto&listtype=document$offset$offsetdir$setuser">文章のみ</a> | <a href="/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons$hideliu$hidemyself$hideauto&listtype=both$offset$offsetdir$setuser">いずれも</a><br>);
+$buffer .= qq(List up for changes of: <a href="/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons$hideliu$hidemyself$hideauto&listtype=glyph$offset$offsetdir$setuser">glyphs</a> | <a href="/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons$hideliu$hidemyself$hideauto&listtype=document$offset$offsetdir$setuser">documents</a> | <a href="/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons$hideliu$hidemyself$hideauto&listtype=both$offset$offsetdir$setuser">both glyphs and documents</a><br>);
+:813
+$buffer .= qq(ボットの編集を<a href="/wiki/Special:Recentchanges?view=$limit&hidebots=0$hideanons$hideliu$hidemyself$hideauto$listtype$offset$offsetdir">表示</a>);
+$buffer .= qq(<a href="/wiki/Special:Recentchanges?view=$limit&hidebots=0$hideanons$hideliu$hidemyself$hideauto$listtype$offset$offsetdir">Show</a> bots);
+:815
+$buffer .= qq(ボットの編集を<a href="/wiki/Special:Recentchanges?view=$limit&hidebots=1$hideanons$hideliu$hidemyself$hideauto$listtype$offset$offsetdir">隠す</a>);
+$buffer .= qq(<a href="/wiki/Special:Recentchanges?view=$limit&hidebots=1$hideanons$hideliu$hidemyself$hideauto$listtype$offset$offsetdir">Hide</a> bots);
+:819
+$buffer .= qq(匿名利用者の編集を<a href="/wiki/Special:Recentchanges?view=$limit$hidebots&hideanons=0$hideliu$hidemyself$hideauto$listtype$offset$offsetdir">表示</a>);
+$buffer .= qq(<a href="/wiki/Special:Recentchanges?view=$limit$hidebots&hideanons=0$hideliu$hidemyself$hideauto$listtype$offset$offsetdir">Show</a> anonymous users);
+:821
+$buffer .= qq(匿名利用者の編集を<a href="/wiki/Special:Recentchanges?view=$limit$hidebots&hideanons=1$hideliu$hidemyself$hideauto$listtype$offset$offsetdir">隠す</a>);
+$buffer .= qq(<a href="/wiki/Special:Recentchanges?view=$limit$hidebots&hideanons=1$hideliu$hidemyself$hideauto$listtype$offset$offsetdir">Hide</a> anonymous users);
+:825
+$buffer .= qq(登録利用者の編集を<a href="/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons&hideliu=0$hidemyself$hideauto$listtype$offset$offsetdir">表示</a>);
+$buffer .= qq(<a href="/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons&hideliu=0$hidemyself$hideauto$listtype$offset$offsetdir">Show</a> logged-in users);
+:827
+$buffer .= qq(登録利用者の編集を<a href="/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons&hideliu=1$hidemyself$hideauto$listtype$offset$offsetdir">隠す</a>);
+$buffer .= qq(<a href="/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons&hideliu=1$hidemyself$hideauto$listtype$offset$offsetdir">Hide</a> logged-in users);
+:831
+$buffer .= qq(自分の編集を<a href="/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons$hideliu&hidemyself=0$hideauto$listtype$offset$offsetdir">表示</a>);
+$buffer .= qq(<a href="/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons$hideliu&hidemyself=0$hideauto$listtype$offset$offsetdir">Show</a> my edits);
+:833
+$buffer .= qq(自分の編集を<a href="/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons$hideliu&hidemyself=1$hideauto$listtype$offset$offsetdir">隠す</a>);
+$buffer .= qq(<a href="/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons$hideliu&hidemyself=1$hideauto$listtype$offset$offsetdir">Hide</a> my edits);
+:837
+$buffer .= qq(自動編集を<a href="/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons$hideliu$hidemyself&hideauto=0$listtype$offset$offsetdir$setuser">表示</a>);
+$buffer .= qq(<a href="/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons$hideliu$hidemyself&hideauto=0$listtype$offset$offsetdir$setuser">Show</a> automatic posting);
+:839
+$buffer .= qq(自動編集を<a href="/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons$hideliu$hidemyself&hideauto=1$listtype$offset$offsetdir$setuser">隠す</a>);
+$buffer .= qq(<a href="/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons$hideliu$hidemyself&hideauto=1$listtype$offset$offsetdir$setuser">Hide</a> automatic posting);
+:842
+$buffer .= "<br><form>利用者<input type=\"text\" name=\"user\" size=\"12\" value=\"$cgi_user\">の履歴を<input type=\"submit\" value=\"見る\">";
+$buffer .= "<br><form><input type=\"submit\" value=\"See\"> recent logs of user <input type=\"text\" name=\"user\" size=\"12\" value=\"$cgi_user\">";
+:844
+$buffer .= " | <a href=\"?user=\">利用者指定の解除</a>";
+$buffer .= " | <a href=\"?user=\">clear limitation of user</a>";
+:853
+$buffer2 .= "<div class=\"texts\">（";
+$buffer2 .= "<div class=\"texts\">(";
+:855
+$buffer2 .= "最新";
+$buffer2 .= "latest";
+:857
+$buffer2 .= "<a href=\"/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons$hideliu$hidemyself$hideauto$listtype$setuser\">最新</a>";
+$buffer2 .= "<a href=\"/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons$hideliu$hidemyself$hideauto$listtype$setuser\">latest</a>";
+:861
+$buffer2 .= "最古";
+$buffer2 .= "earliest";
+:863
+$buffer2 .= "<a href=\"/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons$hideliu$hidemyself$hideauto$listtype&dir=prev$setuser\">最古</a>";
+$buffer2 .= "<a href=\"/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons$hideliu$hidemyself$hideauto$listtype&dir=prev$setuser\">earliest</a>";
+:865,871,877
+$buffer2 .= "）（";
+$buffer2 .= ") (";
+:867
+$buffer2 .= "新しい${limit}件";
+$buffer2 .= "newer ${limit}";
+:869
+$buffer2 .= "<a href=\"/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons$hideliu$hidemyself$hideauto$listtype&offset=$ts_newest&dir=prev$setuser\">新しい${limit}件</a>";
+$buffer2 .= "<a href=\"/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons$hideliu$hidemyself$hideauto$listtype&offset=$ts_newest&dir=prev$setuser\">newer ${limit}</a>";
+:873
+$buffer2 .= "古い${limit}件";
+$buffer2 .= "older ${limit}";
+:875
+$buffer2 .= "<a href=\"/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons$hideliu$hidemyself$hideauto$listtype&offset=$ts_oldest$setuser\">古い${limit}件</a>";
+$buffer2 .= "<a href=\"/wiki/Special:Recentchanges?view=$limit$hidebots$hideanons$hideliu$hidemyself$hideauto$listtype&offset=$ts_oldest$setuser\">older ${limit}</a>";
+:879
+$buffer2 .= "） を見る</div>";
+$buffer2 .= ")</div>";
+:882
+$buffer .= qq|<span class="text">更新されたページはありません。</span>|;
+$buffer .= qq|<span class="text">There are no pages being updated.</span>|;
+:900
+<title>GlyphWiki - 最近更新したページ</title>
+<title>GlyphWiki - Recent changes</title>
+:902
+<description>最近付け加えられた変更はこのフィードで確認できます。</description>
+<description>最近付け加えられた変更はこのフィードで確認できます。</description>
+:1038
+if($temp eq "GlyphWiki:メインページ"){
+if($temp eq "GlyphWiki:MainPage"){
+:1039
+$temp = "メインページ";
+$temp = "MainPage";
+:1041
+$buffer .= qq|<h1>$temp の変更履歴</h1>|;
+$buffer .= qq|<h1>Revision history of $temp</h1>|;
+:1042
+$title = qq|$temp の変更履歴|;
+$title = qq|Revision history of $temp|;
+:1045
+$buffer .= "<div class=\"texts\">凡例:日時はJST</div>";
+$buffer .= "<div class=\"texts\">usage : in JST time</div>";
+:1047
+$buffer .= "<div class=\"texts\">凡例:(最新版) = 最新版との比較、(前の版) = 直前の版との比較、日時はJST</div>";
+$buffer .= "<div class=\"texts\">(cur) = difference from current version, (prev) = difference from preceding version, 日時はJST</div>";
+:1086
+$history_list .= "(最新版) ";
+$history_list .= "(cur) ";
+:1089
+$history_list .= "(<a href=\"/wiki/$db_wiki_name?diff=$data[1]\">最新版</a>) ";
+$history_list .= "(<a href=\"/wiki/$db_wiki_name?diff=$data[1]\">cur</a>) ";
+:1092
+$history_list .= "(<a href=\"/wiki/$db_wiki_name\@$data[1]?diff=".($data[1] - 1)."\">前の版</a>) ";
+$history_list .= "(<a href=\"/wiki/$db_wiki_name\@$data[1]?diff=".($data[1] - 1)."\">prev</a>) ";
+:1094
+$history_list .= "(前の版) ";
+$history_list .= "(prev) ";
+:1108
+$buffer .= qq|<div class="texts">（残りは省略されています ... <a href="?action=history&view=all">すべて表示する</a>）</div>|;
+$buffer .= qq|<div class="texts">（snipped ... <a href="?action=history&view=all">view all</a>）</div>|;
+:1111
+$buffer .= qq|<span class="text">このページには変更履歴がありません。</span>|;
+$buffer .= qq|<span class="text">There is no edit history for this page.</span>|;
+:1132
+$title = qq|検索|;
+$title = qq|Search results|;
+:1147
+$buffer .= qq|<span class="text">グリフウィキの検索についての詳しい情報は、<a href="/wiki/GlyphWiki:$URL_KENSAKU">GlyphWiki:$WORD_KENSAKU</a>をご覧下さい。</span><br><br>|;
+$buffer .= qq|<span class="text">See more details for searching function. <a href="/wiki/GlyphWiki:$URL_KENSAKU">GlyphWiki:$WORD_KENSAKU</a></span><br><br>|;
+:1151
+$buffer .= qq|<br><span class="query">（アルファベットの大文字と小文字は区別しません）</span></form>|;
+$buffer .= qq|<br><span class="query">（small and capital letter of the alphabet are not distinguished)</span></form>|;
+:1161
+$buffer .= qq|<div class="texts">$temp 件目以降の検索結果です。<a href="?search=$query&fulltext=検索&offset=$prev">これより前の検索結果を見る</a></div>|;
+$buffer .= qq|<div class="texts">results of No.$temp <a href="?search=$query&fulltext=検索&offset=$prev">see previous results</a></div>|;
+:1177
+$buffer .= qq|<div class="texts"><a href="?search=$query&fulltext=検索&offset=$prev">これより前の検索結果を見る</a></div>|;
+$buffer .= qq|<div class="texts"><a href="?search=$query&fulltext=検索&offset=$prev">see previous results</a></div>|;
+:1181
+$buffer .= qq|<div class="texts">さらに検索結果がある可能性があります。<a href="?search=$query&fulltext=検索&offset=$next">これ以降の検索結果を見る</a></div>|;
+$buffer .= qq|<div class="texts">There are more results. <a href="?search=$query&fulltext=検索&offset=$next">see next results</a></div>|;
+:1185
+$buffer .= qq|<br><span class="text">該当するページが見つかりませんでした。|;
+$buffer .= qq|<br><span class="text">No page text matches.|;
+:1187
+$buffer .= "検索キーワードは2文字以上である必要があります。";
+$buffer .= "Keyword must be at least 2 characters.";
+:1264
+$message .= "<div class=\"texts\"><p>あなたのメールアドレスは確認されました。ログインしてウィキを使用できます。</p><p><a href=\"/wiki/Special:Userlogin\">ログイン</a></p></div>";
+$message .= "<div class=\"texts\"><p>Your e-mail address has been confirmed. You may now log in and enjoy the wiki.</p><p><a href=\"/wiki/Special:Userlogin\">log in</a></p></div>";
+:1266
+$message .= "<div class=\"texts\"><p>確認用コードが正しくありません。このコードは期限切れです。</p><p><a href=\"/wiki/\">$LINK_DEFAULT</a> に戻る。</p></div>";
+$message .= "<div class=\"texts\"><p>Invalid confirmation code. The code may have expired.</p><p>Back to <a href=\"/wiki/\">$LINK_DEFAULT</a></p></div>";
+:1268
+$message .= "<div class=\"texts\"><p>このページを表示するにはログインが必要です。</p><p><a href=\"/wiki/Special:Userlogin?returnto=Special:Confirmemail\">ログイン</a></p></div>";
+$message .= "<div class=\"texts\"><p>You need to log in to see this page.</p><p><a href=\"/wiki/Special:Userlogin?returnto=Special:Confirmemail\">log in</a></p></div>";
+:1270
+$message .= "<div class=\"messagegreen\">メールアドレス確認メールを送信しました</div>";
+$message .= "<div class=\"messagegreen\">Confirmation email has been sent to you.</div>";
+:1271,1285
+$message .= "<div class=\"texts\"><p>現在のメールアドレス登録状況：メールアドレス確認メール送信済（メールを確認してください。まだメールアドレス正当性の確認は完了していません）</p>";
+$message .= "<div class=\"texts\"><p>Current status: Confirmation email has been sent. (Please check your email. The confirmation has not been done yet.)</p>";
+:1272,1286,1305
+$message .= "<p><form method=\"post\">もう一度確認メールを送りなおす：<input type=\"hidden\" name=\"page\" value=\"Special:Confirmemail\"><input type=\"submit\" name=\"buttons\" value=\"$BUTTON_CONFIRM_EMAIL\"></form></p>";
+$message .= "<p><form method=\"post\">send confirmatoin email again:<input type=\"hidden\" name=\"page\" value=\"Special:Confirmemail\"><input type=\"submit\" name=\"buttons\" value=\"$BUTTON_CONFIRM_EMAIL\"></form></p>";
+:1274,1288,1300,1307,1314
+$message .= "<p><form method=\"post\">新たにメールアドレスを登録する：";
+$message .= "<p><form method=\"post\">register a new email address:";
+:1276,1282,1290,1309
+$message .= "（現在登録されているメールアドレスを上書きします。再度確認メールの送信が必要となります）</p></div>";
+$message .= "(overwritten by new email address and you need to confirm new email address again)</p></div>";
+:1278
+$message .= "<p class=\"rednotice\">有効なメールアドレスが登録されていません</p>";
+$message .= "<p class=\"rednotice\">no valid email address has registered</p>";
+:1279,1293,1318
+$message .= "<div class=\"texts\"><p>現在のメールアドレス登録状況：メールアドレス未登録</p>";
+$message .= "<div class=\"texts\"><p>Current status: no email address has registered</p>";
+:1280,1294
+$message .= "<p><form method=\"post\">メールアドレスを再登録する：";
+$message .= "<p><form method=\"post\">register email address again:";
+:1284
+$message .= "<div class=\"messagegreen\">メールアドレスを登録しました。メールアドレス確認メールを送信しました</div>";
+$message .= "<div class=\"messagegreen\">Registered email address. Email for confirmation has been sent to you.</div>";
+:1292
+$message .= "<p class=\"rednotice\">メールアドレスの登録に失敗しました。有効ではないメールアドレスが入力されたようです</p>";
+$message .= "<p class=\"rednotice\">Failed to register email address. There was an invalid email address sent.</p>";
+:1299
+$message .= "<div class=\"texts\"><p>現在のメールアドレス登録状況：メールアドレス確認済（$temp）</p>";
+$message .= "<div class=\"texts\"><p>Current status: email address has been confirmed ($temp)</p>";
+:1302
+$message .= "（現在登録されているメールアドレスを上書きします。再度メールの確認が必要となります）</p></div>";
+$message .= "(overwritten by new email address and you need to confirm new email address again）</p></div>";
+:1304
+$message .= "<div class=\"texts\"><p>現在のメールアドレス登録状況：メールアドレス確認メール送信済（メールが届いていないか確認してください。まだメールアドレス正当性の確認は完了していません）</p>";
+$message .= "<div class=\"texts\"><p>Current status: Confirmation email has been sent. (Please check your email. The confirmation has not been done yet.)</p>";
+:1311
+$message .= "<div class=\"texts\"><p>現在のメールアドレス登録状況：メールアドレス未確認</p>";
+$message .= "<div class=\"texts\"><p>Current status: email address has not been confirmed</p>";
+:1312
+$message .= "<p>このウィキではメールアドレスの正当性の確認が必要です。以下のボタンを押すと「GlyphWikiメールアドレスの確認」という件名の確認メールがあなたのメールアドレスに送られます。メールには確認用コードを含むリンクが書かれています。そのリンクを開くことによってメールアドレスの正当性が確認されます。</p><p><form method=\"post\"><input type=\"hidden\" name=\"page\" value=\"Special:Confirmemail\"><input type=\"submit\" name=\"buttons\" value=\"$BUTTON_CONFIRM_EMAIL\"></form></p>";
+$message .= "<p>GlyphWiki requires that confirmation of your e-mail address before using e-mail features. Activate the button below to send a confirmation mail to your address. The mail will include a link containing a code; load the link in your browser to confirm that your e-mail address is valid.</p><p><form method=\"post\"><input type=\"hidden\" name=\"page\" value=\"Special:Confirmemail\"><input type=\"submit\" name=\"buttons\" value=\"$BUTTON_CONFIRM_EMAIL\"></form></p>";
+:1316
+$message .= "（現在登録されているメールアドレスを上書きします）</p></div>";
+$message .= "(overwritten by new email address)</p></div>";
+:1319
+$message .= "<p><form method=\"post\">メールアドレスを登録する：";
+$message .= "<p><form method=\"post\">register your email address:";
+:1321
+$message .= "（メールアドレスを登録するとパスワードを忘れたときに再発行することができます）</p></div>";
+$message .= "(you would be able to reissue the log in password if you register your email address)</p></div>";
+:1325
+my $title = "メールアドレスの登録・確認";
+my $title = "Register and Confirm your email address";
+:1483,1503,1522
+$message_login .= "<div class=\"messagered\"><span class=\"notice\">ログイン失敗:</span> ";
+$message_login .= "<div class=\"messagered\"><span class=\"notice\">Login error:</span> ";
+:1485,1524
+$message_login .= "利用者名を正しく指定していません。<span class=\"small\">利用者名は 英小文字、数字、“-”からなります。</span>";
+$message_login .= "You have not specified a valid user name. <span class=\"small\">User name consist from small letters, numbers and hyphen("-").</span>";
+:1488
+$message_login .= "\"$cgi_name\" という利用者は見当たりません。綴りが正しいことを再度確認するか、下記のフォームを使ってアカウントを作成してください。";
+$message_login .= "There is no user by the name \"$cgi_name\". Check your spelling, or create a new account.";
+:1490
+$message_login .= "パスワードを空にすることはできません。再度入力してください。";
+$message_login .= "Password entered was blank. Please try again.";
+:1492
+$message_login .= "パスワードが間違っています。再度入力してください。";
+$message_login .= "Incorrect password entered. Please try again.";
+:1494
+$message_login .= "グリフウィキではログインにクッキーを使います。しかし、ご使用のブラウザ等がクッキーを無効にしているようです。クッキーを有効にして、もう一度試してみてください。";
+$message_login .= "GlyphWiki uses cookies to log in users. You have cookies disabled. Please enable them and try again.";
+:1496
+$message_login .= "利用者のアカウントは作成されましたが、ログインしていません。グリフウィキではログインにクッキーを使います。あなたはクッキーを無効な設定にしているようです。クッキーを有効にしてから作成した利用者名とパスワードでログインしてください。";
+$message_login .= "The user account was created, but you are not logged in. GlyphWiki uses cookies to log in users. You have cookies disabled. Please enable them, then log in with your new username and password.";
+:1506
+$message_login .= "メールの送信中にエラーが発生しました: 利用者 \"$cgi_name\" のメールアドレスは登録されていません。";
+$message_login .= "Error sending mail: There is no e-mail address recorded for user \"$cgi_name\".";
+:1509
+$message_login .= "メールの送信中にエラーが発生しました: 利用者 \"$cgi_name\" のメールアドレスはまだ確認されていません。";
+$message_login .= "Error sending mail: 利用者 \"$cgi_name\" のメールアドレスはまだ確認されていません。";
+:1511
+$message_login .= "新しいパスワードは24時間以内に送信済みです。悪用防止のため、パスワードは24時間間隔で再発行可能となります。";
+$message_login .= "A password reminder has already been sent, within the last 24 hours. To prevent abuse, only one password reminder will be sent per 24 hours.";
+:1516
+$message_login .= "新しいパスワードを \"$cgi_name\" さんの登録済みメールアドレスにお送りしました。メールを受け取ったら、再度ログインしてください。";
+$message_login .= "A new password has been sent to the e-mail address registered for \"$cgi_name\". Please log in again after you receive it.";
+:1526
+$message_login .= "その利用者名はすでに使われています。ほかの名前をお選びください。";
+$message_login .= "Username entered already in use. Please choose a different name.";
+:1528,1560
+$message_login .= "パスワードが短すぎます。1文字以上の文字列にしてください。";
+$message_login .= "Your password is invalid or too short. It must have at least 2 characters.";
+:1530,1562
+$message_login .= "両方のパスワードが一致しません。";
+$message_login .= "The passwords you entered do not match.";
+:1532
+$message_login .= "確認コードが間違っているか入力されていません";
+$message_login .= "The confirmation code is invalid or empty.";
+:1535
+$message_login .= "指定した名前 \"$cgi_name\" は既に存在しているアカウント \"$misleading_name\" と類似しているため使用できません。別の名前を使用してください。";
+$message_login .= "Username you entered: \"$cgi_name\" is invalid for similar to an existing account: \"$misleading_name\". Please enter another one.";
+:1543
+$message_login2 = "<p>グリフウィキに \"$cgi_name\" としてログインしました。</p>";
+$message_login2 = "<p>You are now logged in to GlyphWiki as \"$cgi_name\".</p>";
+:1546
+$message_login = "<div class=\"messagegreen\">メールアドレスの正当性を確認するためのコードを含んだメールを送信しました。この確認を行わなくてもログインはできますが、確認するまでメール通知の機能は無効化されます。</div>";
+$message_login = "<div class=\"messagegreen\">A confirmation e-mail has been sent to the nominated e-mail address. Before any other mail is sent to the account, you will have to follow the instructions in the e-mail, to confirm that the account is actually yours.</div>";
+:1549
+$message_login2 = "<p>あなたのアカウントができました。</p>";
+$message_login2 = "<p>Your account has created.</p>";
+:1556
+$message_login .= "メールで送信した臨時パスワードでログインしています。ログインを完了するには、新しいパスワードを設定しなおす必要があります。";
+$message_login .= "You logged in with a temporary e-mailed code. To finish logging in, you must set a new password here:";
+:1558
+$message_login .= "データがセットされていません。";
+$message_login .= "There are no data to be set.";
+:1585
+$base = "ログイン成功";
+$base = "Login successful";
+:1587
+$base = "パスワードの再設定";
+$base = "Reset password";
+:1589
+$base = "ログインまたはアカウント作成";
+$base = "Log in / create account";
+:1605
+<p>自動化スクリプトによるパスワードクラック攻撃を防止するため、下の画像に表示されている文字を入力してください：（<a href="/wiki/GlyphWiki:$URL_CAPTCHA">詳細</a>)<br>
+<p>To refuse attacks by automated script, please input the characters inside the following image: (<a href="/wiki/GlyphWiki:$URL_CAPTCHA">more information</a>)<br>
+:1618
+<h2>ログイン</h2>
+<h2>Log in</h2>
+:1621
+<p>アカウントはお持ちですか？<a href="/wiki/Special:Userlogin?type=createaccount&returnto=$cgi_returnto" class="notice">アカウントを作成</a></p>
+<p>Don't have an account? <a href="/wiki/Special:Userlogin?type=createaccount&returnto=$cgi_returnto" class="notice">Create one</a>.</p>
+:1623
+<p>グリフウィキにログインするにはクッキーを有効にする必要があります。</p>
+<p>You must have cookies enabled to log in to GlyphWiki.</p>
+:1629,1667
+<tr><td align="right">利用者名<td><input type="text" name="name" value="$temp_name">
+<tr><td align="right">Username:<td><input type="text" name="name" value="$temp_name">
+:1630,1668
+<tr><td align="right">パスワード<td><input type="password" name="password">
+<tr><td align="right">Password:<td><input type="password" name="password">
+:1631,1671,1718
+<tr><td>&nbsp;<td><input id="remember" type="checkbox" name="savepassword" value="savepassword"> <label for="remember">セッションを越えてパスワードを記憶する</label>
+<tr><td>&nbsp;<td><input id="remember" type="checkbox" name="savepassword" value="savepassword"> <label for="remember">Remember me (up to 7 days)</label>
+:1639
+<li>利用者名とパスワードを入力して、<span class="notice">ログイン</span>をクリックしてください。
+<li>input 'Username' and 'Password' then click <span class="notice">login</span> button
+:1640
+<li>パスワードを忘れてしまった場合は、利用者名を入力して<span class="notice">$BUTTON_NEW_PASSWORD</span>をクリックすることによりパスワードの再発行を受けられます（ただし、メールアドレスを登録していた場合に限られます）。
+<li>input 'Username' and click <span class="notice">$BUTTON_NEW_PASSWORD</span> if you forget your 'Password', then you can reset your 'Password' (only when you registered an E-mail address)
+:1641,1682
+<li>その他、ログインに関する情報は<a href="/wiki/GlyphWiki:$URL_LOGIN">GlyphWiki:$WORD_LOGIN</a>を参照してください。 
+<li>その他、ログインに関する情報は<a href="/wiki/GlyphWiki:$URL_LOGIN">GlyphWiki:$WORD_LOGIN</a>を参照してください。 
+:1652
+<h2>アカウント作成</h2>
+<h2>Create account</h2>
+:1654
+<p>すでにアカウントをお持ちの場合: <a href="/wiki/Special:Userlogin?type=loginfirst&returnto=$cgi_returnto" class="notice">ログイン</a></p>
+<p>Already have an account? <a href="/wiki/Special:Userlogin?type=loginfirst&returnto=$cgi_returnto" class="notice">Log in</a></p>
+:1656
+<p>自動で実行されるスパム防止のため、利用者名を登録する際には下の画像に表示される単語を入力する必要があります:<br>
+<p>To help protect against automated account creation, please enter the words that appear below in the box<br>
+:1657
+（<a href="/wiki/GlyphWiki:$URL_CAPTCHA">これは何ですか？</a>）</p>
+（<a href="/wiki/GlyphWiki:Captcha">more info</a>）</p>
+:1669
+<tr><td align="right"><nobr>パスワード再入力</nobr><td><input type="password" name="password2">
+<tr><td align="right"><nobr>Retype password:</nobr><td><input type="password" name="password2">
+:1670
+<tr><td align="right">メールアドレス:<td><input type="text" name="email">
+<tr><td align="right">E-mail (optional)<td><input type="text" name="email">
+:1672
+<tr><td>&nbsp;<td><input type="submit" name="buttons" value="アカウント作成" class="notice">
+<tr><td>&nbsp;<td><input type="submit" name="buttons" value="Create account" class="notice">
+:1679
+<li>使用したい利用者名とパスワードを決めて入力し、<span class="notice">アカウント作成</span>をクリックしてください。
+<li>Simply choose a username (not the same as your email) and a unique password and click <span class="notice">"create account"</span>.
+:1680
+<li>作成したアカウントの削除はできません。
+<li>You can't close the created account.
+:1681
+<li>利用者名には英小文字、数字と“-”が使えます。利用者名を決める際の注意点や詳細な解説は、<a href="/wiki/GlyphWiki:$URL_USERNAME">ユーザー名</a>を参照してください。
+<li>You can use the alphabet(small letters), numbers and hyphen for ID. See <a href="/wiki/GlyphWiki:$URL_USERNAME">more information</a> for details.
+:1690
+<h1>$cgi_name さん、ようこそ!</h1>
+<h1>Welcome, $cgi_name!</h1>
+:1693,1751
+<p><a href="/wiki/$cgi_returnto">$html_returnto</a> に戻る。
+<p>Return to <a href="/wiki/$cgi_returnto">$html_returnto</a>.
+:1707
+<h2>パスワードを設定しなおす</h2>
+<h2>Reset account password</h2>
+:1715
+<tr><td align="right">利用者名:<td>$temp_name<input type="hidden" name="name" value="$temp_name"><input type="hidden" name="password" value="$temp_password">
+<tr><td align="right">Username:<td>$temp_name<input type="hidden" name="name" value="$temp_name"><input type="hidden" name="password" value="$temp_password">
+:1716
+<tr><td align="right">新しいパスワード:<td><input type="password" name="newpassword">
+<tr><td align="right">New password:<td><input type="password" name="newpassword">
+:1717
+<tr><td align="right">パスワード再入力<td><input type="password" name="newpassword2">
+<tr><td align="right">Retype new password<td><input type="password" name="newpassword2">
+:1719
+<tr><td>&nbsp;<td><input type="submit" name="buttons" value="再設定してログイン">
+<tr><td>&nbsp;<td><input type="submit" name="buttons" value="Set password and log in">
+:1743
+my $title = "ログアウト";
+my $title = "User logout";
+:1749
+<p><span class="notice">ログアウトしました。</span>このままグリフウィキを匿名で使い続けることができます。もう一度ログインして元の、あるいは別の利用者として使うこともできます。</p>
+<p><span class="notice">You are now logged out.</span> You can continue to use GlyphWiki anonymously, or you can log in again as the same or as a different user.</p>
+:1750
+<p>※いくつかのページはブラウザのキャッシュをクリアするまでログインしているかのように表示されることがあります。</p>
+<p>Note that some pages may continue to be displayed as if you were still logged in, until you clear your browser cache.</p>
+
+!/home/kamichi/glyphwiki/page_left.pl
+:21
+$buffer .= qq|ナビゲーション|;
+$buffer .= qq|navigation|;
+:25
+$buffer .= qq|<li><a href="/wiki/Special:Recentchanges">最近更新したページ</a>|;
+$buffer .= qq|<li><a href="/wiki/Special:Recentchanges">Recent changes</a>|;
+:26
+$buffer .= qq|<li><a href="/wiki/Special:Random">おまかせ表示</a>|;
+$buffer .= qq|<li><a href="/wiki/Special:Random">Random glyph</a>|;
+:32
+$buffer .= qq|ヘルプ|;
+$buffer .= qq|help|;
+:35
+$buffer .= qq|<li><a href="/wiki/GlyphWiki:$URL_HOWTO">どうやって使うのか</a>|;
+$buffer .= qq|<li><a href="/wiki/GlyphWiki:$URL_HOWTO">Tutorial</a>|;
+:36
+$buffer .= qq|<li><a href="/wiki/GlyphWiki:$URL_FAQ">よくある質問</a>|;
+$buffer .= qq|<li><a href="/wiki/GlyphWiki:$URL_FAQ">FAQ</a>|;
+:37
+$buffer .= qq|<li><a href="/wiki/GlyphWiki:$URL_JOIN">あなたにできること</a>|;
+$buffer .= qq|<li><a href="/wiki/GlyphWiki:$URL_JOIN">Join us</a>|;
+:38
+$buffer .= qq|<li><a href="/wiki/GlyphWiki:$URL_BUG">バグ報告</a>|;
+$buffer .= qq|<li><a href="/wiki/GlyphWiki:$URL_BUG">Bug reports</a>|;
+:39
+$buffer .= qq|<li><a href="/wiki/GlyphWiki:$URL_NEWS">お知らせ</a>|;
+$buffer .= qq|<li><a href="/wiki/GlyphWiki:News">News</a>|;
+:40
+$buffer .= qq|<li><a href="/wiki/GlyphWiki:$URL_IDOBATA">井戸端</a>|;
+$buffer .= qq|<li><a href="/wiki/GlyphWiki:$URL_IDOBATA">Village pump</a>|;
+:46
+$buffer .= qq|検索|;
+$buffer .= qq|search|;
+:54
+$buffer .= qq|<ul><li><a href="http://fonts.jp/glyphwiki/kensaku.cgi">筆画検索（試行）</a></ul>|;
+$buffer .= qq|<ul><li><a href="http://fonts.jp/glyphwiki/kensaku.cgi">glyph search by strokes</a></ul>|;
+:55
+$buffer .= qq|<ul><li><a href="http://fonts.jp/glyphwiki/hwr.html">手書き検索（試行）</a></ul>|;
+$buffer .= qq|<ul><li><a href="http://fonts.jp/glyphwiki/hwr.html">glyph search by hand writing</a></ul>|;
+:56
+$buffer .= qq|<ul><li><a href="http://fonts.jp/glyphwiki/hwr2.html">手書き検索２（試行）</a></ul>|;
+$buffer .= qq|<ul><li><a href="http://fonts.jp/glyphwiki/hwr2.html">glyph search by hand writing 2</a></ul>|;
+:61
+$buffer .= qq|ツールボックス|;
+$buffer .= qq|toolbox|;
+:65
+$buffer .= qq|<li><a href="/wiki/Special:Mustrenew">旧部品引用グリフ</a>|;
+$buffer .= qq|<li><a href="/wiki/Special:Mustrenew">Glyphs which using old components</a>|;
+:68
+$buffer .= qq|<li><a href="/wiki/$fullwikiname">この版への固定リンク</a>|;
+$buffer .= qq|<li><a href="/wiki/$fullwikiname">Permanent link</a>|;
+:77
+$buffer .= qq|他の言語|;
+$buffer .= qq|languages|;
+
+!/home/kamichi/glyphwiki/page_right_general.pl
+:60
+$r_data =~ s/\[\[([^ \]]+ )?Talk:([^\]]+)\]\]/[[$1ノート:$2]]/g;
+# no operation
+:61
+$r_data =~ s/\[\[([^ \]]+ )?GlyphWiki-talk:([^\]]+)\]\]/[[$1GlyphWiki-ノート:$2]]/g;
+# no operation
+:62
+$r_data =~ s/\[\[([^ \]]+ )?Group:([^\]]+)\]\]/[[$1グループ:$2]]/g;
+# no operation
+:63
+$r_data =~ s/\[\[([^ \]]+ )?Group-talk:([^\]]+)\]\]/[[$1グループ-ノート:$2]]/g;
+# no operation
+:64
+$r_data =~ s/\[\[([^ \]]+ )?User:([^\]]+)\]\]/[[$1利用者:$2]]/g;
+# no operation
+:65
+$r_data =~ s/\[\[([^ \]]+ )?User-talk:([^\]]+)\]\]/[[$1利用者-会話:$2]]/g;
+# no operation
+:68
+$cgi_textbox =~ s/\[\[([^ \]]+ )?Talk:([^\]]+)\]\]/[[$1ノート:$2]]/g;
+# no operation
+:69
+$cgi_textbox =~ s/\[\[([^ \]]+ )?GlyphWiki-talk:([^\]]+)\]\]/[[$1GlyphWiki-ノート:$2]]/g;
+# no operation
+:70
+$cgi_textbox =~ s/\[\[([^ \]]+ )?Group:([^\]]+)\]\]/[[$1グループ:$2]]/g;
+# no operation
+:71
+$cgi_textbox =~ s/\[\[([^ \]]+ )?Group-talk:([^\]]+)\]\]/[[$1グループ-ノート:$2]]/g;
+# no operation
+:72
+$cgi_textbox =~ s/\[\[([^ \]]+ )?User:([^\]]+)\]\]/[[$1利用者:$2]]/g;
+# no operation
+:73
+$cgi_textbox =~ s/\[\[([^ \]]+ )?User-talk:([^\]]+)\]\]/[[$1利用者-会話:$2]]/g;
+# no operation
+:109
+$title = qq|$db_wiki_name を編集中|;
+$title = qq|Editing $db_wiki_name|;
+:111
+$title = qq|編集競合: $db_wiki_name|;
+$title = qq|Edit conflict: $db_wiki_name|;
+:113
+$title = qq|データベースエラー: $db_wiki_name|;
+$title = qq|Database error: $db_wiki_name|;
+:115
+$title = qq|データエラー: $db_wiki_name|;
+$title = qq|Data error: $db_wiki_name|;
+:117
+$title = qq|ソースを表示|;
+$title = qq|View source|;
+:146
+$buffer .= "<div class=\"query\"><span class=\"normal\">$db_wiki_name</span> のソース</div>";
+$buffer .= "<div class=\"query\">Source of <span class=\"normal\">$db_wiki_name</span></div>";
+:151
+$buffer .= "<div class=\"version\">版間での差分(日時はJST)</div>";
+$buffer .= "<div class=\"version\">difference among each versions (with JST time)</div>";
+:187
+$newversion = "最新";
+$newversion = "newest";
+:189
+$history_list .= "<li class=\"history\"><a class=\"notice\" href=\"/wiki/$url_db_wiki_name\@$data[1]\">".&local_localtime($data[3])."時点における${newversion}版</a> $temp $summary";
+$history_list .= "<li class=\"history\"><a class=\"notice\" href=\"/wiki/$url_db_wiki_name\@$data[1]\">Revision as of ".&local_localtime($data[3])." (version ${newversion})</a> $temp $summary";
+:190
+$history_list .= "<ul><li>追加された行を<span class=\"newdata\">このように</span>表示します。</ul>";
+$history_list .= "<ul><li>shows added line(s) <span class=\"newdata\">like this</span></ul>";
+:194
+$subtitle = "<h2>".&local_localtime($data[3])."時点における${newversion}版</h2>\n";
+$subtitle = "<h2>Revision as of ".&local_localtime($data[3])." (version ${newversion})</h2>\n";
+:216
+$history_list .= "<li class=\"history\"><a class=\"notice\" href=\"/wiki/$url_db_wiki_name\@$data[1]\">".&local_localtime($data[3])."時点における\@$data[1]版</a> $temp $summary";
+$history_list .= "<li class=\"history\"><a class=\"notice\" href=\"/wiki/$url_db_wiki_name\@$data[1]\">Revision as of ".&local_localtime($data[3])." (version \@$data[1])</a> $temp $summary";
+:217
+$history_list .= "<ul><li>削除された行を<span class=\"olddata\">このように</span>表示します。</ul>";
+$history_list .= "<ul><li>shows deleted line(s) <span class=\"olddata\">like this</span></ul>";
+:244
+$buffer .= "<div class=\"version\">".&local_localtime($r_timestamp)."; ".$temp." による \@${query_version}版<br>";
+$buffer .= "<div class=\"version\">".&local_localtime($r_timestamp)."; version \@${query_version} by ".$temp."<br>";
+:247
+$buffer .= "<a href=\"/wiki/".&url_encode($db_wiki_name)."\@".($query_version - 1)."\">← 前の版</a>";
+$buffer .= "<a href=\"/wiki/".&url_encode($db_wiki_name)."\@".($query_version - 1)."\">← previous version</a>";
+:249
+$buffer .= qq|<span class="disable">← 前の版</span>|;
+$buffer .= qq|<span class="disable">← previous version</span>|;
+:253
+$buffer .= " | <a href=\"/wiki/".&url_encode($db_wiki_name)."\">最新版を表示</a>";
+$buffer .= " | <a href=\"/wiki/".&url_encode($db_wiki_name)."\">latest version</a>";
+:255
+$buffer .= " | <span class=\"disable\">最新版を表示</span>";
+$buffer .= " | <span class=\"disable\">latest version</span>";
+:259
+$buffer .= " | <a href=\"/wiki/".&url_encode($db_wiki_name)."\@".($query_version + 1)."\">次の版 →</a>";
+$buffer .= " | <a href=\"/wiki/".&url_encode($db_wiki_name)."\@".($query_version + 1)."\">next version →</a>";
+:261
+$buffer .= " | <span class=\"disable\">次の版 →</span>";
+$buffer .= " | <span class=\"disable\">next version →</span>";
+:269
+$buffer .= qq|<div class="warning">存在しない版が指定されました。代替として最新版が表示されています。</div>|;
+$buffer .= qq|<div class="warning">存在しない版が指定されました。代替として最新版が表示されています。</div>|;
+:271
+$buffer .= qq|<div class="warning">存在しない版が指定されました。最新版に対する編集となります。</div>|;
+$buffer .= qq|<div class="warning">存在しない版が指定されました。最新版に対する編集となります。</div>|;
+:278
+$buffer .= qq|<div class="warning">警告: あなたはこのページの古い版を編集しています。もしこのグリフを保存すると、この版以降に追加された全ての変更が無効になってしまいます。</div>|;
+$buffer .= qq|<div class="warning">Notice: You are editing an old revision of this page. If you save it, any changes made since then will be removed.</div>|;
+:280
+$buffer .= qq|<div class="warning">警告: あなたはこのページの古い版を編集しています。もしこの文章を保存すると、この版以降に追加された全ての変更が無効になってしまいます。</div>|;
+$buffer .= qq|<div class="warning">Notice: You are editing an old revision of this page. If you save it, any changes made since then will be removed.</div>|;
+:287
+$buffer .= qq|<div class="panel"><span class="warning">グリフウィキには現在この名前の項目はありません。</span><ul><li>グリフを新しく描くには、まず下のテキストボックスに内容を書き込んでください。その際、著作権に注意してください。その後、ページ下部の<span class="notice">■投稿する前に以下を確認して下さい■</span>以下の注意事項をよく確認した上で “$BUTTON_ACCEPT_AND_SUBMIT” ボタンを押してください。そうすればすぐに見えるようになります。<li>もしあなたがグリフウィキに初めて投稿するならば、先に<a href="/wiki/GlyphWiki:$URL_HOWTO">どうやって使うのか</a>を読んでください。<li><span class="notice">投稿のテストをしたい場合、<a href="/wiki/GlyphWiki:$URL_SANDBOX">サンドボックス</a>を利用してください。</span>一度作成した項目はあなたが削除することはできません。<li>他の項目から<a href="/wiki/Special:Search?action=fulltext&search=$url_db_wiki_name">&quot;$db_wiki_name&quot;を検索する</a>。</ul><hr><ul><li><span class="notice">この項目を作成したばかりなのにこのメッセージがでる場合、データベースの更新が遅れているために表示できないのかもしれません。</span>項目を書き直す前にしばらく待ってから、再読込してみてください。<li>以前この項目を作成したことがあるならば、この項目は<a href="/wiki/$URL_DELETE_LOG">既に削除されています</a>。<a href="/wiki/$URL_SAKUJO">$WORD_SAKUJO</a>に削除された理由が記載されているかもしれません。</ul></div>|;
+$buffer .= qq|<div class="panel"><span class="warning">GlyphWiki does not have an article with this exact name.</span><ul><li>グリフを新しく描くには、まず下のテキストボックスに内容を書き込んでください。その際、著作権に注意してください。その後、ページ下部の<span class="notice">*** please confirm the following matters before contributing it ***</span>以下の注意事項をよく確認した上で “$BUTTON_ACCEPT_AND_SUBMIT” ボタンを押してください。そうすればすぐに見えるようになります。<li>もしあなたがグリフウィキに初めて投稿するならば、先に<a href="/wiki/GlyphWiki:$URL_HOWTO">どうやって使うのか</a>を読んでください。<li><span class="notice">投稿のテストをしたい場合、<a href="/wiki/GlyphWiki:$URL_SANDBOX">サンドボックス</a>を利用してください。</span>一度作成した項目はあなたが削除することはできません。<li>他の項目から<a href="/wiki/Special:Search?action=fulltext&search=$url_db_wiki_name">&quot;$db_wiki_name&quot;を検索する</a>。</ul><hr><ul><li><span class="notice">この項目を作成したばかりなのにこのメッセージがでる場合、データベースの更新が遅れているために表示できないのかもしれません。</span>項目を書き直す前にしばらく待ってから、再読込してみてください。<li>以前この項目を作成したことがあるならば、この項目は<a href="/wiki/$URL_DELETE_LOG">既に削除されています</a>。<a href="/wiki/$URL_SAKUJO">$WORD_SAKUJO</a>に削除された理由が記載されているかもしれません。</ul></div>|;
+:289
+$buffer .= qq|<div class="panel"><span class="warning">グリフウィキには現在この名前の項目はありません。</span><ul><li>文章を新しく作成するには、まず下のテキストボックスに内容を書き込んでください。その際、著作権に注意してください。その後、ページ下部の<span class="notice">■投稿する前に以下を確認して下さい■</span>以下の注意事項をよく確認した上で “$BUTTON_ACCEPT_AND_SUBMIT” ボタンを押してください。そうすればすぐに見えるようになります。<li>もしあなたがグリフウィキに初めて投稿するならば、先に<a href="/wiki/GlyphWiki:$URL_HOWTO">どうやって使うのか</a>を読んでください。<li><span class="notice">投稿のテストをしたい場合、<a href="/wiki/GlyphWiki:$URL_SANDBOX">サンドボックス</a>を利用してください。</span>一度作成した項目はあなたが削除することはできません。<li>他の項目から<a href="/wiki/Special:Search?action=fulltext&search=$url_db_wiki_name">&quot;$db_wiki_name&quot;を検索する</a>。</ul><hr><ul><li><span class="notice">この項目を作成したばかりなのにこのメッセージがでる場合、データベースの更新が遅れているために表示できないのかもしれません。</span>項目を書き直す前にしばらく待ってから、再読込してみてください。<li>以前この項目を作成したことがあるならば、この項目は<a href="/wiki/$URL_DELETE_LOG">既に削除されています</a>。<a href="/wiki/$URL_SAKUJO">$WORD_SAKUJO</a>に削除された理由が記載されているかもしれません。</ul></div>|;
+$buffer .= qq|<div class="panel"><span class="warning">GlyphWiki does not have an article with this exact name.</span><ul><li>文章を新しく作成するには、まず下のテキストボックスに内容を書き込んでください。その際、著作権に注意してください。その後、ページ下部の<span class="notice">*** please confirm the following matters before contributing it ***</span>以下の注意事項をよく確認した上で “$BUTTON_ACCEPT_AND_SUBMIT” ボタンを押してください。そうすればすぐに見えるようになります。<li>もしあなたがグリフウィキに初めて投稿するならば、先に<a href="/wiki/GlyphWiki:$URL_HOWTO">どうやって使うのか</a>を読んでください。<li><span class="notice">投稿のテストをしたい場合、<a href="/wiki/GlyphWiki:$URL_SANDBOX">サンドボックス</a>を利用してください。</span>一度作成した項目はあなたが削除することはできません。<li>他の項目から<a href="/wiki/Special:Search?action=fulltext&search=$url_db_wiki_name">&quot;$db_wiki_name&quot;を検索する</a>。</ul><hr><ul><li><span class="notice">この項目を作成したばかりなのにこのメッセージがでる場合、データベースの更新が遅れているために表示できないのかもしれません。</span>項目を書き直す前にしばらく待ってから、再読込してみてください。<li>以前この項目を作成したことがあるならば、この項目は<a href="/wiki/$URL_DELETE_LOG">既に削除されています</a>。<a href="/wiki/$URL_SAKUJO">$WORD_SAKUJO</a>に削除された理由が記載されているかもしれません。</ul></div>|;
+:296
+$buffer .= qq|<div class="message">あなたがこのページを編集し始めた後に、他の誰かがこのページ(またはこのページの別の版)を変更しました。左のグリフが現在の最新の状態です。あなたの編集していたグリフは右側に示されていますので再度編集して下さい。あなたの編集した内容は、"投稿する"をクリックした時に実際に保存されます。</div>|;
+$buffer .= qq|<div class="message">Someone else has changed this page since you started editing it. The left image contains the glyph as it currently exists. Your changes are shown in the right image. You will have to edit again. The glyph you edit will be saved when you press "Save page".</div>|;
+:298
+$buffer .= qq|<div class="message">あなたがこのページを編集し始めた後に、他の誰かがこのページ(またはこのページの別の版)を変更しました。上側のテキストエリアは現在の最新の状態です。あなたの編集していた文章は下側のテキストエリアに示されています。編集していた文章を、上側のテキストエリアの文章に組み込んで下さい。 <span class="notice">上側のテキストエリアの内容だけ</span>が、"保存する"をクリックした時に実際に保存されます。</div>|;
+$buffer .= qq|<div class="message">Someone else has changed this page since you started editing it. The upper text area contains the page text as it currently exists. Your changes are shown in the lower text area. You will have to merge your changes into the existing text. <span class="notice">Only</span> the text in the upper text area will be saved when you press "Save page".</div>|;
+:304
+$buffer .= qq|<div class="message">データベースの書き込みに失敗しました。多数のユーザが同時にアクセスしているか、サーバの負荷が高まっている可能性があります。まだ保存されていませんので、再度投稿してください。あなたの編集した内容は、"投稿する"をクリックした時に実際に保存されます。</div>|;
+$buffer .= qq|<div class="message">Failed to write to the database. 多数のユーザが同時にアクセスしているか、サーバの負荷が高まっている可能性があります。まだ保存されていませんので、再度投稿してください。あなたの編集した内容は、"投稿する"をクリックした時に実際に保存されます。</div>|;
+:309
+$buffer .= qq|<div class="message">グリフデータ、または関連字にエラーがあります。まだ保存されていませんので、内容を確認して再度投稿してください。あなたの編集した内容は、"投稿する"をクリックした時に実際に保存されます。</div>|;
+$buffer .= qq|<div class="message">There is an error at glyph data or at related char and it wasn't registered yet. Please check the content and contribute again. あなたの編集した内容は、"投稿する"をクリックした時に実際に保存されます。</div>|;
+:316
+$buffer .= qq|<div class="message">あなたは<span class="notice">ログインしていません</span>。匿名利用者による投稿としてこの項目の履歴に記録されます。また、投稿の前には<span class="notice">プレビュー</span>が必要です。|;
+$buffer .= qq|<div class="message">You are NOT currently logged in. Editing this way will cause as anonymous user to be recorded publicly in this page's history. Also you are needed to check PREVIEW. |;
+:318
+$buffer .= "匿名利用者は外部リンクを含むページを投稿することはできません。</div>";
+$buffer .= "Anonymous users can't contribute the page which includes external links.</div>";
+:327
+$buffer .= qq|<br><h2>プレビュー</h2><div class="warning2 notice">これはプレビューです。まだ保存されていません！</div><hr>|;
+$buffer .= qq|<br><h2>Preview</h2><div class="warning2 notice">Remember that this is only a preview; any changes have not yet been saved!</div><hr>|;
+:332
+$buffer .= qq|<div class="message">このページは編集できないように保護されているか、編集が禁止されています。これにはいくつか理由があります。詳しくは<a href="/wiki/$URL_HOGO">$PAGE_HOGO</a>または<a href="/wiki/$URL_HOGOKIROKU">$PAGE_HOGOKIROKU</a>をご覧ください。</div><hr>|;
+$buffer .= qq|<div class="message">This page is currently protected from editing. これにはいくつか理由があります。詳しくは<a href="/wiki/$URL_HOGO">$PAGE_HOGO</a>または<a href="/wiki/$URL_HOGOKIROKU">$PAGE_HOGOKIROKU</a>をご覧ください。</div><hr>|;
+:362
+$buffer .= qq|<div class=\"warning2\">UCS関連グリフの関連字に別の文字の割り当てや未定義（〓）とすることはできません。別の文字を関連付けたい場合は<a class=\"notice\" href=\"/wiki/GlyphWiki:$URL_MUSTRELATE\">$WORD_MUSTRELATE</a>に記述して異体字としての関連付けを申請してください。</div><hr>|;
+$buffer .= qq|<div class=\"warning2\">UCS関連グリフの関連字に別の文字の割り当てや未定義（〓）とすることはできません。別の文字を関連付けたい場合は<a class=\"notice\" href=\"/wiki/GlyphWiki:$URL_MUSTRELATE\">$WORD_MUSTRELATE</a>に記述して異体字としての関連付けを申請してください。</div><hr>|;
+:375
+$buffer .= qq|<div class=\"warning2\">他のグリフがこのグリフ（あるいはこのグリフの古い版）を引用しているので実際には削除できません。</div><hr>|;
+$buffer .= qq|<div class=\"warning2\">他のグリフがこのグリフ（あるいはこのグリフの古い版）を引用しているので実際には削除できません。</div><hr>|;
+:382
+$buffer .= qq|<div class=\"warning2\">エイリアスの対象グリフはバージョンを指定できません。このままでは登録はできません。バージョン指定を外すか、エイリアスではなく実体化する必要があります（専用エディタで部品を分解してください）。</div><hr>|;
+$buffer .= qq|<div class=\"warning2\">エイリアスの対象グリフはバージョンを指定できません。このままでは登録はできません。バージョン指定を外すか、エイリアスではなく実体化する必要があります（専用エディタで部品を分解してください）。</div><hr>|;
+:390
+$buffer .= "<div class=\"warning2\">存在しないグリフをエイリアスとして参照しています。実際には登録できません！</div><hr>";
+$buffer .= "<div class=\"warning2\">It refers unexisting glyph as alias. Actually it can't register!</div><hr>";
+:401
+$buffer .= qq|<h2>フォント</h2>|;
+$buffer .= qq|<h2>Font file</h2>|;
+:403
+$buffer .= qq|<li><a href="/wiki/GlyphWiki:$URL_FONT">フォント生成のヘルプ</a>|;
+$buffer .= qq|<li><a href="/wiki/GlyphWiki:$URL_FONT">help document for generating font file</a>|;
+:410
+$buffer .= qq|<li>TrueTypeフォント <a href="/font/$fontname.ttf">ダウンロード</a> (内部バージョン $fontname、$fontsize バイト)|;
+$buffer .= qq|<li>TrueType font file <a href="/font/$fontname.ttf">download</a> (inner version: $fontname、$fontsize bytes)|;
+:411,423,427
+$buffer .= qq|<ul><li>フォント生成ログ <a href="/font/$fontname.log">閲覧</a></ul>|;
+$buffer .= qq|<ul><li>log for font generation <a href="/font/$fontname.log">view</a></ul>|;
+:412
+$buffer .= qq|<li>フォント生成ソース<ul>|;
+$buffer .= qq|<li>sources to generate the font<ul>|;
+:413
+$buffer .= qq|<li><a href="/font/$fontname.source">ソースファイル</a>|;
+$buffer .= qq|<li><a href="/font/$fontname.source">source file</a>|;
+:414
+$buffer .= qq|<li><a href="/font/$fontname.meta">フォント定義ファイル</a>|;
+$buffer .= qq|<li><a href="/font/$fontname.meta">font definition file</a>|;
+:416
+$buffer .= qq|<li><a href="/font/$fontname.ivs">IVS定義ファイル</a>|;
+$buffer .= qq|<li><a href="/font/$fontname.ivs">IVS definition file</a>|;
+:422
+$buffer .= qq|<li>現在フォント生成中です。|;
+$buffer .= qq|<li>It is in generating process of font file now.|;
+:424
+$buffer .= qq|<ul><li><a href="/wiki/$wiki_name">最新の状況に更新</a></ul>|;
+$buffer .= qq|<ul><li><a href="/wiki/$wiki_name">Update latest status</a></ul>|;
+:426
+$buffer .= qq|<li>フォント生成に失敗しました（念のためページを再読み込みしてください）。|;
+$buffer .= qq|<li>Failed in generating font file. (You can try to reload this page.)|;
+:430
+$buffer .= qq|<li><a href="/wiki/$wiki_name?action=makettf">フォント生成の実行</a>|;
+$buffer .= qq|<li><a href="/wiki/$wiki_name?action=makettf">Execute to generate font</a>|;
+:431
+$buffer .= qq|<ul><li>クリックするとフォント生成が始まります。生成に必要な時間は、概ね1,000グリフで4分程度です。</ul>|;
+$buffer .= qq|<ul><li>When you click this link, font generation begins. It costs about 4 minutes per 1,000 glyphs.</ul>|;
+:434
+$buffer .= qq|<h2>グリフ集合</h2>|;
+$buffer .= qq|<h2>Set of glyphs</h2>|;
+:439
+$buffer .= qq|<div class="message">このグリフは<a href="/wiki/GlyphWiki:$URL_ALIAS">エイリアス</a>（他のグリフの別名）に指定されています。このまま編集を行うと独立したグリフ（あるいは別のグリフに対するエイリアス）となり、<span class="notice">現在指しているグリフとの関係は解消されます</span>。現在指しているグリフとの関係を継続する場合は、<a class="notice" href="$alias_to?action=edit">実体となるグリフを編集</a>してください。</div>|;
+$buffer .= qq|<div class="message">このグリフは<a href="/wiki/GlyphWiki:$URL_ALIAS">エイリアス</a>（他のグリフの別名）に指定されています。このまま編集を行うと独立したグリフ（あるいは別のグリフに対するエイリアス）となり、<span class="notice">現在指しているグリフとの関係は解消されます</span>。現在指しているグリフとの関係を継続する場合は、<a class="notice" href="$alias_to?action=edit">実体となるグリフを編集</a>してください。</div>|;
+:457
+$buffer .= qq|<div class="compare"><table><tr><td>保存された版<td>あなたのグリフ<tr><td><img src="/glyph/$temp_name.png"><td><img src="/get_preview_glyph.cgi?data=$cgi_textbox"></table></div>|;
+$buffer .= qq|<div class="compare"><table><tr><td>保存された版<td>あなたのグリフ<tr><td><img src="/glyph/$temp_name.png"><td><img src="/get_preview_glyph.cgi?data=$cgi_textbox"></table></div>|;
+:466
+$buffer .= qq|<div class="texts" style="margin: 1em 0 0 1em;"><a class="wiki" href=\"/wiki/$alias_to\">$alias_to</a> の<a href="/wiki/GlyphWiki:$URL_ALIAS">エイリアス</a>（別名）</div>|;
+$buffer .= qq|<div class="texts" style="margin: 1em 0 0 1em;"><a class="wiki" href=\"/wiki/$alias_to\">$alias_to</a> の<a href="/wiki/GlyphWiki:$URL_ALIAS">Aliase(s)</a></div>|;
+:473
+$buffer .= qq|<span class="text glyph_link">(SVG画像 <a href="/glyph/$db_wiki_name.svg">ポリゴン</a> <a href="/glyph/$db_wiki_name.path.svg">パス</a>)</span>|;
+$buffer .= qq|<span class="text glyph_link">(SVG image <a href="/glyph/$db_wiki_name.svg">by polygon</a> <a href="/glyph/$db_wiki_name.path.svg">by path</a>)</span>|;
+:474
+$buffer .= qq|<span class="text glyph_link"><a href="/glyph/$db_wiki_name.eps">（EPS画像）</a></span><br>|;
+$buffer .= qq|<span class="text glyph_link"><a href="/glyph/$db_wiki_name.eps">(EPS image)</a></span><br>|;
+:479
+$buffer .= qq|<span class="text glyph_link"><a href="/glyph/$db_wiki_name\@$query_version.svg">（SVG画像）</a></span>|;
+$buffer .= qq|<span class="text glyph_link"><a href="/glyph/$db_wiki_name\@$query_version.svg">(SVG image)</a></span>|;
+:480
+$buffer .= qq|<span class="text glyph_link"><a href="/glyph/$db_wiki_name\@$query_version.eps">（EPS画像）</a></span><br>|;
+$buffer .= qq|<span class="text glyph_link"><a href="/glyph/$db_wiki_name\@$query_version.eps">(EPS image)</a></span><br>|;
+:485
+$buffer .= qq|<div class="message">このページ（この版）は<span class="notice">管理者によって削除されました</span>。詳細は<a href="/wiki/$URL_DELETE_LOG">$WORD_DELETE_LOG</a>を参照してください。</div>|;
+$buffer .= qq|<div class="message">This page (this revision) was <span class="notice">deleted by administrator</span>. Please see <a href="/wiki/$URL_DELETE_LOG">$WORD_DELETE_LOG</a> for details.</div>|;
+:538
+$parent_info .= "<li>あなたのブラウザでの表示：<span class=\"related\">$parent_char</span>";
+$parent_info .= "<li>browser view: <span class=\"related\">$parent_char</span>";
+:559
+$parent_info .= "前の符号位置：<a href=\"/wiki/u$code\"><span class=\"related\">$char</span> (u$code)</a> ";
+$parent_info .= "previous code point: <a href=\"/wiki/u$code\"><span class=\"related\">$char</span> (u$code)</a> ";
+:578
+$parent_info .= "次の符号位置：<a href=\"/wiki/u$code\"><span class=\"related\">$char</span> (u$code)</a> ";
+$parent_info .= "next code point: <a href=\"/wiki/u$code\"><span class=\"related\">$char</span> (u$code)</a> ";
+:583,607,634,661
+$buffer .= qq|<h2>文字コード関連情報</h2>|;
+$buffer .= qq|<h2>Information about CCS</h2>|;
+:596,623,650
+$parent_info .= "前の番号：<a href=\"/wiki/$codechar\"><img class=\"thumb related\" src=\"/glyph/$codechar.50px.png\"> ($codechar)</a><br>";
+$parent_info .= "Prev. number : <a href=\"/wiki/$codechar\"><img class=\"thumb related\" src=\"/glyph/$codechar.50px.png\"> ($codechar)</a><br>";
+:602,629,656
+$parent_info .= "次の番号：<a href=\"/wiki/$codechar\"><img class=\"thumb related\" src=\"/glyph/$codechar.50px.png\"> ($codechar)</a><br>";
+$parent_info .= "Next number : <a href=\"/wiki/$codechar\"><img class=\"thumb related\" src=\"/glyph/$codechar.50px.png\"> ($codechar)</a><br>";
+:609
+$buffer .= qq|法務省 戸籍統一文字情報 <a href="http://kosekimoji.moj.go.jp/kosekimojidb/mjko/PeopleTop/">検索サイト</a><br>|;
+$buffer .= qq|法務省 戸籍統一文字情報 <a href="http://kosekimoji.moj.go.jp/kosekimojidb/mjko/PeopleTop/">検索サイト</a><br>|;
+:636,663
+$buffer .= qq|諸橋轍次『大漢和辞典』<br>|;
+$buffer .= qq|<i>Daikanwa-Jiten</i> by Tetsuji Morohashi<br>|;
+:680
+$buffer_related .= qq|<table border="0"><tr><td align="right" valign="top"><nobr><a href="/wiki/GlyphWiki:$URL_RELATED">関連字</a>:</nobr>|;
+$buffer_related .= qq|<table border="0"><tr><td align="right" valign="top"><nobr><a href="/wiki/GlyphWiki:$URL_RELATED">Related character(s)</a>:</nobr>|;
+:709
+$buffer_related .= qq|<tr><td align="right" valign="top"><nobr><a href="/wiki/GlyphWiki:$URL_VARIANT">異体字</a>:</nobr><td valign="top">$related_char$related_code<br>$label<td valign="top">$temp|;
+$buffer_related .= qq|<tr><td align="right" valign="top"><nobr><a href="/wiki/GlyphWiki:$URL_VARIANT">Variant(s)</a>:</nobr><td valign="top">$related_char$related_code<br>$label<td valign="top">$temp|;
+:717
+$buffer_related .= qq|<tr><td align="right" valign="top"><nobr><a href="/wiki/GlyphWiki:$URL_VARIANT">異体字</a>:</nobr><td valign="top"><a href="/wiki/$related_code2">$related_char$related_code</a><br>$label<td valign="top">|;
+$buffer_related .= qq|<tr><td align="right" valign="top"><nobr><a href="/wiki/GlyphWiki:$URL_VARIANT">Variant(s)</a>:</nobr><td valign="top"><a href="/wiki/$related_code2">$related_char$related_code</a><br>$label<td valign="top">|;
+:731
+$buffer_related .= "<p><a href=\"/springGraph.swf?code=$related_code_springgraph\">ばねグラフで異体字を表示する</a> | <span class=\"disable\">異体字の異体字をすべてたどって表示する</span></p>"
+$buffer_related .= "<p><a href=\"/springGraph.swf?code=$related_code_springgraph\">ばねグラフで異体字を表示する</a> | <span class=\"disable\">異体字の異体字をすべてたどって表示する</span></p>"
+:734
+$buffer_related .= "<p>(未設定)</p>";
+$buffer_related .= "<p>(undefined)</p>";
+:738
+$buffer .= qq|<h2>関連グリフ</h2>|;
+$buffer .= qq|<h2>Related glyphs</h2>|;
+:778
+$buffer_quoting .= "<br><p>（残りは省略されています ... <a href=\"?view=all\">すべて表示する</a>）</p>";
+$buffer_quoting .= "<br><p>（snipped ... <a href=\"?view=all\">view all</a>）</p>";
+:796
+$buffer .= qq|<h2>このグリフの<a href="/wiki/GlyphWiki:$URL_ALIAS">エイリアス</a>（別名）一覧</h2>|;
+$buffer .= qq|<h2>List of <a href="/wiki/GlyphWiki:Aliases">aliases</a> for this glyph</h2>|;
+:800
+$buffer .= qq|<h2>このグリフを内部で引用している他のグリフ一覧</h2>|;
+$buffer .= qq|<h2>This glyph is quoted by:</h2>|;
+:802
+$buffer .= qq|<div class="texts"><a href="/wiki/Special:Renewall?view=listup&target=$wiki_name">部品グリフを別のグリフに置き換える</a></div>|;
+$buffer .= qq|<div class="texts"><a href="/wiki/Special:Renewall?view=listup&target=$wiki_name">部品グリフを別のグリフに置き換える</a></div>|;
+:818
+$buffer .= qq|<h2>このグリフで引用している他のグリフ一覧</h2>|;
+$buffer .= qq|<h2>This glyph consists of:</h2>|;
+:839
+$local_using =~ s/^Talk:/ノート:/;
+# no operation
+:840
+$local_using =~ s/^Glyphwiki-talk:/GlyphWiki-ノート:/;
+# no operation
+:841
+$local_using =~ s/^User:/利用者:/;
+# no operation
+:842
+$local_using =~ s/^User-talk:/利用者-会話:/;
+# no operation
+:843
+$local_using =~ s/^Group:/グループ:/;
+# no operation
+:844
+$local_using =~ s/^Group-talk:/グループ-ノート:/;
+# no operation
+:850
+$buffer .= qq|<h2>このグリフを収録するグループ一覧</h2>|;
+$buffer .= qq|<h2>This glyph is a member of the below group(s):</h2>|;
+:884
+my $temp2 = &url_encode("旧部品の更新");
+my $temp2 = &url_encode("update quoted old part(s)");
+:885
+$buffer .= qq|<h2>引用する旧部品の更新</h2>|;
+$buffer .= qq|<h2>update quoted old part(s)</h2>|;
+:886
+$buffer .= qq|<div class="texts">現在：<img class="glyph compare" src="/glyph/$db_wiki_name\@$newest_version.png" border="0"> |;
+$buffer .= qq|<div class="texts">current design：<img class="glyph compare" src="/glyph/$db_wiki_name\@$newest_version.png" border="0"> |;
+:887
+$buffer .= qq|最新部品を利用：<img class="glyph compare" src="/get_preview_glyph.cgi?data=$temp" border="0"> |;
+$buffer .= qq|use the newest part(s):<img class="glyph compare" src="/get_preview_glyph.cgi?data=$temp" border="0"> |;
+:888
+$buffer .= qq|<a href="?action=edit&buttons=$URL_PREVIEW&textbox=$temp&related=$url_related&summary=$temp2">更新する</a></div>|;
+$buffer .= qq|<a href="?action=edit&buttons=$URL_PREVIEW&textbox=$temp&related=$url_related&summary=$temp2">Update</a></div>|;
+:914
+$buffer .= qq|<h2>このグループを引用するグループ一覧</h2>|;
+$buffer .= qq|<h2>List of groups which quotes this group</h2>|;
+:923
+$buffer .= qq|<div class="panel"><span class="warning">この名前は<a href="/wiki/GlyphWiki:$URL_GUIDE">命名ガイドライン</a>に沿っていない可能性があります。確認のうえ正しくなければ修正してください。</span><ul><li>諸橋轍次『大漢和辞典』番号は <a href="/wiki/dkw-$num0$num1">dkw-$num0$num1</a> のように数字5桁を指定してください</ul></div>|;
+$buffer .= qq|<div class="panel"><span class="warning">この名前は<a href="/wiki/GlyphWiki:$URL_GUIDE">命名ガイドライン</a>に沿っていない可能性があります。確認のうえ正しくなければ修正してください。</span><ul><li>諸橋轍次『大漢和辞典』番号は <a href="/wiki/dkw-$num0$num1">dkw-$num0$num1</a> のように数字5桁を指定してください</ul></div>|;
+:928
+$buffer .= qq|<div class="panel"><span class="warning">この名前は<a href="/wiki/GlyphWiki:$URL_GUIDE">命名ガイドライン</a>に沿っていない可能性があります。確認のうえ正しくなければ修正してください。</span><ul><li>法務省戸籍統一文字番号は <a href="/wiki/koseki-$num0$num1">koseki-$num0$num1</a> のように数字6桁を指定してください</ul></div>|;
+$buffer .= qq|<div class="panel"><span class="warning">この名前は<a href="/wiki/GlyphWiki:$URL_GUIDE">命名ガイドライン</a>に沿っていない可能性があります。確認のうえ正しくなければ修正してください。</span><ul><li>法務省戸籍統一文字番号は <a href="/wiki/koseki-$num0$num1">koseki-$num0$num1</a> のように数字6桁を指定してください</ul></div>|;
+:931
+$buffer .= qq|<div class="panel"><span class="warning">この名前は<a href="/wiki/GlyphWiki:$URL_GUIDE">命名ガイドライン</a>に沿っていない可能性があります。確認のうえ正しくなければ修正してください。</span><ul><li>baseparts- は廃止されました</ul></div>|;
+$buffer .= qq|<div class="panel"><span class="warning">この名前は<a href="/wiki/GlyphWiki:$URL_GUIDE">命名ガイドライン</a>に沿っていない可能性があります。確認のうえ正しくなければ修正してください。</span><ul><li>baseparts- は廃止されました</ul></div>|;
+:933
+$buffer .= qq|<div class="panel"><span class="warning">グリフウィキには現在この名前の項目はありません。</span><ul><li><a href="/wiki/$url_db_wiki_name?action=edit" class="recommend">&quot;$db_wiki_name&quot;という項目を新規作成する</a>。または<a href="/wiki/GlyphWiki:$URL_SEISAKUIRAI">制作依頼</a>する。<li>既存の項目から<a href="/wiki/Special:Search?action=fulltext&search=$url_db_wiki_name">&quot;$db_wiki_name&quot;を検索する</a>。</ul><hr><ul><li>もしこの項目を作成したことがあるのにこのメッセージがでる場合、データベースの更新が遅れているために表示できないか、既に削除されています（<a href="/wiki/$URL_SAKUJO">$WORD_SAKUJO</a>に削除された理由が記載されているかもしれません）。<a href="/wiki/$URL_DELETE_LOG">$WORD_DELETE_LOG</a>も確認してください。</ul></div>|;
+$buffer .= qq|<div class="panel"><span class="warning">GlyphWiki does not have an article with this exact name.</span><ul><li><a href="/wiki/$url_db_wiki_name?action=edit" class="recommend">&quot;$db_wiki_name&quot;という項目を新規作成する</a>。または<a href="/wiki/GlyphWiki:$URL_SEISAKUIRAI">制作依頼</a>する。<li>既存の項目から<a href="/wiki/Special:Search?action=fulltext&search=$url_db_wiki_name">&quot;$db_wiki_name&quot;を検索する</a>。</ul><hr><ul><li>もしこの項目を作成したことがあるのにこのメッセージがでる場合、データベースの更新が遅れているために表示できないか、既に削除されています（<a href="/wiki/$URL_SAKUJO">$WORD_SAKUJO</a>に削除された理由が記載されているかもしれません）。<a href="/wiki/$URL_DELETE_LOG">$WORD_DELETE_LOG</a>も確認してください。</ul></div>|;
+:966
+$buffer .= qq|<h2>あなたのグリフ</h2>|;
+$buffer .= qq|<h2>Your desgined glyph</h2>|;
+:979
+$buffer .= qq|<a href="/wiki/GlyphWiki:$URL_RELATED">関連字</a> (入力必須): <input type="text" name="related" value="$temp2" size="6"><br>|; 
+$buffer .= qq|<a href="/wiki/GlyphWiki:$URL_RELATED">related character</a> (must input): <input type="text" name="related" value="$temp2" size="6"><br>|; 
+:987
+$buffer .= qq|<div class="message"><div class="title">■投稿する前に以下の事柄を確認してください■</div><ol><li>GlyphWikiに投稿したデータは著作権の譲渡を行ったことになり、その<span class="notice">データがいかなる形態で改変・使用されることもあなたは許諾し、以後著作者人格権を主張・使用しないことを了承するものとみなします</span>。<li><span class="notice">他のフォントや印刷物などからグリフを無断で転載・コピー・トレースしないでください</span>。それ以外にも投稿内容に問題がある場合、<a href="/wiki/$URL_SAKUJO">削除の方針</a>に基づき削除されます。また、グリフウィキの運営方針についてはこれから決定していきますが、<span class="notice">最終的な決定権は管理者にあるものとします</span>。これらのことにあなたはあらかじめ同意したものとみなします。 <li>GlyphWikiのデータ・記事のライセンスはWikipediaの記事のライセンス(GFDL)とは異なります。詳しくは <a href="/wiki/GlyphWiki:$URL_LICENSE">データ・記事のライセンス</a> を参照してください。</ol></div>|;
+$buffer .= qq|<div class="message"><div class="title">*** please confirm the following matters before contributing it ***</div><ol><li>GlyphWikiに投稿したデータは著作権の譲渡を行ったことになり、その<span class="notice">データがいかなる形態で改変・使用されることもあなたは許諾し、以後著作者人格権を主張・使用しないことを了承するものとみなします</span>。<li><span class="notice">他のフォントや印刷物などからグリフを無断で転載・コピー・トレースしないでください</span>。それ以外にも投稿内容に問題がある場合、<a href="/wiki/$URL_SAKUJO">削除の方針</a>に基づき削除されます。また、グリフウィキの運営方針についてはこれから決定していきますが、<span class="notice">最終的な決定権は管理者にあるものとします</span>。これらのことにあなたはあらかじめ同意したものとみなします。 <li>GlyphWikiのデータ・記事のライセンスはWikipediaの記事のライセンス(GFDL)とは異なります。詳しくは <a href="/wiki/GlyphWiki:$URL_LICENSE">データ・記事のライセンス</a> を参照してください。</ol></div>|;
+:989,1030
+$buffer .= qq|<div class="toolbox"><a href="/wiki/GlyphWiki:$URL_YOUYAKU">編集内容の要約</a>: <input type="text" name="summary" value="$html_summary" size="100"><br>|;
+$buffer .= qq|<div class="toolbox"><a href="/wiki/GlyphWiki:$URL_YOUYAKU">Edit summary</a>: <input type="text" name="summary" value="$html_summary" size="100"><br>|;
+:991,1032
+$buffer .= "要約のプレビュー: <span class=\"summary\">($html_summary)</span><br>";
+$buffer .= "Summary preview: <span class=\"summary\">($html_summary)</span><br>";
+:1000,1041
+$buffer .= qq*<a href="/wiki/$url_wiki_name">中止</a> | <a href="/wiki/GlyphWiki:$URL_HENSHU" target="_blank">編集の仕方</a> （新しいウィンドウが開きます）</div>*;
+$buffer .= qq*<a href="/wiki/$url_wiki_name">Cancel</a> | <a href="/wiki/GlyphWiki:$URL_HENSHU" target="_blank">Editing help</a> (opens in new window)</div>*;
+:1005
+$buffer .= qq|<div class="message2">以下にソースを表示しています:</div>|;
+$buffer .= qq|<div class="message2">Showing source in the following:</div>|;
+:1009
+$buffer .= qq|<a href="/wiki/GlyphWiki:$URL_RELATED">関連字</a>: <input type="text" name="related" value="$temp2" size="6"><br>|; 
+$buffer .= qq|<a href="/wiki/GlyphWiki:$URL_RELATED">related character</a>: <input type="text" name="related" value="$temp2" size="6"><br>|; 
+:1016
+$buffer .= qq|<div class="message"><a href="/wiki/$url_db_wiki_name">$db_wiki_name</a> に戻る。</div>|;
+$buffer .= qq|<div class="message">Return tp <a href="/wiki/$url_db_wiki_name">$db_wiki_name</a>.</div>|;
+:1028
+$buffer .= qq|<div class="message"><div class="title">■投稿する前に以下の事柄を確認してください■</div><ol><li>GlyphWikiに投稿した記事は著作権の譲渡を行ったことになり、その<span class="notice">記事がいかなる形態で改変・使用されることもあなたは許諾し、以後著作者人格権を主張・使用しないことを了承するものとみなします</span>。<li><span class="notice">他のWebページや出版物などから文章を無断で転載・コピー・トレースしないでください</span>。それ以外にも投稿内容に問題がある場合、<a href="/wiki/$URL_SAKUJO">削除の方針</a>に基づき削除されます。また、グリフウィキの運営方針についてはこれから決定していきますが、<span class="notice">最終的な決定権は管理者にあるものとします</span>。これらのことにあなたはあらかじめ同意したものとみなします。 <li>GlyphWikiのデータ・記事のライセンスはWikipediaの記事のライセンス(GFDL)とは異なります。詳しくは<a href="/wiki/GlyphWiki:$URL_LICENSE">データ・記事のライセンス</a>を参照してください。</ol></div>|;
+$buffer .= qq|<div class="message"><div class="title">*** please confirm the following matters before contributing it ***</div><ol><li>GlyphWikiに投稿した記事は著作権の譲渡を行ったことになり、その<span class="notice">記事がいかなる形態で改変・使用されることもあなたは許諾し、以後著作者人格権を主張・使用しないことを了承するものとみなします</span>。<li><span class="notice">他のWebページや出版物などから文章を無断で転載・コピー・トレースしないでください</span>。それ以外にも投稿内容に問題がある場合、<a href="/wiki/$URL_SAKUJO">削除の方針</a>に基づき削除されます。また、グリフウィキの運営方針についてはこれから決定していきますが、<span class="notice">最終的な決定権は管理者にあるものとします</span>。これらのことにあなたはあらかじめ同意したものとみなします。 <li>GlyphWikiのデータ・記事のライセンスはWikipediaの記事のライセンス(GFDL)とは異なります。詳しくは<a href="/wiki/GlyphWiki:$URL_LICENSE">データ・記事のライセンス</a>を参照してください。</ol></div>|;
+:1044
+$buffer .= qq|<h2>あなたの更新内容</h2>|;
+$buffer .= qq|<h2>your changes</h2>|;
+:1056
+$sqlh = $dbh->prepare("SELECT count(*) FROM wiki WHERE name = '$db_wiki_name' AND username != 'autoglyph-bot' AND summary != '旧部品の一括更新' AND summary != '部品の一括更新'");
+$sqlh = $dbh->prepare("SELECT count(*) FROM wiki WHERE name = '$db_wiki_name' AND username != 'autoglyph-bot' AND summary != '旧部品の一括更新' AND summary != '部品の一括更新'");
+:1057
+$DEBUG .= "SELECT count(*) FROM wiki WHERE name = '$db_wiki_name' AND username != 'autoglyph-bot' AND summary != '旧部品の一括更新' AND summary != '部品の一括更新'\n";
+$DEBUG .= "SELECT count(*) FROM wiki WHERE name = '$db_wiki_name' AND username != 'autoglyph-bot' AND summary != '旧部品の一括更新' AND summary != '部品の一括更新'\n";
+:1070
+my $summary = &url_encode("簡易調整");
+my $summary = "simple adjustment";
+:1072
+$buffer .= qq|<h2>簡易調整</h2>\n<div class="texts">適切と思われるグリフをクリックしてください。続けてプレビュー状態になります。赤枠は現在プレビュー中のグリフです。</div>|;
+$buffer .= qq|<h2>Simple adjustment</h2>\n<div class="texts">Click most proper designed glyph, and become preview mode. The red frame is currently previewed glyph.</div>|;
+:1074
+$buffer .= qq|<h2>簡易調整</h2>\n<div class="texts">適切と思われるグリフをクリックしてください。プレビュー状態になります。赤枠は現在の登録グリフです。</div>|;
+$buffer .= qq|<h2>Simple adjustment</h2>\n<div class="texts">Click most proper designed glyph, and become preview mode. The red frame is currently registered glyph.</div>|;
+:1083
+$buffer .= qq|<h3>間隔<span style="font-size: 80%; font-weight: normal;">（広く ←→ 狭く）</span></h3>|;
+$buffer .= qq|<h3>Space between two components<span style="font-size: 80%; font-weight: normal;">( get wider ←→ get narrower )</span></h3>|;
+:1159
+$buffer .= qq|<h3>比率<span style="font-size: 80%; font-weight: normal;">（左を小さく ←→ 右を小さく）</span></h3>|;
+$buffer .= qq|<h3>Ratio of two components<span style="font-size: 80%; font-weight: normal;">( get smaller the left ←→ get smaller the right )</span></h3>|;
+
+!/home/kamichi/glyphwiki/makefont.pl
+:79
+if($data =~ m/(^|\r\n|\r|\n):(usecurve|曲線を使う):(yes|はい)/){
+if($data =~ m/(^|\r\n|\r|\n):(usecurve|曲線を使う):(yes|はい)/){
+:87
+if($data =~ m/(^|\r\n|\r|\n):(baseline|ベースライン):(-?[0-9]{3})/){
+if($data =~ m/(^|\r\n|\r|\n):(baseline|ベースライン):(-?[0-9]{3})/){
+
+!/home/kamichi/glyphwiki/common.pl
+:661
+$dbh->do("INSERT INTO wiki VALUES (DEFAULT, '$wikiname', COALESCE((SELECT max(version) FROM wiki WHERE name = '$wikiname'), 0) + 1, $time, '$user', 'エイリアス実体変更による自動更新', 0, '$old_buffer', '$ip', $current_related, 1)"); 
+$dbh->do("INSERT INTO wiki VALUES (DEFAULT, '$wikiname', COALESCE((SELECT max(version) FROM wiki WHERE name = '$wikiname'), 0) + 1, $time, '$user', 'Automatic update by changes of substance of aliases', 0, '$old_buffer', '$ip', $current_related, 1)"); 
+:662
+$DEBUG .= "INSERT INTO wiki VALUES (DEFAULT, '$wikiname', COALESCE((SELECT max(version) FROM wiki WHERE name = '$wikiname'), 0) + 1, $time, '$user', 'エイリアス実体変更による自動更新', 0, '$old_buffer', '$ip', $current_related, 1)\n";
+$DEBUG .= "INSERT INTO wiki VALUES (DEFAULT, '$wikiname', COALESCE((SELECT max(version) FROM wiki WHERE name = '$wikiname'), 0) + 1, $time, '$user', 'Automatic update by changes of substance of aliases', 0, '$old_buffer', '$ip', $current_related, 1)\n";
+:703
+$URL_USERNAME = &url_encode("ユーザー名");
+$URL_USERNAME = &url_encode("ユーザー名");
+:704
+$URL_SANDBOX = &url_encode("サンドボックス");
+$URL_SANDBOX = &url_encode("サンドボックス");
+:705
+$URL_SEISAKUIRAI = &url_encode("制作依頼");
+$URL_SEISAKUIRAI = &url_encode("制作依頼");
+:706
+$URL_HENSHU = &url_encode("編集の仕方");
+$URL_HENSHU = &url_encode("編集の仕方");
+:707
+$URL_YOUYAKU = &url_encode("常に要約欄に記入する");
+$URL_YOUYAKU = &url_encode("常に要約欄に記入する");
+:708
+$URL_LICENSE = &url_encode("データ・記事のライセンス");
+$URL_LICENSE = "License";
+:709
+$URL_ABOUT = &url_encode("グリフウィキについて");
+$URL_ABOUT = "About";
+:710
+$URL_PRIVACY = &url_encode("プライバシー・ポリシー");
+$URL_PRIVACY = "PrivacyPolicy";
+:711
+$URL_MENSEKI = &url_encode("免責事項");
+$URL_MENSEKI = "Disclaimers";
+:712
+$URL_RELATED = &url_encode("関連字");
+$URL_RELATED = &url_encode("関連字");
+:713
+$URL_VARIANT = &url_encode("異体字");
+$URL_VARIANT = &url_encode("異体字");
+:714
+$URL_BUG = &url_encode("バグ報告");
+$URL_BUG = &url_encode("バグ報告");
+:715
+$URL_JOIN = &url_encode("あなたにできること");
+$URL_JOIN = "JoinUs";
+:716
+$URL_FAQ = &url_encode("よくある質問");
+$URL_FAQ = "FAQ";
+:717
+$URL_HOWTO = &url_encode("どうやって使うのか");
+$URL_HOWTO = "Tutorial";
+:718
+$URL_FONT = &url_encode("フォント生成");
+$URL_FONT = &url_encode("フォント生成");
+:719
+$URL_ALIAS = &url_encode("エイリアス");
+$URL_ALIAS = &url_encode("エイリアス");
+:720
+$URL_CAPTCHA = &url_encode("キャプチャ");
+$URL_CAPTCHA = &url_encode("キャプチャ");
+:721
+$URL_NEWS = &url_encode("お知らせ");
+$URL_NEWS = "News";
+:722
+$URL_IDOBATA = &url_encode("井戸端");
+$URL_IDOBATA = &url_encode("VillagePump");
+:723
+$URL_GUIDE = &url_encode("命名ガイドライン");
+$URL_GUIDE = &url_encode("命名ガイドライン");
+:725
+$WORD_QUERY = "問い合わせ";
+$WORD_QUERY = "You searched for";
+:727
+$WORD_EDITOR = "専用エディタで編集する";
+$WORD_EDITOR = "Edit by glyph editor";
+:729
+$WORD_DESCRIPTION = "説明";
+$WORD_DESCRIPTION = "Description";
+:731
+$WORD_DEFAULT = "メインページ";
+$WORD_DEFAULT = "MainPage";
+:734
+$WORD_CONFIRM_EMAIL = "確認用コードを送信する";
+$WORD_CONFIRM_EMAIL = "Send confirmation code by email.";
+:737
+$WORD_REGISTER_EMAIL = "メールアドレスを登録する";
+$WORD_REGISTER_EMAIL = "メールアドレスを登録する";
+:740
+$WORD_NEW_PASSWORD = "新しいパスワードをメールで送る";
+$WORD_NEW_PASSWORD = "E-mail new password";
+:743
+$WORD_LOGIN = "ログイン";
+$WORD_LOGIN = "Log in";
+:747
+$WORD_FROM = "出典: フリーグリフデータベース『グリフウィキ(GlyphWiki)』";
+$WORD_FROM = "From GlyphWiki: the free glyph database";
+:749
+$TAB_KAISETSU = "解説";
+$TAB_KAISETSU = "article";
+:750
+$TAB_SPECIAL = "特別ページ";
+$TAB_SPECIAL = "special page";
+:751
+$TAB_EDIT = "編集";
+$TAB_EDIT = "edit this page";
+:752
+$TAB_VIEW_SOURCE = "ソースを表示";
+$TAB_VIEW_SOURCE = "view source";
+:753
+$TAB_GLYPH = "グリフ";
+$TAB_GLYPH = "glyph";
+:754
+$TAB_RECENT = "履歴";
+$TAB_RECENT = "history";
+:755
+$TAB_GROUP = "グループ";
+$TAB_GROUP = "group";
+:756
+$TAB_NOTE = "ノート";
+$TAB_NOTE = "discussion";
+:757
+$TAB_USER = "利用者ページ";
+$TAB_USER = "user page";
+:758
+$LABEL_RECENT = "履歴";
+$LABEL_RECENT = "hist";
+:759
+$LABEL_KAIWA = "会話";
+$LABEL_KAIWA = "Talk";
+:760
+$LABEL_USER = "利用者";
+$LABEL_USER = "User";
+:761
+$LABEL_ANONYMOUS = "匿名利用者";
+$LABEL_ANONYMOUS = "anonymous user";
+:763
+$WORD_MUSTRELATE = "関連付けるべきグリフ";
+$WORD_MUSTRELATE = "関連付けるべきグリフ";
+:767
+$WORD_HOGOKIROKU = "保護記録";
+$WORD_HOGOKIROKU = "Protection log";
+:771
+$WORD_HOGO = "保護されたページ";
+$WORD_HOGO = "Protected page";
+:775
+$WORD_SAKUJO = "削除の方針";
+$WORD_SAKUJO = "Deletion policy";
+:779
+$WORD_DELETE_LOG = "削除記録";
+$WORD_DELETE_LOG = "Deletion log";
+:783
+$WORD_ACCEPT_AND_SUBMIT = "以上の記述を完全に理解し同意したうえで投稿する";
+$WORD_ACCEPT_AND_SUBMIT = "Save page";
+:786
+$WORD_PREVIEW = "プレビューを実行";
+$WORD_PREVIEW = "Show preview";
+:790
+$WORD_KENSAKU = "検索";
+$WORD_KENSAKU = "Search";
+:794
+$WORD_HYOUJI = "表示";
+$WORD_HYOUJI = "Go";
+:806
+$label =~ s/Talk:/ノート:/;
+# no operation
+:807
+$label =~ s/GlyphWiki-talk:/GlyphWiki-ノート:/;
+# no operation
+:808
+$label =~ s/User:/利用者:/;
+# no operation
+:809
+$label =~ s/User-talk:/利用者-会話:/;
+# no operation
+:810
+$label =~ s/Group:/グループ:/;
+# no operation
+:811
+$label =~ s/Group-talk:/グループ-ノート:/;
+# no operation
+:818
+$label =~ s/利用者:/User:/;
+# no operation
+:819
+$label =~ s/利用者-会話:/User-talk:/;
+# no operation
+:820
+$label =~ s/グループ:/Group:/;
+# no operation
+:821
+$label =~ s/グループ-ノート:/Group-talk:/; 
+# no operation
+:822
+$label =~ s/GlyphWiki-ノート:/GlyphWiki-talk:/; 
+# no operation
+:823
+$label =~ s/ノート:/Talk:/;
+# no operation
+:917
+return sprintf("%04d年%d月%d日(%s) %02d:%02d", $year + 1900, $mon + 1, $mday, qw(日 月 火 水 木 金 土)[$wday], $hour, $min);
+return sprintf("%02d:%02d, %d %s %d", $hour, $min, $mday, qw(January February March April May June July August September October November December)[$mon], $year + 1900);
+:1007
+my $subject = 'Password reminder from GlyphWiki (グリフウィキからのパスワードのお知らせ)';
+my $subject = 'Password reminder from GlyphWiki';
+:1009
+どなたか（$ip のIPアドレスの使用者）がグリフウィキ（http://glyphwiki.org/）
+Someone (probably you, from IP address $1)
+:1010
+のログイン用パスワードの再発行を依頼しました。
+requested that we send you a new GlyphWiki login password.
+:1012
+利用者 "$name" のパスワードを "$temp_password" に変更しました。
+The password for user "$name" is now "$temp_password".
+:1013
+ログインして別のパスワードに変更してください。
+You should log in and change your password now.
+:1359
+my $subject = 'GlyphWiki メールアドレスの確認';
+my $subject = 'GlyphWiki e-mail address confirmation';
+:1367
+どなたか（IPアドレス $ip の使用者）がこのメールアドレスを
+Someone, probably you from IP address $ip,
+:1368
+GlyphWiki のアカウント "$name" に登録しました。
+has registered an account "$name" with this e-mail address
+:1370
+このアカウントがあなたのものであるか確認してください。
+on GlyphWiki.
+:1371
+あなたの登録したアカウントであるならば、GlyphWiki
+To confirm that this account really does belong to you and activate
+:1372
+のメール通知機能を有効にするために、以下のURLにアクセスしてください:
+e-mail features on GlyphWiki, open this link in your browser:
+:1376
+もし GlyphWiki について身に覚えがない場合は、リンクを開かないでください。
+If this is *not* you, don't follow the link. This confirmation code
+:1377
+確認用コードは $expire に期限切れになります。
+will expire at $expire.
+:1680
+unshift(@tocresult, qq(<div class="toc"><h1>目次</h1>));
+unshift(@tocresult, qq(<div class="toc"><h1>Contents</h1>));
+

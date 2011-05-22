@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+<head>
+<title>News: CHaracter Information Service Environment</title>
+<link rel=stylesheet href="../chise.css" type="text/css">
+</head>
+<body>
+
+    <p>
+      [<a href="../index.html.ja.iso-2022-jp">CHISE</a>]
+      [<a href="../xemacs/index.html.ja.iso-2022-jp">XEmacs CHISE</a>]
+      [<a href="../ruby/index.html.ja.iso-2022-jp">Ruby/CHISE</a>]
+      [<a href="../perl/index.html.ja.iso-2022-jp">Perl/CHISE</a>]
+      [<a href="../topicmaps/index.html.ja.iso-2022-jp">TopicMaps</a>]
+      [<a href="../ids/index.html.ja.iso-2022-jp">IDS</a>]
+      [<a href="../glyph/index.html.ja.iso-2022-jp">glyph</a>]
+      [<a href="../visualization/index.html.ja.iso-2022-jp">Visualization</a>]
+      [<a href="../omega/index.html.ja.iso-2022-jp">Ω</a>]
+    </p>
+
+    <h1>
+      <a href="../index.html.ja.iso-2022-jp">CHISE</a> / 
+      <a name="ruby">過去のニュース</a>
+    </h1>
+    
+    <hr>
+    
+    <h2>2003</h2>
+
+    <dl>
+      <dt>2003-03-15</dt>
+      <dd><a href="http://www.ipa.go.jp/ipa/about/officeindex.htm">IPA特別会議室</a> で
+	<a href="News/20030315.html.ja.iso-2022-jp">CHISE Symposium 2003</a> を開催しました。</dd>
+
+    </dl>
+
+    <h2>2002</h2>
+
+    <dl>
+      <dt>2002-12-25</dt>
+      <dd><a href="http://mousai.as.wakwak.ne.jp/projects/chise/dist/XEmacs/xemacs-utf-2000-0.20.tar.gz">
+	  XEmacs UTF-2000 0.20 (奈良)
+	</a>
+	が release されました。</dd>
+    </dl>
+
+    
+    <hr>
+
+    <p>
+      [<a href="../">戻る</a>]
+    </p>
+
+    <p>
+<!-- hhmts start -->
+Last modified: Mon Mar 17 12:00:23 JST 2003
+<!-- hhmts end -->.
+    </p>
+
+
+</body>
+</html>

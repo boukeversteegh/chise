@@ -1,0 +1,108 @@
+-*- Mode: outline -*- Coding: euc-jp -*-
+
+* はじめに
+
+  ここでは Ω/CHISE を fink を利用して Mac OS X にインストールする手順
+  を紹介します。インストールが完了すれば、付属の test.tex をPDFに出来
+  るようになるはずです。
+
+  必要な手順は次の通りです。
+
+  1. Chise_utils.pm をインストール（要 BerkeleyDB.pm）
+  2. CHISE DB に Ω/CHISE が利用する情報を加える。
+  3. フォントメトリックファイルのインストール
+  4. fontforge, t1asm のインストール
+  5. スクリプトの設定
+  6. dvipdfmx の設定
+
+  7. lambda の実行
+  8. dvipdfmx の実行
+
+  これを順に説明していきます。
+
+  一般的な手順は INSTALL.txt.ja に書いてありますので、詳しくはそちらを
+  御参照下さい。
+
+  また「6. dvipdfmx の設定」以降は、一般的な手順と共通ですので、
+  ここでは省略します。INSTALL.txt.ja を御参照下さい。
+
+* 1. CHISE DB に Ω/CHISE が利用する情報を加える。
+
+  CVS から fink が利用する CHISE 用の finkinfo ファイルを入手して 
+  利用できるようにしておいて下さい。
+
+  その上で次のコマンドを実行します。
+
+  $ fink install berkeleydb-pm
+  $ fink install chise-utils-pm
+
+  * もし chise-utils-pm のインストールに失敗する場合は、berkeleydb-pm 
+    の代わりに、Fink のunstable にある berkeleydb-pm581 などをお試し下
+    さい。
+
+    /sw/etc/fink.conf の中の Trees を unstable も使うように設定した上で
+
+    $ fink install berkeleydb-pm581
+
+    など、お使いの perl のバージョンに合わせてインストールして下さい。
+
+  以下、同じように、fink を使ってインストールしていきます。
+
+* 2. CHISE DB に Ω/CHISE が利用する情報を加える。
+
+  $ fink install omega-chise-supportdb
+
+  * ここでインストールされる情報はある時点でしか整合性がないものですの
+    で、問題がある場合は INSTALL.ja.txt を参考にアーカイブを利用せずに
+    CHISE DB を更新して下さい。
+
+* 3. フォントメトリックファイルのインストール
+
+  $ fink install omega-chise
+
+  * 必要ならこの後 mktexlsr を実行して下さい。
+
+* 4. fontforge, t1asm などのインストール
+
+  ・Mac OS X では fink を使えば t1asm をインストールできます。
+
+    $ sudo apt-get install t1utils
+
+  ・fontforge は
+
+      http://fontforge.sourceforge.net/MacOSX.html
+
+    にバイナリパッケージがありますので、それを通常のインストール手順で
+    インストールして下さい。
+
+* 5. スクリプトの設定の変更
+
+  fink を利用して Ω/CHISE をインストールした場合は、設定の変更の必要
+  はありません。
+
+  「inCHISE のスクリプト埋め込みオプション」については INSTALL.txt.ja 
+  をご参照下さい。
+
+* 6. dvipdfmx の設定
+
+  「dvipdfmx の設定」以降は他の OS と共通です。
+  INSTALL.txt.ja を御参照下さい。
+
+* 7. lambda の実行
+
+（省略）
+
+* 8. dvipdfmx の実行
+
+（省略）
+
+
+* おまけ
+
+** Mac OS X での pTeX のインストール
+
+  私は「JIS X0212 for pTeX」
+
+    http://www2.kumagaku.ac.jp/teacher/herogw/index.html
+
+  のページにあるパッケージを利用させてもらってます。

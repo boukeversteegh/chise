@@ -1,0 +1,313 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{chiseotf}[2006/03/28 v.0.2 (Omega/CHISE Team)]
+
+\RequirePackage[multi]{otf}
+
+\DeclareKanjiFamily{JY1}{urui6}{}
+\DeclareKanjiFamily{JT1}{urui6}{}
+\Declare@FontShape{urui6}{m}{0123456789abcdef}{urui6}
+\Declare@FontShape{urui6}{bx}{0123456789abcdef}{urui6}
+
+\DeclareRobustCommand{\Ruimoku}[1]{\begingroup%
+        \edef\reserved@a{\gtdefault}\ifx\k@family\reserved@a \kanjiseries{bx}\fi%
+        \kanjifamily{urui6}\uppercase{\set@character="#1}%
+        \endgroup%
+}
+
+\DeclareKanjiFamily{JY1}{uhzk1}{}
+\DeclareKanjiFamily{JT1}{uhzk1}{}
+\Declare@FontShape{uhzk1}{m}{0123456789abcdef}{uhzk1}
+\Declare@FontShape{uhzk1}{bx}{0123456789abcdef}{uhzk1}
+\DeclareKanjiFamily{JY1}{uhzk2}{}
+\DeclareKanjiFamily{JT1}{uhzk2}{}
+\Declare@FontShape{uhzk2}{m}{0123456789abcdef}{uhzk2}
+\Declare@FontShape{uhzk2}{bx}{0123456789abcdef}{uhzk2}
+\DeclareKanjiFamily{JY1}{uhzk3}{}
+\DeclareKanjiFamily{JT1}{uhzk3}{}
+\Declare@FontShape{uhzk3}{m}{0123456789abcdef}{uhzk3}
+\Declare@FontShape{uhzk3}{bx}{0123456789abcdef}{uhzk3}
+\DeclareKanjiFamily{JY1}{uhzk4}{}
+\DeclareKanjiFamily{JT1}{uhzk4}{}
+\Declare@FontShape{uhzk4}{m}{0123456789abcdef}{uhzk4}
+\Declare@FontShape{uhzk4}{bx}{0123456789abcdef}{uhzk4}
+\DeclareKanjiFamily{JY1}{uhzk5}{}
+\DeclareKanjiFamily{JT1}{uhzk5}{}
+\Declare@FontShape{uhzk5}{m}{0123456789abcdef}{uhzk5}
+\Declare@FontShape{uhzk5}{bx}{0123456789abcdef}{uhzk5}
+\DeclareKanjiFamily{JY1}{uhzk6}{}
+\DeclareKanjiFamily{JT1}{uhzk6}{}
+\Declare@FontShape{uhzk6}{m}{0123456789abcdef}{uhzk6}
+\Declare@FontShape{uhzk6}{bx}{0123456789abcdef}{uhzk6}
+\DeclareKanjiFamily{JY1}{uhzk7}{}
+\DeclareKanjiFamily{JT1}{uhzk7}{}
+\Declare@FontShape{uhzk7}{m}{0123456789abcdef}{uhzk7}
+\Declare@FontShape{uhzk7}{bx}{0123456789abcdef}{uhzk7}
+\DeclareKanjiFamily{JY1}{uhzk8}{}
+\DeclareKanjiFamily{JT1}{uhzk8}{}
+\Declare@FontShape{uhzk8}{m}{0123456789abcdef}{uhzk8}
+\Declare@FontShape{uhzk8}{bx}{0123456789abcdef}{uhzk8}
+\DeclareKanjiFamily{JY1}{uhzk9}{}
+\DeclareKanjiFamily{JT1}{uhzk9}{}
+\Declare@FontShape{uhzk9}{m}{0123456789abcdef}{uhzk9}
+\Declare@FontShape{uhzk9}{bx}{0123456789abcdef}{uhzk9}
+\DeclareKanjiFamily{JY1}{uhzka}{}
+\DeclareKanjiFamily{JT1}{uhzka}{}
+\Declare@FontShape{uhzka}{m}{0123456789abcdef}{uhzka}
+\Declare@FontShape{uhzka}{bx}{0123456789abcdef}{uhzka}
+\DeclareKanjiFamily{JY1}{uhzkb}{}
+\DeclareKanjiFamily{JT1}{uhzkb}{}
+\Declare@FontShape{uhzkb}{m}{0123456789abcdef}{uhzkb}
+\Declare@FontShape{uhzkb}{bx}{0123456789abcdef}{uhzkb}
+\DeclareKanjiFamily{JY1}{uhzkc}{}
+\DeclareKanjiFamily{JT1}{uhzkc}{}
+\Declare@FontShape{uhzkc}{m}{0123456789abcdef}{uhzkc}
+\Declare@FontShape{uhzkc}{bx}{0123456789abcdef}{uhzkc}
+
+\DeclareRobustCommand{\HanzikuA}[1]{\begingroup%
+        \edef\reserved@a{\gtdefault}\ifx\k@family\reserved@a \kanjiseries{bx}\fi%
+        \kanjifamily{uhzk1}\uppercase{\set@character="#1}%
+        \endgroup%
+}
+\DeclareRobustCommand{\HanzikuB}[1]{\begingroup%
+        \edef\reserved@a{\gtdefault}\ifx\k@family\reserved@a \kanjiseries{bx}\fi%
+        \kanjifamily{uhzk2}\uppercase{\set@character="#1}%
+        \endgroup%
+}
+\DeclareRobustCommand{\HanzikuC}[1]{\begingroup%
+        \edef\reserved@a{\gtdefault}\ifx\k@family\reserved@a \kanjiseries{bx}\fi%
+        \kanjifamily{uhzk3}\uppercase{\set@character="#1}%
+        \endgroup%
+}
+\DeclareRobustCommand{\HanzikuD}[1]{\begingroup%
+        \edef\reserved@a{\gtdefault}\ifx\k@family\reserved@a \kanjiseries{bx}\fi%
+        \kanjifamily{uhzk4}\uppercase{\set@character="#1}%
+        \endgroup%
+}
+\DeclareRobustCommand{\HanzikuE}[1]{\begingroup%
+        \edef\reserved@a{\gtdefault}\ifx\k@family\reserved@a \kanjiseries{bx}\fi%
+        \kanjifamily{uhzk5}\uppercase{\set@character="#1}%
+        \endgroup%
+}
+\DeclareRobustCommand{\HanzikuF}[1]{\begingroup%
+        \edef\reserved@a{\gtdefault}\ifx\k@family\reserved@a \kanjiseries{bx}\fi%
+        \kanjifamily{uhzk6}\uppercase{\set@character="#1}%
+        \endgroup%
+}
+\DeclareRobustCommand{\HanzikuG}[1]{\begingroup%
+        \edef\reserved@a{\gtdefault}\ifx\k@family\reserved@a \kanjiseries{bx}\fi%
+        \kanjifamily{uhzk7}\uppercase{\set@character="#1}%
+        \endgroup%
+}
+\DeclareRobustCommand{\HanzikuH}[1]{\begingroup%
+        \edef\reserved@a{\gtdefault}\ifx\k@family\reserved@a \kanjiseries{bx}\fi%
+        \kanjifamily{uhzk8}\uppercase{\set@character="#1}%
+        \endgroup%
+}
+\DeclareRobustCommand{\HanzikuI}[1]{\begingroup%
+        \edef\reserved@a{\gtdefault}\ifx\k@family\reserved@a \kanjiseries{bx}\fi%
+        \kanjifamily{uhzk9}\uppercase{\set@character="#1}%
+        \endgroup%
+}
+\DeclareRobustCommand{\HanzikuJ}[1]{\begingroup%
+        \edef\reserved@a{\gtdefault}\ifx\k@family\reserved@a \kanjiseries{bx}\fi%
+        \kanjifamily{uhzka}\uppercase{\set@character="#1}%
+        \endgroup%
+}
+\DeclareRobustCommand{\HanzikuK}[1]{\begingroup%
+        \edef\reserved@a{\gtdefault}\ifx\k@family\reserved@a \kanjiseries{bx}\fi%
+        \kanjifamily{uhzkb}\uppercase{\set@character="#1}%
+        \endgroup%
+}
+\DeclareRobustCommand{\HanzikuL}[1]{\begingroup%
+        \edef\reserved@a{\gtdefault}\ifx\k@family\reserved@a \kanjiseries{bx}\fi%
+        \kanjifamily{uhzkc}\uppercase{\set@character="#1}%
+        \endgroup%
+}
+
+\DeclareKanjiFamily{JY1}{ucdp}{}
+\DeclareKanjiFamily{JT1}{ucdp}{}
+\Declare@FontShape{ucdp}{m}{0123456789abcdef}{ucdp}
+\Declare@FontShape{ucdp}{bx}{0123456789abcdef}{ucdp}
+
+\DeclareRobustCommand{\CDPUCS}[1]{\begingroup%
+        \edef\reserved@a{\gtdefault}\ifx\k@family\reserved@a \kanjiseries{bx}\fi%
+        \kanjifamily{ucdp}\uppercase{\set@character="#1}%
+        \endgroup%
+}
+
+\DeclareKanjiFamily{JY1}{gto01}{}
+\DeclareFontShape{JY1}{gto01}{m}{n}{<-> s * [0.961] gto01}{}
+\DeclareFontShape{JY1}{gto01}{bx}{n}{<-> s * [0.961] gto01}{}
+\DeclareKanjiFamily{JY1}{gto02}{}
+\DeclareFontShape{JY1}{gto02}{m}{n}{<-> s * [0.961] gto02}{}
+\DeclareFontShape{JY1}{gto02}{bx}{n}{<-> s * [0.961] gto02}{}
+\DeclareKanjiFamily{JY1}{gto03}{}
+\DeclareFontShape{JY1}{gto03}{m}{n}{<-> s * [0.961] gto03}{}
+\DeclareFontShape{JY1}{gto03}{bx}{n}{<-> s * [0.961] gto03}{}
+\DeclareKanjiFamily{JY1}{gto04}{}
+\DeclareFontShape{JY1}{gto04}{m}{n}{<-> s * [0.961] gto04}{}
+\DeclareFontShape{JY1}{gto04}{bx}{n}{<-> s * [0.961] gto04}{}
+\DeclareKanjiFamily{JY1}{gto05}{}
+\DeclareFontShape{JY1}{gto05}{m}{n}{<-> s * [0.961] gto05}{}
+\DeclareFontShape{JY1}{gto05}{bx}{n}{<-> s * [0.961] gto05}{}
+\DeclareKanjiFamily{JY1}{gto06}{}
+\DeclareFontShape{JY1}{gto06}{m}{n}{<-> s * [0.961] gto06}{}
+\DeclareFontShape{JY1}{gto06}{bx}{n}{<-> s * [0.961] gto06}{}
+\DeclareKanjiFamily{JY1}{gto07}{}
+\DeclareFontShape{JY1}{gto07}{m}{n}{<-> s * [0.961] gto07}{}
+\DeclareFontShape{JY1}{gto07}{bx}{n}{<-> s * [0.961] gto07}{}
+\DeclareKanjiFamily{JY1}{gto08}{}
+\DeclareFontShape{JY1}{gto08}{m}{n}{<-> s * [0.961] gto08}{}
+\DeclareFontShape{JY1}{gto08}{bx}{n}{<-> s * [0.961] gto08}{}
+\DeclareKanjiFamily{JY1}{gto09}{}
+\DeclareFontShape{JY1}{gto09}{m}{n}{<-> s * [0.961] gto09}{}
+\DeclareFontShape{JY1}{gto09}{bx}{n}{<-> s * [0.961] gto09}{}
+\DeclareKanjiFamily{JY1}{gto10}{}
+\DeclareFontShape{JY1}{gto10}{m}{n}{<-> s * [0.961] gto10}{}
+\DeclareFontShape{JY1}{gto10}{bx}{n}{<-> s * [0.961] gto10}{}
+\DeclareKanjiFamily{JY1}{gto11}{}
+\DeclareFontShape{JY1}{gto11}{m}{n}{<-> s * [0.961] gto11}{}
+\DeclareFontShape{JY1}{gto11}{bx}{n}{<-> s * [0.961] gto11}{}
+\DeclareKanjiFamily{JY1}{gto12}{}
+\DeclareFontShape{JY1}{gto12}{m}{n}{<-> s * [0.961] gto12}{}
+\DeclareFontShape{JY1}{gto12}{bx}{n}{<-> s * [0.961] gto12}{}
+\DeclareKanjiFamily{JY1}{gto13}{}
+\DeclareFontShape{JY1}{gto13}{m}{n}{<-> s * [0.961] gto13}{}
+\DeclareFontShape{JY1}{gto13}{bx}{n}{<-> s * [0.961] gto13}{}
+\DeclareKanjiFamily{JT1}{gto01}{}
+\DeclareFontShape{JT1}{gto01}{m}{n}{<-> s * [0.961] gto01-v}{}
+\DeclareFontShape{JT1}{gto01}{bx}{n}{<-> s * [0.961] gto01-v}{}
+\DeclareKanjiFamily{JT1}{gto02}{}
+\DeclareFontShape{JT1}{gto02}{m}{n}{<-> s * [0.961] gto02-v}{}
+\DeclareFontShape{JT1}{gto02}{bx}{n}{<-> s * [0.961] gto02-v}{}
+\DeclareKanjiFamily{JT1}{gto03}{}
+\DeclareFontShape{JT1}{gto03}{m}{n}{<-> s * [0.961] gto03-v}{}
+\DeclareFontShape{JT1}{gto03}{bx}{n}{<-> s * [0.961] gto03-v}{}
+\DeclareKanjiFamily{JT1}{gto04}{}
+\DeclareFontShape{JT1}{gto04}{m}{n}{<-> s * [0.961] gto04-v}{}
+\DeclareFontShape{JT1}{gto04}{bx}{n}{<-> s * [0.961] gto04-v}{}
+\DeclareKanjiFamily{JT1}{gto05}{}
+\DeclareFontShape{JT1}{gto05}{m}{n}{<-> s * [0.961] gto05-v}{}
+\DeclareFontShape{JT1}{gto05}{bx}{n}{<-> s * [0.961] gto05-v}{}
+\DeclareKanjiFamily{JT1}{gto06}{}
+\DeclareFontShape{JT1}{gto06}{m}{n}{<-> s * [0.961] gto06-v}{}
+\DeclareFontShape{JT1}{gto06}{bx}{n}{<-> s * [0.961] gto06-v}{}
+\DeclareKanjiFamily{JT1}{gto07}{}
+\DeclareFontShape{JT1}{gto07}{m}{n}{<-> s * [0.961] gto07-v}{}
+\DeclareFontShape{JT1}{gto07}{bx}{n}{<-> s * [0.961] gto07-v}{}
+\DeclareKanjiFamily{JT1}{gto08}{}
+\DeclareFontShape{JT1}{gto08}{m}{n}{<-> s * [0.961] gto08-v}{}
+\DeclareFontShape{JT1}{gto08}{bx}{n}{<-> s * [0.961] gto08-v}{}
+\DeclareKanjiFamily{JT1}{gto09}{}
+\DeclareFontShape{JT1}{gto09}{m}{n}{<-> s * [0.961] gto09-v}{}
+\DeclareFontShape{JT1}{gto09}{bx}{n}{<-> s * [0.961] gto09-v}{}
+\DeclareKanjiFamily{JT1}{gto10}{}
+\DeclareFontShape{JT1}{gto10}{m}{n}{<-> s * [0.961] gto10-v}{}
+\DeclareFontShape{JT1}{gto10}{bx}{n}{<-> s * [0.961] gto10-v}{}
+\DeclareKanjiFamily{JT1}{gto11}{}
+\DeclareFontShape{JT1}{gto11}{m}{n}{<-> s * [0.961] gto11-v}{}
+\DeclareFontShape{JT1}{gto11}{bx}{n}{<-> s * [0.961] gto11-v}{}
+\DeclareKanjiFamily{JT1}{gto12}{}
+\DeclareFontShape{JT1}{gto12}{m}{n}{<-> s * [0.961] gto12-v}{}
+\DeclareFontShape{JT1}{gto12}{bx}{n}{<-> s * [0.961] gto12-v}{}
+\DeclareKanjiFamily{JT1}{gto13}{}
+\DeclareFontShape{JT1}{gto13}{m}{n}{<-> s * [0.961] gto13-v}{}
+\DeclareFontShape{JT1}{gto13}{bx}{n}{<-> s * [0.961] gto13-v}{}
+
+\DeclareRobustCommand{\GTpjA}[1]{\begingroup%
+  \kanjifamily{gto01}\selectfont\char\jis"#1\endgroup
+}
+\DeclareRobustCommand{\GTpjB}[1]{\begingroup%
+  \kanjifamily{gto02}\selectfont\char\jis"#1\endgroup
+}
+\DeclareRobustCommand{\GTpjC}[1]{\begingroup%
+  \kanjifamily{gto03}\selectfont\char\jis"#1\endgroup
+}
+\DeclareRobustCommand{\GTpjD}[1]{\begingroup%
+  \kanjifamily{gto04}\selectfont\char\jis"#1\endgroup
+}
+\DeclareRobustCommand{\GTpjE}[1]{\begingroup%
+  \kanjifamily{gto05}\selectfont\char\jis"#1\endgroup
+}
+\DeclareRobustCommand{\GTpjF}[1]{\begingroup%
+  \kanjifamily{gto06}\selectfont\char\jis"#1\endgroup
+}
+\DeclareRobustCommand{\GTpjG}[1]{\begingroup%
+  \kanjifamily{gto07}\selectfont\char\jis"#1\endgroup
+}
+\DeclareRobustCommand{\GTpjH}[1]{\begingroup%
+  \kanjifamily{gto08}\selectfont\char\jis"#1\endgroup
+}
+\DeclareRobustCommand{\GTpjI}[1]{\begingroup%
+  \kanjifamily{gto09}\selectfont\char\jis"#1\endgroup
+}
+\DeclareRobustCommand{\GTpjJ}[1]{\begingroup%
+  \kanjifamily{gto10}\selectfont\char\jis"#1\endgroup
+}
+\DeclareRobustCommand{\GTpjK}[1]{\begingroup%
+  \kanjifamily{gto11}\selectfont\char\jis"#1\endgroup
+}
+\DeclareRobustCommand{\GTpjL}[1]{\begingroup%
+  \kanjifamily{gto12}\selectfont\char\jis"#1\endgroup
+}
+\DeclareRobustCommand{\GTpjM}[1]{\begingroup%
+  \kanjifamily{gto13}\selectfont\char\jis"#1\endgroup
+}
+
+\DeclareFontFamily{T1}{chisesub000}{}
+\DeclareFontShape{T1}{chisesub000}{m}{n}{
+   <-> [.961] chisesub000min
+}{}
+\DeclareFontFamily{T1}{chisesub000}{}
+\DeclareFontShape{T1}{chisesub000}{bx}{n}{
+   <-> [.961] chisesub000got
+}{}
+\DeclareFontFamily{T1}{chisesub001}{}
+\DeclareFontShape{T1}{chisesub001}{m}{n}{
+   <-> [.961] chisesub001min
+}{}
+\DeclareFontFamily{T1}{chisesub001}{}
+\DeclareFontShape{T1}{chisesub001}{bx}{n}{
+   <-> [.961] chisesub001got
+}{}
+\DeclareFontFamily{T1}{chisesub002}{}
+\DeclareFontShape{T1}{chisesub002}{m}{n}{
+   <-> [.961] chisesub002min
+}{}
+\DeclareFontFamily{T1}{chisesub002}{}
+\DeclareFontShape{T1}{chisesub002}{bx}{n}{
+   <-> [.961] chisesub002got
+}{}
+\DeclareFontFamily{T1}{chisesub003}{}
+\DeclareFontShape{T1}{chisesub003}{m}{n}{
+   <-> [.961] chisesub003min
+}{}
+\DeclareFontFamily{T1}{chisesub003}{}
+\DeclareFontShape{T1}{chisesub003}{bx}{n}{
+   <-> [.961] chisesub003got
+}{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% IDC shorthand
+% -------------
+\def\idc@#1{\UTFM{#1}}
+\def\idcltr{\idc@{2FF0}}
+\def\idcatb{\idc@{2FF1}}
+\def\idcltmr{\idc@{2FF2}}
+\def\idcatmb{\idc@{2FF3}}
+\def\idcfs{\idc@{2FF4}}
+\def\idcsfa{\idc@{2FF5}}
+\def\idcsfb{\idc@{2FF6}}
+\def\idcsfl{\idc@{2FF7}}
+\def\idcsful{\idc@{2FF8}}
+\def\idcsfur{\idc@{2FF9}}
+\def\idcsfll{\idc@{2FFA}}
+\def\idcol{\idc@{2FFB}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% other macros
+% -------------
+\newcommand{\UCSgb}[1]{\UTFC{#1}}
+\newcommand{\UCSjis}[1]{\UTF{#1}}
+\newcommand{\UCSks}[1]{\UTFK{#1}}
+\newcommand{\UCScns}[1]{\UTFT{#1}}
+\newcommand{\AdobeJP}[1]{\CID{#1}}

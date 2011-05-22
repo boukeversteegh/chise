@@ -1,0 +1,52 @@
+Package: xemacs-chise
+Version: 0.21.20050405
+Revision: 1
+Source: http://www.jokoji.jp/chise/xemacs-chise-%v.tar.gz
+Source-MD5: 02d95143bd5cd4aefa08914802073bc4
+BuildDepends: libpng3, libtiff, libjpeg, gdbm3, xaw3d (>= 1.5-5), ncurses-dev (>= 5.3-20031018-2), libchise1, libchise1-dev, compface-dev
+Depends: x11, libpng3-shlibs, libtiff-shlibs, libjpeg-shlibs, gdbm3-shlibs, xemacs-base-pkg, xemacs-efs-pkg, xaw3d-shlibs (>= 1.5-5), ncurses (>= 5.3-12), ncurses-shlibs (>= 5.3-12), gettext, libchise1, libchise1-shlibs, compface-shlibs
+PatchScript: <<
+# sed 's|@PREFIX@|%p|g' <%a/xemacs-chise-%v-%r.patch | patch -p1
+ sed 's|@PREFIX@|%p|g' <%a/xemacs-chise.patch | patch -p1
+<<
+ConfigureParams: --with-dialogs=athena --with-widgets=athena --with-sound=none --with-database=gdbm --with-athena=3d --error-checking=none --without-xim --with-chise --with-xface --pdump
+GCC: 3.3
+InstallScript: <<
+ make install prefix=%i mandir=%i/share/man/man1
+ mv %i/bin/ctags %i/bin/ctags.xemacs-chise
+ mv %i/share/man/man1/ctags.1 %i/share/man/man1/ctags.1.xemacs-chise
+ mv %i/bin/etags %i/bin/etags.xemacs-chise
+ mv %i/share/man/man1/etags.1 %i/share/man/man1/etags.1.xemacs-chise
+ mv %i/bin/b2m %i/bin/b2m.xemacs-chise
+ mv %i/bin/rcs-checkin %i/bin/rcs-checkin.xemacs-chise
+<<
+PostInstScript: <<
+update-alternatives --install %p/bin/ctags ctags %p/bin/ctags.xemacs-chise 60 --slave %p/share/man/man1/ctags.1 ctags.1 %p/share/man/man1/ctags.1.xemacs-chise
+update-alternatives --install %p/bin/etags etags %p/bin/etags.xemacs-chise 80 --slave %p/share/man/man1/etags.1 etags.1 %p/share/man/man1/etags.1.xemacs-chise
+update-alternatives --install %p/bin/b2m b2m %p/bin/b2m.xemacs-chise 80 
+update-alternatives --install %p/bin/rcs-checkin rcs-checkin %p/bin/rcs-checkin.xemacs-chise 80 
+XEMACS_DBDIR=`/sw/bin/xemacs -q -batch -vanilla -eval '(princ (file-name-as-directory chise-db-directory))'`
+XEMACS_DATADIR=`/sw/bin/xemacs -q -batch -vanilla -eval '(princ (file-name-as-directory data-directory))'`
+if [ ! -e ${XEMACS_DBDIR} ]; then
+   mkdir -p ${XEMACS_DBDIR}
+fi
+ln -sf ${XEMACS_DATADIR}chise-db ${XEMACS_DBDIR}db
+<<
+PreRmScript: <<
+if [ $1 != "upgrade" ]; then
+  update-alternatives --remove ctags %p/bin/ctags.xemacs-chise
+  update-alternatives --remove etags %p/bin/etags.xemacs-chise
+  update-alternatives --remove b2m %p/bin/b2m.xemacs-chise
+  update-alternatives --remove rcs-checkin %p/bin/rcs-checkin.xemacs-chise
+fi
+XEMACS_DBDIR=`/sw/bin/xemacs -q -batch -vanilla -eval '(princ (file-name-as-directory chise-db-directory))'`
+rm ${XEMACS_DBDIR}db
+rmdir ${XEMACS_DBDIR}
+<<
+Conflicts: xemacs
+Replaces: xemacs
+Provides: xemacs
+Description: Highly customizable text editor based on Chaon model.
+License: GPL
+Homepage: http://www.kanji.zinbun.kyoto-u.ac.jp/projects/chise/xemacs/
+Maintainer: MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>

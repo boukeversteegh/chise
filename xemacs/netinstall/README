@@ -1,0 +1,16 @@
+This directory contains the source for the setup program for the XEmacs
+net releases.
+
+For commentary on how to do a release please see `package-net.el'
+
+This code has been adapted from the cygwin net release installer. In
+particular note that the cygwin net release installer is actively
+maintained and therefore we will want to incorporate improvements from
+that. I have therefore tried to use the cygwin way wherever
+possible. I have however cleaned up the code somewhat so that there
+are not billions of warnings.
+
+This program should get built as part of the standard XEmacs
+make. Note however that if you use trhe cygwin build you will need a
+NON CYGWIN VERSION OF ZLIB.
+	

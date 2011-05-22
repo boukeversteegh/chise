@@ -1,0 +1,47 @@
+VERSION = @PACKAGE_VERSION@
+
+RM	= /bin/rm -f
+TAR	= tar
+WGET	= wget
+MKDIR	= mkdir -p
+SUDO	= 
+
+prefix		= @prefix@
+exec_prefix	= @exec_prefix@
+
+datadir	= @datadir@
+
+FONTS_DIR	= $(datadir)/fonts
+TTF_FONTS_DIR	= $(datadir)/fonts/TrueType
+ZINBUN_FONTS_DIR = $(TTF_FONTS_DIR)/Zinbun
+
+CHISE_FONTS_URL	= http://kanji.zinbun.kyoto-u.ac.jp/projects/chise/dist/fonts
+
+OPTS		= @ac_configure_args@
+
+all:	get
+
+get:	rui6-eudc.ttf fonts.dir fonts.alias
+
+
+rui6-eudc.ttf:
+	$(WGET) $(CHISE_FONTS_URL)/TrueType/Zinbun/rui6-eudc.ttf
+
+fonts.dir:
+	$(WGET) $(CHISE_FONTS_URL)/TrueType/Zinbun/fonts.dir
+
+fonts.alias:
+	$(WGET) $(CHISE_FONTS_URL)/TrueType/Zinbun/fonts.alias
+
+
+install:
+	$(MKDIR) $(ZINBUN_FONTS_DIR)
+	( $(TAR) -cf - *.ttf fonts.dir fonts.alias ) | \
+	( cd $(ZINBUN_FONTS_DIR) && $(TAR) -xf - )
+
+
+distclean:
+	-$(RM) Makefile
+
+distclean-all:
+	-$(RM) *.ttf fonts.dir fonts.alias Makefile

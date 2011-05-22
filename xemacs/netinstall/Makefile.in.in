@@ -1,0 +1,279 @@
+## Copyright (c) 2000, Red Hat, Inc.
+##
+##     This program is free software; you can redistribute it and/or modify
+##     it under the terms of the GNU General Public License as published by
+##     the Free Software Foundation; either version 2 of the License, or
+##     (at your option) any later version.
+##
+##     A copy of the GNU General Public License can be found at
+##     http://www.gnu.org/
+##
+## Written by Christopher Faylor <cgf@redhat.com>
+## Adapted for XEmacs by Andy Piper <andy@xemacs.org>
+##
+## Makefile for Cygwin installer
+
+## For performance and consistency, no built-in rules
+.SUFFIXES:
+.SUFFIXES: .c .cc .h .o
+## ==================== Things "configure" will edit ====================
+
+@SET_MAKE@
+SHELL = /bin/sh
+RM = rm -f
+pwd = /bin/pwd
+
+CC=@CC@
+CPP=@CPP@
+CFLAGS=@CFLAGS@
+CPPFLAGS=@CPPFLAGS@
+LDFLAGS=@LDFLAGS@
+ALLOCA=@ALLOCA@
+LN_S=@LN_S@
+version=@version@
+
+## This will be the name of the generated binary and is set automatically
+## by configure.
+PROGNAME=@PROGNAME@
+INSTALLABLES=setup
+#ifdef USE_GNU_MAKE
+vpath %.c @srcdir@
+vpath %.cc @srcdir@
+vpath %.h @srcdir@
+vpath %.l @srcdir@
+vpath %.y @srcdir@
+vpath %.rc @srcdir@
+#else
+VPATH=@srcdir@
+#endif
+
+## ==================== Where To Install Things ====================
+
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+bindir=@bindir@
+libdir=@libdir@
+srcdir=@srcdir@
+datadir=@datadir@
+instvardir=@instvardir@
+top_srcdir=@top_srcdir@
+archlibdir=@archlibdir@
+configuration=@configuration@
+moduledir=@moduledir@
+sitemoduledir=@sitemoduledir@
+extra_includes=@extra_includes@
+blddir=@blddir@
+
+## ==================== Utility Programs for the Build =================
+
+INSTALL = @install_pp@ @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+SHELL = @SHELL@
+## ========================== Lists of Files ===========================
+
+#define NO_SHORTNAMES
+#define NOT_C_CODE
+#include "../src/config.h"
+
+program_transform_name = @program_transform_name@
+
+CC		= @CC@
+CC_FOR_TARGET	= $(CC)
+
+## -O3 has problems so fix this locally
+LOCALCFLAGS = $(CFLAGS) -O2 -DMINGW $(extra_includes)
+CXXFLAGS	= $(LOCALCFLAGS) -fno-exceptions -nostdinc++ -fno-rtti
+
+WINDRES		= windres
+MINGW_INCLUDES	= -I. -I$(srcdir) 
+MINGW_CXXFLAGS	= $(CXXFLAGS) -mno-cygwin $(MINGW_INCLUDES) -mwindows
+MINGW_CFLAGS	= $(LOCALCFLAGS) -mno-cygwin $(MINGW_INCLUDES) -mwindows
+MINGW_ZLIB_DIR	= /usr/local/lib
+
+PROGS	= setup.exe
+XEMACS=${blddir}/src/${PROGNAME}
+
+CYGWIN_SIZE=0
+WIN32_SIZE=0
+KIT_VERSION=""
+
+CONFIG_H = ../src/config.h
+
+OBJS = \
+	autoload.o \
+	choose.o \
+	concat.o \
+	desktop.o \
+	dialog.o \
+	diskfull.o \
+	download.o \
+	find.o \
+	fromcwd.o \
+	geturl.o \
+	hash.o \
+	ini.o \
+	inilex.o \
+	iniparse.o \
+	init.o \
+	install.o \
+	localdir.o \
+	log.o \
+	main.o \
+	mkdir.o \
+	mklink2.o \
+	regedit.o \
+	msg.o \
+	net.o \
+	netio.o \
+	nio-ie5.o \
+	nio-file.o \
+	nio-ftp.o \
+	nio-http.o \
+	other.o \
+	postinstall.o \
+	res.o \
+	root.o \
+	simpsock.o \
+	site.o \
+	source.o \
+	splash.o \
+	state.o \
+	tar.o \
+	uninstall.o \
+	version.o
+
+.SUFFIXES:
+.NOEXPORT:
+
+.PHONY: all install
+
+all: Makefile $(PROGS)
+
+setup.exe: $(OBJS)
+	$(CXX) $(MINGW_CXXFLAGS) -o $@ $(OBJS) \
+		-lole32 -lwsock32 -lnetapi32 -ladvapi32 \
+		-luuid -lkernel32 -luser32 \
+		-L$(MINGW_ZLIB_DIR) -lz -lmingw32
+	@chmod a-x $@
+
+setup-bin.ini:
+	V=`grep '^\$$Revision.*' $(srcdir)/ChangeLog \
+	| sed -e 's/\$$Revision:* *//' -e 's/ *$$.*//'` ;\
+	$(XEMACS) -batch -vanilla \
+		-eval '(setq package-net-cygwin32-binary-size $(CYGWIN_SIZE) \
+			package-net-win32-binary-size $(WIN32_SIZE) \
+			package-net-kit-version "$(KIT_VERSION)" \
+			package-net-setup-version "'$$V'")' \
+		-l ${srcdir}/../lisp/package-net.el \
+		-f package-net-batch-generate-bin-ini
+
+install:
+	@echo; echo "Installing net setup."
+	for file in ${INSTALLABLES} ; do \
+	  (cd .. && $(INSTALL_PROGRAM) netinstall/$${file} ${bindir}/$${file}) ; \
+	done
+
+version.c : $(srcdir)/ChangeLog Makefile
+	V=`grep '^\$$Revision.*' $(srcdir)/ChangeLog \
+	| sed -e 's/\$$Revision:* *//' \
+	  -e 's/ *$$.*//'` ;\
+	echo "char *version = \"$$V\";" > version.tmp ;\
+	echo "static char *id = \"\\n%%% setup-version $$V\\n\";" >> version.tmp
+	mv version.tmp version.c
+
+%.o: %.rc
+	$(WINDRES) --include-dir $(srcdir) -o $@ $<
+
+%.o: %.c
+	$(CC) $(MINGW_CFLAGS) -c -o $@ $<
+
+%.o: %.cc
+	$(CC) $(MINGW_CXXFLAGS) -c -o $@ $<
+
+iniparse.c iniparse.h : iniparse.y
+	bison -d -o iniparse.c $(srcdir)/iniparse.y
+
+inilex.c : inilex.l iniparse.h
+	flex -8 $(srcdir)/inilex.l
+	mv lex.yy.c inilex.c
+
+.PHONY: mostlyclean clean distclean realclean extraclean
+
+mostlyclean:
+	$(RM) *.o *.i *.ini core $(PROGS)
+
+clean: mostlyclean
+
+distclean: clean
+	$(RM) GNUmakefile Makefile Makefile.in TAGS
+
+realclean: distclean
+
+extraclean: distclean
+	$(RM) *~ \#*
+
+choose.o: choose.cc win32.h dialog.h resource.h state.h ini.h concat.h \
+ msg.h log.h find.h reginfo.h
+concat.o: concat.cc
+desktop.o: desktop.cc win32.h resource.h ini.h msg.h state.h concat.h \
+ mkdir.h dialog.h version.h port.h reginfo.h desktop.h
+dialog.o: dialog.cc win32.h dialog.h msg.h log.h
+diskfull.o: diskfull.cc win32.h diskfull.h
+download.o: download.cc win32.h resource.h msg.h ini.h dialog.h \
+ concat.h geturl.h state.h mkdir.h log.h
+find.o: find.cc win32.h port.h
+fromcwd.o: fromcwd.cc win32.h ini.h resource.h concat.h state.h \
+ dialog.h msg.h find.h version.h port.h
+geturl.o: geturl.cc win32.h dialog.h \
+ geturl.h resource.h netio.h msg.h log.h
+hash.o: hash.cc hash.h
+ini.o: ini.cc win32.h ini.h resource.h concat.h state.h geturl.h \
+ dialog.h msg.h mkdir.h log.h reginfo.h version.h
+inilex.o: inilex.c win32.h \
+ ini.h \
+ iniparse.h
+iniparse.o: iniparse.c ini.h \
+ iniparse.h \
+ port.h
+install.o: install.cc win32.h \
+ resource.h ini.h dialog.h concat.h geturl.h mkdir.h state.h tar.h \
+ diskfull.h msg.h regedit.h reginfo.h log.h hash.h port.h desktop.h
+init.o: init.cc win32.h resource.h dialog.h state.h msg.h log.h 
+uninstall.o: uninstall.cc win32.h \
+ resource.h ini.h dialog.h concat.h geturl.h mkdir.h state.h tar.h \
+ diskfull.h msg.h regedit.h reginfo.h log.h hash.h port.h desktop.h
+localdir.o: localdir.cc win32.h dialog.h resource.h state.h msg.h \
+ concat.h log.h
+log.o: log.cc win32.h resource.h msg.h log.h dialog.h state.h concat.h \
+ mkdir.h
+main.o: main.cc win32.h resource.h dialog.h state.h msg.h netio.h \
+ find.h log.h port.h
+mkdir.o: mkdir.cc win32.h mkdir.h
+mklink2.o: mklink2.c win32.h /usr/include/w32api/shlobj.h
+msg.o: msg.cc win32.h dialog.h log.h
+net.o: net.cc win32.h dialog.h resource.h state.h msg.h log.h
+netio.o: netio.cc win32.h resource.h state.h msg.h netio.h nio-file.h \
+ nio-ie5.h nio-http.h nio-ftp.h dialog.h log.h port.h
+nio-file.o: nio-file.cc win32.h netio.h nio-file.h resource.h msg.h
+nio-ftp.o: nio-ftp.cc win32.h resource.h state.h simpsock.h log.h \
+ netio.h nio-ftp.h
+nio-http.o: nio-http.cc win32.h resource.h state.h simpsock.h msg.h \
+ netio.h nio-http.h
+nio-ie5.o: nio-ie5.cc win32.h resource.h state.h dialog.h msg.h \
+ netio.h nio-ie5.h
+other.o: other.cc win32.h dialog.h resource.h state.h msg.h log.h
+postinstall.o: postinstall.cc win32.h state.h dialog.h find.h concat.h \
+ port.h
+regedit.o: regedit.cc win32.h reginfo.h regedit.h msg.h resource.h \
+ dialog.h
+root.o: root.cc win32.h dialog.h resource.h state.h msg.h regedit.h \
+ reginfo.h concat.h log.h
+simpsock.o: simpsock.cc win32.h simpsock.h msg.h
+site.o: site.cc win32.h dialog.h resource.h state.h geturl.h msg.h \
+ concat.h regedit.h reginfo.h log.h port.h
+source.o: source.cc win32.h dialog.h resource.h state.h msg.h log.h
+splash.o: splash.cc win32.h dialog.h resource.h msg.h version.h
+state.o: state.cc state.h
+tar.o: tar.cc win32.h tar.h mkdir.h log.h port.h
+version.o: version.c

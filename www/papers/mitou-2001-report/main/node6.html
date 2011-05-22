@@ -1,0 +1,323 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>文書編集系と外部データベースの統合</TITLE>
+<META NAME="description" CONTENT="文書編集系と外部データベースの統合">
+<META NAME="keywords" CONTENT="main">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=euc-jp">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="main.css">
+
+<LINK REL="next" HREF="node7.html">
+<LINK REL="previous" HREF="node5.html">
+<LINK REL="up" HREF="main.html">
+<LINK REL="next" HREF="node7.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html114"
+  HREF="node7.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html112"
+  HREF="main.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html106"
+  HREF="node5.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html115"
+  HREF="node7.html">Bibliography</A>
+<B> Up:</B> <A NAME="tex2html113"
+  HREF="main.html">2001年度未踏ソフトウェア創造事業 文字データベースに基づく 文字オブジェクト技術の構築 （契約番号</A>
+<B> Previous:</B> <A NAME="tex2html107"
+  HREF="node5.html">Topic Maps に基づく大域文字データベース</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html116"
+  HREF="#SECTION00610000000000000000">基本構造</A>
+<LI><A NAME="tex2html117"
+  HREF="#SECTION00620000000000000000">Berkeley DB を用いた実装</A>
+<LI><A NAME="tex2html118"
+  HREF="#SECTION00630000000000000000">外部データベースを扱うための API</A>
+<LI><A NAME="tex2html119"
+  HREF="#SECTION00640000000000000000">評価</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00600000000000000000">
+文書編集系と外部データベースの統合</A>
+</H1>
+
+<P>
+UTF-2000 実装では処理対象とするすべての文字の知識を文字属性として保持
+しなければならないために、符号化文字モデルに基づく従来型の文字処理系に
+比べて多くの記憶資源を必要とする。
+
+<P>
+XEmacs UTF-2000 では文字属性データベースは define-char 形式の Emacs
+Lisp プログラムとして表現され、文字属性データベース全体を読み込んだ状
+態の記憶イメージをダンプした実行形式を作り、そのダンプされた実行形式を
+用いる。このため、XEmacs UTF-2000 のダンプ後の実行形式の大きさと元となっ
+た XEmacs-Mule の実行形式の大きさの差は文字属性データベースを保持する
+ための記憶資源の大きさを意味している。
+
+<P>
+初期の XEmacs UTF-2000 は文字属性データベースの保持するための機構の効
+率化が十分でなかったこともあり、i386 アーキテクチャ上の Linux において
+当時のXEmacs-Mule の実行形式が約 10 MB であったのに対し、約5万字分の文
+字データを保持した状態で実行形式が 40 MB を越えるようになった。その後、
+文字データを保持する機構を改良し、記憶効率を向上したため、最近のXEmacs
+UTF-2000 では約7万字分の文字データを保持した状態で実行形式は約27 MB と
+なっている。
+
+<P>
+このように、主記憶上に文字属性データベースを保持する方法は多くの記憶資
+源を要するという点で問題がある。そして、通常の利用で必要となる文字は数
+百から数千であり、必要とする文字属性も限られているということを考えると、
+文字属性データベース全体をダンプするという方法は望ましくないと考えられ
+る。
+
+<P>
+文字属性データベース全体をダンプする方法のもう一つの問題点は、UTF-2000 
+実装と文字属性データベースが不可分になってしまうことである。つまり、異
+なる UTF-2000 実装間で文字属性データベースが共有できないことを意味する。
+また、UTF-2000 実装の開発と文字属性データベースのメンテナンスは非常に
+性質の異なる作業であるにも関わらず、両者を統合した形でソースファイルを
+管理しなければならない。
+
+<P>
+このようなことを考えると、UTF-2000 実装と文字属性データベースは分離し
+た方が良いと考えられる。すなわち、文字属性データベースは UTF-2000 実装
+の外部にあるデータベースに保持し、UTF-2000 実装において外部データベー
+スから処理に必要な分だけデータをロードするようにする訳である。
+
+<P>
+このような考えに立ち、本プロジェクトでは XEmacs UTF-2000 において外部
+の文字データベースを利用するための機構を開発した。本章ではこの機構に関
+して概説する。
+
+<P>
+
+<H1><A NAME="SECTION00610000000000000000">
+基本構造</A>
+</H1>
+
+<P>
+現在の XEmacs UTF-2000 では文字属性データベースは属性毎のデータ構造 
+(char-id-table) に分けて保持されている。このchar-id-table は文字 id か
+ら属性値を索くためのデータ構造であり、属性値として任意の Lisp オブジェ
+クトが格納できる。文字属性名と char-id-table の対応はハッシュ表によっ
+て管理されており、これにより文字属性名からその属性値を索くことができる。
+
+<P>
+<A HREF="node4.html#sec:coded-charset">4.2</A> 節および <A HREF="node4.html#sec:coded-charset">4.2</A> 節で述べたよ
+うに、符合位置属性は coded-charset での復号処理に利用されるが、これは
+char-id-table を逆索きすることに相当する。復号処理は重要な処理でありこ
+の高速化のために、coded-charset での符合位置から文字オブジェクトを索く
+ためのデータ構造 (decoding-table) も用意している。これは 1 byte 毎に分
+割した符合位置を用いた入れ子上の配列で実現されている。
+
+<P>
+XEmacs UTF-2000 において外部データベースから必要な時に情報を獲得するこ
+と (lazy-loading) をするためには、char-id-table および decoding-table 
+に値が存在しないことを示す印が必要である。このために、記憶空間中に値が
+存在しないことを示す特別な Lisp オブジェクト <B>Qunloaded</B> を導入
+した。すなわち、char-id-table および decoding-table を索いた時に得られ
+た値が Qunloaded であれば外部データベースから情報を獲得しなければなら
+ないことがわかる。そして、この時、外部データベースから情報を獲得するこ
+とができれば、Qunloaded をその結果で置き換えるとともに、その獲得した値
+を返す訳である。
+
+<P>
+
+<H1><A NAME="SECTION00620000000000000000">
+Berkeley DB を用いた実装</A>
+</H1>
+
+<P>
+XEmacs は Berkeley DB のような属性値を保持するための単純なデータベース
+を抽象化した <B>database</B> 機能を持っている。本プロジェクトではこ
+の機能を利用した文字属性データベースの外部化機能を実現した。現在のとこ
+ろ、動作確認は Debian GNU/Linux (sid) における Berkeley DB Version 3 
+でのみ行なっている。
+
+<P>
+
+<H2><A NAME="SECTION00621000000000000000">
+データベース・ファイルとの対応づけ</A>
+</H2>
+
+<P>
+char-id-table および decoding-table は
+<BLOCKQUOTE>
+<I>『文字属性データベースのルート』</I>/<I>『鍵の種類』</I>/<I>『値の種類』</I>
+
+</BLOCKQUOTE>
+というファイル名のデータベースに対応付けられる。
+
+<P>
+ここで、<I>『鍵の種類』</I> はその情報の鍵の符号化法を表す。例えば、
+char-id-table の場合、鍵の符号化法は XEmacs UTF-2000 の文字 id なので、
+それを表す名前 <TT>system-char-id</TT> が <I>『鍵の種類』</I> となる。
+decoding-table の場合 coded-charset の名前が <I>『鍵の種類』</I> とな
+る。例えば、<TT>ascii</TT> の場合 <I>『鍵の種類』</I> は 
+<TT>ascii</TT> となる。
+
+<P>
+<I>『値の種類』</I> はその属性の名前に対応付けられる。char-id-table の
+場合、文字属性の名前が用いられる。ただし、属性名にファイル名として用い
+ることができない文字が含まれていた場合、Emacs Lisp における 
+<code>\</code>-quoting を行なう。また、decoding-table の場合、
+<TT>system-char-id</TT> を用いる。
+
+<P>
+以下に幾つか例を示す：
+<BLOCKQUOTE>
+<I>『文字属性データベースのルート』</I> を
+  <TT>/usr/local/libexec/char-db/</TT> とする時、
+  </BLOCKQUOTE><DL>
+<DT><STRONG>例1</STRONG></DT>
+<DD>文字属性 ideographic-structure は
+    <TT>/usr/local/libexec/char-db/system-char-id/ideographic-structure</TT>
+    に対応する。
+  
+</DD>
+<DT><STRONG>例2</STRONG></DT>
+<DD>ascii の decoding-table は 
+    <TT>/usr/local/libexec/char-db/ascii/system-char-id</TT> に対応す
+    る。
+  
+</DD>
+</DL>
+
+<P>
+
+<H1><A NAME="SECTION00630000000000000000">
+外部データベースを扱うための API</A>
+</H1>
+
+<P>
+外部データベースからの文字データの獲得は必要な時に自動的に行なわれるが、
+記憶空間中の文字データと外部データベースの入出力を制御するために幾つか
+の API を拡張した。
+
+<P>
+<BLOCKQUOTE>
+ 
+  関数 <B>save-char-attribute-table</B> (<I>attribute</I>)
+  
+<BLOCKQUOTE>
+文字属性 <I>attribute</I> のすべての値をこの属性に対応付けられた
+    外部データベースに保存する。
+</BLOCKQUOTE></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><BLOCKQUOTE>対応付けられた外部データベースが存在しない場合、何もしない。
+  
+</BLOCKQUOTE>
+</BLOCKQUOTE>
+
+<P>
+<BLOCKQUOTE>
+ 
+  関数 <B>save-charset-mapping-table</B>) (<I>coded-charset</I>)
+  
+<BLOCKQUOTE>
+<I>coded-charset</I> の decoding-table を対応付けられた外部デー
+    タベースに保存する。
+</BLOCKQUOTE></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><BLOCKQUOTE>対応付けられた外部データベースが存在しない場合、何もしない。
+  
+</BLOCKQUOTE>
+</BLOCKQUOTE>
+
+<P>
+<BLOCKQUOTE>
+ 
+  関数 <B>reset-char-attribute-table</B> (<I>attribute</I>)
+  
+<BLOCKQUOTE>
+文字属性 <I>attribute</I> に対応付けられた外部データベースが存在
+    する時、すべての属性値を消去し、外部データベースから読み込める状態
+    にする。
+  
+</BLOCKQUOTE>
+</BLOCKQUOTE>
+
+<P>
+
+<H1><A NAME="SECTION00640000000000000000">
+評価</A>
+</H1>
+
+<P>
+TM 5800 上の Debian GNU/Linux (sid) において、約7万字のの文字定義を持つ 
+XEmacs 21.2.43 UTF-2000 のダンプ後の実行形式の大きさが 27 MB (strip 後 
+22 MB) であるのに対して、lazy-loading 版の実行形式の大きさは 15 MB
+(strip 後 10 MB) となった。ちなみに、XEmacs 21.2.43（mule 付き）の実行
+形式の大きさは 10 MB (strip 後 6 MB) である。
+
+<P>
+lazy-loading 版の実行形式の大きさがなお XEmacs-Mule よりも 5 MB 程大き
+いのは、XEmacs-Mule から引き継いだ Emacs Lisp code において、
+coded-charset を鍵とした char-table が多用されているせいだと考えられる。
+XEmacs UTF-2000 では char-table は char-id-table で実装されており、
+coded-charset を鍵にして値を設定した場合、その coded-charset に属する
+すべての文字に対して値を設定するようになっているため、必要な記憶量が膨
+らむと考えられる。また、char-table は文字属性と異なり外部データベース
+に対応付けられていないため、lazy-loading ができないのである。よって、
+この点を改良すれば lazy-loading 版 XEmacs UTF-2000 の実行形式の大きさ
+を XEmacs-Mule と同程度にすることができると考えられる。
+
+<P>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html114"
+  HREF="node7.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html112"
+  HREF="main.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html106"
+  HREF="node5.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html115"
+  HREF="node7.html">Bibliography</A>
+<B> Up:</B> <A NAME="tex2html113"
+  HREF="main.html">2001年度未踏ソフトウェア創造事業 文字データベースに基づく 文字オブジェクト技術の構築 （契約番号</A>
+<B> Previous:</B> <A NAME="tex2html107"
+  HREF="node5.html">Topic Maps に基づく大域文字データベース</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+MORIOKA Tomohiko
+2002-02-15
+</ADDRESS>
+</BODY>
+</HTML>

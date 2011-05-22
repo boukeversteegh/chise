@@ -1,0 +1,63 @@
+Document Type: DLG
+item: Custom Dialog
+  Name=Display ReadMe
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=Read Me File
+    Title French=Fichier Lisez-moi
+    Title German=Liesmich-Datei
+    Title Portuguese=Ficheiro Leia-me
+    Title Spanish=Archivo Léeme
+    Title Italian=File Leggimi
+    Title Danish=Vigtigt fil
+    Title Dutch=Leesmij-bestand
+    Title Norwegian=Informasjonsfil
+    Title Swedish=Läs mig-fil
+    Width=280
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=172 185 214 199
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=I &Agree >
+      Text French=&Suivant>
+      Text German=&Weiter>
+      Text Portuguese=&Próximo>
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+      Text Danish=&Næste>
+      Text Dutch=&Volgende>
+      Text Norwegian=&Neste>
+      Text Swedish=&Nästa >
+    end
+    item: Push Button
+      Rectangle=222 185 264 199
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=Cancel
+      Text French=Annuler
+      Text German=Abbrechen
+      Text Portuguese=Cancelar
+      Text Spanish=Cancelar
+      Text Italian=Annulla
+      Text Danish=Slet
+      Text Dutch=Annuleren
+      Text Norwegian=Avbryt
+      Text Swedish=Avbryt
+    end
+    item: Static
+      Rectangle=9 177 263 178
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Editbox
+      Rectangle=85 11 254 170
+      Value=%TEMP%\%READMEFILE%
+      Help Context=16711681
+      Create Flags=01010000101000000000100000000100
+    end
+  end
+end

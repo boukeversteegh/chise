@@ -1,0 +1,986 @@
+2010-12-02  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.utf-8 (Git Repository): Add Link for est.git.
+
+2010-12-02  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.utf-8 (Git Repository): Use git.chise.org instead
+	of www.chise.org.
+
+2010-09-21  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.en (top): Add link for http://www.chise.org/.
+
+	* index.html.ja.utf-8: (News):
+	- Get chise.org.
+	- CHISE-base/core 0.25 was released.
+	- Use http://qwik.chise.org/chise-ja/ instead of
+	  http://chise.zinbun.kyoto-u.ac.jp/qwik/chise-ja/.
+	(Sub Projects):
+	- Add item about EsT.
+	- Use Use http://www.chise.org/ids-find instead of
+	  http://chise.zinbun.kyoto-u.ac.jp/ids-find.
+	- Add item about CHISE-wiki.
+	(Download): New subsection.
+	(Git Repository): New subsection.
+	(bottom): Use http://kita.zinbun.kyoto-u.ac.jp/ instead of
+	http://www.kanji.zinbun.kyoto-u.ac.jp/.
+
+2010-09-21  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.en, index.html.ja.iso-2022-jp, index.html.ja.utf-8:
+	Rename index.html.ja.iso-2022-jp -> index.html.ja.utf-8.
+
+2010-06-15  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* xemacs/index.html.ja.iso-2022-jp: Modify for XEmacs CHISE 0.25
+	release.
+
+	* history.html.ja.iso-2022-jp: Add information about XEmacs CHISE
+	Version 0.21.
+
+	* index.html.ja.iso-2022-jp: Use mousai.info instead of
+	mousai.as.wakwak.ne.jp.
+	(News): XEmacs CHISE 0.25 is released.
+
+2009-10-01  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp: Add news about
+	http://chise.zinbun.kyoto-u.ac.jp/qwik/chise-ja/.
+
+2009-06-19  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* ids/index.html.ja.iso-2022-jp, index.html.en,
+	index.html.ja.iso-2022-jp: Modify URL of CHISE IDS-Find.
+
+2009-05-22  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp (ids-find): Moved to
+	http://app.kita.zinbun.kyoto-u.ac.jp/ids-find.
+
+	* index.html.en (ids-find): Move it from
+	http://mousai.kanji.zinbun.kyoto-u.ac.jp/ids-find to
+	http://app.kita.zinbun.kyoto-u.ac.jp/ids-find.
+
+2009-05-18  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* ids/index.html.ja.iso-2022-jp, index.html.ja.iso-2022-jp
+	(ids-find): Move it from
+	http://mousai.kanji.zinbun.kyoto-u.ac.jp/ids-find to
+	http://kita.zinbun.kyoto-u.ac.jp/ids-find.
+
+2008-02-29  moro  <moro@ruimoku.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp: index.html.ja has been updated
+
+2007-03-06  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp (News): Update.
+
+2007-02-22  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.en (Sub Projects): Add stubs for libchise, Concord
+	and CHISE-core / CHISE-base; add links for chise_swig_perl, CHISE
+	IDS Find, CHISE linkmap and makettf.
+
+	* index.html.ja.iso-2022-jp (About the CHISE Project): Modified.
+	(News): Add a link for
+	http://coe21.zinbun.kyoto-u.ac.jp/ws-hi-2007.html.ja; delete old
+	topics.
+	(Sub Projects): Add stubs for libchise, Concord and CHISE-core /
+	CHISE-base; add links for chise_swig_perl, CHISE IDS Find, CHISE
+	linkmap and makettf.
+	(Related Events): New section.
+	(footer): Add link for http://kura.hanazono.ac.jp/kanji/.
+
+2005-10-18  KAMICHI Koichi    <kamichi@fonts.jp>
+
+	* index.html.en: Modified links to CVS repository.
+
+	* char-data/index.html.ja.iso-2022-jp,
+	ids/index.html.ja.iso-2022-jp, index.html.ja.iso-2022-jp,
+	omega/index.html.ja.iso-2022-jp, ruby/index.html.ja.iso-2022-jp,
+	xemacs/index.html.ja.iso-2022-jp: Modifed links to CVS repository.
+
+2005-10-17  KAMICHI Koichi    <kamichi@fonts.jp>
+
+	* xemacs/install.debian.ja.html: Modify a link again.
+
+	* xemacs/install.debian.ja.html: Re-link to m17n.org's CVS
+	repository.
+
+2005-10-17  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* conf/2005/index.html.ja.iso-2022-jp: Fix tomo's title.
+
+2005-10-16  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp (News): Add link for
+	conf/2005/index.html.ja.
+
+	* conf/2005/index.html.ja.iso-2022-jp,
+	conf/2005/tomo/chise-2005-pr.pdf,
+	conf/2005/kamichi/chise2005-kamichi.pdf,
+	conf/2005/kamichi/chise2005-kamichi.ppt,
+	conf/2005/moro/20051013.ppt.pdf,
+	conf/2005/rast/rast-presentation.pdf: New files.
+
+2005-10-15  Shigeki Moro  <s-moro@hanazono.ac.jp>
+
+	* News/20051013-15.html.ja.iso-2022-jp, index.html.en,
+	index.html.ja.iso-2022-jp: update index
+
+2005-10-06  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* News/20051013-15.html.ja.iso-2022-jp: Change title of the tomo's
+	lecture.
+
+2005-10-03  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* News/20051013-15.html.ja.iso-2022-jp: Add abstract of
+	Hashimoto's lecture.
+
+2005-09-30  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* News/20051013-15.html.ja.iso-2022-jp: Add program of CHISE
+	Conference 2005.
+
+2005-09-28  Shigeki Moro  <s-moro@hanazono.ac.jp>
+
+	* index.html.en, index.html.ja.iso-2022-jp: update index
+
+2005-09-26  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* News/20051013-15.html.ja.iso-2022-jp: Add link for
+	https://members.fsij.org/trac/codefestkyoto2005/.
+
+2005-09-22  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* News/20051013-15.html.ja.iso-2022-jp: Add link for
+	http://qwik.jp/codefest-kyoto/.
+
+2005-09-22  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* News/20051013-15.html.ja.iso-2022-jp (application): 「予定してい
+	るハック」を追加。
+
+2005-09-21  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* News/20051013-15.html.ja.iso-2022-jp: Add application.
+
+2005-09-16  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* News/20051013-15.html.ja.iso-2022-jp: Add speakers.
+
+2005-09-14  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* News/20051013-15.html.ja.iso-2022-jp (CHISE Conference 2005):
+	Add theme.
+
+2005-09-14  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* News/20051013-15.html.ja.iso-2022-jp: Add links for
+	http://coe21.zinbun.kyoto-u.ac.jp/ and http://www.fsij.org/.
+
+	* index.html.ja.iso-2022-jp: Link for News/20051013-15.html.ja
+	instead of News/20051013-15.html.ja.iso-2022-jp.
+
+2005-09-14  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp: Add news about CHISE Conference +
+	CodeFest Kyoto 2005.
+
+	* News/20051013-15.html.ja.iso-2022-jp: New file.
+
+2005-09-14  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp: Change Z's site.
+
+2005-04-28  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp, ids/index.html.ja.iso-2022-jp: Add
+	link for http://mousai.kanji.zinbun.kyoto-u.ac.jp/ids-find.
+
+2005-03-01  Shigeki Moro  <s-moro@hanazono.ac.jp>
+
+	* index.html.ja.iso-2022-jp: update index.html.ja.iso-2022-jp
+
+2005-01-26  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* papers/beijing-2005/b2005-chise-pr.pdf,
+	papers/beijing-2005/b2005-chise.pdf: New files.
+
+2004-11-29  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* xemacs/install.debian.ja.html: Add description about libchise
+	and Debian sarge.
+
+2004-05-30  Shigeki Moro  <s-moro@hanazono.ac.jp>
+
+	* perl/index.html.ja.iso-2022-jp, index.html.en,
+	index.html.ja.iso-2022-jp: update several pages
+
+2004-05-16  Shigeki Moro  <s-moro@hanazono.ac.jp>
+
+	* index.html.en, index.html.ja.iso-2022-jp: add News
+
+2004-05-06  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* xemacs/install.mac-os-x.ja.html.iso-2022-jp: Modify for 10.3 and
+	getting finkinfo files from the viewcvs service of cvs.m17n.org.
+
+2004-01-10  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* index.html.en: update index.html.en
+
+2004-01-09  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* index.html.en, index.html.ja.iso-2022-jp: update index.html.en
+
+2003-11-19  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* history.html.ja.iso-2022-jp: Add entry for XEmacs UTF-2000 0.20.
+
+	* xemacs/index.html.ja.iso-2022-jp: Update to XEmacs CHISE 0.21.
+
+2003-10-14  Izumi MIYAZAKI    <imiyazaki@bun.kyoto-u.ac.jp>
+
+	* xemacs/install.mac-os-x.ja.html.iso-2022-jp: update link to
+	finkinfo.
+
+2003-10-07  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* perl/index.html.ja.iso-2022-jp: add the description on CHISE_REG
+
+2003-10-06  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* index.html.ja.iso-2022-jp: add information of LC2003
+
+2003-10-03  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp (News): Add link for
+	http://coe21.zinbun.kyoto-u.ac.jp/ws-type-2003; comment out
+	information about XEmacs UTF-2000 0.20.
+
+2003-08-26  Izumi MIYAZAKI    <imiyazaki@bun.kyoto-u.ac.jp>
+
+	* xemacs/install.mac-os-x.ja.html.iso-2022-jp: update finkinfo.
+	add explanations of new finkinfo.
+
+2003-08-11  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* xemacs/install.mac-os-x.ja.html.iso-2022-jp: add comments on
+	canna etc.
+
+2003-08-09  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* xemacs/install.mac-os-x.ja.html.iso-2022-jp: add some oracles
+
+2003-07-11  Izumi MIYAZAKI    <imiyazaki@bun.kyoto-u.ac.jp>
+
+	* xemacs/install.mac-os-x.ja.html.iso-2022-jp: update link to
+	finkinfo.
+
+2003-07-08  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* char-data/index.html.ja.iso-2022-jp: Link C1-to-UCS.txt and
+	C2-to-UCS.txt.
+
+2003-07-08  Izumi MIYAZAKI    <imiyazaki@bun.kyoto-u.ac.jp>
+
+	* xemacs/install.mac-os-x.ja.html.iso-2022-jp: update link of
+	finkinfo.
+
+2003-07-06  Izumi MIYAZAKI    <imiyazaki@bun.kyoto-u.ac.jp>
+
+	* xemacs/install.mac-os-x.ja.html.iso-2022-jp: update finkinfo.
+
+2003-06-29  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* omega/index.html.ja.iso-2022-jp: Add description about anonymous
+	cvs.
+
+	* index.html.ja.iso-2022-jp: Add Omega/CHISE into title of the
+	link for omega/.
+
+2003-06-29  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* xemacs/index.html.ja.iso-2022-jp (How to install XEmacs CHISE):
+	Link install.mac-os-x.ja.html.iso-2022-jp.
+
+	* xemacs/install.debian.ja.html:
+	- Add link targets "sources" and "fonts".
+	- Add link for ../ids/.
+
+	* xemacs/install.mac-os-x.ja.html.iso-2022-jp: New file.
+
+2003-06-24  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp (title): Rename `XEmacs UTF-2000' to
+	`XEmacs CHISE'.
+
+2003-06-24  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* ids/index.html.ja.iso-2022-jp:
+	- Add description about cvs command sample.
+	- Add description about XEmacs CHISE and Ruby/CHISE.
+
+	* index.html.ja.iso-2022-jp: Rename ``XEmacs UTF-2000'' ->
+	``XEmacs CHISE''.
+
+	* xemacs/install.debian.ja.html: Modify description about CVS
+	repository.
+
+2003-06-24  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* char-data/index.html.ja.iso-2022-jp: Modify URL of viewcvs.
+
+2003-06-09  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* index.html.ja.iso-2022-jp: updated.
+
+2003-04-02  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* symposium2003/index.html.ja.iso-2022-jp: add the href for
+	Kamichi-san's pdf.
+
+	* index.html.ja.iso-2022-jp,
+	symposium2003/index.html.ja.iso-2022-jp: The report for CHISE
+	Symposium 20003 has been published.
+
+2003-03-28  KAMICHI Koichi    <kamichi@fonts.jp>
+
+	* symposium2003/kamichi/chise2003kamichi.pdf: New file.
+
+2003-03-25  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* symposium2003/index.html.ja.iso-2022-jp: add the report of CHISE
+	2003 symposium.
+
+2003-03-23  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* symposium2003/tomo/xelib-pr-chise-2003.ps,
+	symposium2003/tomo/xelib-pr-chise-2003.pdf: New files.
+
+2003-03-23  Izumi MIYAZAKI    <imiyazaki@bun.kyoto-u.ac.jp>
+
+	* symposium2003/omega/chise-omega-030315.pdf: created.
+
+2003-03-20  Kouichirou Eto    <2003@eto.com>
+
+	* symposium2003/eto/KanjiNetwork.pdf,
+	symposium2003/eto/RubyCHISE.pdf: readd RubyCHISE.pdf,
+	KanjiNetwork.pdf. But RubyCHISE.pdf is corrupted.
+
+	* symposium2003/eto/KanjiNetwork.pdf,
+	symposium2003/eto/RubyCHISE.pdf: delete RubyCHISE.pdf,
+	KanjiNetwork.pdf. mistake...
+
+	* symposium2003/eto/KanjiNetwork.pdf,
+	symposium2003/eto/RubyCHISE.pdf: add RubyCHISE.pdf,
+	KanjiNetwork.pdf. But RubyCHISE.pdf is corrupted.
+
+2003-03-19  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* index.html.ja.iso-2022-jp,
+	symposium2003/moro/20030315CHISE_moro#1.pdf,
+	symposium2003/moro/20030315CHISE_moro#2.pdf: /papers/20030315 =>
+	/symposium2003/moro
+
+2003-03-19  Kouichirou Eto    <2003@eto.com>
+
+	* symposium2003/eto/128awase-neato.svg: add a svg file.
+
+2003-03-18  Kouichirou Eto    <2003@eto.com>
+
+	* symposium2003/eto/cKanjiNetwork.html,
+	symposium2003/eto/cRubyCHISE.html: add target
+
+	* symposium2003/eto/cKanjiNetwork.html,
+	symposium2003/eto/cRubyCHISE.html, symposium2003/eto/style.css:
+	delete mail address
+
+	* symposium2003/eto/128awase-twopi1.svg,
+	symposium2003/eto/128awase-twopi2.svg,
+	symposium2003/eto/KanjiNetwork.html,
+	symposium2003/eto/RubyCHISE.html,
+	symposium2003/eto/cKanjiNetwork.html,
+	symposium2003/eto/cRubyCHISE.html, symposium2003/eto/count1.rb,
+	symposium2003/eto/shou4-twopi.svg, symposium2003/eto/style.css,
+	symposium2003/eto/test1.rb, symposium2003/eto/test2.rb,
+	symposium2003/eto/test3.rb, symposium2003/eto/test4.rb,
+	symposium2003/eto/test5.rb: add eto's presentation
+
+2003-03-17  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* News/index.html.ja.iso-2022-jp: add the index page of News/.
+
+2003-03-16  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* index.html.ja.iso-2022-jp: modified: '#' -> '%23'
+
+	* index.html.ja.iso-2022-jp: add anchors to moro's resumes.
+
+2003-03-12  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* xemacs/index.html.ja.iso-2022-jp (API): New subsection.
+	(anon-cvs): Change repository.
+
+2003-03-12  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* perl/index.html.ja.iso-2022-jp: modified.
+
+2003-03-04  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* News/20030315.html.ja.iso-2022-jp, chise.css: add abstracts
+
+2003-03-04  Kouichirou Eto    <2003@eto.com>
+
+	* News/20030315.txt.ja.iso-2022-jp: add Tomo's description.
+
+	* News/20030315.txt.ja.iso-2022-jp: add Moro's description.
+
+	* News/20030315.txt.ja.iso-2022-jp: add description.
+
+2003-02-27  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* xemacs/install.debian.ja.html:
+	- Rename "XEmacs UTF-2000" -> "XEmacs CHISE".
+	- Use --pdump instead of --ldflags=-znocombreloc.
+	- Add description about GT 2000 fonts with xfs-xtt.
+
+2003-02-26  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* News/20030315.html.ja.iso-2022-jp: fixed.
+
+2003-02-22  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* News/20030315.html.ja.iso-2022-jp: updated
+
+2003-02-22  Kouichirou Eto    <2003@eto.com>
+
+	* News/20030315.txt.ja.iso-2022-jp: change layout
+
+2003-02-20  Kouichirou Eto    <2003@eto.com>
+
+	* News/20030315.txt.ja.iso-2022-jp: change style of URL
+
+	* News/20030315.txt.ja.iso-2022-jp: add CHISE symposium 2003 text
+	file
+
+2003-02-18  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* News/20030315.html.ja.iso-2022-jp: modified.
+
+2003-02-17  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* News/20030315.html.ja.iso-2022-jp: modified.
+
+2003-02-16  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* News/20030315.html.ja.iso-2022-jp: modified.
+
+	* News/20030315.html.ja.iso-2022-jp, index.html.ja.iso-2022-jp:
+	Info of CHISE 2003 Symposium published.
+
+2003-02-14  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* News/20030315.html.ja.iso-2022-jp: change the email address of
+	CHISE office.
+
+2003-02-13  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* xemacs/index.html.ja.iso-2022-jp: Rename `XEmacs UTF-2000' and
+	`UTF-2000 model' to `XEmacs CHISE' and `Chaon model'.
+
+2003-02-13  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* News/20030315.html.ja.iso-2022-jp: add News/ and the announce
+	for CHISE Symposium 2003.
+
+2003-02-13  Kouichirou Eto    <2003@eto.com>
+
+	* ruby/index.html.ja.iso-2022-jp: add CVS access link
+
+2003-02-13  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp: Add announce about the CHISE
+	Symposium 2003.
+
+2003-02-13  Kouichirou Eto    <2003@eto.com>
+
+	* ruby/index.html.ja.iso-2022-jp: Change Ruby/UTF-2000 to
+	Ruby/CHISE
+
+2003-02-12  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* ruby/index.html.ja.iso-2022-jp,
+	topicmaps/index.html.ja.iso-2022-jp,
+	visualization/index.html.ja.iso-2022-jp,
+	xemacs/index.html.ja.iso-2022-jp, glyph/index.html.ja.iso-2022-jp,
+	ids/index.html.ja.iso-2022-jp, omega/index.html.ja.iso-2022-jp,
+	perl/index.html.ja.iso-2022-jp, index.html.ja.iso-2022-jp:
+	UTF-2000 -> CHISE, and more.
+
+2003-02-02  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* papers/20030201moro/20030201perlUTF2000.html,
+	papers/20030201moro/20030201perlUTF2000.sxi,
+	papers/20030201moro/first0.gif, papers/20030201moro/first1.gif,
+	papers/20030201moro/img0.jpg, papers/20030201moro/img1.html,
+	papers/20030201moro/img1.jpg, papers/20030201moro/img2.html,
+	papers/20030201moro/img2.jpg, papers/20030201moro/img3.html,
+	papers/20030201moro/img3.jpg, papers/20030201moro/img4.html,
+	papers/20030201moro/img4.jpg, papers/20030201moro/img5.html,
+	papers/20030201moro/img5.jpg, papers/20030201moro/img6.html,
+	papers/20030201moro/img6.jpg, papers/20030201moro/img7.html,
+	papers/20030201moro/img7.jpg, papers/20030201moro/img8.html,
+	papers/20030201moro/img8.jpg, papers/20030201moro/index.gif,
+	papers/20030201moro/last0.gif, papers/20030201moro/last1.gif,
+	papers/20030201moro/next0.gif, papers/20030201moro/next1.gif,
+	papers/20030201moro/prev0.gif, papers/20030201moro/prev1.gif,
+	papers/20030201moro/text.gif, papers/20030201moro/text0.html,
+	papers/20030201moro/text1.html, papers/20030201moro/text2.html,
+	papers/20030201moro/text3.html, papers/20030201moro/text4.html,
+	papers/20030201moro/text5.html, papers/20030201moro/text6.html,
+	papers/20030201moro/text7.html, papers/20030201moro/text8.html,
+	perl/index.html.ja.iso-2022-jp: add moro's presentation files.
+
+2003-02-01  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* perl/index.html.ja.iso-2022-jp: revised
+
+2003-01-29  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* xemacs/index.html.ja.iso-2022-jp,
+	topicmaps/index.html.ja.iso-2022-jp,
+	visualization/index.html.ja.iso-2022-jp,
+	ids/index.html.ja.iso-2022-jp, omega/index.html.ja.iso-2022-jp,
+	ruby/index.html.ja.iso-2022-jp, glyph/index.html.ja.iso-2022-jp:
+	add the hyperlink to the perl/utf2000 page.
+
+2003-01-28  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* perl/index.html.ja.iso-2022-jp, index.html.ja.iso-2022-jp:
+	Perl/UTF-2000 page added.
+
+2003-01-16  Shigeki Moro      <s-moro@hanazono.ac.jp>
+
+	* ruby/index.html.ja.iso-2022-jp,
+	xemacs/index.html.ja.iso-2022-jp, glyph/index.html.ja.iso-2022-jp,
+	visualization/index.html.ja.iso-2022-jp,
+	xemacs/install.debian.ja.html, index.html.ja.iso-2022-jp: revised.
+
+	* xemacs/index.html.ja.iso-2022-jp,
+	glyph/index.html.ja.iso-2022-jp,
+	visualization/index.html.ja.iso-2022-jp,
+	index.html.ja.iso-2022-jp: updated.
+
+2002-12-25  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* index.html.ja.iso-2022-jp (News): Delete old news and add
+	announce about XEmacs UTF-2000 0.20.
+
+	* history.html.ja.iso-2022-jp: Add descriptions about 2002-12-06
+	and 2002-12-07.
+
+	* xemacs/index.html.ja.iso-2022-jp: XEmacs UTF-2000 0.20 is
+	released.
+
+2002-12-25  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* history.html.ja.iso-2022-jp (2002-08-21): Add information about
+	XEmacs UTF-2000 0.19.
+
+	* xemacs/index.html.ja.iso-2022-jp (anon-cvs): New section.
+
+2002-12-19  Yoshi Fujiwara    <yfujiwar@atr.co.jp>
+
+	* index.html.ja.iso-2022-jp: CRL->ATR
+
+2002-12-11  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* index.html.ja.iso-2022-jp: Add link for
+	papers/chise-m17n-2001.txt.
+
+	* papers/chise-m17n-2001.txt: New file.
+
+2002-12-04  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp: Add link for char-data/.
+
+	* char-data/CBETA-to-UCS.txt, char-data/index.html.ja.iso-2022-jp:
+	New files.
+
+	* ids/index.html.ja.iso-2022-jp: Add link for
+	IDS-JIS-X0208-1990.txt.
+
+2002-12-03  Shigeki Moro <s-moro@hanazono.ac.jp>
+
+	* glyph/index.html.ja.iso-2022-jp, ids/index.html.ja.iso-2022-jp,
+	index.html.ja.iso-2022-jp, omega/index.html.ja.iso-2022-jp,
+	ruby/index.html.ja.iso-2022-jp,
+	topicmaps/index.html.ja.iso-2022-jp,
+	visualization/index.html.ja.iso-2022-jp: pages for sub-projects
+	have been created.
+
+2002-11-30  Shigeki Moro <s-moro@hanazono.ac.jp>
+
+	* xemacs/install.debian.ja.html, index.html.ja.iso-2022-jp:
+	modified.
+
+2002-11-28  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp: Delete link for Wiliki.
+
+2002-11-28  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* xemacs/index.html.ja.iso-2022-jp: modified.
+
+	* xemacs/index.html.ja.iso-2022-jp: Add links for mirrors.
+
+	* index.html.ja.iso-2022-jp (ruby): New section.
+
+2002-11-27  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* index.html.ja.iso-2022-jp (News): Add description about 12/06.
+
+	* index.html.ja.iso-2022-jp: Add link for Wiliki.
+
+2002-11-26  Shigeki Moro <s-moro@hanazono.ac.jp>
+
+	* xemacs/install.debian.ja.html: add the info. for Ext.B font.
+
+2002-11-25  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* index.html.ja.iso-2022-jp: fixed.
+
+	* images/chise-omega.png: New file.
+
+	* index.html.ja.iso-2022-jp (omega): New section.
+
+2002-11-24  Shigeki Moro <s-moro@hanazono.ac.jp>
+
+	* xemacs/install.debian.ja.html: add some descriptions of GT
+	mincho or so.
+
+2002-11-23  Shigeki Moro <s-moro@hanazono.ac.jp>
+
+	* xemacs/install.debian.ja.html: some small changes.
+
+	* xemacs/index.html.ja.iso-2022-jp, xemacs/install.debian.ja.html:
+	install.debian.ja.html has been published.
+
+	* xemacs/install.debian.ja.html, install.debian.ja.html: moved to
+	/chise/www/xemacs/.
+
+2002-11-21  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* images/diccs-s.jpg, images/egret-pond-s.jpg,
+	images/tomura-s.png: New files.
+
+	* index.html.ja.iso-2022-jp: Some design changes.
+
+	* history.html.ja.iso-2022-jp: update.
+
+2002-11-21  Shigeki Moro <s-moro@hanazono.ac.jp>
+
+	* install.debian.ja.html: add the information to install CDP font.
+
+2002-11-20  Shigeki Moro <s-moro@hanazono.ac.jp>
+
+	* install.debian.ja.html: add the information about European
+	fonts.
+
+2002-11-08  Shigeki Moro <s-moro@hanazono.ac.jp>
+
+	* index.html.en, index.html.ja.iso-2022-jp: add the information of
+	JAET 5th meeting.
+
+2002-10-24  Christian Wittern <wittern@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.en: Merged conflict.
+
+2002-10-20  Shigeki Moro <s-moro@hanazono.ac.jp>
+
+	* chise.css: almost properties have been changed.
+
+	* install.debian.ja.html: Under construction...
+
+2002-10-18  Shigeki Moro <s-moro@hanazono.ac.jp>
+
+	* install.debian.ja.html: Still under construction, now...
+
+2002-10-17  Shigeki Moro <s-moro@hanazono.ac.jp>
+
+	* install.debian.ja.html: Under construction...
+
+	* chise.css: This is the 1st commitment.
+
+2002-10-16  Shigeki Moro <s-moro@hanazono.ac.jp>
+
+	* install.debian.ja.html: Under construction...
+
+2002-10-14  Shigeki Moro <s-moro@hanazono.ac.jp>
+
+	* index.html.ja.iso-2022-jp, index.html.en: some sentences
+	corrected.
+
+	* index.html.en: Some sentences revised.
+
+	* index.html.en: Add some infomation to _Papers and Presentations_
+
+2002-10-11  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp: Add link for papers/dc2002.pdf.
+
+	* papers/dc2002.pdf: New file.
+
+2002-10-09  Shigeki Moro <s-moro@hanazono.ac.jp>
+
+	* index.html.ja.iso-2022-jp: News changed: This is something like
+	test :-)
+
+2002-10-08  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.en: Add counter.
+
+2002-09-26  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* index.html.en:
+	- Specify lang="en" instead of "ja".
+	- Use images/japanese-page.png instead of
+	  ../../images/japanese-page.gif.
+
+	* images/japanese-page.png: New file.
+
+2002-09-26  Christian Wittern <wittern@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.en: Put dates in the News list in backward order.
+
+	* index.html.en: Date for release of Koriyama.
+
+	* index.html.en: English translation of the CHISE toppage.
+
+2002-08-21  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp, xemacs/index.html.ja.iso-2022-jp:
+	XEmacs UTF-2000 0.19 released.
+
+2002-08-13  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* history.html.ja.iso-2022-jp: Add code names of XEmacs.
+
+2002-08-07  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp: Add links for Kamichi's and tomo's
+	WWW pages.
+	(News): Add announce about LC2002 and PNC.
+
+2002-08-07  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp (Mailing List): New section.
+
+2002-08-02  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* index.html.ja.iso-2022-jp (ids): Add name; add link for
+	http://www.fonts.jp/search.html.
+	(glyph): New subsection.
+
+2002-08-01  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* xemacs/index.html.ja.iso-2022-jp: Fix URL of mirror in
+	www.kanji.zinbun.kyoto-u.ac.jp.
+
+2002-08-01  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* xemacs/index.html.ja.iso-2022-jp: Change URL for XEmacs UTF-2000
+	0.18.
+	(XEmacs UTF-2000 Archives): New section.
+	(Resource): Separate description about the XEmacs UTF-2000
+	Archives into `XEmacs UTF-2000 Archives'.
+
+2002-07-22  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* xemacs/index.html.ja.iso-2022-jp (CVS): New section.
+
+2002-07-15  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* xemacs/index.html.ja.iso-2022-jp: Modify DTD; modify links to
+	return; add counter.
+
+2002-07-06  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* index.html.ja.iso-2022-jp: Add counter.
+
+2002-07-05  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* index.html.ja.iso-2022-jp: Add some links.
+
+2002-07-01  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* history.html.ja.iso-2022-jp: Add description about ITX2002
+	Summer.
+
+	* index.html.ja.iso-2022-jp: Delete news about ITX2002 Summer.
+
+2002-06-26  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp: Add IDS-Daikanwa-*.txt.
+
+2002-06-26  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp: Add some inline images.
+
+	* images/ids-ext-b-1-s.png, images/ids-ext-b-1.png,
+	images/mage1-s.jpg, images/mage2-s.jpg: New files.
+
+2002-06-24  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp: Add IDS-CBETA.txt.
+
+2002-06-12  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* xemacs/index.html.ja.iso-2022-jp: Move some presentations from
+	../.
+
+	* index.html.ja.iso-2022-jp: Rearrangement about presentations.
+
+	* papers/u2k-plan.ja/activem.gif, papers/u2k-plan.ja/activep.gif,
+	papers/u2k-plan.ja/collapse.gif, papers/u2k-plan.ja/expand.gif,
+	papers/u2k-plan.ja/first.gif, papers/u2k-plan.ja/home.gif,
+	papers/u2k-plan.ja/ielogo.gif, papers/u2k-plan.ja/img001.gif,
+	papers/u2k-plan.ja/img002.gif, papers/u2k-plan.ja/img003.gif,
+	papers/u2k-plan.ja/img004.gif, papers/u2k-plan.ja/img005.gif,
+	papers/u2k-plan.ja/img006.gif, papers/u2k-plan.ja/img007.gif,
+	papers/u2k-plan.ja/img008.gif, papers/u2k-plan.ja/img009.gif,
+	papers/u2k-plan.ja/img010.gif, papers/u2k-plan.ja/img011.gif,
+	papers/u2k-plan.ja/img012.gif, papers/u2k-plan.ja/img013.gif,
+	papers/u2k-plan.ja/img014.gif, papers/u2k-plan.ja/img015.gif,
+	papers/u2k-plan.ja/img016.gif, papers/u2k-plan.ja/img017.gif,
+	papers/u2k-plan.ja/index.htm, papers/u2k-plan.ja/info.gif,
+	papers/u2k-plan.ja/last.gif, papers/u2k-plan.ja/next.gif,
+	papers/u2k-plan.ja/pptani.gif, papers/u2k-plan.ja/prev.gif,
+	papers/u2k-plan.ja/sld001.htm, papers/u2k-plan.ja/sld002.htm,
+	papers/u2k-plan.ja/sld003.htm, papers/u2k-plan.ja/sld004.htm,
+	papers/u2k-plan.ja/sld005.htm, papers/u2k-plan.ja/sld006.htm,
+	papers/u2k-plan.ja/sld007.htm, papers/u2k-plan.ja/sld008.htm,
+	papers/u2k-plan.ja/sld009.htm, papers/u2k-plan.ja/sld010.htm,
+	papers/u2k-plan.ja/sld011.htm, papers/u2k-plan.ja/sld012.htm,
+	papers/u2k-plan.ja/sld013.htm, papers/u2k-plan.ja/sld014.htm,
+	papers/u2k-plan.ja/sld015.htm, papers/u2k-plan.ja/sld016.htm,
+	papers/u2k-plan.ja/sld017.htm, papers/u2k-plan.ja/space.gif,
+	papers/u2k-plan.ja/text.gif, papers/u2k-plan.ja/tsld001.htm,
+	papers/u2k-plan.ja/tsld002.htm, papers/u2k-plan.ja/tsld003.htm,
+	papers/u2k-plan.ja/tsld004.htm, papers/u2k-plan.ja/tsld005.htm,
+	papers/u2k-plan.ja/tsld006.htm, papers/u2k-plan.ja/tsld007.htm,
+	papers/u2k-plan.ja/tsld008.htm, papers/u2k-plan.ja/tsld009.htm,
+	papers/u2k-plan.ja/tsld010.htm, papers/u2k-plan.ja/tsld011.htm,
+	papers/u2k-plan.ja/tsld012.htm, papers/u2k-plan.ja/tsld013.htm,
+	papers/u2k-plan.ja/tsld014.htm, papers/u2k-plan.ja/tsld015.htm,
+	papers/u2k-plan.ja/tsld016.htm, papers/u2k-plan.ja/tsld017.htm,
+	history.html.ja.iso-2022-jp, index.html.ja.iso-2022-jp: Move
+	plan.ja/ -> papers/u2k-plan.ja/.
+
+2002-06-11  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* papers/mitou-2001-report/main/images/mitou-report03.jpg,
+	papers/mitou-2001-report/main/images/mitou-report02.gif,
+	papers/mitou-2001-report/main/images/mitou-report10.jpg,
+	papers/mitou-2001-report/main/images/mitou-report12.jpg,
+	papers/mitou-2001-report/main/images/mitou-report01.jpg,
+	papers/mitou-2001-report/main/images/mitou-report04.jpg,
+	papers/mitou-2001-report/main/images/mitou-report05.jpg,
+	papers/mitou-2001-report/main/images/mitou-report06.jpg,
+	papers/mitou-2001-report/main/images/mitou-report07.jpg,
+	papers/mitou-2001-report/main/images/mitou-report08.jpg,
+	papers/mitou-2001-report/main/images/mitou-report09.jpg,
+	papers/mitou-2001-report/main/img10.png,
+	papers/mitou-2001-report/main/img12.png,
+	papers/mitou-2001-report/main/img4.png,
+	papers/mitou-2001-report/main/img6.png,
+	papers/mitou-2001-report/main/img7.png,
+	papers/mitou-2001-report/main/img8.png,
+	papers/mitou-2001-report/main/img9.png,
+	papers/mitou-2001-report/main/img2.png,
+	papers/mitou-2001-report/main/img5.png: New files.
+
+	* papers/mitou-2001-report/main/img1.png: New file.
+
+	* papers/mitou-2001-report/main/index.html,
+	papers/mitou-2001-report/main/node1.html,
+	papers/mitou-2001-report/main/node2.html,
+	papers/mitou-2001-report/main/node3.html,
+	papers/mitou-2001-report/main/node4.html,
+	papers/mitou-2001-report/main/node5.html,
+	papers/mitou-2001-report/main/node6.html,
+	papers/mitou-2001-report/main/node7.html: New files.
+
+2002-06-11  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* xemacs/index.html.ja.iso-2022-jp: Delete link for plan.ja/; link
+	builtin-char.html.ja instead of builtin-char.ja.html.
+
+	* xemacs/builtin-char.html.ja.iso-2022-jp, papers/dc2000.pdf: New
+	file.
+
+	* plan.ja/activem.gif, plan.ja/activep.gif, plan.ja/collapse.gif,
+	plan.ja/expand.gif, plan.ja/first.gif, plan.ja/home.gif,
+	plan.ja/ielogo.gif, plan.ja/img001.gif, plan.ja/img002.gif,
+	plan.ja/img003.gif, plan.ja/img004.gif, plan.ja/img005.gif,
+	plan.ja/img006.gif, plan.ja/img007.gif, plan.ja/img008.gif,
+	plan.ja/img009.gif, plan.ja/img010.gif, plan.ja/img011.gif,
+	plan.ja/img012.gif, plan.ja/img013.gif, plan.ja/img014.gif,
+	plan.ja/img015.gif, plan.ja/img016.gif, plan.ja/img017.gif,
+	plan.ja/index.htm, plan.ja/info.gif, plan.ja/last.gif,
+	plan.ja/next.gif, plan.ja/pptani.gif, plan.ja/prev.gif,
+	plan.ja/sld001.htm, plan.ja/sld002.htm, plan.ja/sld003.htm,
+	plan.ja/sld004.htm, plan.ja/sld005.htm, plan.ja/sld006.htm,
+	plan.ja/sld007.htm, plan.ja/sld008.htm, plan.ja/sld009.htm,
+	plan.ja/sld010.htm, plan.ja/sld011.htm, plan.ja/sld012.htm,
+	plan.ja/sld013.htm, plan.ja/sld014.htm, plan.ja/sld015.htm,
+	plan.ja/sld016.htm, plan.ja/sld017.htm, plan.ja/space.gif,
+	plan.ja/text.gif, plan.ja/tsld001.htm, plan.ja/tsld002.htm,
+	plan.ja/tsld003.htm, plan.ja/tsld004.htm, plan.ja/tsld005.htm,
+	plan.ja/tsld006.htm, plan.ja/tsld007.htm, plan.ja/tsld008.htm,
+	plan.ja/tsld009.htm, plan.ja/tsld010.htm, plan.ja/tsld011.htm,
+	plan.ja/tsld012.htm, plan.ja/tsld013.htm, plan.ja/tsld014.htm,
+	plan.ja/tsld015.htm, plan.ja/tsld016.htm, plan.ja/tsld017.htm: New
+	files.
+
+	* index.html.ja.iso-2022-jp: Add some documents.
+
+2002-06-11  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp: Add links to Dr.Fujiwara's site.
+
+2002-06-07  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp: Add some links.
+
+2002-06-07  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* history.html.ja.iso-2022-jp: New file.
+
+	* index.html.ja.iso-2022-jp: Link to xemacs/ and history.
+
+	* xemacs/demo/handa.png, xemacs/demo/sat-sample.png,
+	xemacs/index.html.ja.iso-2022-jp: New files.
+
+2002-06-06  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp: Modify for
+	http://cvs.m17n.org/chise/.
+
+	* images/dragon.jpg: New file.
+
+2002-06-06  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp: Modify for images/cm450118-s.jpg.
+
+	* images/cm450118-s.jpg: New file.
+
+2002-06-06  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* index.html.ja.iso-2022-jp: New file.
+

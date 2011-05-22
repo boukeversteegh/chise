@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+<head>
+<title>CHISE Conference 2005</title>
+<link rel=stylesheet href="../chise.css" type="text/css">
+</head>
+
+<body>
+<p>
+[<a href="../../index.html.ja">CHISE Project</a>]
+[<a href="http://coe21.zinbun.kyoto-u.ac.jp/">京都大学21世紀COE
+「東アジア世界の人文情報学研究教育拠点」</a>]
+</p>
+<h1>CHISE Conference 2005 報告 / 資料集</h1>
+<p>
+2003 年に開催された
+<a
+href="http://mousai.kanji.zinbun.kyoto-u.ac.jp/chise/symposium2003/">
+CHISE Symposium 2003</a>, <a
+href="http://coe21.zinbun.kyoto-u.ac.jp/ws-type-2003.html.ja"
+>書体・組版ワークショップ</a> に引続き、CHISE Project
+および多言語処理に関するイベントを開催しました。
+</p>
+<p>
+また、今回は発表形式のイベントに加え、<a href="https://members.fsij.org/trac/codefestkyoto2005/"><b>CodeFest 京都 2005</b></a>
+も併催しました。
+</p>
+
+<ul>
+<li>日時： 2005年10月13日(木)〜14日(金) 13:30〜16:30
+<li>場所： <a href="http://www.kcif.or.jp/jp/footer/05.html"
+    >京都市国際交流会館</a>
+    研修室
+</ul>
+<ul>
+  <li><a href="../../News/20051013-15.html.ja">案内頁</a>
+</ul>
+
+<hr>
+
+<h2>プログラム</h2>
+<ul style="list-style-type: none;">
+  <li>10/13（木）
+      <ul>
+	<li>Opening
+	<li>守岡 知彦（京都大学 / CHISE Project）
+	    「Character Database 2.0」
+	    <ul>
+	      <li>レジュメ
+		  <a href="tomo/chise-2005-pr.pdf">[PDF]</a>
+	    </ul>
+	<li>師 茂樹（花園大学 / CHISE Project）
+	    「文字オントロジに基づく文字オブジェクト列間の編集距離」
+	    <ul>
+	      <li>レジュメ
+		  <a href="moro/20051013.ppt.pdf">[PDF]</a>
+	    </ul>
+	<li>上地 宏一（慶應義塾大学 / CHISE Project）
+	    「KAGEシステムによる漢字フォント制作支援」
+	    <ul>
+	      <li>レジュメ
+		  <a href="kamichi/chise2005-kamichi.pdf">[PDF]</a>
+		  <a href="kamichi/chise2005-kamichi.ppt">[PPT]</a>
+	      <li><a href="http://fonts.jp/chise_linkmap/"
+		  >CHISE漢字連環図</a>
+	      <li><a href="http://fonts.jp/chise_swig_perl/"
+		  >chise_swig_perl</a>
+	      <li><a href="http://fonts.jp/makettf/">makettf</a>
+	    </ul>
+      </ul>
+  <li>10/14（金）
+      <ul>
+	<li>橋本 将、かずひこ（株式会社ネットワーク応用通信研究所）
+	    「全文検索システムRastによる全文検索アプリケーションの構築」
+	    <ul>
+	      <li>レジュメ <a href="rast/rast-presentation.pdf">[PDF]</a>
+	    </ul>
+	<li>BOF
+	    <ul>
+	      <li>Rast による構造化文書サポートの可能性について
+	      <li>IDS の正規化について
+		  <ul>
+		    <li>川幡氏による発表
+		    <li>フリートーク
+		  </ul>
+	    </ul>
+	<li>Closing
+      </ul>
+</ul>
+
+<hr>
+
+<!-- hhmts start -->
+Last modified: Mon Oct 17 13:27:07 JST 2005
+<!-- hhmts end -->
+</body>
+</html>

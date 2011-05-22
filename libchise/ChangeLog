@@ -1,0 +1,815 @@
+2010-06-10  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* libchise 0.4.2 released.
+
+	* configure.in: Update version to 0.4.2.
+
+2008-07-21  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* configure.in: Add settings for --with-site-includes=PATH and
+	--with-site-libraries=PATH.
+
+
+2008-05-27  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* libchise 0.4.1 released.
+
+2006-12-22  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* configure.in: Update version to 0.4.1.
+
+	* Makefile.in (libchise.la): Specify `-no-undefined' to avoid
+	error on Cygwin [suggested by KAMICHI Koichi <kamichi@fonts.jp>].
+	(chise.lo): Specify `--mode=compile'.
+	(install.libs): Specify `--mode=install'.
+
+
+2006-05-11  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* libchise 0.4.0 released.
+
+2005-06-24  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* sample.c (test_map_func): Use <CHISE_Feature> instead of
+	<CHISE_Feature_Table *>.
+	(test_radical_func): Likewise.
+
+2005-06-24  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise.c (chise_char_set_feature_value): Use
+	`concord_obj_put_feature_value_str' instead of
+	`concord_stroid_set_feature_str'.
+	(chise_char_load_feature_value): Use
+	`concord_obj_get_feature_value_string' instead of
+	`concord_stroid_get_feature_string'.
+	(chise_char_gets_feature_value): Use
+	`concord_obj_gets_feature_value' instead of
+	`concord_stroid_gets_feature'.
+	(chise_feature_foreach_char_with_value): Use
+	`concord_feature_foreach_obj_string' instead of
+	`concord_feature_foreach_object_string'.
+	(chise_ccs_decode): Use `concord_index_strid_get_obj_string'
+	instead of `concord_index_strid_get_object_string'.
+	(chise_ccs_set_decoded_char): Use `concord_index_strid_put_obj'
+	instead of `concord_index_strid_set_object_str'.
+	(chise_feature_set_property_value): Use
+	`concord_obj_put_feature_value_str' instead of
+	`concord_stroid_set_feature_str'.
+	(chise_feature_load_property_value): Use
+	`concord_obj_get_feature_value_string' instead of
+	`concord_stroid_get_feature_string'.
+	(chise_feature_gets_property_value): Use
+	`concord_obj_gets_feature_value' instead of
+	`concord_stroid_gets_feature'.
+
+2005-06-24  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise.c (CHISE_DS_close): Use `concord_close_ds' instead of
+	`CONCORD_DS_close'.
+
+2005-06-24  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise.h, chise.c (chise_db_format_version): New constant.
+
+	* Makefile.in (CHISE_CFLAGS): Add new macro
+	`CHISE_DB_FORMAT_VERSION'.
+	(distclean): Delete autom4te.cache, autoscan.log, configure.scan
+	and libtool.
+
+2005-06-23  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise.h: Don't include <db.h> and <errno.h>.
+	(CHISE_DS_Type): Use <CONCORD_Backend_Type> instead of <enum
+	CONCORD_Backend_Type>.
+
+2005-06-23  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* README.en (PREREQUISITES): Add `CONCORD'.
+
+	* configure.in:
+	- Update version to 0.4.0.
+	- Don't link Berkeley DB.
+	- Use `AC_CHECK_LIB' to link CONCORD.
+
+	* chise.h: Use concord.h.
+	(CHISE_DS_Type): Use <enum CONCORD_Backend_Type> instead of <enum
+	CHISE_DS_Type>.
+	(CHISE_DS_Berkeley_DB): New macro to wrap
+	`CONCORD_Backend_Berkeley_DB'.
+	(CHISE_DS): Use <CONCORD_Genre_Table> instead of <struct
+	CHISE_DS>.
+	(CHISE_Value): Use <CONCORD_String_Tank> instead of <DBT>.
+	(chise_value_size): Changed to non-inline function.
+	(chise_value_data): Likewise.
+	(chise_value_to_c_string): Likewise.
+	(struct CHISE_Feature_Table): Abolished.
+	(CHISE_Feature): Use <CONCORD_Feature> instead of
+	<CHISE_Feature_Table*>.
+	(struct CHISE_CCS_Table): Abolished.
+	(CHISE_CCS): Use <CONCORD_INDEX> instead of <CHISE_CCS_Table*>.
+	(struct CHISE_Property_Table): Abolished.
+	(CHISE_Property): Use <CONCORD_Feature> instead of
+	<CHISE_Property_Table*>.
+
+	* chise.c: Don't use "chise-name.h".
+	(chise_ds_open_feature_table): Deleted.
+	(chise_ft_close): Deleted.
+	(chise_ds_open_ccs_table): Deleted.
+	(chise_ccst_close): Deleted.
+	(chise_ds_open_property_table): Deleted.
+	(chise_pt_close): Deleted.
+	(CHISE_Attribute_Table): Deleted.
+	(CHISE_Attribute_Table_open): Deleted.
+	(CHISE_Attribute_Table_close): Deleted.
+	(chise_attribute_table_get): Deleted.
+	(chise_attribute_table_put): Deleted.
+	(chise_value_size): New function.
+	(chise_value_data): New function.
+	(chise_value_to_c_string): New function.
+	(struct CHISE_DS): Abolished.
+	(CHISE_DS_open): New implementation; use `concord_open_ds' and
+	`concord_ds_get_genre'.
+	(CHISE_DS_close): New implementation; use `CONCORD_DS_close' and
+	`concord_genre_get_data_source'.
+	(chise_ds_location): New implementation; use `concord_ds_location'
+	and `concord_genre_get_data_source'.
+	(chise_ds_get_feature): New implementation; use
+	`concord_genre_get_feature'.
+	(chise_ds_get_ccs): New implementation; use
+	`concord_genre_get_index'.
+	(chise_ds_get_property): New implementation; use
+	`concord_ds_get_genre', `concord_genre_get_data_source' and
+	`concord_genre_get_feature'.
+	(chise_ds_foreach_char_feature_name): New implementation; use
+	`concord_genre_foreach_feature_name'.
+	(struct CHISE_Feature_Table): Abolished.
+	(chise_feature_setup_db): New implementation; use
+	`concord_feature_setup_db'.
+	(chise_feature_sync): New implementation; use
+	`concord_feature_sync'.
+	(chise_char_set_feature_value): New implementation; use
+	`concord_stroid_set_feature_str'.
+	(chise_char_load_feature_value): New implementation; use
+	`concord_stroid_get_feature_string'.
+	(chise_char_gets_feature_value): New implementation; use
+	`concord_stroid_gets_feature'.
+	(chise_feature_for_a_char_with_value_func): New variable.
+	(chise_feature_foreach_char_with_value_wrapper): New function.
+	(chise_feature_foreach_char_with_value): New implementation; use
+	`chise_feature_for_a_char_with_value_func',
+	`chise_feature_foreach_char_with_value_wrapper' and
+	`concord_feature_foreach_object_string'.
+	(struct CHISE_CCS_Table): Abolished.
+	(chise_ccs_setup_db): New implementation; use
+	`concord_index_setup_db'.
+	(chise_ccs_sync): New implementation; use `concord_index_sync'.
+	(chise_ccs_decode): Use `concord_index_strid_get_object_string'
+	instead of `chise_attribute_table_get'.
+	(chise_ccs_set_decoded_char): Use
+	`concord_index_strid_set_object_str' instead of
+	`concord_index_strid_set_object_str'.
+	(struct CHISE_Property_Table): Abolished.
+	(chise_ds_open_property_table): Deleted.
+	(chise_pt_close): Deleted.
+	(chise_property_setup_db): New implementation; use
+	`concord_feature_setup_db'.
+	(chise_property_sync): New implementation; use
+	`concord_feature_sync'.
+	(chise_feature_set_property_value): New implementation; use
+	`concord_stroid_set_feature_str' and `concord_feature_get_name'.
+	(chise_feature_load_property_value): New implementation; use
+	`concord_stroid_get_feature_string' and
+	`concord_feature_get_name'.
+	(chise_feature_gets_property_value): New implementation; use
+	`concord_stroid_gets_feature' and `concord_feature_get_name'.
+
+2005-06-22  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise-name.h, name.c: Deleted.
+
+	* Makefile.in (CHISE_DIR_VERSION): Update to 1.0.
+	(ABI_VERSION): Update to 3:0:2.
+	(HEADERS): Delete chise-name.h.
+	(OBJS): Delete name.lo.
+
+
+2005-03-29  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* libchise 0.3.0 released.
+
+2005-03-02  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise.h: Modify for C++.
+
+	* sample.c (test_radical_func): New function.
+	(main): Add sample code about `ideographic-radical'.
+
+2004-07-17  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* configure.in: Update version to 0.3.0.
+
+	* Makefile.in (datadir): New variable.
+	(libexecdir): Commented out.
+	(sharedstatedir): New variable.
+	(CHISE_DIR_PREFIX): Use ${datadir}/chise instead of
+	${libexecdir}/chise.
+	(CHISE_DIR_VERSION): Update to 0.3.
+	(CHISE_DB_DIR): Use ${CHISE_DIR} instead of
+	${CHISE_DIR}/${target}.
+
+2004-07-15  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise.c (struct CHISE_DS): Add new member `property_names'.
+	(CHISE_DS_open): Initialize `property_names'.
+	(CHISE_DS_close): Destroy `property_names'.
+	(chise_ds_location): New function.
+	(chise_ds_get_property): New function.
+	(struct CHISE_Property_Table): New structure.
+	(chise_ds_open_property_table): New function.
+	(chise_pt_close): Likewise.
+	(chise_property_setup_db): Likewise.
+	(chise_property_sync): Likewise.
+	(chise_feature_set_property_value): Likewise.
+	(chise_feature_load_property_value): Likewise.
+	(chise_feature_gets_property_value): Likewise.
+
+	* chise.h (chise_ds_location): New prototype.
+	(CHISE_Property_Table): New type.
+	(CHISE_Property): New type.
+	(chise_ds_get_property): New prototype.
+	(chise_property_setup_db): Likewise.
+	(chise_property_sync): Likewise.
+	(chise_feature_set_property_value): Likewise.
+	(chise_feature_load_property_value): Likewise.
+	(chise_feature_gets_property_value): Likewise.
+
+	* sample.c (main): Use `chise_ds_location'.
+
+	* configure.in: Update version to 0.2.2.
+
+	* Makefile.in (ABI_VERSION): Update to 2:0:1.
+
+
+2004-03-01  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* libchise 0.2.1 released.
+
+	* Makefile.in (ABI_VERSION): Update to Revision 1.
+
+	* configure.in: Update version to 0.2.1.
+
+2004-02-26  MORIOKA Tomohiko  <tomo@m17n.org>
+
+	* name.c (chise_make_name_table): Change initial number of hash
+	table to 256.
+	(chise_destroy_name_table): Destroy each entry.
+
+	* chise.c (CHISE_DS_close): Use `chise_destroy_name_table'.
+
+
+2003-11-03  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* libchise 0.2.0 released.
+
+2003-11-03  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* Makefile.in (TAR): New variable.
+
+2003-11-03  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* Makefile.in (tar): New target.
+
+2003-11-02  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* README.en, COPYING.LIB: New files.
+
+	* chise-name.h, chise.c, chise.h, name.c: Add header.
+
+2003-10-30  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* sample.c (test_map_func): Modify to display UCS code point and
+	character name.
+	(main): Use `chise_system_db_dir'; display `numeric-value' instead
+	of `ascii'.
+
+2003-10-15  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise.c (CHISE_Attribute_Table_open): Add code for BDB Ver. 4.1
+	or later.
+
+	* chise.h (chise_system_db_dir): New constant.
+
+2003-10-15  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* Makefile.in (LIBS): Don't add -ldb.
+
+	* configure.in: Setup LIBS; check /sw/include/db4/db.h and setup
+	for db4 when the library is found.
+
+2003-10-15  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* aclocal.m4, ltmain.sh, config.guess, config.sub, install-sh: New
+	files.
+
+	* Makefile.in (target): New variable.
+	(top_builddir): New variable.
+	(CHISE_DIR_PREFIX): New variable.
+	(CHISE_DIR_VERSION): New variable.
+	(CHISE_DIR): New variable.
+	(CHISE_DB_DIR): Renamed from `DB_DIR'; use `CHISE_DIR'.
+	(CHISE_SI_DB_DIR): New variable.
+	(CHISE_CFLAGS): New variable; define `CHISE_SI_DB_DIR'.
+	(chise.lo): Use $(CHISE_CFLAGS).
+
+	* configure.in: Add `AC_CANONICAL_TARGET'; use `AC_PROG_LIBTOOL'
+	instead of `AC_CHECK_PROGS' for `LIBTOOL'.
+
+	* chise.c (chise_system_db_dir): New constant.
+	(CHISE_DS_open): Don't use DBTYPE.
+
+2003-10-14  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise.h (CHISE_DS_open): Don't use DBTYPE.
+
+2003-10-14  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* Makefile.in (DB_DIR): Update version to 0.2.
+
+2003-10-13  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise.c (chise_ds_foreach_char_feature_name): Read
+	${db_dir}/character/feature/ instead of ${db_dir}/system-char-id.
+	(chise_feature_setup_db): Modify for `CHISE_Attribute_Table_open'.
+	(chise_ccs_setup_db): Likewise.
+	(CHISE_Attribute_Table_open): Change interface to specify
+	category/key_type/name instead of encoding/feature.
+
+2003-10-12  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise.c (chise_ds_foreach_char_feature_name): New function.
+	(chise_feature_foreach_char_with_value): Renamed from
+	`chise_char_feature_value_iterate'.
+
+2003-10-11  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* sample.c (test_name_map_func): New function.
+	(main): Use `chise_ds_foreach_char_feature_name'.
+
+	* Makefile.in (sample): Add -Wall -Wmissing-prototypes options for
+	gcc.
+
+	* chise.h (chise_ds_foreach_char_feature_name): New prototype.
+	(chise_feature_foreach_char_with_value): Renamed from
+	`chise_char_feature_value_iterate'.
+
+2003-10-08  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* sample.c (char db_dir): Deleted.
+	(main): Use ${chise_db_dir}/db/ for the location of data-source.
+
+	* Makefile.in (prefix): Use @prefix@.
+	(exec_prefix): Use @exec_prefix@.
+	(libdir): Use @libdir@.
+	(libexecdir): New variable.
+	(DB_INSTALLDIR): Deleted.
+	(DB_DIR): New variable.
+	(chise.lo): Specify DB_DIR.
+	(install): Don't call install.db.
+	(install.db): Deleted.
+
+	* chise.h, chise.c (chise_db_dir): New variable.
+	(CHISE_DS_open): Use <const unsigned char *> instead of <char *>
+	as the type of location.
+
+2003-10-06  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise.h (chise_feature_setup_db): New prototype.
+	(chise_ccs_setup_db): Likewise.
+
+	* chise.c (chise_feature_setup_db): Changed to public function.
+	(chise_ccs_setup_db): New function.
+	(chise_ccs_decode): Use `chise_ccs_setup_db'.
+	(chise_ccs_set_decoded_char): Likewise.
+
+2003-10-05  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise.c (CHISE_Attribute_Table_open): Create required
+	directories when running with create mode.
+
+2003-10-05  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise.h (chise_feature_sync): New prototype.
+	(chise_char_set_feature_value): New prototype.
+	(chise_ds_load_char_feature_value): New inline function.
+
+	* chise.c (chise_feature_sync): New function.
+	(chise_char_set_feature_value): New function.
+
+2003-10-03  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* sample.c (main): Use `chise_ds_decode_char' instead of
+	`chise_ds_get_ccs' and `chise_ccs_decode'.
+
+	* chise.c (chise_ccs_decode): Return -1 when argument `ccs' is
+	NULL.
+	(chise_ccs_set_decoded_char): Likewise.
+
+	* chise.h (chise_ds_decode_char): New inline function.
+
+2003-10-02  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* sample.c:
+	- `chise_open_data_source' is renamed to `CHISE_DS_open'.
+	- `chise_ds_close' is renamed to `CHISE_DS_close'.
+
+	* name.c: Modify to avoid warning.
+
+	* chise-name.h (chise_make_name_table): Modify to avoid warning.
+
+	* chise.c (strnlen): Separated to sysdep.h; include sysdep.h
+	instead.
+	(CHISE_Attribute_Table_open): Renamed from
+	`chise_open_attribute_table'.
+	(CHISE_Attribute_Table_close): Renamed from
+	`chise_close_attribute_table'.
+	(chise_attribute_table_get): Renamed from
+	`chise_get_attribute_table'.
+	(chise_attribute_table_put): Renamed from
+	`chise_put_attribute_table'.
+	(CHISE_DS_open): Renamed from `chise_open_data_source'.
+	(CHISE_DS_close): Renamed from `chise_ds_close'.
+	(chise_feature_setup_db): New function.
+	(chise_char_load_feature_value): Use `chise_feature_setup_db'.
+	(chise_char_gets_feature_value): Likewise.
+	(chise_char_feature_value_iterate): Likewise.
+
+	* Makefile.in (CFLAGS): Add -Wall and -Wmissing-prototypes.
+	(chise.lo): Add dependency on sysdep.h.
+
+	* chise.h (CHISE_DS_open): Renamed from `chise_open_data_source'.
+	(CHISE_DS_close): Renamed from `chise_ds_close'.
+
+	* sysdep.h: New file [separate from chise.c].
+
+2003-10-02  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise.h (chise_ds_open_feature_table): Abolished.
+	(chise_ft_close): Likewise.
+
+2003-10-02  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* sample.c: Update for the latest API.
+
+	* chise.c (struct CHISE_DS): Add new member `subtype' and
+	`modemask'.
+	(chise_open_data_source): Add new arguments `subtype' and
+	`modemask'.
+	(chise_ds_get_feature): Delete arguments `real_subtype',
+	`accessmask', `modemask'.
+	(chise_ds_get_ccs): Likewise.
+	(struct CHISE_Feature_Table): Add new member `name' and `access'.
+	(chise_ds_open_feature_table): Delete arguments `real_subtype',
+	`accessmask', `modemask'.
+	(chise_ft_close): Release `table->name'.
+	(chise_char_load_feature_value): Setup `table->db'.
+	(chise_char_gets_feature_value): Likewise.
+	(chise_char_feature_value_iterate): Return an integer value; setup
+	`feature->db'.
+	(struct CHISE_CCS_Table): Add new member `name' and `access'.
+	(chise_ds_open_ccs_table): Delete arguments `real_subtype',
+	`accessmask', `modemask'.
+	(chise_ccst_close): Release `table->name'.
+	(chise_ccs_sync): New function.
+	(chise_ccs_decode): Setup `ccs->db'.
+	(chise_ccs_set_decoded_char): Renamed from `chise_ccst_put_char';
+	setup `ccs->db'.
+
+	* chise.h (chise_open_data_source): Add new arguments `subtype'
+	and `modemask'.
+	(chise_ds_get_feature): Delete arguments `real_subtype',
+	`accessmask', `modemask'.
+	(chise_char_feature_value_iterate): Return an integer value.
+	(chise_char_feature_str_iterate): Comment out.
+	(chise_ds_open_feature_table): Delete arguments `real_subtype',
+	`accessmask', `modemask'.
+	(chise_ds_get_ccs): Delete arguments `real_subtype', `accessmask',
+	`modemask'.
+	(chise_ccs_set_decoded_char): Renamed from `chise_ccst_put_char'.
+	(chise_ccs_sync): New prototype.
+	(chise_ds_open_ccs_table): Abolished.
+	(int chise_ccst_close): Abolished.
+
+2003-08-28  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* sample.c (test_map_func): Modify for
+	chise_char_feature_value_iterate.
+	(main): Rename `dt_*' to `ccs_*'; use `chise_ds_get_ccs' instead
+	of `chise_ds_open_decoding_table'; use `chise_ccs_decode' instead
+	of `chise_dt_get_char'; don't use `chise_dt_close'; use `use
+	`chise_ds_get_feature' instead of `chise_ds_open_feature_table';
+	use `chise_char_gets_feature_value' instead of
+	`chise_ft_get_value'; use `chise_char_feature_value_iterate'
+	instead of `chise_ft_iterate'; don't use `chise_ft_close'.
+
+2003-08-26  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* chise.c: Include "chise-name.h".
+	(CHISE_DS): Add new members `feature_names' and `ccs_names'.
+	(chise_open_data_source): Setup ds->feature_names and
+	ds->ccs_names.
+	(chise_ds_close): Release ds->feature_names and ds->ccs_names.
+	(chise_ds_get_feature): New function.
+	(chise_ds_get_ccs): New function.
+	(chise_char_load_feature_value): Renamed from
+	`chise_ft_get_value'; modify interface.
+	(chise_char_gets_feature_value): New function.
+	(chise_char_feature_value_iterate): Renamed from
+	`chise_ft_iterate'; modify interface.
+	(CHISE_CCS_Table): Renamed from `CHISE_Decoding_Table'.
+	(chise_ds_open_ccs_table): Renamed from
+	`chise_ds_open_decoding_table'.
+	(chise_ccst_close): Renamed from `chise_dt_close'.
+	(chise_ccs_decode): Renamed from `chise_dt_get_char'.
+	(chise_ccst_put_char): Renamed from `chise_dt_put_char'.
+
+	* chise.h (CHISE_Feature): New type.
+	(chise_ds_get_feature): New prototype.
+	(chise_char_load_feature_value): Renamed from
+	`chise_ft_get_value'; modify interface.
+	(chise_char_gets_feature_value): New prototype.
+	(chise_char_feature_value_iterate): Renamed from
+	`chise_ft_iterate'; modify interface.
+	(chise_char_feature_str_iterate): New prototype.
+	(CHISE_CCS_Table): Renamed from `CHISE_Decoding_Table'.
+	(CHISE_CCS): New type.
+	(chise_ds_get_ccs): New prototype.
+	(chise_ccs_decode): Renamed from `chise_dt_get_char'.
+	(chise_ds_open_ccs_table): Renamed from
+	`chise_ds_open_decoding_table'.
+	(chise_ccst_close): Renamed from `chise_dt_close'.
+	(chise_ccst_put_char): Renamed from `chise_dt_put_char'.
+	(chise_decode_char): Deleted.
+	(chise_get_feature): Deleted.
+
+2003-08-20  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* name.c: Include "chise-name.h".
+	(chise_name_table_put): Use <const unsigned char*> instead of
+	<unsigned char*> for key.
+	(chise_name_table_get): Likewise.
+
+	* chise-name.h (chise_name_table_put): Use <const unsigned char*>
+	instead of <unsigned char*> for key.
+	(chise_name_table_get): Likewise.
+
+2003-08-16  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* Makefile.in (HEADERS): New variable.
+	(OBJS): New variable.
+	(libchise.la): Refer $(OBJS); add --mode=link for libtool.
+	(chise.lo): Depends on config.h.
+	(name.lo): New target.
+	(install.h): Refer $(HEADERS).
+
+2003-08-15  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* chise-name.h, name.c: New files.
+
+2003-08-17  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* chise.c (CHISE_Attribute_Table): Use <DB> instead of <struct
+	CHISE_Attribute_Table>.
+	(chise_put_attribute_table): New prototype.
+	(struct CHISE_Decoding_Table): Use <CHISE_Attribute_Table*>
+	instead of <DB*> as the type of member `db'.
+	(chise_ds_open_decoding_table): New implementation.
+	(chise_dt_close): Likewise.
+	(chise_dt_get_char): Modify for new implementation of <struct
+	CHISE_Decoding_Table>.
+	(chise_dt_put_char): Likewise.
+	(struct CHISE_Feature_Table): Use <CHISE_Attribute_Table*> instead
+	of <DB*> as the type of member `db'.
+	(chise_ds_open_feature_table): New implementation.
+	(chise_ft_close): Likewise.
+	(chise_ft_get_value): Modify for new implementation of <struct
+	CHISE_Feature_Table>.
+	(chise_open_attribute_table): Use db_dir instead of ds as the
+	first argument; modify for new implementation of
+	<CHISE_Attribute_Table>.
+	(chise_close_attribute_table): Modify for new implementation of
+	<CHISE_Attribute_Table>.
+	(chise_get_attribute_table): Likewise.
+	(chise_put_attribute_table): Likewise.
+
+2003-08-17  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* chise.c (CHISE_Attribute_Table): Moved from chise.h.
+	(struct CHISE_Decoding_Table): New structure.
+	(chise_ds_open_decoding_table): Cast the return value to
+	<CHISE_Decoding_Table*>.
+	(chise_dt_close): Cast back to <CHISE_Attribute_Table*>.
+	(chise_dt_get_char): Likewise.
+	(struct CHISE_Feature_Table): New structure.
+	(chise_ds_open_feature_table): Cast the return value to
+	<CHISE_Feature_Table*>.
+	(chise_ft_close): Cast back to <CHISE_Attribute_Table*>.
+	(chise_ft_get_value): Likewise.
+
+	* chise.h (CHISE_Attribute_Table): Deleted.
+	(CHISE_Decoding_Table): Use <struct CHISE_Decoding_Table> instead
+	of <CHISE_Attribute_Table>.
+	(CHISE_Feature_Table): Use <struct CHISE_Feature_Table> instead of
+	<CHISE_Attribute_Table>.
+
+2003-08-17  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* chise.c (chise_open_attribute_table): New prototype.
+	(chise_close_attribute_table): New prototype.
+	(chise_get_attribute_table): New prototype.
+
+	* chise.h (chise_open_attribute_table): Deleted.
+	(chise_close_attribute_table): Deleted.
+	(chise_get_attribute_table): Deleted.
+
+2003-08-17  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* chise.c (struct CHISE_DS): Definition of members are moved from
+	chise.h.
+
+	* chise.h (struct CHISE_DS): Omit definition of members.
+
+2003-08-17  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* sample.c (main): Modify for new API.
+
+	* chise.c (chise_open_data_source): Interface change; allocate a
+	CHISE_DS object and return it.
+	(chise_ds_close): Renamed from `chise_close_data_source'; destroy
+	the specified CHISE_DS object.
+	(chise_ds_open_decoding_table): Renamed from
+	`chise_open_decoding_table' and changed the interface.
+	(chise_dt_close): Renamed from `chise_close_decoding_table'.
+	(chise_ds_open_feature_table): Renamed from
+	`chise_open_feature_table' and changed the interface.
+	(chise_ft_close): Renamed from `chise_close_feature_table'.
+	(chise_open_attribute_table): Interface change; allocate a
+	CHISE_Attribute_Table object and return it; require pointer for
+	data source object instead of db_dir.
+	(chise_close_attribute_table): Destroy the specified
+	CHISE_Attribute_Table object.
+
+	* chise.h (struct CHISE_DS): Change type of location from <char*>
+	to <unsigned char*>.
+	(chise_open_data_source): Change interface.
+	(chise_ds_close): Renamed from `chise_close_data_source'.
+	(struct CHISE_Attribute_Table): Add new member `ds'; rename `dbp'
+	to `db'.
+	(chise_ds_open_decoding_table): Renamed from
+	`chise_open_decoding_table' and changed the interface.
+	(chise_dt_close): Renamed from `chise_close_decoding_table'.
+	(chise_ds_open_feature_table): Renamed from
+	`chise_open_feature_table' and changed the interface.
+	(chise_ft_close): Renamed from `chise_close_feature_table'.
+	(chise_open_attribute_table): Change interface.
+
+2003-08-12  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* configure.in: Update version to 0.2.0.
+
+	* Makefile.in (ABI_VERSION): New variable.
+	(libchise.la): Specify $(ABI_VERSION) as -version-info of libtool.
+
+2003-08-12  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* sample.c (main): Use <CHISE_Decoding_Table> instead of
+	<CHISE_Decoding_Table*> to define `dt_daikanwa'; use
+	<CHISE_Feature_Table> instead of <CHISE_Feature_Table*> to define
+	`ft_ideographic_structure' and `ft_ascii'.
+
+	* chise.c (chise_open_decoding_table): Use <CHISE_Decoding_Table*>
+	instead of <CHISE_Decoding_Table**> as the type of the first
+	argument.
+	(chise_open_feature_table): Use <CHISE_Feature_Table*> instead of
+	<CHISE_Feature_Table**> as the type of the first argument.
+	(chise_ft_iterate): Modify for the structure
+	`CHISE_Feature_Table'.
+	(chise_open_attribute_table): Use <CHISE_Attribute_Table*> instead
+	of <CHISE_Attribute_Table **> as the type of the first argument;
+	modify for the structure <CHISE_Feature_Table>.
+	(chise_close_attribute_table): Modify for the structure
+	<CHISE_Feature_Table>.
+	(chise_get_attribute_table): Likewise.
+	(chise_put_attribute_table): Likewise.
+
+	* chise.h (CHISE_Attribute_Table): Define as a structure.
+	(chise_open_decoding_table): Use <CHISE_Decoding_Table*> instead
+	of <CHISE_Decoding_Table**> as the type of the first argument.
+	(chise_open_feature_table): Use <CHISE_Feature_Table*> instead of
+	<CHISE_Feature_Table**> as the type of the first argument.
+	(chise_open_attribute_table): Use <CHISE_Attribute_Table*> instead
+	of <CHISE_Attribute_Table**> as the type of the first argument.
+
+2003-08-11  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* chise.h (chise_dt_put_char): New prototype.
+
+2003-08-10  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* chise.c (chise_dt_put_char): New function.
+	(chise_put_attribute_table): New function.
+
+2003-08-10  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* chise.c (chise_format_char_id): New function.
+	(chise_ft_get_value): Use `chise_format_char_id'.
+
+2003-08-09  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* chise.h: Define `_CHISE_H'.
+
+2003-08-09  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* sample.c (test_map_func): New function.
+	(main): Add sample of `chise_ft_iterate'.
+
+	* chise.c (chise_char_id_parse_c_string): New function.
+	(chise_dt_get_char): Use `chise_char_id_parse_c_string'.
+	(chise_ft_iterate): New function.
+
+	* chise.h (chise_ft_iterate): New function.
+
+2003-08-06  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* chise.c (chise_ft_get_value): Use escape forms for some special
+	characters.
+
+2003-08-06  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* sample.c (main): Rename "ideograph-daikanwa" to "=daikanwa".
+
+	* chise.c (chise_open_attribute_table): Encode '/' and '%' in
+	argument `feature' for file name.
+
+2003-07-12  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* chise.c, chise.h: Move strnlen related code from chise.h to
+	chise.c.
+
+2003-07-08  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* Makefile.in (CFLAGS): Refer @CFLAGS@.
+
+	* configure.in: Add check code for Fink.
+
+2003-07-08  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* Makefile.in (LIBTOOL): New variable.
+	(distclean): New target.
+
+	* configure.in: Check about libtool.
+
+2003-07-08  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* Makefile.in: Use libtool.
+
+2003-07-07  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise.c: Include "config.h" when HAVE_CONFIG_H is defined.
+
+	* chise.h (strnlen): New inline function when HAVE_STRNLEN is not
+	defined [based on Izumi MIYAZAKI <imiyazaki@bun.kyoto-u.ac.jp>'s
+	patch].
+
+	* Makefile: Deleted.
+
+	* configure: New file.
+
+	* Makefile.in, config.h.in, configure.in: New files.
+
+2003-03-12  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* chise.c (chise_dt_get_char): Use `chise_value_data' instead of
+	`chise_value_to_c_string'; use `strnlen' and `chise_value_size'
+	instead of `strlen'; fix problem about control characters.
+
+	* chise.h (chise_value_data): New inline function.
+
+2003-03-10  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* chise.c (chise_dt_get_char): Fix problem about `?\CHAR'.
+
+2003-03-06  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* sample.c: Add comments.
+
+2003-03-06  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
+
+	* sample.c: Use <chise.h>.
+	(db_dir): Use "/usr/local/lib/chise/char-db".
+
+	* Makefile: Install chise.h; setup /usr/local/lib/chise/char-db/.
+
+2003-03-05  MORIOKA Tomohiko  <tomo@mousai.as.wakwak.ne.jp>
+
+	* Makefile, chise.c, chise.h, sample.c: New files.
+

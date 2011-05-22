@@ -1,0 +1,849 @@
+2007-05-18  Francesco Potortì  <pot@gnu.org>
+
+	* etags.c: Extern definitions of some more pointer functions for
+	standalone compilation, especially important for 64bit platforms.
+	(main, print_help): --members is now the default for etags.
+	(C_entries): Parse start of C comment as a space == end of token.
+	This is not necessary for C++ comment, already parsed as newline.
+
+2007-02-05  Francesco Potortì  <pot@gnu.org>
+
+	* etags.c (default_C_help, Cplusplus_help, PHP_help, print_help)
+	(main): Now --members is the default for etags, not for ctags yet.
+
+2007-01-02  Francesco Potortì  <pot@gnu.org>
+
+	* etags.c (longopts): New undocumented option --no-duplicates.
+	(no_duplicates): Static variables for the above option.
+	(print_help): Do not print help for --no-warn, now undocumented.
+	(add_node): Allow duplicate tags in ctags mode unless --no-duplicates.
+	(main): Pass the -u option to sort in ctags mode.
+
+2006-12-28  Francesco Potortì  <pot@gnu.org>
+
+	* etags.c (readline): When creating a relative file name from a
+	#line directive, leave the file name alone.  The previous
+	behaviour was to make it relative to the tags file directory,
+	under the hypothesis that the #line directive file name was
+	relative to the directory of the tagged file.  That hypothesis is
+	wrong with Cpp and Lex.
+
+2006-12-20  Francesco Potortì  <pot@gnu.org>
+
+	* etags.c (C_entries): DEFUN names were longer by one: corrected.
+	(Makefile_targets): Do not include spaces in tag names.
+
+2006-08-12  Kevin Ryde <user42@zip.com.au>
+
+	* etags.c (readline): Check for double quote after #line.
+
+2006-08-12  Jan Djärv  <jan.h.d@swipnet.se>
+
+	* etags.c (readline): sscanf could in principle return 2.
+
+2006-08-12  Francesco Potortì  <pot@gnu.org>
+
+	* etags.c (readline): lno is unsigned.
+	(TeX_commands): Use p++ (rather than *p++) to increment p.
+	(Lua_functions): Explicitely discard LOOKING_AT's return value.
+
+2006-08-07  Masatake YAMATO  <jet@gyve.org>
+
+	* etags.c (TEX_mode): Check getc retruns EOF.
+	File ended without newline causes infinite loop.
+
+2002-07-14  Adrian Aichner  <adrian@xemacs.org>  (tiny change)
+
+	* etags.c: It's XEmacs, not Xemacs: change all the occurences.
+
+2006-07-10  Francesco Potortì  <pot@gnu.org>
+
+	* etags.c [ETAGS_REGEXPS]: #ifdef's deleted, define unconditionally.
+	[LONG_OPTIONS]: Changed to NO_LONG_OPTIONS, now normally undefined.
+	(Objc_suffixes): Suggest using --lang=c for full help.
+	(C_entries): Initialise savetoken to 0 to shut up the compiler.
+
+2006-07-10  Francesco Potortì  <pot@gnu.org>
+
+	* etags.c (absolute_filename): Free unused space (cosmetic change).
+	(in_word_set): In C, also tag #undef symbols.
+
+2006-05-02  Francesco Potortì  <pot@gnu.org>
+
+	* etags.c (Perl_functions): Free space allocated for var package.
+	(Erlang_functions): Possibly free space allocated for var last.
+	(Prolog_functions): Possibly free space allocated for var last.
+
+2005-11-18  Hideki IWAMOTO <h-iwamoto@kit.hi-ho.ne.jp>  (tiny change)
+
+	* etags.c (main): Cxref mode writes to stdout: do not close tagf,
+	which was never opened.
+
+2005-09-27  Francesco Potortì  <pot@gnu.org>
+
+	* etags.c: Preliminary Forth support.
+	(prolog_pr): Cast strlen to int before comparison.
+	(LOOKING_AT, LOOKING_AT_NOCASE): Let the preprocessor check that
+	the second argument is indeed a literal string.
+	(main): In append mode, sort the tags file after writing it.
+
+2005-09-27  Emanuele Giaquinta  <emanuele.giaquinta@gmail.com>  (tiny change)
+
+	* etags.c (longopts, print_help, main): The -a (--append) option
+	can be used in ctags also; for one, the Linux make file uses it.
+
+2004-09-13  Francesco Potortì  <pot@gnu.org>
+
+	* etags.c (main): When relative file names are given as argument,
+	make them relative to the current working dir, rather than
+	relative to the output tags file, if the latter is in /dev.
+
+2004-09-13  David A. Capello  <dacap@users.sourceforge.net>  (tiny change)
+
+	* etags.c: (Lua_suffixes, Lua_help, lang_names, Lua_functions):
+	Support the Lua scripting language <http://www.lua.org>.
+
+2004-09-13  Francesco Potortì  <pot@gnu.org>
+
+	* etags.c [EXIT_SUCCESS, EXIT_FAILURE]: Define them when no
+	<stdlib.h> is available.
+	(enum sym_type): New st_C_attribute value for parsing
+	gcc's __attribute__.  Deleted st_C_typespec value.
+	(gperf, in_word_set): Use gperf 3, options changed.  Added the
+	__attribute__ keyword, removed all the st_C_typespec keywords,
+	changed attribute for Java to (C_JAVA & !C_PLPL).
+	(inattribute): New global bool, part of the C state machine.
+	(cblev): Identifier renamed to bracelev throughout.
+	(consider_token, C_entries): Numerous changes for making the
+	parser more robust and adding support for __attribute__.
+
+2004-09-08  Francesco Potortì  <pot@gnu.org>
+
+	* etags.c: Add arch taglines
+	[LONG_OPTIONS]: make it TRUE (ifdef) or FALSE for ease of use.
+	[GOOD, BAD]: renamed to EXIT_SUCCESS, EXIT_FAILURE.
+	(suggest_asking_for_help): Fix having macros in a printf statement.
+	(consider_token): check C++ `operator' only when the token len is
+	long enough.
+
+2003-01-09  Francesco Potortì  <pot@gnu.org>
+
+	* etags.c: changes for language-sepcific help by Philippe
+	Waroquiers <wao@cfmu.eurocontrol.be> applied and largely revised.
+	(language): Added a `help' member.
+	(arg_type): Added an at_end constant.
+	(plain_C_suffixes): Some items removed from here.
+	(Objc_suffixes): And put here (new constant).
+	(Ada_help, Asm_help, default_C_help, Cplusplus_help, Cjava_help,
+	Cobol_help, Erlang_help, Fortran_help, HTML_help, Lisp_help,
+	Makefile_help, Objc_help, Pascal_help, Perl_help, PHP_help,
+	PS_help, Prolog_help, Python_help, Scheme_help, TeX_help,
+	Texinfo_help, Yacc_help, auto_help, none-help, no_lang_help): New
+	constants.
+	(PS_functions, PS_suffixes): Renamed from Postscript_functions and
+	Postscript_suffixes.
+	(lang_names): Adapted to the new language structure, new language
+	"objc" added (was previously merged with "proc").
+	(print_language_names): Some help strings corrected.
+	(print_help): Now takes an argument and possibly prints lang help.
+	(print_help): Some help strings corrected.  Documents
+	language-specific help.
+	(main): Only print help after having parsed all the arguments.
+
+2002-09-03  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (regex_tag_multiline, readline): Never pass pfnote a
+	string that cannot be freed.
+
+2002-08-30  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (consider_token, C_entries): Switch to C++ parsing when
+	auto-detection is enabled and the `::' qualifier is met.
+	(consider_token, C_entries): Several bugs corrected that tagged
+	some declarations even though --declarations was not used.
+	(plainc): New macro.
+	(C_entries): Use it.
+	(C_entries): Several cosmetic changes.
+	(C_entries): Invalidate the token is some cases.
+
+2002-08-29  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (C_entries): Corrected a problem with const C++ funcs.
+	(ignoreindent): Renamed from noindentypedefs.
+	(cjava, cplpl): They are now macros instead of local vars.
+
+2002-08-28  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (HTML_labels): Tag ID= also.
+
+2002-08-27  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (Ada_funcs): Do not tag "use type Xxxx;".
+
+2002-06-25  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c: New language HTML.
+	(make_tag): Never generate null length tag names.
+	(linebuffer_init): Renamed from initbuffer.  All callers changed.
+	(pattern): Structure renamed to `regexp', member regex renamed to
+	pattern.
+	(node_st): Member pat renamed to regex.
+	(pattern); New member force_explicit_name, for future use.  Now
+	always set to true, cannot be reset.
+	(add_regex, regex_tag_multiline, readline): Use it.
+	(main): Free some global structures.
+
+2002-06-21  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (fdesc): New member `written'.
+	(readline, process_file): Initialise it.
+	(put_entries): Set it.
+	(main): Use it to create entries for files without tags.
+	(total_size_of_entries): Do not count invalid tags.
+	(etags_strcasecmp): Like BSD's, for compatibility.
+	(strcaseeq): Make it into a macro.
+
+2002-06-21  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c: (F_getit, Fortran_functions, Ada_getit, Asm_labels)
+	(Python_functions, PHP_functions, PHP_functions, PHP_functions)
+	(PHP_functions, PHP_functions, Cobol_paragraphs)
+	(Makefile_targets, Postscript_functions, Texinfo_nodes)
+	(prolog_pr, erlang_func, erlang_attribute)
+	(Perl_functions, Perl_functions, Pascal_functions)
+	(TeX_commands, get_tag): Use make_tag instead of pfnote.
+	(get_tag): Prototype changed, all callers changed.
+
+2002-06-20  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c: Use, together with etags.el, an optimised form of tags,
+	which are almost always unnamed.  etags.el looks for an explicit
+	tag name, then for an implicit one.  See make_tag for details.
+	The change is both forwards and backwards compatible.
+	(make_tag): New function (was the disabled function new_pfnote).
+	(make_C_tag): Use it.
+
+2002-06-19  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (add_regex): Invalid regexp modifiers are ignored.
+	(Makefile_targets): Tag variables unless --no-globals.
+	(LOOP_ON_INPUT_LINES): Serious bug corrected.
+
+2002-06-13  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (erlang_atom, erlang_attribute): Bugs corrected.
+	(invalidate_nodes): Bug corrected.
+	(print_help): Better help for regexps.
+
+2002-06-12  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (arg_type): at_icregexp label removed (obsolete).
+	(pattern): New member multi_line for multi-line regexps.
+	(filebuf): A global buffer containing the whole file as a string
+	for multi-line regexp matching.
+	(need_filebuf): Global flag raised if multi-line regexps used.
+	(print_help): Document new regexp modifiers, remove references to
+	obsolete option --ignore-case-regexp.
+	(main): Do not set regexp syntax and translation table here.
+	(main): Treat -c option as a backward compatibility hack.
+	(main, find_entries): Init and free filebuf.
+	(find_entries): Call regex_tag_multiline after the regular parser.
+	(scan_separators): Check for untermintaed regexp and return NULL.
+	(analyse_regex, add_regex): Remove the ignore_case argument, which
+	is now a modifier to the regexp.  All callers changed.
+	(add_regex): Manage the regexp modifiers.
+	(regex_tag_multiline): New function.  Reads from filebuf.
+	(readline_internal): If necessary, copy the whole file into filebuf.
+	(readline): Skip multi-line regexps, leave them to regex_tag_multiline.
+
+2002-06-11  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (add_regex): Better check for null regexps.
+	(readline): Check for regex matching null string.
+
+2002-06-07  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (find_entries): Reorganisation.
+
+2002-06-07  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (scan_separators): Support all character escape
+	sequences supported by gcc.
+	(find_entries): rewind unconditionally.
+	(find_entries): Do not call language functions directly, now calls
+	itself.
+	(find_entries): Do general initialisations here.
+	(CNL_SAVE_DEFINEDEF, C_entries, LOOP_ON_INPUT_LINES, F_getit)
+	(Ada_getit, Pascal_functions, Pascal_functions)
+	(prolog_skip_comment): Do not do them here.
+	(readline_internal): Increment lineno here.
+	(readline): Conditionally undo readline_internal increment.
+	(readline): Do not return a value.
+
+2002-06-06  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (enum arg_type): New label at_stdin.
+	(STDIN): New constant.
+	(parsing_stdin): New flag.
+	(longopts): New option --parse-stdin=NAME.
+	(print_help): Document it.
+	(main): Handle it.
+	(process_file): Split into process_file and process_file_name.
+	(process_file_name): New function.
+
+2002-06-06  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (main): Avoid a buffer overrun with sprintf.
+	(TEX_cmt): Make it a static char and move it before TeX_commands.
+	(TeX_commands): Skip comments.
+	(TEX_defenv): Now contains more contructs.
+	(TeX_commands): Shorten the tag to the brace after the name.
+	(TeX_commands): Allow for names with embedded spaces.
+	(TeX_commands): Names now include the initial backslash.
+	(TeX_commands): Names do not include numeric args #n.
+	(TeX_commands): Correct line char number in tags.
+	(TEX_tabent, TEX_token): Deleted.
+	(TeX_commands, TEX_decode_env): Streamlined.
+
+2002-05-31  Paul Eggert  <eggert@twinsun.com>
+
+	* etags.c (main): Use `sort -o TAGFILE TAGFILE' instead of
+	`sort TAGFILE -o TAGFILE', as POSIX 1003.1-2001 disallows
+	the latter usage.
+
+2002-04-22  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c: (last_node): Make it a global variable.
+	(process_file): Print the tags from the nodes as soon as
+	possible, and delete the nodes.  This brings down the memory
+	occupancy as etags to almost the same level as when the #line
+	directives were not parsed.
+	(free_fdesc): New function.
+	(find_entries): Use it.
+	(invalidate_nodes): In etags mode, do not just mark the nodes as
+	invalid, do delete them.
+
+2002-04-16  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (find_entries): Bug fix in list management.
+
+2002-04-15  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (get_language_from_filename): Add one argument.
+	(strcaseeq): New function.
+	(get_language_from_filename): Use it to do a case insenstitive
+	comparison if called with appropriate args.
+	(find_entries): Try with case insensitive match.
+	(process_file): Bug fixed.
+
+2002-04-13  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (find_entries): Delete tags previously obtained from
+	file xxx.c's #line directives when parsing file xxx.y.  This is
+	generally done for automatically generated files containing
+	#line directives.  This handles the case when xxx.y is tagged
+	before xxx.c, and the entries of xxx.c pointing to xxx.y should
+	be discarded.
+	(language): Added the metasource member.  Initializers changed.
+	(invalidate_nodes): New function.
+
+2002-03-21  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (readline): Discard lines after having found a #line
+  	directive pointing to an already tagged file.  This handles the
+	case when xxx.y is tagged before xxx.c, and the entries of
+	xxx.c pointing to xxx.y should be discarded.
+
+2002-03-15  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (fdesc): New structure for keeping track of input files.
+	(fdesc): Remove `file' member (a string) and use instead a pointer
+	to a file description structure.
+	(curfile, curfiledir, curtagfname, curlang, nocharno,
+	forced_lang): Global variables removed in favor of fdhead and
+	curfdp, pointers to file description strucures.
+	(longopts, main, print_help): Use the CTAGS conditional to include
+	or exclude options that work on etags or ctags only.
+	(process_file, find_entries, pfnote, add_node, put_entries,
+	readline): Use fdhead and curfdp.
+	(process_file, find_entries): Do not take an arg string, all
+	callers changed.
+
+2002-03-13  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (longopts, print_help, main): Test CTAGS to disallow
+	options that are not right for either etags or ctags.
+
+2002-03-12  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (number_len, total_size_of_entries): Define them also
+	in CTAGS mode, because gcc does not compile all refs away.
+	(Python_functions, PHP_functions): Name tags, for ctags' sake.
+	(TeX_commands): Name tags.  Correction of old disabled code.
+
+2002-03-06  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (Python_functions): Consider indented "def" and "class".
+
+2002-03-05  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (curfiledir, curtagfname): New global variables.
+	(process_file): Initialise them.
+	(readline): Canonicalize the name found in #line directive.
+
+2002-03-05  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c: Honour #line directives.
+	(no_line_directive): New global var; set it for old behaviour.
+	(main): Remove some #ifdef in the getopt switch.
+	(add_node, put_entries): Code added to merge different chunks of
+	nodes referring to the same file.  Currently the tags are just
+	appended, without any check for duplicates.
+	(Perl_functions): Do not special case ctags.
+	(readline): Identify #line directives and do the right thing.
+	(nocharno, invalidcharno): New global vars.
+	(process_file): Reset nocharno.
+	(readline): Set nocharno.
+	(pfnote): Read nocharno and maybe put invalidcharno in node.
+	(total_size_of_entries, put_entries): Use invalidcharno.
+
+2002-03-04  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c: Keep the whole tag table in memory, even in etags mode.
+	(main): Call put_entries here even in CTAGS mode.
+	(main, process_file): Check the return values of fclose and pclose.
+	(process_file): Do not call put_entries after parsing each file.
+	(process_file): Canonicalise file names even for ctags.
+	(process_file): Set curfile here...
+	(find_entries): ... not here any more.
+	(add_node): In etags mode, build a linked list of entries (on
+	right pointer) for each file, and link the first entry of each
+	file on left nodes.
+	(put_entries): Print here the name of the file.
+	(put_entries): Print the entries starting from the first file.
+	(number_len, total_size_of_entries): Define these only iin etags
+	mode, make the second work only on the right nodes.
+
+2002-01-03  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c: Make all global variables static.
+
+2001-12-21  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (Perl_functions): Tag packages and use them in sub tags.
+	(get_tag): Return a pointer to the tag that is found.
+
+2001-12-21  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (LOOKING_AT): Use !intoken instead of iswhite.
+	(F_takeprec): Renamed from takeprec.  All callers changed.
+	(F_getit): Renamed from getit.  All callers changed.
+	(nocase_tail): Renamed from tail.  All callers changed.
+	(Ada_getit): Renamed from adagetit.  All callers changed.
+	(L_getit): Simplified by using get_tag.
+	(Perl_functions, Postscript_functions, erlang_attribute): Use the
+	modified LOOKING_AT.
+	(notinname): Removed '[' and added ')' to the recognised chars.
+	(LOOKING_AT, get_tag, PHP_functions): Use notinname.
+	(Ada_getit, Ada_funcs, Python_functions, Scheme_functions):
+	Clarified, using strneq or notinname.
+	(L_isdef, L_isquote): Removed.
+	(Lisp_functions, L_getit): Clarified.
+
+2001-12-17  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c: [P_]: Renamed to __P for consistency with config.h.
+	[HAVE_CONFIG_H]: Let config.h deal with __P.
+	[__STDC__] [!HAVE_CONFIG_H]: Define PTR as in config.h.
+	[!__STDC__] [!HAVE_CONFIG_H]: Do not undefine static, because
+	gperf code needs it.
+	[HAVE_CONFIG_H] [!PTR]: Define PTR (for use with Xemacs).
+	[HAVE_CONFIG_H] [!__P]: Define __P (for use with Xemacs).
+	(xmalloc, xrealloc): Use PTR instead of long *.
+	(bool): Make it a define, not a typedef, for C++ compilers.
+	(pattern): Members renamed to avoid name clash in some C++ compilers.
+	(get_language_from_langname): Use const argument.
+
+2001-12-12  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (PHP_functions): New function by Diez B. Roggisch,
+	heavily adapted by me, for parsing PHP.
+	(LOOKING_AT): New macro.
+	(Perl_functions, Python_functions, PHP_functions)
+	(Scheme_functions, Texinfo_nodes): Use it.
+	(Perl_functions): Use strneq.
+	(prolog_pred): Renamed to prolog_pr.
+	(prolog_pr): Recognise Prolog rules (thanks to Geert Kloosterman)
+	in addition to predicates.
+	[ETAGS_REGEXPS] [!HAVE_CONFIG_H] [__CYGWIN__]: Prevent
+	unmodified compile, as Cygwin's regex.h is incompatible with us
+	(thanks to Markus Hoenicka).
+	[!HAVE_CONFIG_H] [!__STDC__]: #define const as the empty string.
+
+2001-05-11  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (add_regex): Reset the whole newly allocated pattern
+	buffer instead of the individual members.  It's safer and works
+	with Xemacs.
+
+2001-02-23  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (enum sym_type): New label st_C_template.
+	(gperf input): Use it for switching to C++ from C.
+	(consider_token): Do it.
+
+2001-02-16  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (C_entries): Initialise typdefcblev to quiet compilers.
+
+2001-02-06  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c [!HAVE_CONFIG_H] [!__STDC__]: #define static as nothing.
+
+2001-01-31  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c: [NDEBUG] #undef assert and #define it as ((void)0), for
+	the sake of some buggy assert.h (e.g. in MinGW and sunos4 pcc).
+	(C_entries): Tag token renamed to still_in_token because sunos4
+	pcc wants to expand it as the token() macro even though it has no
+	arguments.
+
+2001-01-30  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c: [WIN32-NATIVE]: #undef MSDOS, #undef WINDOWSNT and
+	#define it for the sake of Xemacs.
+	[WINDOWSNT]: #undef HAVE_NTGUI even if built without
+	HAVE_CONFIG_H.  This change only affects a standalone etags.
+	[WINDOWSNT]: #undef DOS_NT and #define it even if built with
+	HAVE_CONFIG_H.  This change does nothing in Emacs, as DOS_NT is
+	always defined when HAVE_CONFIG_H and WINDOWS are both defined.
+	[!HAVE_UNISTD_H]: use defined(WINDOWSNT) instead of the bare
+	WINDOWSNT, as this is the correct way to use it.
+
+2001-01-28  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c: Be capable to parse nested struct-like structures.
+	(structdef, structtag): Struct state machine revisited.
+	(struct tok): Revisited.
+	(cstack, nestlev, instruct): New struct and macros.
+	(pushclass_above, popclass_above, write_classname): New functions
+	for dealing with nested class names, inspired by Mykola Dzyuba.
+	(consider_token, make_C_tag, C_entries): Many changes for dealing
+	with arbitrarily nested structures.
+	(etags_getcwd): #if MSDOS, not #ifdef MSDOS!
+	(C_entries): Consider templates in C++.
+	(sym_type): New constant st_C_class for detecting "class" also in
+	C mode.
+	(C_AUTO): New macro for automatic detection of C++.
+	(consider_token): Automatic set C++ mode.
+	(C_entries): New security check for yacc.
+	(print_language_names, print_help): Mention the autodetect
+	feature, do not show help for the -C option, now mostly	useless.
+	(C_entries): Tag C++ forward declarations if --declarations.
+	(C_entries): Don't be fooled by things like XDEFUN.
+	(consider_token): Discard asm pseudo function.
+
+2001-01-25  Francesco Potorti`  <pot@potorti.it>
+
+	* etags.c (struct tok): Renamed from struct token.
+	(token): Renamed from tok.
+	(structtype): Make it a local variable.
+	[DEBUG]: Use assert.
+	(xrnew): Change the synopsis.
+	(typedefs_or_cplusplus): Renamed from typedefs_and_cplusplus.
+	(grow_linebuffer): Don't call xrnew when not needed.
+	(token): buffer renamed to line.
+	(C_entries): Three calls to inibuffer moved here from main.
+	(C_entries): Removed all references to var methodlen, delete it.
+	(linebuffer_setlen): Was grow_buffer, now also sets len.
+	(consider_token, C_entries, Pascal_functions): Use it.
+	(C_entries): Preventing problems relative to extern "C".
+	(C_entries): Can tag more than one variable or func separated by
+	comma when --declarations is used.
+	(C_entries): More accurate tagging of members and declarations.
+	(yacc_rules): Was global, made local to C_entries.
+	(next_token_is_func): Removed.
+	(fvdef): New constants fdefunkey, fdefunname.
+	(consider_token, C_entries): Use them.
+	(C_entries): Build proper lisp names for Emacs DEFUNs.
+
+2001-01-15  Francesco Potorti`  <pot@pot.cnuce.cnr.it>
+
+	* etags.c (print_language_names): Print filenames in addition to
+	suffixes.
+
+2001-01-12  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (get_language_from_langname): Renamed from
+	get_language_from_name.
+	(get_language_from_filename): Renamed from
+	get_language_from_suffix.  Now first looks for the complete file
+	name.
+	(language): New member char **filenames.
+	(Makefile_filenames): List of possible filenames for makefiles.
+	(lang_names): Added a NULL member for every entry, added an entry
+	for makefiles.
+	(Makefile_targets): New function, inspired by Assar Westerlund
+	<assar@sics.se>.
+
+2000-11-07  Francesco Potortì  <pot@pot.cnuce.cnr.it>
+
+	* etags.c (Texinfo_nodes): Renamed from Texinfo_fuctions and made
+	it conformant to the style of the rest of the code.
+
+2000-02-10  Francesco Potorti`  <pot@gnu.org>
+
+	* etags.c (iswhite): Redefined not to consider '\0' as white
+	space, and use it throughout in place of isspace, thus preventing a
+	potential signed char to int conversion problem.
+	(MSDOS): #undefine befere redefining
+
+2000-02-04  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c (many functions): Add prototypes.
+
+2000-01-31  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c [MSDOS]: Set MSDOS to 1 if #defined, 0 otherwise.
+	(get_compressor_from_suffix, process_file): Use MSDOS in if clause.
+	(etags_strchr, etags_strrchr): Use const char * and int as arguments.
+	(getenv, getcwd): Only declare them if necessary.
+	(EMACS_NAME): New constant macro.
+	(print_version): Use it.
+	(P_) [__STDC__]: Macro for defining function prototypes.
+
+2000-01-18  Fabrice Popineau  <Fabrice.Popineau@supelec.fr>
+
+	* etags.c [WINDOWSNT]: #include <direct.h>
+
+2000-01-18  Martin Buchholz  <martin@xemacs.org>
+
+	* etags.c (all functions): Made them static.
+	(all functions): Write prototypes.
+
+1999-11-19  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c (_GNU_SOURCE): Define only if undefined.
+	(get_scheme): Declaration deleted.
+	(main): error was called with an integer as second arg, instead of
+	a char pointer.
+	(canonicalize_filename): Bug removed.
+
+1999-11-18  Dave Love  <d.love@dl.ac.uk>
+
+	* etags.c (C_entries): Rename label `intoken', avoiding K&R
+	lossage from name clash with macro.
+
+1999-09-14  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c: Add suffix psw for PSWrap.
+	(L_getit): Generalize a "cp!=' '" into "!isspace(*cp)".
+	(Postscript_functions): Add code for PSWrap.
+	(Scheme_functions): Use local pointer and new get_tag function.
+	(get_tag): New name for old get_scheme.
+	(process_file): Do not free NULL when file does not exist.
+	(typdef): ttypedefseen renamed to tkeyseen, new label ttypeseen.
+	(C_entries): Modifications that make --members tag even inside
+	typedefs and C nested structs (one level only).
+	(consider_token): Corrected a bug which prevented tagging of enum
+	constants.
+	(C_stab_entry): Added if, for, while, switch, return as
+	st_C_ignore.  This makes it simpler to work when cblev!=0.
+
+1999-04-21  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c (C_entries): tag member function declarations when
+	--declarations is used.
+
+1999-04-20  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c (C_entries, consider_token): C++ `operator' now is
+	tagged in most cases.
+	As before, :: is not recognised if surrounded by spaces.
+
+1999-01-14  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c (relative_filename): Account for DOS file names such
+	that is impossible to make one relative to another.
+
+1998-10-09  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c (sym_type): New st_C_extern tag.
+	(gperf input): Use it for spotting external declarations.
+	(print_help): Document the new behaviour of --declarations.
+	(fvextern): New global variable.
+	(consider_token, C_entries): Use it.
+
+1998-06-19  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c (HAVE_GETCWD) [WINDOWSNT]: Define if undefined.
+	(etags_getcwd): Remove test for WINDOWSNT.
+
+1998-06-16  Eli Zaretskii  <eliz@is.elta.co.il>
+
+	* etags.c (process_file) [MSDOS]: If foo.c.gz is not found, try
+	foo.cgz, foo.cz, etc.
+
+1998-06-15  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c (declarations): New global switch.
+	(longopts): Describe it.
+	(print_help): Document it.
+	(C_entries): Use it.
+	(process_file): Don't process a file twice.
+
+1998-06-02  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c (Fortran_functions): No tags for "procedure".
+
+1998-05-29  Eli Zaretskii  <eliz@is.elta.co.il>
+
+	* etags.c (get_compressor_from_suffix): Second argument EXTPTR, if
+	non-zero, returns a pointer to where the extension begins; callers
+	changed.
+	[MSDOS]: Support DOS file names by handling e.g. foo.cgz as if it
+	were foo.c.gz.
+
+1998-05-18  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c (sym_type, C_stab_entry): New constant st_C_operator.
+	(fvdev): New constant foperator.
+	(consider_token): Use it to get "operator" in C++.
+	(C_entries): Extend length of operator@ function name.
+	(C_entries): Use foperator when necessary.
+
+1998-05-13  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c (main) [!ETAGS_REGEXPS]: Do not call free_patterns.
+
+1998-05-12  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c (compressor): New struct for compressed files.
+	(get_compressor_from_suffix): New function.
+	(get_language_from_suffix): Use it.  Also, semantics changed.
+	(process_file): Consider compressed files, close file.
+	(find_entries): Use different call arg for get_language_from_suffix,
+	don't close file.
+
+1998-05-11  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c (main): Call free_tree.
+	(find_entries): Do not free curfile.
+	(pfnote): Cosmetic change: NULL and '\0' where appropriate.
+	(prolog_pred, erlang_func, substitute): Cast strlen to int when
+	comparing.
+	(canonicalize_filename): Shut up compiler warning.
+	(Perl_functions): Make tag significant.
+
+1997-11-27  Dave Love  <d.love@dl.ac.uk>
+
+	* etags.c (longopts, optstring): New option --ignore-case-regex (-c).
+	(argument_type): New member at_icregexp.
+	(lc_trans): New global.
+	(main): Fill lc_trans.  Process -c args.
+	(add_regex): New arg determining whether to use translation table.
+	(analyse_regex): New arg.  Use it for add_regex.
+
+1997-09-30  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c (init): Cosmetic change: NULL --> '\0'.
+	(erlang_attribute): Bug corrected (uninitialized variable).
+	(filename_is_absolute): New function replaces absolutefn macro and
+ 	corrects a bug.  All callers changed.
+	(canonicalize_filename): New function.
+	(process_file, etags_getcwd, absolute_dirname): Use it.
+	(relative_filename, absolute_filename): Removed var shadowing.
+	(C_entries, Pascal_functions): Add fake initializations to keep
+ 	compilers quiet.
+	(TeX_functions, Prolog_functions, Erlang_functions): Cleanup.
+
+1997-09-20  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c (xrnew): New macro.  All callers of xrealloc changed.
+	(language): New typedef (was struct lang_entry).
+	(curlang): New global variable.
+	(node): typedef renamed from NODE.
+	(linebuffer): New typedef (was struct linebuffer).
+	(pattern): New typedef (was struct pattern).  Some members added.
+	Now used as element of a linked list.
+	(patterns, num_patterns): Global variables deleted.
+	(p_head): New global variable.
+	(forced_lang):  New global variable (replaces lang_func).
+	(get_language_from_name, get_language_from_interpreter,
+	get_language_from_suffix): Semantics changed.  All callers changed.
+	(last_node): New global variable.
+	(free_tree, add_node, put_entries, total_size_of_entries): Change
+	name of local vars to avoid clashes with typedef node.
+	(number_len): Rewritten for elegance.
+	(token): New typedef replaces TOKEN.
+	(analyse_regex, add_regex): Rewritten for new functionality.
+	(free_patterns): New function called from main and add_regex.
+	(initbuffer, readline_internal, readline, grow_linebuffer):
+	Change name of local vars to avoid clashes with typedef
+	linebuffer.
+	(readline): Rewritten for new functionality.
+
+1997-09-04  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c: (Scheme_suffixes): New suffix ".ss".
+	(print_help): --globals is now used for more than C-type languages.
+	(Perl_functions): Tag global variables ("my" and "local").
+
+1997-08-22  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c (print_help): Some messages clarified.
+	(LOOP_ON_INPUT_LINES): New macro.
+	(just_read_file, Fortran_functions, Asm_labels, Perl_functions,
+	Python_functions, Cobol_paragraphs, Pascal_functions,
+	Lisp_functions, Postscript_functions, Scheme_functions,
+	TeX_functions, Prolog_functions, Erlang_functions): Use it.
+	(Cobol_paragraphs, Postscript_functions, TeX_functions,
+	Prolog_functions, Erlang_functions): Use a local variable instead
+	of the global variable dbp.
+	(Pascal_functions, L_isquote, Scheme_functions): Use GNU coding
+	standard indentation.
+
+1997-08-21  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c (Python_suffixes, lang_names, Python_functions): Python
+	support.
+	(skip_spaces, skip_non_spaces): Utility functions.
+	(find_entries, takeprec, getit, Fortran_functions, Perl_functions,
+	Python_functions, L_getit, Lisp_functions, Scheme_functions,
+	prolog_pred, erlanf_func, erlang_attribute): Use them.
+	(eat_white): Deleted.
+
+1997-08-20  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c (CHAR, init): Keep into account non US-ASCII
+	characters and compilers with default signed chars.
+	(L_getit): Tag "(defstruct (foo", "(defun (operator" and similar
+	constructs.
+
+1997-07-04  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* (C_stab_entry): "interface" in Java behaves like "class".
+
+1997-06-23  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c: (HAVE_NTGUI) [WINDOWSNT]: #undef if HAVE_CONFIG_H.
+	(main): Put interval syntax here.
+	(add_regex): And remove it from here.
+
+1997-06-17  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c (suggest_asking_for_help): Provide a
+	meaningful help message with and without LONG_OPTIONS.
+
+1997-06-09  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c: <io.h> [MSDOS]: Include it, don't include string.h.
+	<stdlib.h, string.h>: Don't test MSDOS when including them.
+	(white, nonam, endtk): Like elsewhere, use \r instead of \013.
+	(put_entries): Correctly use %ld instead of %d in printf.
+
+1997-06-04  Francesco Potorti`  <F.Potorti@cnuce.cnr.it>
+
+	* etags.c: <unistd.h> [HAVE_UNISTD_H]: Include conditionally, else
+	declare getcwd if HAVE_GETCWD.
+	(consider_token): Dead break instruction removed.

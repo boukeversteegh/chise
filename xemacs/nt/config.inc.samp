@@ -1,0 +1,102 @@
+# -*- mode: makefile -*-
+
+############################################################################
+
+INSTALL_DIR=c:\Program Files\XEmacs\XEmacs-$(XEMACS_VERSION_STRING)
+
+# Set this if your packages are installed in an unusal place.
+#PACKAGE_PREFIX=c:\Program Files\XEmacs
+
+############################################################################
+
+# Multilingual support (not currently working).
+HAVE_MULE=0
+
+# Native MS Windows support.
+HAVE_MS_WINDOWS=1
+
+# X Windows support.
+HAVE_X_WINDOWS=0
+X11_DIR=
+
+# GTK support. Do NOT set this to 1; gtk-xemacs is not supported on
+# MSWindows (mingw or msvc).  Yes, we know that gtk has been ported to
+# native MSWindows but XEmacs is not yet ready to use that port.
+HAVE_GTK=0
+GTK_DIR=
+
+############################################################################
+#                  Compiled-in features: graphics formats                  #
+############################################################################
+
+# Directory under which the optional libraries are placed.  To make your
+# life easy, just grab http://ftp.xemacs.org/aux/optional-libs.exe
+# (a self-installing .ZIP) and unzip them into an appropriate directory
+# (by default, c:\src).  This gets you precompiled versions of all of
+# the libraries below.
+OPTIONAL_LIBRARY_DIR=c:\src
+
+# Set this to enable XPM support (virtually mandatory), and specify
+# the directory containing xpm.  Get the library from
+# http://ftp.xemacs.org/aux/xpm-3.4k.tar.gz.
+HAVE_XPM=1
+XPM_DIR=$(OPTIONAL_LIBRARY_DIR)\xpm-3.4k
+
+# Set this to enable GIF support (built-in).
+HAVE_GIF=1
+
+# Set this to enable PNG support (virtually mandatory), and specify
+# the directories containing png and zlib.  Get the latest version from
+# ftp://ftp.uu.net/graphics/png/.  NOTE: In order to compile libpng,
+# you will have to rename the zlib directory to just `zlib'.  We don't
+# do that here so we can preserve the version number, like for the other
+# libraries.
+HAVE_PNG=1
+PNG_DIR=$(OPTIONAL_LIBRARY_DIR)\libpng-1.2.8
+ZLIB_DIR=$(OPTIONAL_LIBRARY_DIR)\zlib-1.2.1
+
+# Set this to enable JPEG support (useful, but not necessary), and specify
+# the directory containing jpeg.  Get the latest version from
+# ftp://ftp.uu.net/graphics/jpeg/.
+HAVE_JPEG=1
+JPEG_DIR=$(OPTIONAL_LIBRARY_DIR)\jpeg-6b
+
+# Set this to enable TIFF support (not very important), and specify the
+# directory containing tiff.  Get the latest version from
+# ftp://ftp.uu.net/graphics/tiff/.
+HAVE_TIFF=1
+TIFF_DIR=$(OPTIONAL_LIBRARY_DIR)\tiff-v3.5.7
+
+# Set this to enable XFace support (not very important), and specify the
+# directory containing compface.  Get the library from
+# http://ftp.xemacs.org/aux/compface-1.5-1.tar.gz.
+HAVE_XFACE=1
+COMPFACE_DIR=$(OPTIONAL_LIBRARY_DIR)\compface-1.5.1
+
+############################################################################
+
+# Set this to specify the location of makeinfo. (If not set, XEmacs will
+# attempt to use its built-in texinfo support when building info files.)
+MAKEINFO=c:\cygwin\bin\makeinfo.exe
+
+############################################################################
+
+# Set this to enable some debug code that doesn't slow things down.
+DEBUG_XEMACS=1
+
+# Set this to speed up building, for development purposes.
+QUICK_BUILD=0
+
+# Set this to see exactly which compilation commands are being run (not
+# generally recommended).
+VERBOSECC=0
+
+# Set this to get nmake to use dependency info (requires Perl to be installed)
+DEPEND=0
+
+# Set this to use the portable dumper for dumping the preloaded Lisp
+# routines, instead of the older "unexec" routines in unexnt.c.
+USE_PORTABLE_DUMPER=1
+
+# Set this to build XEmacs with the Intel C Compiler.
+USE_INTEL_COMPILER=0

@@ -1,0 +1,32 @@
+Package: kagecgi
+Version: 0.4.0.20050408
+Revision: 1
+Maintainer: KAMICHI Koichi
+Source: http://www.jokoji.jp/chise/kagecgi-%v.tar.gz
+Source-MD5: 5eaddd4cbf5255de634aa1c3774bd56d
+#
+BuildDepends: db42, libpng3, wget
+Depends: db42-shlibs, libpng3-shlibs
+PatchScript: <<
+  sed 's|@PREFIX@|%p|g' <%a/%n.patch | patch -p1
+<<
+CompileScript: <<
+make
+make kagedb
+<<
+InstallScript: <<
+mkdir -p %i/../Library/WebServer/CGI-Executables
+mkdir -p %i/../usr/local/share/kagecgi
+/usr/bin/install -c -m 755 kage.cgi %i/../Library/WebServer/CGI-Executables
+/usr/bin/install -c -m 644 error.png %i/../usr/local/share/kagecgi
+/usr/bin/install -c -m 644 kagedb %i/../usr/local/share/kagecgi
+<<
+DocFiles: README.en COPYING
+#
+Description: Kanji-glyph generating engine
+DescDetail: <<
+KAGE/cgi is a Kanji-glyph generating engine.
+It can use by command prompt and for executable cgi for httpd server.
+<<
+Homepage: http://fonts.jp/
+License: GPL

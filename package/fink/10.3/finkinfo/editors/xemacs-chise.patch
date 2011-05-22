@@ -1,0 +1,37 @@
+diff -uNr xemacs-chise-0.20.20031029.orig/configure xemacs-chise-0.20.20031029/configure
+--- xemacs-chise-0.20.20031029.orig/configure	Sun Nov  2 23:50:56 2003
++++ xemacs-chise-0.20.20031029/configure	Mon Nov  3 13:49:45 2003
+@@ -14320,7 +14320,7 @@
+ if test "$with_database_berkdb" != "no"; then
+   echo $ac_n "checking for Berkeley db.h""... $ac_c" 1>&6
+ echo "configure:14400: checking for Berkeley db.h" >&5
+-  for header in "db/db.h" "db.h"; do
++  for header in "db4/db.h db3/db.h db/db.h" "db.h"; do
+     case "$opsys" in
+         *freebsd*)
+     cat > conftest.$ac_ext <<EOF
+@@ -14359,9 +14359,6 @@
+ #ifdef HAVE_INTTYPES_H
+ #define __BIT_TYPES_DEFINED__
+ #include <inttypes.h>
+-typedef uint8_t  u_int8_t;
+-typedef uint16_t u_int16_t;
+-typedef uint32_t u_int32_t;
+ #ifdef WE_DONT_NEED_QUADS
+ typedef uint64_t u_int64_t;
+ #endif
+diff -uNr xemacs-chise-0.20.20031029.orig/src/database.c xemacs-chise-0.20.20031029/src/database.c
+--- xemacs-chise-0.20.20031029.orig/src/database.c	Sun Nov  2 23:51:53 2003
++++ xemacs-chise-0.20.20031029/src/database.c	Mon Nov  3 13:49:16 2003
+@@ -46,9 +46,11 @@
+ #define __BIT_TYPES_DEFINED__
+ #include <inttypes.h>
+ #ifndef __FreeBSD__
++/*
+ typedef uint8_t  u_int8_t;
+ typedef uint16_t u_int16_t;
+ typedef uint32_t u_int32_t;
++*/
+ #ifdef WE_DONT_NEED_QUADS
+ typedef uint64_t u_int64_t;
+ #endif

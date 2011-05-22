@@ -1,0 +1,54 @@
+VERSION = @PACKAGE_VERSION@
+
+RM	= /bin/rm -f
+TAR	= tar
+WGET	= wget
+MKDIR	= mkdir -p
+SUDO	= 
+
+prefix		= @prefix@
+exec_prefix	= @exec_prefix@
+
+datadir	= @datadir@
+
+FONTS_DIR	= $(datadir)/fonts
+BDF_FONTS_DIR	= $(datadir)/fonts/BDF
+PCF_FONTS_DIR	= $(datadir)/fonts/PCF
+EGB_BDF_FONTS_DIR = $(BDF_FONTS_DIR)/EGB
+EGB_PCF_FONTS_DIR = $(PCF_FONTS_DIR)/EGB
+
+YASUOKA_FONTS_URL	= http://kanji.zinbun.kyoto-u.ac.jp/~yasuoka/ftp/fonts/
+
+BDF_FILES	= guobiao16.bdf
+
+OPTS		= @ac_configure_args@
+
+all:	get
+
+get:	$(BDF_FILES)
+
+
+guobiao16.bdf:
+	$(WGET) $(YASUOKA_FONTS_URL)/guobiao16.bdf.Z
+	gunzip guobiao16.bdf.Z
+
+
+install:
+	$(MKDIR) $(EGB_BDF_FONTS_DIR)
+	( $(TAR) -cf - *.bdf ) | \
+	( cd $(EGB_BDF_FONTS_DIR) && $(TAR) -xf - )
+	$(MKDIR) $(EGB_PCF_FONTS_DIR)
+	for file in $(BDF_FILES) ; do \
+		FONT=`basename $${file} .bdf`.pcf.gz ; \
+		bdftopcf $${file} | gzip -9 > $(EGB_PCF_FONTS_DIR)/$${FONT} ; \
+	done
+	( $(TAR) -cf - fonts.alias ) | \
+	( cd $(EGB_PCF_FONTS_DIR) && $(TAR) -xf - )
+	cd $(EGB_PCF_FONTS_DIR) && mkfontdir
+
+
+distclean:
+	-$(RM) Makefile
+
+distclean-all:
+	-$(RM) *.bdf Makefile

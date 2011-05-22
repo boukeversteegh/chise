@@ -1,0 +1,68 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ(2.57)
+AC_INIT(concord, 0.0.2, chise-en@m17n.org)
+AC_CONFIG_SRCDIR(concord.c)
+AC_CONFIG_HEADER(config.h)
+
+AC_CANONICAL_TARGET
+
+# Checks for programs.
+AC_PROG_CC
+AC_PROG_LIBTOOL
+#  AC_CHECK_PROGS(LIBTOOL, glibtool libtool, libtool, \
+#  	/usr/local/bin:/opt/bin:/sw/bin:/usr/bin:/bin)
+
+# Settings for optional paths
+AC_ARG_WITH(site_includes,
+  --with-site-includes=PATH List of directories to search first for header files
+,
+for dir in `echo "$with_site_includes"|sed 's/:/ /'`
+do
+    SITE_INCLUDES_CFLAGS="$SITE_INCLUDES_CFLAGS -I$dir"
+done
+CFLAGS=`echo "$SITE_INCLUDES_CFLAGS $CFLAGS"|sed 's/^  *//'`
+,
+if test -f /sw/include/db3/db.h; then
+	CFLAGS="-I/sw/include/db3 $CFLAGS"
+elif test -f /sw/include/db4/db.h; then
+	CFLAGS="-I/sw/include/db4 $CFLAGS"
+fi
+)
+
+AC_ARG_WITH(site_libraries,
+  --with-site-libraries=PATH List of directories to search first for libraries
+,
+for dir in `echo "$with_site_libraries"|sed 's/:/ /'`
+do
+    SITE_LIBS="$SITE_LIBS -L$dir"
+done
+LIBS=`echo "$SITE_LIBS $LIBS"|sed 's/^  *//'`
+LIBS="-ldb $LIBS"
+,
+if test -f /sw/include/db3/db.h; then
+	LIBS="-L/sw/lib -ldb-3 $LIBS"
+elif test -f /sw/include/db4/db.h; then
+	LIBS="-L/sw/lib -ldb-4 $LIBS"
+else
+	LIBS="-ldb $LIBS"
+fi
+)
+
+# Checks for libraries.
+
+# Checks for header files.
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_C_CONST
+AC_C_INLINE
+
+# Checks for library functions.
+AC_FUNC_ALLOCA
+AC_FUNC_STRNLEN
+
+AC_CHECK_FUNCS(strnlen)
+
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT
